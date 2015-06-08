@@ -1,0 +1,49 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - ASDepthModal (1.0.0)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - ICViewPager (1.5.1)
+  - JVFloatingDrawer (0.1.0)
+  - MDCSwipeToChoose (0.2.2)
+
+DEPENDENCIES:
+  - AFNetworking
+  - ASDepthModal
+  - FMDB
+  - ICViewPager
+  - JVFloatingDrawer
+  - MDCSwipeToChoose
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  ASDepthModal: c84ba6596c8f6aef3cadacdc979d287ed2915c64
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  ICViewPager: 032dc71a50fe898e185fae6112ded4bed0e0523c
+  JVFloatingDrawer: 4782b1df21411aef2c1818f3b346cace02cc2e24
+  MDCSwipeToChoose: 715aefacd3cc884c448fcdc70638c04a3056408c
+
+COCOAPODS: 0.37.1

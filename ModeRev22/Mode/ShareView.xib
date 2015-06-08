@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lDb-Tz-iTU" customClass="ShareView">
+            <rect key="frame" x="0.0" y="0.0" width="268" height="425"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEh-0D-VSr">
+                    <rect key="frame" x="0.0" y="0.0" width="268" height="360"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nIG-cs-B2K">
+                            <rect key="frame" x="44" y="295" width="180" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bL7-bg-bSJ">
+                            <rect key="frame" x="43" y="62" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.89455966509999996" blue="0.22603744049999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fKd-bV-aAV">
+                            <rect key="frame" x="104" y="62" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLI-bz-SxQ">
+                            <rect key="frame" x="43" y="123" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daF-C4-5Sn">
+                            <rect key="frame" x="104" y="123" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Yu-xK-dXo">
+                            <rect key="frame" x="165" y="123" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WdG-7o-hfP">
+                            <rect key="frame" x="43" y="184" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mot-DJ-apS">
+                            <rect key="frame" x="104" y="184" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOv-96-Wbp">
+                            <rect key="frame" x="165" y="184" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="My Collection..." translatesAutoresizingMaskIntoConstraints="NO" id="Ncj-mH-2aa">
+                            <rect key="frame" x="44" y="295" width="180" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYJ-hb-sCa">
+                            <rect key="frame" x="44" y="284" width="180" height="2"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFx-lU-ufW">
+                            <rect key="frame" x="24" y="258" width="20" height="20"/>
+                            <state key="normal" image="格子_normal.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="格子_pressl.png"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share to your" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4n-OS-0FO">
+                            <rect key="frame" x="44" y="258" width="103" height="21"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="facebook.png" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-it-k6D">
+                            <rect key="frame" x="147" y="258" width="20" height="20"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cool,wishlist is full!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2A-hd-L5U">
+                            <rect key="frame" x="43" y="16" width="180" height="21"/>
+                            <fontDescription key="fontDescription" name="HoeflerText-Italic" family="Hoefler Text" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share it to open a new list." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wh-kS-OSf">
+                            <rect key="frame" x="43" y="39" width="180" height="21"/>
+                            <fontDescription key="fontDescription" name="HoeflerText-Italic" family="Hoefler Text" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JqE-6q-Vur">
+                            <rect key="frame" x="165" y="62" width="60" height="60"/>
+                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.18431372549019609" green="0.18823529411764706" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTc-4O-CHl">
+                    <rect key="frame" x="54" y="395" width="160" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="save_wishlist_normal.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" image="save_wishlist_highlight.png"/>
+                    <connections>
+                        <action selector="sendShareAndPostNotification:" destination="lDb-Tz-iTU" eventType="touchUpInside" id="8rY-Ep-KZu"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="shareTextContent" destination="Ncj-mH-2aa" id="dlp-f3-Pd6"/>
+                <outletCollection property="shareImageViews" destination="bL7-bg-bSJ" id="xgH-jE-e1S"/>
+                <outletCollection property="shareImageViews" destination="fKd-bV-aAV" id="PME-FV-eA3"/>
+                <outletCollection property="shareImageViews" destination="JqE-6q-Vur" id="WZy-nN-xDD"/>
+                <outletCollection property="shareImageViews" destination="WLI-bz-SxQ" id="fIb-D7-cNs"/>
+                <outletCollection property="shareImageViews" destination="daF-C4-5Sn" id="MFc-Z6-7KJ"/>
+                <outletCollection property="shareImageViews" destination="8Yu-xK-dXo" id="ycQ-1v-yGw"/>
+                <outletCollection property="shareImageViews" destination="WdG-7o-hfP" id="q2n-rj-52t"/>
+                <outletCollection property="shareImageViews" destination="Mot-DJ-apS" id="FC8-C4-USP"/>
+                <outletCollection property="shareImageViews" destination="YOv-96-Wbp" id="sRi-je-jl6"/>
+            </connections>
+            <point key="canvasLocation" x="-44" y="216.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="facebook.png" width="44" height="42"/>
+        <image name="save_wishlist_highlight.png" width="486" height="82"/>
+        <image name="save_wishlist_normal.png" width="486" height="82"/>
+        <image name="格子_normal.png" width="45" height="36"/>
+        <image name="格子_pressl.png" width="33" height="33"/>
+    </resources>
+</document>

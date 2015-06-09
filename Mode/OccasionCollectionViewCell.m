@@ -16,7 +16,8 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.name.text = self.occasion.name;
+    
+    self.name.text = [self.occasion.name uppercaseString];
     
     [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.occasion.pic_link] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [[SDImageCache sharedImageCache] storeImage:image forKey:[self.occasion.pic_link lastPathComponent] toDisk:YES];

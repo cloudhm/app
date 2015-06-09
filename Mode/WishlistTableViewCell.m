@@ -14,7 +14,7 @@
 - (void)awakeFromNib {
     if (!self.commentLabel) {
         self.commentLabel = [[UILabel alloc]init];
-        self.commentLabel.font = [UIFont fontWithName:@"Arial" size:12];
+        self.commentLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
         self.commentLabel.textColor = [UIColor blackColor];
         self.commentLabel.numberOfLines = 0;
         [self.contentView addSubview: self.commentLabel];
@@ -35,10 +35,10 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.commentLabel.text = self.modeWishlist.comments;
-    float commentLabelW = (CGRectGetWidth(self.bounds)-80.f-20.f);
+    float commentLabelW = (CGRectGetWidth(self.bounds)-60.f-20.f);
     float commentLabelH = [self.modeWishlist getCommentHeightByLabelWidth:commentLabelW];
     NSLog(@"commentLabelH:%f",commentLabelH);
-    self.commentLabel.frame = CGRectMake(80.f, 10.f, commentLabelW, commentLabelH);
+    self.commentLabel.frame = CGRectMake(60.f, 10.f, commentLabelW, commentLabelH);
     
     self.iconIV.frame =CGRectMake(15.f, 10.f, 35.f, 35.f);
     self.iconIV.layer.cornerRadius = self.iconIV.bounds.size.width/2;

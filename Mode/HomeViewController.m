@@ -17,6 +17,7 @@
 
 #import "SDWebImage/SDImageCache.h"
 #import "FMDB.h"
+#import "UIColor+HexString.h"
 @interface HomeViewController ()<ViewPagerDataSource,ViewPagerDelegate>
 @property (strong, nonatomic) NSArray *tabNames;
 
@@ -63,7 +64,7 @@
     self.dataSource = self;
     [super viewDidLoad];
     self.title = @"MODE";
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:25],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
 }
 
 #pragma mark ViewPagerDatasource
@@ -77,10 +78,10 @@
 -(UIView *)viewPager:(ViewPagerController *)viewPager viewForTabAtIndex:(NSUInteger)index{
     UILabel *label = [UILabel new];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:18.0];
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
     label.text = self.tabNames[index];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:151/255.f green:150/255.f blue:151/255.f alpha:1];
+    label.textColor = [UIColor colorWithHexString:@"#b4b4b4"];
     [label sizeToFit];
     return label;
 }

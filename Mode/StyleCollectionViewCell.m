@@ -16,7 +16,7 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.name.text = self.mstyle.name;
+    self.name.text = [self.mstyle.name uppercaseString];
     [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.mstyle.pic_link] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [[SDImageCache sharedImageCache] storeImage:image forKey:[self.mstyle.pic_link lastPathComponent] toDisk:YES];
     }];

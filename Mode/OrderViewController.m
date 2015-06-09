@@ -9,6 +9,7 @@
 #import "OrderViewController.h"
 #import "AppDelegate.h"
 #import "OrderTableViewCell.h"
+#import "UIColor+HexString.h"
 @interface OrderViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) NSInteger selectedIndex;
@@ -28,7 +29,7 @@
     
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCell"];
     
@@ -48,6 +49,7 @@
 - (IBAction)modifyState:(UIButton *)sender {
     [self setSelectedAtIndex:(NSInteger)sender.tag];
 #warning 发出通知来让表格显示需要的内容
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
 }
 
@@ -66,6 +68,7 @@
     OrderTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"OrderTableViewCell" owner:nil options:nil]lastObject];
+        
     }
     return cell;
 }

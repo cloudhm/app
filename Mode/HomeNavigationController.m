@@ -9,27 +9,51 @@
 #import "HomeNavigationController.h"
 #import "WishListViewController.h"
 #import "AppDelegate.h"
-@interface HomeNavigationController ()
+#import "UIColor+HexString.h"
+@interface HomeNavigationController ()<UIAlertViewDelegate>
 
 @end
 
 @implementation HomeNavigationController
 -(void)viewDidAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController) name:@"gotoWishlistController" object:nil];
+    NSLog(@"1");
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
+        [self pushViewController:wlvc animated:YES];
+    }
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    NSLog(@"2");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
 }
--(void)gotoWishlistController{
-    WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
-    [self pushViewController:wlvc animated:YES];
+-(void)gotoWishlistController:(NSNotification*)noti{
+//    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[HomeNavigationController class]]) {
+//        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+//        [[NSUserDefaults standardUserDefaults]synchronize];
+//    }
+    
+    if ([[noti.userInfo objectForKey:@"currentViewController"]isKindOfClass:[HomeNavigationController class]]
+        &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSLog(@"home");
+        [av show];
+    }
+    
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+//    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 - (void)didReceiveMemoryWarning {

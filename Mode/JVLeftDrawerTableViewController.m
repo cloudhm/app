@@ -98,7 +98,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
             [[[AppDelegate globalDelegate] drawerViewController] setCenterViewController:destinationViewController];
             [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
             
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"gotoWishlistController" object:nil userInfo:@{@"currentViewController":self.currentViewController}];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"gotoWishlistController" object:nil userInfo:@{@"currentViewController":self.currentViewController,@"count":self.wishlistCount.text}];
             return;
             
         } else if (indexPath.row == 1) {

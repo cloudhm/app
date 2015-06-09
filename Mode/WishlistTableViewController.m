@@ -12,10 +12,13 @@
 #import "WishlistTableViewCell.h"
 #import "WishListViewController.h"
 #import "AppDelegate.h"
+#import "UIColor+HexString.h"
 @interface WishlistTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *wishlists;
 @property (strong, nonatomic) UIRefreshControl *refresh;
+@property (weak, nonatomic) IBOutlet UIImageView *brand_img;
+
 @end
 
 @implementation WishlistTableViewController
@@ -28,13 +31,19 @@
     }
     return _wishlists;
 }
+-(void)initUI{
+    self.brand_img.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.brand_img.layer.borderWidth = 1.f;
+    self.brand_img.layer.cornerRadius = 29.f;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+    [self initUI];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:21/255.f alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self getDataFromNetwork];
     self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
     // Uncomment the following line to preserve selection between presentations.
@@ -92,11 +101,7 @@
     return 30.f;
 }
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-#warning 这里不能用带属性的字符串，如需要修改sectionTitle 则需要用添加视图的方法来做
-//    NSDictionary* attributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20],NSForegroundColorAttributeName:[UIColor grayColor]};
-//    NSAttributedString* headStr = [[NSAttributedString alloc]initWithString:@"123123" attributes:attributes];
-    
-    return @"123123";
+    return @"AAAAAAAA";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -21,9 +21,18 @@
 @property (assign, nonatomic) CGPoint lastScrollOffset;
 @property (strong, nonatomic) NSMutableArray *brandRunwayList;
 @property (strong, nonatomic) ModeBrandRunway *brandRunway;
+
 @end
 
 @implementation BrandRunwayTableViewController
+-(BrandInfo *)brandInfo{
+    if (!_brandInfo) {
+        _brandInfo = [[BrandInfo alloc]init];
+        _brandInfo.brandIntroduce = @"BEIJING - The capsized Eastern Star cruise ship will be moved to allow divers to search for victims at the site.With eight victims still missing, the search and rescue headquarters will move the ship as soon as weather and water movements are favorable, Minister of Transport Yang Chuantang said Monday.\"A glimmer of hope deserves all-out efforts,\" he said.Ministry sources said on Saturday the search for the missing victims would be extended for nearly 1,300 km along the Yangtze River between Jianli in Hubei Province, where the ship sank, downstream to the Wusong Estuary in Shanghai.The Eastern Star with 456 people onboard was on an 11-day trip along the Yangtze when it was overturned by a tornado last Monday night.Fourteen people survived the disaster. As of Monday, rescuers had retrieved the bodies of 434 victims.";
+    }
+    return _brandInfo;
+}
+
 -(NSMutableArray *)brandRunwayList{
     if (!_brandRunwayList) {
         _brandRunwayList = [NSMutableArray array];
@@ -43,10 +52,12 @@
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+    
+    
     [self initHeaderView];
     [self initNavigationBar];
-    //偏移量初始化，用来判断表向上或向下移动
-    self.lastScrollOffset = CGPointZero;
+//    //偏移量初始化，用来判断表向上或向下移动
+//    self.lastScrollOffset = CGPointZero;
     [self updateRunwayList];
     [self createToolbar];
 }
@@ -68,11 +79,11 @@
 }
 #pragma mark InitUI
 -(void)initHeaderView{
-    CGRect frame = [UIScreen mainScreen].bounds;
+    CGRect frame = [UIScreen mainScreen].applicationFrame;
     //设置表头视图
     BrandIntroduceHeaderView*headerView = (BrandIntroduceHeaderView*)self.tableView.tableHeaderView;
+    headerView.brandInfo = self.brandInfo;
     frame = headerView.frame;
-    self.tableView.tableHeaderView.backgroundColor = [UIColor redColor];
     frame.size.height = [self.brandInfo getBrandDetailHeigthtByWidth:(self.tableView.frame.size.width - 20.f)] + 137.f;
     self.tableView.tableHeaderView.frame = frame;
 }
@@ -140,9 +151,7 @@
     self.toolbarBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2-45.f, 5.f, 40.f, 40.f)];
     [self.toolbarBtn setImage:[UIImage imageNamed:@"_hollow.png"] forState:UIControlStateNormal];
     [self.toolbarBtn setImage:[UIImage imageNamed:@"_solid.png"] forState:UIControlStateSelected];
-    self.toolbarBtn.layer.borderWidth = 1.f;
-    self.toolbarBtn.layer.borderColor = [UIColor redColor].CGColor;
-    self.toolbarBtn.layer.cornerRadius = 20.f;
+    self.toolbarBtn.backgroundColor = [UIColor clearColor];
     [self.toolbarBtn addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
     
     self.toolbarLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2+5.f, 5, 100, 40)];
@@ -158,9 +167,7 @@
     rect.origin.y -= 50.f;
     self.toolbar.frame = rect;
     [self.navigationController.view addSubview:self.toolbar];
-//    [UIView animateWithDuration:.5f animations:^{
-//        self.toolbar.frame = rect;
-//    }];
+
 }
 
 -(void)like:(UIButton*)btn{

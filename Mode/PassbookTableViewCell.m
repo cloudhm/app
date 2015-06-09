@@ -11,6 +11,11 @@
 @implementation PassbookTableViewCell
 
 - (void)awakeFromNib {
+    self.brand_img.layer.borderWidth = 1.f;
+    self.brand_img.layer.borderColor = [UIColor grayColor].CGColor;
+    self.brand_img.layer.cornerRadius = 21.f;
+    self.brand_img.layer.masksToBounds = YES;
+    
     self.hourLabel.layer.borderWidth = 1.5f;
     self.hourLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.minuteLabel.layer.borderWidth = 1.5f;

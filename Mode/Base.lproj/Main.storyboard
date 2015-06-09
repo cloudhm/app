@@ -660,12 +660,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="brand_img" destination="ejS-PB-hic" id="1Ov-0o-T6M"/>
                         <segue destination="53f-ci-DNR" kind="push" identifier="gotoWishlist2" id="lbH-oj-K9A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sB2-gD-Y4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5734.5" y="207"/>
+            <point key="canvasLocation" x="7570.5" y="207"/>
         </scene>
         <!--Like Or Nope View Controller-->
         <scene sceneID="aqZ-eo-LlY">
@@ -703,8 +704,12 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Ewn-SR-EEf"/>
-                                            <constraint firstAttribute="width" constant="40" id="Y7d-bK-fHh"/>
+                                            <constraint firstAttribute="height" constant="30" id="Ewn-SR-EEf">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="40" id="Y7d-bK-fHh">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                            </constraint>
                                         </constraints>
                                         <state key="normal" image="hand_unlike_normal.png"/>
                                         <state key="highlighted" image="hand_unlike_press.png"/>
@@ -729,8 +734,12 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Hcs-iS-uN1"/>
-                                            <constraint firstAttribute="width" constant="40" id="eek-xZ-SJc"/>
+                                            <constraint firstAttribute="height" constant="30" id="Hcs-iS-uN1">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="40" id="eek-xZ-SJc">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="53"/>
+                                            </constraint>
                                         </constraints>
                                         <state key="normal" image="hand_like_normal.png"/>
                                         <state key="highlighted" image="hand_like_press.png"/>
@@ -953,7 +962,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lj-TB-Vec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3784.5" y="-235.5"/>
+            <point key="canvasLocation" x="4702.5" y="-235.5"/>
         </scene>
         <!--Wish List View Controller-->
         <scene sceneID="zO1-gl-6Oa">
@@ -1182,7 +1191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tLc-Ig-FMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6565.5" y="-567"/>
+            <point key="canvasLocation" x="7483.5" y="-567"/>
         </scene>
         <!--Occasion View Controller-->
         <scene sceneID="I8C-jO-bHx">
@@ -1196,7 +1205,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="pC4-ei-BmE">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="pC4-ei-BmE">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="vf2-mJ-e8O"/>
@@ -1215,7 +1224,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-xq-JA5">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-xq-JA5">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="8lN-5G-5Q0"/>
@@ -1287,7 +1296,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="2Nc-Tj-Drq">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="2Nc-Tj-Drq">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="DAr-Yh-4eA"/>
@@ -1306,7 +1315,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="vnW-9y-Cth">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="vnW-9y-Cth">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="ZFk-Ao-waz"/>
@@ -1378,7 +1387,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="5Pg-kc-X4Y">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_left" translatesAutoresizingMaskIntoConstraints="NO" id="5Pg-kc-X4Y">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="5ad-hd-btr"/>
@@ -1397,7 +1406,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="dsR-WI-PAq">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_Arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="dsR-WI-PAq">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="3A3-Y7-MV2"/>
@@ -2429,7 +2438,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coupon_page.png" translatesAutoresizingMaskIntoConstraints="NO" id="cDH-bn-gaq">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="172" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aou-gF-5oo">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="172" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aou-gF-5oo">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2510,7 +2519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a94-Pn-Le9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128.5" y="1150.5"/>
+            <point key="canvasLocation" x="3046.5" y="1150.5"/>
         </scene>
         <!--Web View View Controller-->
         <scene sceneID="Pqa-F4-5mt">
@@ -2575,25 +2584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rr2-LG-HOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3072" y="1144.5"/>
-        </scene>
-        <!--Wishlist Nagigation View Controller-->
-        <scene sceneID="fQV-7r-ByS">
-            <objects>
-                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foC-vO-tKO" customClass="WishlistNagigationViewController" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Uc-kR-rVg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="sAZ-L8-2sM" kind="relationship" relationship="rootViewController" id="XUr-UG-efq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WrR-HU-c1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4692" y="255.75"/>
+            <point key="canvasLocation" x="3990" y="1144.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mqc-3N-o74">
@@ -2977,7 +2968,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fcz-O6-gW9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="681" y="-306"/>
+            <point key="canvasLocation" x="1599" y="-306"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ajH-8b-x2M">
@@ -2995,43 +2986,61 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0C4-8A-ybj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2863.5" y="-240"/>
-        </scene>
-        <!--Order Navigation View Controller-->
-        <scene sceneID="tsV-PS-53n">
-            <objects>
-                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pF7-XS-qd6" customClass="OrderNavigationViewController" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6OM-EY-BrG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="M86-6b-71H" kind="relationship" relationship="rootViewController" id="OQ2-6I-F7J"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qdx-X3-Ui6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="27" y="-306"/>
+            <point key="canvasLocation" x="3781.5" y="-240"/>
         </scene>
         <!--Passbook Navigation View Controller-->
-        <scene sceneID="zEW-LG-v8D">
+        <scene sceneID="4Oo-sY-R2I">
             <objects>
-                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5Y1-kC-K8m" customClass="PassbookNavigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bux-Fw-Dho" customClass="PassbookNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7tI-Q5-Zrd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tNK-lW-6nH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zhX-5i-GJj" kind="relationship" relationship="rootViewController" id="gg7-Ut-YzO"/>
+                        <segue destination="zhX-5i-GJj" kind="relationship" relationship="rootViewController" id="x4Q-Ix-lou"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Omg-OK-OT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rNc-IQ-Msu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405.5" y="1150.5"/>
+            <point key="canvasLocation" x="2128.5" y="1150.5"/>
+        </scene>
+        <!--Wishlist Nagigation View Controller-->
+        <scene sceneID="0c2-2E-hId">
+            <objects>
+                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3Ey-xl-JLi" customClass="WishlistNagigationViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cht-pD-iTV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sAZ-L8-2sM" kind="relationship" relationship="rootViewController" id="psS-se-kg2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXe-Nv-D2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6652.5" y="207"/>
+        </scene>
+        <!--Order Navigation View Controller-->
+        <scene sceneID="ZYi-NF-55Y">
+            <objects>
+                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="53M-td-iFT" customClass="OrderNavigationViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MDX-1t-Jnw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M86-6b-71H" kind="relationship" relationship="rootViewController" id="RSa-pi-rMe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RRr-FN-BqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681" y="-306"/>
         </scene>
     </scenes>
     <resources>
@@ -3065,7 +3074,7 @@
         <image name="wishlist.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ltb-0z-8pe"/>
+        <segue reference="Gjt-AA-Rcx"/>
         <segue reference="5iR-fH-Svb"/>
     </inferredMetricsTieBreakers>
 </document>

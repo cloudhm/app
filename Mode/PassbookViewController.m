@@ -110,7 +110,7 @@
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 189.f;
+    return 220.f;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderConfirmViewController* orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];

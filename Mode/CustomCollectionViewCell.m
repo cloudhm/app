@@ -20,7 +20,10 @@
         float labelY = CGRectGetHeight(frame) - labelH -20.f;
         UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake(labelX,labelY,labelW,labelH)];
         namelabel.textAlignment = NSTextAlignmentCenter;
-
+        namelabel.textColor = [UIColor blackColor];
+        namelabel.alpha = 0.9;
+        namelabel.font = [UIFont fontWithName:@"Verdana" size:12];
+//        namelabel.adjustsFontSizeToFitWidth = YES;
         self.name = namelabel;
         
         [self.contentView addSubview:self.name];

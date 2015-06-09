@@ -17,6 +17,7 @@
 #import "SDWebImageManager.h"
 #import "UIViewController+CWPopup.h"
 #import "ShareViewController.h"
+#import "UIColor+HexString.h"
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -47,7 +48,13 @@
 }
 #pragma mark - UIViewController Overrides
 -(void)gotoWishlist:(UIBarButtonItem*)btn{
-    [self performSegueWithIdentifier:@"gotoWishlistVC" sender:nil];
+    if (self.label.text.integerValue>0) {
+        [self performSegueWithIdentifier:@"gotoWishlistVC" sender:nil];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Hi,Friend!" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [av show];
+    }
+    
 //    WishListViewController* wvc = [[WishListViewController alloc]init];
 //    [self.navigationController pushViewController:wvc animated:YES];
 
@@ -82,13 +89,16 @@
     [self.view insertSubview:self.bottomView atIndex:0];
     [self.wishlist removeAllObjects];
     [self readTableWishlistFromDatabase];
-    
+    NSLog(@"userInteractionEnabled open");
+    self.view.userInteractionEnabled = YES;
 }
 -(void)viewDidAppear:(BOOL)animated{
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showShareViewController) name:@"showShareView" object:nil];
     if (self.label.text.integerValue >= 9) {
         [self showShareViewController];
     }
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"likeOrNope"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 -(void)viewDidDisappear:(BOOL)animated{
 //    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"showShareView" object:nil];
@@ -132,11 +142,11 @@
     
 #warning 再造一个view在初次进这时显示
     [self createStartIntroduceView];
-    
+    self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self readDatabase];
     
     [self updateUI];
@@ -150,7 +160,7 @@
     }
     
     
-    self.title = [self.dictionary objectForKey:@"title"];
+    
     
     
     
@@ -218,44 +228,47 @@
 -(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent{
     
 #warning 发布信息给服务器
-#warning 成功后移除popupViewController
-    
-    [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+
 #warning 清空数据库中9个项目
     BOOL flag = [self clearTableWishlist];
+#warning 成功后移除ShareViewController
+    [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+#warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
+    if (self.tabLabel.text.integerValue>=self.totalNumber) {
+        [self finishOneSetAndReadyComeback];
+        return ;
+    }
     if (flag) {
-        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"返回" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice choice!" message:@"Whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Continue",nil];
+        av.tag = 1;
         [av show];
-        NSLog(@"321");
     }
 }
+
 -(void)dealloc{
     NSLog(@"likeornope页面销毁");
 }
 
-
-//#pragma ShareViewDelegate
-//-(void)shareView:(ShareView *)shareView shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent{
-//#warning 发布信息给服务器
-//#warning 清空数据库中9个项目
-//    BOOL flag = [self clearTableWishlist];
-//    if (flag) {
-//        [ASDepthModalViewController dismiss];
-//        NSLog(@"123");
-//        [NSThread sleepForTimeInterval:3.f];
-//        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"返回" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [av show];
-//        NSLog(@"321");
-//    }
-//}
-#pragma UIAlertViewDelegate
+-(void)finishOneSetAndReadyComeback{
+    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"This set has been choosen,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    av.tag = 2;
+    [av show];
+}
+#pragma mark UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"即将返回前一个页面");
-    if (buttonIndex == 0) {
+    if (alertView.tag == 1) {
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            NSLog(@"before open:%@",self);
+            self.view.userInteractionEnabled = YES;
+            self.firstCardView.userInteractionEnabled = YES;
+        }
+    } else if (alertView.tag == 2) {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
-#pragma 清空wishlist数据
+#pragma mark 清空wishlist数据
 -(BOOL)clearTableWishlist{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
@@ -278,7 +291,7 @@
     [db close];
     return NO;
 }
-#pragma UpdateUI
+#pragma mark UpdateUI
 -(void)updateUI{
     //由于使用自动布局和size class技术  屏幕宽度在首次使用时用常量持久保存，否则首次匹配会有问题
     self.mainFrame = [UIScreen mainScreen].bounds;
@@ -349,10 +362,10 @@
 
 // This is called then a user swipes the view fully left or right.
 - (void)view:(UIView *)view wasChosenWithDirection:(MDCSwipeDirection)direction {
-    if (self.number<self.totalNumber) {
-        self.number++;
-    }
-    self.tabLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.number,self.totalNumber];
+    
+    self.number++;
+    
+    self.tabLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.number>self.totalNumber?12:self.number,self.totalNumber];
     // MDCSwipeToChooseView shows "NOPE" on swipes to the left,
     // and "LIKED" on swipes to the right.
     if (direction == MDCSwipeDirectionLeft) {
@@ -362,6 +375,7 @@
         }];
         // remove nope goods-Image from Disk
         [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.img_link lastPathComponent] fromDisk:YES];
+        
     } else {
         //Like goods
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"nope"} andCallback:^(id obj) {
@@ -377,7 +391,11 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
         if (self.label.text.intValue == 9) {
+            NSLog(@"before close:%@",self);
+            self.view.userInteractionEnabled = NO;
             [self showShareViewController];
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"likeOrNope"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
         }
         
         
@@ -397,14 +415,21 @@
         self.fourthCardView.frame = [self fourthCardViewFrame];
         [self.view insertSubview:self.fourthCardView belowSubview:self.thirdCardView];
     }
-}
-- (void)dismissPopup {
-    if (self.popupViewController != nil) {
-        [self dismissPopupViewControllerAnimated:YES completion:^{
-            NSLog(@"popup view dismissed");
-        }];
+    if(![[NSUserDefaults standardUserDefaults]boolForKey:@"likeOrNope"]) {
+        if (self.number>self.totalNumber) {
+            [self finishOneSetAndReadyComeback];
+        }
     }
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"likeOrNope"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
+//- (void)dismissPopup {
+//    if (self.popupViewController != nil) {
+//        [self dismissPopupViewControllerAnimated:YES completion:^{
+//            NSLog(@"popup view dismissed");
+//        }];
+//    }
+//}
 -(void)writeCurrentClothIntoTableWishlist{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];

@@ -17,7 +17,7 @@
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
 #import "ColorView.h"
-@interface WishListViewController ()
+@interface WishListViewController ()<UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
 @property (weak, nonatomic) UILabel *label;
@@ -189,14 +189,13 @@
     
     
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated{
     if (!self.receiveArr) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeDataFromWishlist:) name:@"removeNopedGood" object:nil];
     }
-    
 }
 //页面即将消失把通知注销掉
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"removeNopedGood" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"requestLoadGoodInfo" object:nil];
 }
@@ -281,6 +280,16 @@
         count--;
         self.label.text = [NSString stringWithFormat:@"%d",(int)count];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
+        if ([self.label.text isEqualToString:@"0"]) {
+            UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please come back and choose some your liked fashion goods first" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [av show];
+        }
+    }
+}
+#pragma mark UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 //定义导航栏右上角红心位置的视图

@@ -15,6 +15,7 @@
     self.orderCellInnerView = [[OrderCellInnerView alloc]init];
     [self.contentView addSubview:self.orderCellInnerView];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleView.userInteractionEnabled = NO;
 }
 

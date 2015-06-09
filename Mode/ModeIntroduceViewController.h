@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//介绍页面 scrollview实现app简介 只在第一次运行app时
 @interface ModeIntroduceViewController : UIViewController
 
 @end

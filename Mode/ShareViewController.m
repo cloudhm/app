@@ -63,8 +63,8 @@
     }
 }
 - (IBAction)sendShareAndPostNotification:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:)]) {
-        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text];
+    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:startAnimation:)]) {
+        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text startAnimation:self.avtivityView];
     }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

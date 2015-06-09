@@ -43,6 +43,7 @@
 @end
 
 @implementation WishListViewController
+//增加右下视图  商品详情控件
 -(void)addSomeElementsToRightView{
     UILabel* l1 = [[UILabel alloc]init];
     l1.numberOfLines=0;
@@ -114,7 +115,7 @@
     
     self.colorViews = @[self.colorView1,self.colorView2,self.colorView3,self.colorView4];
 }
-//重设右视图的所有子控件位置及大小
+//设置右视图的所有子控件位置及大小
 -(void)resetAllElementsInRightView{
     CGRect frame = [self getGoodTitleFrame];
     self.goods_title.text = self.goodInfo.goods_title;
@@ -162,7 +163,7 @@
     
     
 }
-//从已存在的wishlist列表中导入数据
+//懒加载
 -(NSMutableArray *)clothes{
     if (!_clothes) {
         _clothes = [NSMutableArray array];
@@ -175,12 +176,13 @@
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+//如果跳转页面未传值，则显示本地未上传给服务器的wishlist列表，如果传值则显示网络上喜欢的历史纪录
     if (!self.receiveArr) {
         [self readDataFromTableWishlist];
     } else {
         [self.clothes addObjectsFromArray:self.receiveArr];
     }
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
+    
     [self addSomeElementsToRightView];
 //从数据库读取数据
     
@@ -189,7 +191,9 @@
     
     
 }
+//页面已经显示时添加两个通知的观察者
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
     if (!self.receiveArr) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeDataFromWishlist:) name:@"removeNopedGood" object:nil];
     }
@@ -199,7 +203,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"removeNopedGood" object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"requestLoadGoodInfo" object:nil];
 }
-//收到通知  开始去网络请求商品信息
+//收到通知  网络请求商品详情
 -(void)requestLoadGoodInfo:(NSNotification*)noti{
     NSLog(@"noti");
     [ModeGoodAPI requestGoodInfoWithGoodID:[noti.userInfo objectForKey:@"goods_id"] andCallback:^(id obj) {
@@ -215,6 +219,7 @@
         [self.view setNeedsLayout];
     }];
 }
+//计算右视图中商品标题的大小
 -(CGRect)getGoodTitleFrame {
     NSDictionary* attributes = @{NSFontAttributeName:[UIFont italicSystemFontOfSize:14],NSForegroundColorAttributeName:[UIColor colorWithRed:77/255.f green:77/255.f blue:77/255.f alpha:1]};
     return [self.goodInfo.goods_title boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.rightView.bounds), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];

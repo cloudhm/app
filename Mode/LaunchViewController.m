@@ -19,9 +19,8 @@
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
--(void)dealloc{
+-(void)viewDidDisappear:(BOOL)animated{
     self.backgroundView = nil;
-    NSLog(@"本页面销毁");
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

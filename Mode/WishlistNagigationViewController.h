@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//WishlistTableViewController的导航栏控制器
 @interface WishlistNagigationViewController : UINavigationController
 
 @end

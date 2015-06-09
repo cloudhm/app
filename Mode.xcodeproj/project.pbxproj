@@ -64,8 +64,6 @@
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
 		DB671FEE1B2706C000769F36 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB671FED1B2706C000769F36 /* times.plist */; };
-		DB6A36581B16A6E100623016 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6A36571B16A6E100623016 /* ShareView.m */; };
-		DB6A365A1B16A6EF00623016 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6A36591B16A6EF00623016 /* ShareView.xib */; };
 		DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */; };
 		DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9E11101B229A2D00C92D6A /* OrderViewController.m */; };
 		DB9E118C1B229CD000C92D6A /* email_login_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11141B229CD000C92D6A /* email_login_normal.png */; };
@@ -338,9 +336,6 @@
 		DB4BDDDE1B215C3E00EFDE22 /* BrandRunwayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandRunwayTableViewCell.h; sourceTree = "<group>"; };
 		DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayTableViewCell.m; sourceTree = "<group>"; };
 		DB671FED1B2706C000769F36 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
-		DB6A36561B16A6E100623016 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
-		DB6A36571B16A6E100623016 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		DB6A36591B16A6EF00623016 /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
 		DB76ECD51B1FDDAE007E8B4E /* ModeAccountAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeAccountAPI.h; sourceTree = "<group>"; };
 		DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeAccountAPI.m; sourceTree = "<group>"; };
 		DB9E110F1B229A2D00C92D6A /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -1297,9 +1292,6 @@
 			children = (
 				DBAA40071B130F79009D66D3 /* ChooseClothesView.h */,
 				DBAA40081B130F79009D66D3 /* ChooseClothesView.m */,
-				DB6A36561B16A6E100623016 /* ShareView.h */,
-				DB6A36571B16A6E100623016 /* ShareView.m */,
-				DB6A36591B16A6EF00623016 /* ShareView.xib */,
 			);
 			name = LikeOrNopeView;
 			sourceTree = "<group>";
@@ -1445,7 +1437,6 @@
 				DB9E11F31B229CD000C92D6A /* heart_button.png in Resources */,
 				DB9E11B71B229CD000C92D6A /* new_secret_password.png in Resources */,
 				DB9E119B1B229CD000C92D6A /* coupon_line.png in Resources */,
-				DB6A365A1B16A6EF00623016 /* ShareView.xib in Resources */,
 				DB9E11B21B229CD000C92D6A /* new_secret_email_normal.png in Resources */,
 				DB9E11F01B229CD000C92D6A /* good_normal.png in Resources */,
 				DB9E11951B229CD000C92D6A /* long line.png in Resources */,
@@ -1673,7 +1664,6 @@
 				11BD58011B176E7B00A149C0 /* StyleCollectionViewCell.m in Sources */,
 				DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */,
 				11BD57F51B17634B00A149C0 /* OccasionViewController.m in Sources */,
-				DB6A36581B16A6E100623016 /* ShareView.m in Sources */,
 				DB0D53321B0EF15C0012E321 /* RegisterView.m in Sources */,
 				DBAA3FCB1B12D415009D66D3 /* BrandViewController.m in Sources */,
 			);
@@ -1797,7 +1787,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1812,7 +1802,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

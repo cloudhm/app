@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 YedaoDEV. All rights reserved.
 //
 
-//系统网络请求
+//获取系统主页网络请求
 #import <Foundation/Foundation.h>
 #import "PrefixHeader.pch"
 typedef void (^MyCallback)(id obj);

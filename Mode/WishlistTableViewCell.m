@@ -12,6 +12,7 @@
 @implementation WishlistTableViewCell
 
 - (void)awakeFromNib {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     if (!self.commentLabel) {
         self.commentLabel = [[UILabel alloc]init];
         self.commentLabel.font = [UIFont fontWithName:@"Helvetica" size:15];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//OrderViewController的导航栏控制器
 @interface OrderNavigationViewController : UINavigationController
 
 @end

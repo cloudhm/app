@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ChooseClothesView.h"
+//喜欢不喜欢评测界面
 @class ModeGood;
 @interface LikeOrNopeViewController : UIViewController<MDCSwipeToChooseDelegate>
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;//下半部视图，用来把下半部整体插入subView 0的位置，在拖动显示时可以在拖动图片下方
 
 @property (weak, nonatomic) IBOutlet UILabel *tabLabel;
 @property (nonatomic,assign) NSInteger number;

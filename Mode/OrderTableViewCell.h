@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OrderCellInnerView.h"
 #import "ModeOrder.h"
+//OrderViewController中tableView的自定义xib cell
 @interface OrderTableViewCell : UITableViewCell
 @property (nonatomic, strong) ModeOrder *modeOrder;
 @property (weak, nonatomic) IBOutlet UIImageView *main_img;

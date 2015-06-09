@@ -23,11 +23,15 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    
+    
+    //批量设置按钮选中和未选中的字体颜色
     [[UIButton appearance] setTitleColor:[UIColor colorWithRed:188/255.f green:218/255.f blue:180/255.f alpha:1] forState:UIControlStateSelected];
     [[UIButton appearance] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     
-    
+    self.title = @"Orders";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -35,10 +39,12 @@
     
     self.selectedIndex = 1;
 }
+//页面即将显示把tag为1的按钮设置为选中状态
 -(void)viewDidAppear:(BOOL)animated{
     UIButton* btn = (UIButton*)[self.view viewWithTag:self.selectedIndex];
     btn.selected = YES;
 }
+//每次点按钮后触发此方法
 -(void)setSelectedAtIndex:(NSInteger)selectedIndex{
     UIButton* btn = (UIButton*)[self.view viewWithTag:_selectedIndex];
     btn.selected = NO;
@@ -46,6 +52,8 @@
     btn = (UIButton*)[self.view viewWithTag:_selectedIndex];
     btn.selected = YES;
 }
+
+//点击按钮时执行此方法
 - (IBAction)modifyState:(UIButton *)sender {
     [self setSelectedAtIndex:(NSInteger)sender.tag];
 #warning 发出通知来让表格显示需要的内容
@@ -53,10 +61,7 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

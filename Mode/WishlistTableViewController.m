@@ -42,6 +42,8 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     [self initUI];
+    self.title = @"Profile";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self getDataFromNetwork];
@@ -78,12 +80,9 @@
         }
     }];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-#pragma mark - Table view data source
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -103,7 +102,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return @"AAAAAAAA";
 }
-
+#pragma mark -UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* reuseIdentifier = @"Cell";
     WishlistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
@@ -122,8 +121,6 @@
     [ModeWishlistAPI requestWishlistsByWishlist_ID:wishlist.wishlist_id AndCallback:^(id obj) {
         if(![obj isKindOfClass:[NSNull class]]) {
             [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
-//            WishListViewController*wvc = [[WishListViewController alloc]init];
-//            [self.navigationController pushViewController:wvc animated:YES];
         } else {
             self.tableView.userInteractionEnabled = YES;
         }

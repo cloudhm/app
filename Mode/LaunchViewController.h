@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//界面首页
+//界面首页 每次运行时短暂的动画
 @interface LaunchViewController : UIViewController
 
 

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
                 <outlet property="activityIndicatorView" destination="r5D-tN-szW" id="NqO-JW-NeE"/>
+                <outlet property="avtivityView" destination="DxD-JN-jiE" id="A4V-EE-QQE"/>
                 <outlet property="shareFacebookBtn" destination="98C-WF-5IX" id="7Ew-OQ-CZ1"/>
                 <outlet property="shareTextContent" destination="fGB-Pt-gCE" id="0fd-4g-JDI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jbd-KL-IHJ"/>
@@ -135,6 +136,11 @@
                             <rect key="frame" x="101" y="231" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="color" red="0.90196078430000004" green="0.89455966509999996" blue="0.22603744049999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="DxD-JN-jiE">
+                            <rect key="frame" x="100" y="231" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" red="1" green="0.8901478531" blue="0.1481260854" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.1843137255" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>

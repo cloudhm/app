@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSMutableArray *allGoods;
 @property (strong, nonatomic) NSMutableArray *wishlist;
 @property (strong, nonatomic) UIView *startIntroduceView;
+@property (nonatomic,assign) BOOL anotherFlag;
 @end
 
 @implementation LikeOrNopeViewController
@@ -46,7 +47,7 @@
     }
     return _wishlist;
 }
-#pragma mark - UIViewController Overrides
+#pragma mark - 跳转至Wishlist页面
 -(void)gotoWishlist:(UIBarButtonItem*)btn{
     if (self.label.text.integerValue>0) {
         [self performSegueWithIdentifier:@"gotoWishlistVC" sender:nil];
@@ -54,17 +55,13 @@
         UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Hi,Friend!" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [av show];
     }
-    
-//    WishListViewController* wvc = [[WishListViewController alloc]init];
-//    [self.navigationController pushViewController:wvc animated:YES];
-
 }
+//定义导航栏右侧按钮
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
     bgIV.image = [UIImage imageNamed:@"heart.png"];
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
-
     l.textAlignment = NSTextAlignmentCenter;
     l.textColor = [UIColor whiteColor];
     self.label = l;
@@ -76,32 +73,27 @@
     UIBarButtonItem* rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightView];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
-#warning 临时按钮
+#warning 临时左侧按钮
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
     
 }
-#pragma mark 临时的按钮
+#pragma mark －临时左侧按钮
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
+//页面即将显示 将bottomView插入至视图底部位置
 -(void)viewWillAppear:(BOOL)animated{
     [self.view insertSubview:self.bottomView atIndex:0];
     [self.wishlist removeAllObjects];
     [self readTableWishlistFromDatabase];
-    NSLog(@"userInteractionEnabled open");
     self.view.userInteractionEnabled = YES;
 }
+//如果上一次未完成分享  会弹出分享视图
 -(void)viewDidAppear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(showShareViewController) name:@"showShareView" object:nil];
     if (self.label.text.integerValue >= 9) {
         [self showShareViewController];
     }
-    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"likeOrNope"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-}
--(void)viewDidDisappear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"showShareView" object:nil];
 }
 //读likenope中的数据 一组秀场数据
 -(void)readDatabase{
@@ -128,15 +120,16 @@
         [db close];
     }
 }
--(void)tap:(UITapGestureRecognizer*)gr{
-    self.startIntroduceView=gr.view;
-    [UIView animateWithDuration:0.5f animations:^{
-        self.startIntroduceView.alpha = 0.f;
-    } completion:^(BOOL finished) {
-        [self.startIntroduceView removeFromSuperview];
-        self.startIntroduceView =nil;
-    }];
-}
+////
+//-(void)tap:(UITapGestureRecognizer*)gr{
+//    self.startIntroduceView=gr.view;
+//    [UIView animateWithDuration:0.5f animations:^{
+//        self.startIntroduceView.alpha = 0.f;
+//    } completion:^(BOOL finished) {
+//        [self.startIntroduceView removeFromSuperview];
+//        self.startIntroduceView =nil;
+//    }];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -151,27 +144,12 @@
     
     [self updateUI];
     [self defineRightBarItem];
-    
-#warning 该方法可以隐藏导航栏左侧自带按钮的文字,目前由于是pesenet过来的   导航栏左侧没有按钮
-//    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
-    
+    self.anotherFlag = NO;
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
-    
-    
-    
-    
-    
 }
 -(void)createStartIntroduceView{
-//    StartIntroduceViewController* startIntroduceViewController = [[StartIntroduceViewController alloc]initWithNibName:@"StartIntroduceViewController" bundle:nil];
-//    startIntroduceViewController.dictionary=self.dictionary;
-//    startIntroduceViewController.delegate = self;
-//    [self.navigationController presentPopupViewController:startIntroduceViewController animated:NO completion:nil];
-    
-    
     if (!self.startIntroduceView) {
         self.startIntroduceView = [[UIView alloc]initWithFrame:self.navigationController.view.bounds];
         self.startIntroduceView.backgroundColor = [UIColor colorWithRed:27/255.f green:27/255.f blue:27/255.f alpha:1];
@@ -225,10 +203,16 @@
     [self.navigationController presentPopupViewController:shareViewController animated:YES completion:nil];
 }
 #pragma mark ShareViewControllerDelegate
--(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent{
-    
+-(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent startAnimation:(UIActivityIndicatorView *)activityView{
+    [activityView startAnimating];
 #warning 发布信息给服务器
-
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [NSThread sleepForTimeInterval:5.f];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [activityView stopAnimating];
+//            [self dismissOrderConfirmViewController:orderConfirmViewController];
+//        });
+//    });
 #warning 清空数据库中9个项目
     BOOL flag = [self clearTableWishlist];
 #warning 成功后移除ShareViewController
@@ -313,9 +297,7 @@
     self.fourthCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]];
     self.fourthCardView.frame = self.thirdCardView.frame;
     [self.view insertSubview:self.fourthCardView belowSubview:self.thirdCardView];
-    
-//    [self constructNopeButton];
-//    [self constructLikedButton];
+
 }
 -(CGRect)scaleRect:(CGRect)frame{
     CGRect rect = frame;
@@ -362,12 +344,8 @@
 
 // This is called then a user swipes the view fully left or right.
 - (void)view:(UIView *)view wasChosenWithDirection:(MDCSwipeDirection)direction {
-    
     self.number++;
-    
     self.tabLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.number>self.totalNumber?12:self.number,self.totalNumber];
-    // MDCSwipeToChooseView shows "NOPE" on swipes to the left,
-    // and "LIKED" on swipes to the right.
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"nope"} andCallback:^(id obj) {
@@ -397,16 +375,7 @@
             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"likeOrNope"];
             [[NSUserDefaults standardUserDefaults]synchronize];
         }
-        
-        
     }
-    
-    
-    
-    // MDCSwipeToChooseView removes the view from the view hierarchy
-    // after it is swiped (this behavior can be customized via the
-    // MDCSwipeOptions class). Since the front card view is gone, we
-    // move the back card to the front, and create a new back card.
     self.firstCardView = self.secondCardView;
     self.firstCardView.userInteractionEnabled = YES;
     self.secondCardView = self.thirdCardView;
@@ -423,13 +392,7 @@
     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"likeOrNope"];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
-//- (void)dismissPopup {
-//    if (self.popupViewController != nil) {
-//        [self dismissPopupViewControllerAnimated:YES completion:^{
-//            NSLog(@"popup view dismissed");
-//        }];
-//    }
-//}
+
 -(void)writeCurrentClothIntoTableWishlist{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
@@ -453,8 +416,6 @@
 }
 #pragma mark - Internal Methods
 - (void)setFirstCardView:(ChooseClothesView *)firstCardView {
-    // Keep track of the person currently being chosen.
-    // Quick and dirty, just for the purposes of this sample app.
     _firstCardView = firstCardView;
     self.currentCloth = firstCardView.modeGood;
 }
@@ -462,10 +423,6 @@
     if ([self.allGoods count] == 0) {
         return nil;
     }
-    // UIView+MDCSwipeToChoose and MDCSwipeToChooseView are heavily customizable.
-    // Each take an "options" argument. Here, we specify the view controller as
-    // a delegate, and provide a custom callback that moves the back card view
-    // based on how far the user has panned the front card view.
     MDCSwipeToChooseViewOptions *options = [MDCSwipeToChooseViewOptions new];
     options.delegate = self;
     options.threshold = 80.f;
@@ -521,59 +478,10 @@
     return [self thirdCardViewFrame];
     
 }
-//// Create and add the "nope" button.
-//- (void)constructNopeButton {
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [button setBackgroundColor:[UIColor grayColor]];
-//    UIImage *image = [UIImage imageNamed:@"hand_left.png"];
-//    button.frame = CGRectMake(ChoosePersonButtonHorizontalPadding,
-//                              CGRectGetMaxY(self.secondCardView.frame) + ChoosePersonButtonVerticalPadding*2,
-//                              image.size.width,
-//                              image.size.height);
-//    [button setImage:image forState:UIControlStateNormal];
-//    [button setTintColor:[UIColor colorWithRed:247.f/255.f
-//                                         green:91.f/255.f
-//                                          blue:37.f/255.f
-//                                         alpha:1.f]];
-//    [button addTarget:self
-//               action:@selector(nopeFrontCardView)
-//     forControlEvents:UIControlEventTouchUpInside];
-//    [self.view insertSubview:button atIndex:0];
-//}
-//
-//// Create and add the "like" button.
-//- (void)constructLikedButton {
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [button setBackgroundColor:[UIColor grayColor]];
-//    UIImage *image = [UIImage imageNamed:@"hand_right.png"];
-//    button.frame = 
-//    button.frame = CGRectMake(CGRectGetMaxX(self.mainFrame) - image.size.width - ChoosePersonButtonHorizontalPadding,
-//                              CGRectGetMaxY(self.secondCardView.frame) + ChoosePersonButtonVerticalPadding*2,
-//                              image.size.width,
-//                              image.size.height);
-//    [button setImage:image forState:UIControlStateNormal];
-//    [button setTintColor:[UIColor colorWithRed:29.f/255.f
-//                                         green:245.f/255.f
-//                                          blue:106.f/255.f
-//                                         alpha:1.f]];
-//    [button addTarget:self
-//               action:@selector(likeFrontCardView)
-//     forControlEvents:UIControlEventTouchUpInside];
-//    [self.view insertSubview:button atIndex:0];
-//}
+
 
 #pragma mark Control Events
 
-//// Programmatically "nopes" the front card view.
-//- (void)nopeFrontCardView {
-//    [self.firstCardView mdc_swipe:MDCSwipeDirectionLeft];
-//}
-//
-//
-//// Programmatically "likes" the front card view.
-//- (void)likeFrontCardView {
-//    [self.firstCardView mdc_swipe:MDCSwipeDirectionRight];
-//}
 - (IBAction)likeFrontCardView:(UIButton *)sender {
     [self.firstCardView mdc_swipe:MDCSwipeDirectionRight];
 }
@@ -582,10 +490,5 @@
     [self.firstCardView mdc_swipe:MDCSwipeDirectionLeft];
 }
 
-
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    WishListViewController* wvc = segue.destinationViewController;
-//    wvc.comfirmValue = sender;
-//}
 @end
 

@@ -23,7 +23,7 @@
 #define kFixLatterTabsPositions 0.0
 
 #define kIndicatorColor [UIColor colorWithRed:183.0/255.0 green:220.0/255.0 blue:173.0/255.0 alpha:1]
-#define kTabsViewBackgroundColor [UIColor colorWithRed:57.0/255.0 green:58.0/255.0 blue:58.0/255.0 alpha:1]
+#define kTabsViewBackgroundColor [UIColor colorWithRed:74.0/255.0 green:74.0/255.0 blue:74.0/255.0 alpha:1]
 #define kContentViewBackgroundColor [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:248.0/255.0 alpha:0.75]
 
 #pragma mark - UIColor+Equality
@@ -869,9 +869,9 @@
             contentSizeWidth += CGRectGetWidth(self.tabsView.frame) - [self.tabWidth floatValue] - [self.tabOffset floatValue];
         }
     }
-    
-    self.tabsView.contentSize = CGSizeMake(contentSizeWidth, [self.tabHeight floatValue]);
-    
+    //由于不需要翻页滚动  设定成0，0就行了
+//    self.tabsView.contentSize = CGSizeMake(contentSizeWidth, [self.tabHeight floatValue]);
+    self.tabsView.contentSize = CGSizeMake(0, 0);
     // Add contentView
     self.contentView = [self.view viewWithTag:kContentViewTag];
     

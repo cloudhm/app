@@ -59,9 +59,11 @@
 		DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */; };
 		DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */; };
 		DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDB1B267E3B00102403 /* WebViewViewController.m */; };
+		DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */; };
 		DB4BDDD81B2136F900EFDE22 /* ModeBrandRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */; };
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
+		DB671FEE1B2706C000769F36 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB671FED1B2706C000769F36 /* times.plist */; };
 		DB6A36581B16A6E100623016 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6A36571B16A6E100623016 /* ShareView.m */; };
 		DB6A365A1B16A6EF00623016 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6A36591B16A6EF00623016 /* ShareView.xib */; };
 		DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */; };
@@ -209,7 +211,6 @@
 		DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */; };
 		DBF6CB371B25288600FEC1F5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB361B25288600FEC1F5 /* ShareViewController.m */; };
 		DBF6CB391B252D8200FEC1F5 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF6CB381B252D8200FEC1F5 /* ShareViewController.xib */; };
-		DBF6CB3B1B253A9E00FEC1F5 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF6CB3A1B253A9E00FEC1F5 /* times.plist */; };
 		DBF6CB511B2587C000FEC1F5 /* OrderConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB4F1B2587C000FEC1F5 /* OrderConfirmViewController.m */; };
 		DBF6CB521B2587C000FEC1F5 /* OrderConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF6CB501B2587C000FEC1F5 /* OrderConfirmViewController.xib */; };
 		DBFA95AE1B219D0700362DAC /* ConvertTime.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFA95AD1B219D0700362DAC /* ConvertTime.m */; };
@@ -328,6 +329,7 @@
 		DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistNagigationViewController.m; sourceTree = "<group>"; };
 		DB24CFDA1B267E3B00102403 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DB24CFDB1B267E3B00102403 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
+		DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINOT-Light.otf"; sourceTree = "<group>"; };
 		DB4BDDD61B2136F900EFDE22 /* ModeBrandRunwayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunwayAPI.h; sourceTree = "<group>"; };
 		DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeBrandRunwayAPI.m; sourceTree = "<group>"; };
 		DB4BDDDA1B2138E200EFDE22 /* ModeBrandRunway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunway.h; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		DB4BDDDD1B21550300EFDE22 /* JsonParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		DB4BDDDE1B215C3E00EFDE22 /* BrandRunwayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandRunwayTableViewCell.h; sourceTree = "<group>"; };
 		DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayTableViewCell.m; sourceTree = "<group>"; };
+		DB671FED1B2706C000769F36 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
 		DB6A36561B16A6E100623016 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		DB6A36571B16A6E100623016 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		DB6A36591B16A6EF00623016 /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
@@ -513,7 +516,6 @@
 		DBF6CB351B25288600FEC1F5 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		DBF6CB361B25288600FEC1F5 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		DBF6CB381B252D8200FEC1F5 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
-		DBF6CB3A1B253A9E00FEC1F5 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
 		DBF6CB4E1B2587C000FEC1F5 /* OrderConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderConfirmViewController.h; sourceTree = "<group>"; };
 		DBF6CB4F1B2587C000FEC1F5 /* OrderConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderConfirmViewController.m; sourceTree = "<group>"; };
 		DBF6CB501B2587C000FEC1F5 /* OrderConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderConfirmViewController.xib; sourceTree = "<group>"; };
@@ -871,8 +873,8 @@
 			isa = PBXGroup;
 			children = (
 				DBF6CB411B25707300FEC1F5 /* FontResource */,
-				DBF6CB3A1B253A9E00FEC1F5 /* times.plist */,
 				DBC022CB1B20398300F27D1C /* init.plist */,
+				DB671FED1B2706C000769F36 /* times.plist */,
 				DBF6CB311B25270E00FEC1F5 /* CWPopup */,
 				DB169D1E1B199B1C0015D4A6 /* SDWebImage */,
 				118CC8E11B18A30200AE5BD4 /* andriod  整套切片 */,
@@ -1332,6 +1334,7 @@
 		DBF6CB411B25707300FEC1F5 /* FontResource */ = {
 			isa = PBXGroup;
 			children = (
+				DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */,
 			);
 			name = FontResource;
 			sourceTree = "<group>";
@@ -1476,7 +1479,6 @@
 				DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */,
 				DB9E11D71B229CD000C92D6A /* like.png in Resources */,
 				DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */,
-				DBF6CB3B1B253A9E00FEC1F5 /* times.plist in Resources */,
 				DB9E11A11B229CD000C92D6A /* confirm_press.png in Resources */,
 				DB9E11D11B229CD000C92D6A /* card_left_two_bottom.png in Resources */,
 				DB9E11A61B229CD000C92D6A /* Pop up box_.png in Resources */,
@@ -1495,6 +1497,7 @@
 				DB9E11E41B229CD000C92D6A /* _divider line.png in Resources */,
 				DB9E11BB1B229CD000C92D6A /* input_right_password.png in Resources */,
 				DB9E11CF1B229CD000C92D6A /* card_bg_01.png in Resources */,
+				DB671FEE1B2706C000769F36 /* times.plist in Resources */,
 				DB9E11AE1B229CD000C92D6A /* _new_secret_name_normal.png in Resources */,
 				DB9E11EE1B229CD000C92D6A /* delete_normal.png in Resources */,
 				DB9E11D51B229CD000C92D6A /* hand_unlike_press.png in Resources */,
@@ -1593,6 +1596,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */,
 				DBA2E98C1B1448EC006B5CE4 /* ModeSysAPI.m in Sources */,
 				DBA2E97E1B140A2F006B5CE4 /* BrandIntroduceHeaderView.m in Sources */,
 				118CC99A1B18C68100AE5BD4 /* Coupon.m in Sources */,

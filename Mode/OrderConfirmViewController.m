@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *zipcodeTextField;
 
+
 @end
 
 @implementation OrderConfirmViewController
@@ -26,8 +27,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)confirm:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(orderConfirmViewController:editFinishWithName:andZipCode:) ]) {
-        [self.delegate orderConfirmViewController:self editFinishWithName:self.nameTextField.text andZipCode:self.zipcodeTextField.text];
+    if ([self.delegate respondsToSelector:@selector(orderConfirmViewController:editFinishWithName:andZipCode:beginAnimation:) ]) {
+        [self.delegate orderConfirmViewController:self editFinishWithName:self.nameTextField.text andZipCode:self.zipcodeTextField.text beginAnimation:self.activityView];
     }
 }
 - (IBAction)dismiss:(UIButton *)sender {

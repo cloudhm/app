@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class OrderConfirmViewController;
+@class OrderConfirmViewController,UIActivityIndicatorView;
 @protocol OrderConfirmViewControllerDelegate <NSObject>
 
 @optional
--(void)orderConfirmViewController:(OrderConfirmViewController*)orderConfirmViewController editFinishWithName:(NSString*)name andZipCode:(NSString*)zipcode;
+-(void)orderConfirmViewController:(OrderConfirmViewController*)orderConfirmViewController editFinishWithName:(NSString*)name andZipCode:(NSString*)zipcode beginAnimation:(UIActivityIndicatorView*)activityView;
 -(void) dismissOrderConfirmViewController:(OrderConfirmViewController*)orderConfirmViewController;
 
 @end
 @interface OrderConfirmViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 @property (weak, nonatomic) id <OrderConfirmViewControllerDelegate> delegate;
 @end

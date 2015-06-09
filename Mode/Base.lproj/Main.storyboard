@@ -2505,16 +2505,82 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="aou-gF-5oo" id="foi-BR-OjM"/>
+                        <segue destination="H2D-We-fdm" kind="show" identifier="gotoWebViewViewController" id="iLx-eR-bPa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a94-Pn-Le9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2128.5" y="1150.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Web View View Controller-->
+        <scene sceneID="Pqa-F4-5mt">
+            <objects>
+                <viewController id="H2D-We-fdm" customClass="WebViewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="two-O8-xFP"/>
+                        <viewControllerLayoutGuide type="bottom" id="9iy-aK-653"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wjg-CG-ys8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-XC-60h">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="H2D-We-fdm" id="Wrr-jP-cRG"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9iy-aK-653" firstAttribute="top" secondItem="j8V-XC-60h" secondAttribute="bottom" id="2cw-nZ-Hog"/>
+                            <constraint firstAttribute="centerY" secondItem="j8V-XC-60h" secondAttribute="centerY" id="KYm-bb-pNZ"/>
+                            <constraint firstItem="j8V-XC-60h" firstAttribute="top" secondItem="Wjg-CG-ys8" secondAttribute="top" id="LKM-wH-9yu"/>
+                            <constraint firstItem="j8V-XC-60h" firstAttribute="leading" secondItem="Wjg-CG-ys8" secondAttribute="leading" id="Osk-aR-NbK"/>
+                            <constraint firstAttribute="centerX" secondItem="j8V-XC-60h" secondAttribute="centerX" id="ZPk-WZ-ttz"/>
+                            <constraint firstAttribute="trailing" secondItem="j8V-XC-60h" secondAttribute="trailing" id="pCl-KB-RXV"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="j8V-XC-60h"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2cw-nZ-Hog"/>
+                                <exclude reference="KYm-bb-pNZ"/>
+                                <exclude reference="LKM-wH-9yu"/>
+                                <exclude reference="Osk-aR-NbK"/>
+                                <exclude reference="ZPk-WZ-ttz"/>
+                                <exclude reference="pCl-KB-RXV"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="j8V-XC-60h"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2cw-nZ-Hog"/>
+                                <include reference="KYm-bb-pNZ"/>
+                                <include reference="LKM-wH-9yu"/>
+                                <include reference="Osk-aR-NbK"/>
+                                <include reference="ZPk-WZ-ttz"/>
+                                <include reference="pCl-KB-RXV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="p06-AC-kNL"/>
+                    <connections>
+                        <outlet property="webView" destination="j8V-XC-60h" id="Im7-iu-N1L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rr2-LG-HOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3072" y="1144.5"/>
+        </scene>
+        <!--Wishlist Nagigation View Controller-->
         <scene sceneID="fQV-7r-ByS">
             <objects>
-                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foC-vO-tKO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="foC-vO-tKO" customClass="WishlistNagigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Uc-kR-rVg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2931,10 +2997,10 @@
             </objects>
             <point key="canvasLocation" x="2863.5" y="-240"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Order Navigation View Controller-->
         <scene sceneID="tsV-PS-53n">
             <objects>
-                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pF7-XS-qd6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pF7-XS-qd6" customClass="OrderNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6OM-EY-BrG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2949,10 +3015,10 @@
             </objects>
             <point key="canvasLocation" x="27" y="-306"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Passbook Navigation View Controller-->
         <scene sceneID="zEW-LG-v8D">
             <objects>
-                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5Y1-kC-K8m" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="5Y1-kC-K8m" customClass="PassbookNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7tI-Q5-Zrd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

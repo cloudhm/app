@@ -10,11 +10,14 @@
 #import "AppDelegate.h"
 #import "ConvertTime.h"
 #import "PassbookTableViewCell.h"
-
-@interface PassbookViewController ()<UITableViewDataSource,UITabBarDelegate>
+#import "WebViewViewController.h"
+#import "OrderConfirmViewController.h"
+#import "UIViewController+CWPopup.h"
+@interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray* timeArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CADisplayLink *gameTimer;
+@property (strong, nonatomic) OrderConfirmViewController *orderConfirmViewController;
 @end
 
 @implementation PassbookViewController
@@ -109,7 +112,38 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 189.f;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    OrderConfirmViewController* orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];
+#warning ..
+    orderConfirmViewController.delegate = self;
+    [self presentPopupViewController:orderConfirmViewController animated:YES completion:nil];
+    
+    
+    NSString* website = @"http://www.baidu.com";
+    [self performSegueWithIdentifier:@"gotoWebViewViewController" sender:website];
+}
+#pragma mark OrderConfirmViewControllerDelegate
+-(void)dismissOrderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController{
+    [self dismissPopupViewControllerAnimated:YES completion:nil];
+}
+-(void)orderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController editFinishWithName:(NSString *)name andZipCode:(NSString *)zipcode beginAnimation:(UIActivityIndicatorView *)activityView{
+#warning 这个方法是发送信息给服务器端
+    [activityView startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:5.f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [activityView stopAnimating];
+            [self dismissOrderConfirmViewController:orderConfirmViewController];
+        });
+    });
+    
+    
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    WebViewViewController* webView = segue.destinationViewController;
+    
+    webView.website = sender;
+}
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -97,16 +97,21 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
             destinationViewController = self.currentViewController;
             [[[AppDelegate globalDelegate] drawerViewController] setCenterViewController:destinationViewController];
             [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
-//            [[NSNotificationCenter defaultCenter]postNotificationName:@"gotoWishlistController" object:nil];
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"gotoWishlistController" object:nil userInfo:@{@"currentViewController":self.currentViewController}];
+            return;
             
         } else if (indexPath.row == 1) {
             destinationViewController = [[AppDelegate globalDelegate] orderViewController];
+            self.currentViewController = destinationViewController;
         } else if (indexPath.row == 2) {
             destinationViewController = [[AppDelegate globalDelegate]passbookViewController];
+            self.currentViewController = destinationViewController;
         }
     } else if (indexPath.section == 2) {
         if (indexPath.row == 0||indexPath.row ==1) {
             destinationViewController = [[AppDelegate globalDelegate]brandRunwayViewController];
+            
         }
     }
     

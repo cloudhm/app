@@ -49,19 +49,19 @@
 -(void)changePosition:(NSNotification*)noti {
     NSDictionary *dic = noti.userInfo;
     float t = [[dic objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
-    CGRect startPosition = [[dic objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
     CGRect endPosition = [[dic objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
-    float del = startPosition.origin.y - endPosition.origin.y;
     if (self.lvc != nil) {
         CGRect frame = self.lvc.frame;
-        frame.origin.y -= del;
+        float del = endPosition.origin.y - CGRectGetHeight(LOGINVIEWFRAME);
+        frame.origin.y = del;
         [UIView animateWithDuration:t animations:^{
             self.lvc.frame = frame;
         }];
     }
     if (self.rvc != nil) {
         CGRect frame = self.rvc.frame;
-        frame.origin.y -= del;
+        float del = endPosition.origin.y - CGRectGetHeight(REGISTERVIEWFRAME);
+        frame.origin.y = del;
         [UIView animateWithDuration:t animations:^{
             self.rvc.frame = frame;
         }];

@@ -1,0 +1,39 @@
+//
+//  PrefixHeader.pch
+//  Mode
+//
+//  Created by YedaoDEV on 15/5/26.
+//  Copyright (c) 2015年 YedaoDEV. All rights reserved.
+//
+//定义接口的宏命令集
+#ifndef Mode_PrefixHeader_pch
+#define Mode_PrefixHeader_pch
+
+//账号接口
+#define ACCOUNT_SIGNUP @"http://120.26.107.42/api/account/signup" //邮箱注册
+
+
+//系统接口
+#define BRAND_LIST @"http://120.26.107.42/api/sys/brand_list" //获取活跃中的品牌名称列表
+#define OCCASION_LIST @"http://120.26.107.42/api/sys/occasion_list" //获取场合列表
+#define STYLE_LIST @"http://120.26.107.42/api/sys/style_list" //获取商品风格列表
+
+
+//商品接口
+#define GET_GOODS @"http://120.26.107.42/api/goods/get_goods" //获取商品的基本信息
+#define SET_GOODS_FEEDBACK @"http://120.26.107.42/api/goods/set_goods_feedback" //设置商品测试反馈秀场接口
+
+//秀场接口
+#define GET_NEW @"http://120.26.107.42/api/runway/get_new" //新建一组秀场心愿单接口
+
+//心愿单接口
+#define GET_WISHLISTS @"http://120.26.107.42/api/wishlist/get_wishlists" //获取用户的wishlist
+#define GET_WISHLIST_BY_ID @"http://120.26.107.42/api/wishlist/get_wishlist_by_id" //按ID获取用户wishlist
+#define GET_NEWEST_WISHLIST @"http://120.26.107.42/api/wishlist/get_newest_wishlist" //获取用户最新的wishlist
+
+
+//品牌接口
+#define BRAND_GET_RUNWAY_LIST @"http://120.26.107.42/api/brand/get_runway_list" //获取某个品牌的所有秀场信息
+
+
+#endif

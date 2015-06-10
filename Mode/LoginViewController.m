@@ -28,11 +28,14 @@
     return YES;
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"token"]) {
         [self.activityIndicatorView startAnimating];
-        [NSThread sleepForTimeInterval:3.f];
-        [self enterHostView];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [NSThread sleepForTimeInterval:3.f];
+            [self enterHostView];
+        });
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{

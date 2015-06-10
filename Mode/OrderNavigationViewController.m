@@ -17,7 +17,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
-    
 }
 -(void)viewDidAppear:(BOOL)animated{//设置观察者  防止重复设置多个相同的观察者  每次页面显示先清除
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];

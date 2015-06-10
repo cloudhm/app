@@ -29,7 +29,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNeedsStatusBarAppearanceUpdate];
+    self.modalPresentationCapturesStatusBarAppearance = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

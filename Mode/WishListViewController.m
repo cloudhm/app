@@ -55,6 +55,7 @@
 -(void)addSomeElementsToRightView{
     UILabel* l1 = [[UILabel alloc]init];
     l1.numberOfLines=0;
+    l1.text = @"The Good's Name";
     l1.font = [UIFont italicSystemFontOfSize:14];
     l1.textAlignment = NSTextAlignmentCenter;
 //    l1.backgroundColor = [UIColor yellowColor];
@@ -69,6 +70,7 @@
     
     UILabel* l2 = [[UILabel alloc]init];
     l2.textColor = [UIColor colorWithRed:95/255.f green:197/255.f blue:66/255.f alpha:1];
+    l2.text = @"xxxx.xx.xx";
     self.releaseTime = l2;
     l2.textAlignment = NSTextAlignmentCenter;
     l2.font = [UIFont italicSystemFontOfSize:12];
@@ -106,18 +108,22 @@
     [self.rightView addSubview: b2];
     
     ColorView* colorView = [[ColorView alloc]init];
+    colorView.colorStr = @"";
     self.colorView1 = colorView;
     [self.rightView addSubview:self.colorView1];
     
     colorView = [[ColorView alloc]init];
+    colorView.colorStr = @"";
     self.colorView2 = colorView;
     [self.rightView addSubview:self.colorView2];
     
     colorView = [[ColorView alloc]init];
+    colorView.colorStr = @"";
     self.colorView3 = colorView;
     [self.rightView addSubview:self.colorView3];
     
     colorView = [[ColorView alloc]init];
+    colorView.colorStr = @"";
     self.colorView4 = colorView;
     [self.rightView addSubview:self.colorView4];
     
@@ -181,6 +187,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//由于页面显示的关系  因此本通知写在viewDidLoad中   在页面显示的时候   会显示出第一件物品的信息
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -201,7 +209,7 @@
 }
 //页面已经显示时添加两个通知的观察者
 -(void)viewDidAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
+    
     if (!self.receiveArr) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeDataFromWishlist:) name:@"removeNopedGood" object:nil];
     }

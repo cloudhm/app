@@ -31,6 +31,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"token"]) {
+        self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
         [self.activityIndicatorView startAnimating];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [NSThread sleepForTimeInterval:3.f];

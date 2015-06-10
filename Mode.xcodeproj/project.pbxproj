@@ -26,7 +26,6 @@
 		11C183BD1B14CD62009F3819 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C183BC1B14CD62009F3819 /* Default-568h@2x.png */; };
 		11FE48031B11AC9000255C1D /* JVLeftDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE48001B11AC9000255C1D /* JVLeftDrawerTableViewCell.m */; };
 		11FE48041B11AC9000255C1D /* JVLeftDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE48021B11AC9000255C1D /* JVLeftDrawerTableViewController.m */; };
-		11FE480B1B11B6E000255C1D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE480A1B11B6DF00255C1D /* ProfileViewController.m */; };
 		AA9827CDCB6C528EADAAF092 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B79F925EE1658CDFB122AC77 /* libPods.a */; };
 		DB0D53231B0ECDC50012E321 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0D53221B0ECDC50012E321 /* LoginViewController.m */; };
 		DB0D532D1B0ED7F00012E321 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0D532C1B0ED7F00012E321 /* LoginView.m */; };
@@ -259,8 +258,6 @@
 		11FE48001B11AC9000255C1D /* JVLeftDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVLeftDrawerTableViewCell.m; sourceTree = "<group>"; };
 		11FE48011B11AC9000255C1D /* JVLeftDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVLeftDrawerTableViewController.h; sourceTree = "<group>"; };
 		11FE48021B11AC9000255C1D /* JVLeftDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVLeftDrawerTableViewController.m; sourceTree = "<group>"; };
-		11FE48091B11B6DF00255C1D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		11FE480A1B11B6DF00255C1D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		7573F3FA989C4D6E242F66EC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B79BDD8BA03DB78EF24C2D6A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B79F925EE1658CDFB122AC77 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -579,12 +576,8 @@
 		118CC9941B18B24000AE5BD4 /* WishList */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */,
-				DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */,
 				DBA2E99D1B145AB0006B5CE4 /* WishListViewController.h */,
 				DBA2E99E1B145AB0006B5CE4 /* WishListViewController.m */,
-				DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */,
-				DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */,
 			);
 			name = WishList;
 			sourceTree = "<group>";
@@ -663,8 +656,10 @@
 		11FE48081B11B68C00255C1D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				11FE48091B11B6DF00255C1D /* ProfileViewController.h */,
-				11FE480A1B11B6DF00255C1D /* ProfileViewController.m */,
+				DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */,
+				DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */,
+				DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */,
+				DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1642,7 +1637,6 @@
 				116D38841B1B1F99009E9D14 /* ModeRunwayAPI.m in Sources */,
 				116D38871B1B35BC009E9D14 /* ModeWishlistAPI.m in Sources */,
 				DB169D401B199B1C0015D4A6 /* MKAnnotationView+WebCache.m in Sources */,
-				11FE480B1B11B6E000255C1D /* ProfileViewController.m in Sources */,
 				11FE48041B11AC9000255C1D /* JVLeftDrawerTableViewController.m in Sources */,
 				DB169D441B199B1C0015D4A6 /* SDWebImageDecoder.m in Sources */,
 				DBC4976D1B16CE0A00F70A25 /* ModeGood.m in Sources */,
@@ -1787,7 +1781,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1802,7 +1796,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

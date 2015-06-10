@@ -9,7 +9,6 @@
 #import "PassbookNavigationViewController.h"
 #import "WishListViewController.h"
 #import "AppDelegate.h"
-#import "UIColor+HexString.h"
 @interface PassbookNavigationViewController ()
 
 @end
@@ -41,14 +40,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-//    self.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-//    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    // Do any additional setup after loading the view.
     
-    
-    NSLog(@"%lf",self.topLayoutGuide.length);
 }
 
 - (void)didReceiveMemoryWarning {

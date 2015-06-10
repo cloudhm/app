@@ -13,6 +13,7 @@
 #import "WebViewViewController.h"
 #import "OrderConfirmViewController.h"
 #import "UIViewController+CWPopup.h"
+#import "UIColor+HexString.h"
 @interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray* timeArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,10 +26,7 @@
 -(void)dealloc{
     NSLog(@"passbook dealloc");
 }
-//-(void)viewDidDisappear:(BOOL)animated{
-//    NSLog(@"self.gameTimer remove");
-//    [self.gameTimer invalidate];
-//}
+//设置CADisplayLink 并加入事件循环
 -(void)viewDidAppear:(BOOL)animated{
     if (!self.gameTimer) {
         self.gameTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateDisplay:)];
@@ -44,27 +42,27 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"Profile";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    
     self.tableView.backgroundColor = [UIColor clearColor];//使tableView变透明背景
     
-    
-    
+#warning 虚拟数据从plist文件中倒入
     NSString* filePath = [[NSBundle mainBundle]pathForResource:@"times" ofType:@"plist"];
     self.timeArr = [[NSArray arrayWithContentsOfFile:filePath]mutableCopy];
-    
-    //    self.gameTimer = [CADisplayLink displayLinkWithTarget:self
-    //                                            selector:@selector(updateDisplay:)];
-    //    self.gameTimer.frameInterval = 60.f;//该控件默认1分钟刷新60次，设置为60 则1秒钟刷新1次
-    //    [self.gameTimer addToRunLoop:[NSRunLoop currentRunLoop]forMode:NSDefaultRunLoopMode];
+ 
     [self.tableView registerNib:[UINib nibWithNibName:@"PassbookTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCell"];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+//CADisplayLink刷新数据
 -(void)updateDisplay:(CADisplayLink*)caDisplayLink{
     for (int i = 0; i<self.timeArr.count; i++) {
         NSNumber* timeNum = self.timeArr[i];
@@ -79,10 +77,7 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - Table view data source
 
@@ -114,11 +109,10 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderConfirmViewController* orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];
-#warning ..
     orderConfirmViewController.delegate = self;
     [self presentPopupViewController:orderConfirmViewController animated:YES completion:nil];
     
-    
+#warning 这个是跳准时传递的数据 暂时写死为www.baidu.com
     NSString* website = @"http://www.baidu.com";
     [self performSegueWithIdentifier:@"gotoWebViewViewController" sender:website];
 }
@@ -136,12 +130,10 @@
             [self dismissOrderConfirmViewController:orderConfirmViewController];
         });
     });
-    
-    
 }
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     WebViewViewController* webView = segue.destinationViewController;
-    
     webView.website = sender;
 }
 /*

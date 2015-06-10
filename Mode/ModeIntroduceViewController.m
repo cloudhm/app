@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "LaunchViewController.h"
 #import "ModeUtils.h"
+#import "UIColor+HexString.h"
 @interface ModeIntroduceViewController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) UIScrollView *introScrollView;
 @property(nonatomic,strong)NSArray *imageNames;
@@ -72,9 +73,9 @@
     pageControl.frame = CGRectMake(0, self.view.frame.size.height-20-30, self.view.frame.size.width, 30);
     pageControl.numberOfPages = self.imageNames.count;
     //设置圆点的颜色
-    pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#403434"];
     //设置被选中的圆点的颜色
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"#ff00ea"];
     //关闭用户交互功能
     pageControl.userInteractionEnabled = NO;
     [self.view addSubview:pageControl];

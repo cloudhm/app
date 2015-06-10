@@ -38,14 +38,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    [self initUI];
     self.title = @"Profile";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    
+    
+    if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+    [self initUI];
+    
     [self getDataFromNetwork];
     self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
     // Uncomment the following line to preserve selection between presentations.

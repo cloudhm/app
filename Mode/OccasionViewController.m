@@ -37,13 +37,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     [self readDataFromLocalDatabase];
-    
-    
-    
-    
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -67,14 +61,14 @@ static NSString *reuseIdentifier=@"MyCell";
     self.refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
     [self.cv addSubview:self.refresh];
 }
+//刷新数据
 -(void)refreshData{
     NSLog(@"update");
     [ModeSysAPI requestOccasionListAndCallback:^(id obj) {
-        [self.refresh endRefreshing];
+        [self.refresh endRefreshing];//返回值进入block块中停止刷新动画
         if (![obj isKindOfClass:[NSNull class]]) {
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
-            NSLog(@"刷新视图");
             [self saveAllResponseDataByObject:obj];
             [self.cv reloadData];
             [self.cv setNeedsLayout];
@@ -98,19 +92,19 @@ static NSString *reuseIdentifier=@"MyCell";
     }];
     
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"cccc");
-}
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [self getData];
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
 }
+//接受到通知后响应此方法
 -(void)gotoChoose:(NSNotification*)noti{
     NSDictionary* params = @{@"mode":[noti.userInfo objectForKey:@"mode"],@"mode_val":[noti.userInfo objectForKey:@"mode_val"]};
     NSLog(@"页面即将切换");
@@ -125,17 +119,19 @@ static NSString *reuseIdentifier=@"MyCell";
         [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"]}];
     }];
 }
+//把网络请求回来的秀场数据 存入数据库
 -(void)saveDatabaseWithObj:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
-        BOOL result = [db executeUpdate:@"DROP TABLE likenope"];//只是为了清空原先加载的16张图片数据模型
+        BOOL result = [db executeUpdate:@"delete from likenope"];//只是为了清空原先加载的16张图片数据模型
         if (result) {
             NSLog(@"成功删除");
         } else {
             NSLog(@"该表不存在或未删除");
         }
+#warning 这个表类型数据结构可能会修改
         result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
         if (result) {
             NSLog(@"创建likenope表成功");
@@ -162,6 +158,7 @@ static NSString *reuseIdentifier=@"MyCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
+#pragma mark CollectionView继承ScrollView  因此可以用ScrollViewDelegate
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self.cv reloadData];
 }
@@ -171,7 +168,7 @@ static NSString *reuseIdentifier=@"MyCell";
     cell.occasion = self.dataArray[indexPath.row];
     return cell;
 }
-
+//获取网络数据  用来填充页面内容
 -(void)getData{
     [ModeSysAPI requestOccasionListAndCallback:^(id obj) {
         if (![obj isKindOfClass:[NSNull class]]) {//返回不为空
@@ -183,8 +180,8 @@ static NSString *reuseIdentifier=@"MyCell";
         }
     }];
 }
+//每次开机先从本地数据库中读取框架数据
 -(void)readDataFromLocalDatabase{
-    //从本地数据库读取内容
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
@@ -204,12 +201,11 @@ static NSString *reuseIdentifier=@"MyCell";
     }
     [db close];
 }
-
+//把请求回来的框架数据存入本地数据库
 -(void)saveAllResponseDataByObject:(NSArray*)array{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
-
     if ([db open]) {
         BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (event_id primary key,type,name,pic_link,amount)"];
         if (result) {

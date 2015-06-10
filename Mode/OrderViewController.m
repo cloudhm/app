@@ -24,17 +24,17 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
+    self.title = @"Orders";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     
     //批量设置按钮选中和未选中的字体颜色
     [[UIButton appearance] setTitleColor:[UIColor colorWithRed:188/255.f green:218/255.f blue:180/255.f alpha:1] forState:UIControlStateSelected];
     [[UIButton appearance] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     
-    self.title = @"Orders";
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"OrderTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCell"];
     
     self.selectedIndex = 1;

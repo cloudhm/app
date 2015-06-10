@@ -51,6 +51,7 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
 //增加右下视图  商品详情控件
 -(void)addSomeElementsToRightView{
     UILabel* l1 = [[UILabel alloc]init];

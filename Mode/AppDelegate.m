@@ -39,6 +39,7 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
 - (JVFloatingDrawerViewController *)drawerViewController {
     if (!_drawerViewController) {
         _drawerViewController = [[JVFloatingDrawerViewController alloc] init];
+        
     }
     
     return _drawerViewController;

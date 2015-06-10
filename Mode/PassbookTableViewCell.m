@@ -23,7 +23,6 @@
     self.secondLabel.layer.borderWidth = 1.5f;
     self.secondLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

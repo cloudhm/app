@@ -36,7 +36,7 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.commentLabel.text = self.modeWishlist.comments;
-    float commentLabelW = (CGRectGetWidth(self.bounds)-60.f-20.f);
+    float commentLabelW = (CGRectGetWidth(self.bounds)-60.f-10.f);
     float commentLabelH = [self.modeWishlist getCommentHeightByLabelWidth:commentLabelW];
     NSLog(@"commentLabelH:%f",commentLabelH);
     self.commentLabel.frame = CGRectMake(60.f, 10.f, commentLabelW, commentLabelH);

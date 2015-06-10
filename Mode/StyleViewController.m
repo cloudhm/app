@@ -65,6 +65,7 @@ static NSString *reuseIdentifier=@"MyCell";
     [self.cv addSubview:self.refresh];
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"svcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"svcToLvc" object:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated{

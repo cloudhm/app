@@ -35,9 +35,6 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   
-    
     [self readDataFromLocalDatabase];
     
     //设置集合视图的框架位置
@@ -64,6 +61,7 @@ static NSString *reuseIdentifier=@"MyCell";
     [self.cv addSubview:self.refresh];
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bvcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"bvcToLvc" object:nil];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -124,7 +122,7 @@ static NSString *reuseIdentifier=@"MyCell";
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
-        [db executeUpdate:@"DROP TABLE likenope"];//只是为了清空原先加载的16张图片数据模型
+        [db executeUpdate:@"delete from likenope"];//只是为了清空原先加载的16张图片数据模型
         BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
         if (result) {
             NSLog(@"创建表成功");

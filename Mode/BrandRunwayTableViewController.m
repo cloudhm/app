@@ -12,6 +12,7 @@
 #import "ModeBrandRunwayAPI.h"
 #import "ModeBrandRunway.h"
 #import "BrandRunwayTableViewCell.h"
+#import "UIColor+HexString.h"
 @interface BrandRunwayTableViewController ()
 
 
@@ -25,6 +26,14 @@
 @end
 
 @implementation BrandRunwayTableViewController
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(BrandInfo *)brandInfo{
     if (!_brandInfo) {
         _brandInfo = [[BrandInfo alloc]init];
@@ -47,6 +56,7 @@
 //开始加载数据
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     //设置状态栏为白色字体
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
@@ -110,40 +120,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 226;
 }
-//#pragma UITableViewDelegate
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-//    if (!self.toolbar) {
-//        [self createToolbar];
-//    }
-//}
-//#pragma mark addCustomToolbar
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if (scrollView == self.tableView) {
-//        CGFloat y = scrollView.contentOffset.y;
-//        if (y>self.lastScrollOffset.y) {
-//            if (!self.toolbar) {
-//                [self createToolbar];
-//            }
-//        } else {
-//            [self removeToolbar];
-//        }
-//        CGPoint p = self.lastScrollOffset;
-//        p.y = MAX(scrollView.contentOffset.y,0);
-//        self.lastScrollOffset = p;
-//    }
-//}
-//#pragma mark moveCustomToolbar
-//-(void)removeToolbar{
-//    CGRect rect = self.toolbar.frame;
-//    rect.origin.y += 50.f;
-//    [UIView animateWithDuration:.5f animations:^{
-//        self.toolbar.frame = rect;
-//    } completion:^(BOOL finished) {
-//        [self.toolbar removeFromSuperview];
-//        self.toolbar = nil;
-//    }];
-//}
-#pragma addToolbar
+
+#pragma mark addToolbar
 -(void)createToolbar{
     
     self.toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, self.navigationController.view.bounds.size.height, self.view.bounds.size.width, 50)];

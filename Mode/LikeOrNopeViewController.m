@@ -33,15 +33,22 @@
 @end
 
 @implementation LikeOrNopeViewController
-
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 #pragma mark - Object Lifecycle
--(NSMutableArray *)allGoods{
+-(NSMutableArray *)allGoods{//准备接受一组秀场的数组
     if (!_allGoods) {
         _allGoods = [NSMutableArray array];
     }
     return _allGoods;
 }
--(NSMutableArray *)wishlist{
+-(NSMutableArray *)wishlist{//喜欢产品的数组，从数据库先读取
     if (!_wishlist) {
         _wishlist = [NSMutableArray array];
     }
@@ -76,7 +83,6 @@
 #warning 临时左侧按钮
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
-    
 }
 #pragma mark －临时左侧按钮
 -(void)comeback:(UIBarButtonItem*)btn{
@@ -95,7 +101,7 @@
         [self showShareViewController];
     }
 }
-//读likenope中的数据 一组秀场数据
+//读likenope中的数据 一组秀场数据 存入allGoods数组中
 -(void)readDatabase{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
@@ -120,23 +126,22 @@
         [db close];
     }
 }
-////
-//-(void)tap:(UITapGestureRecognizer*)gr{
-//    self.startIntroduceView=gr.view;
-//    [UIView animateWithDuration:0.5f animations:^{
-//        self.startIntroduceView.alpha = 0.f;
-//    } completion:^(BOOL finished) {
-//        [self.startIntroduceView removeFromSuperview];
-//        self.startIntroduceView =nil;
-//    }];
-//}
+//点击手势 去除开场遮盖
+-(void)tap:(UITapGestureRecognizer*)gr{
+    self.startIntroduceView=gr.view;
+    [UIView animateWithDuration:0.5f animations:^{
+        self.startIntroduceView.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        [self.startIntroduceView removeFromSuperview];
+        self.startIntroduceView =nil;
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 #warning 再造一个view在初次进这时显示
-    [self createStartIntroduceView];
+    [self createStartIntroduceView];//创建一个开场遮盖
     self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
-    
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -149,6 +154,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 }
+//开场遮盖
 -(void)createStartIntroduceView{
     if (!self.startIntroduceView) {
         self.startIntroduceView = [[UIView alloc]initWithFrame:self.navigationController.view.bounds];
@@ -161,7 +167,6 @@
         titleLabel.attributedText = [[NSAttributedString alloc]initWithString:[self.dictionary objectForKey:@"intro_title"]attributes:attributes];
         CGRect rect = [titleLabel.text boundingRectWithSize:CGSizeMake(220, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
         titleLabel.frame = CGRectMake((CGRectGetWidth(self.navigationController.view.bounds) - 220.f)/2, CGRectGetHeight(self.navigationController.view.bounds)/2 - 100.f, 220, rect.size.height + 10.f);
-        
         [self.startIntroduceView addSubview:titleLabel];
         
         UILabel * descLabel = [[UILabel alloc]init];
@@ -178,24 +183,13 @@
         lineView.backgroundColor = [UIColor whiteColor];
         [self.startIntroduceView addSubview:lineView];
         
-        
-        
         UITapGestureRecognizer* tapGr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
         [self.startIntroduceView addGestureRecognizer:tapGr];
         [self.navigationController.view addSubview:self.startIntroduceView];
     }
-
 }
-
+//九宫格弹出的控件
 -(void)showShareViewController{
-//    ShareView* shareView = [[[NSBundle mainBundle]loadNibNamed:@"ShareView" owner:nil options:nil]lastObject];
-//    shareView.delegate = self;
-//    shareView.nineGoods = self.wishlist;
-//    NSLog(@"%@",self.wishlist);
-    
-//    [ASDepthModalViewController presentView:shareView backgroundColor:nil options:ASDepthModalOptionAnimationNone completionHandler:nil];
-//    [ASDepthModalViewController presentView:shareView onCurrentViewController:self.navigationController backgroundColor:nil options:ASDepthModalOptionAnimationNone completionHandler:nil];
-    
     ShareViewController* shareViewController = [[ShareViewController alloc]initWithNibName:@"ShareViewController" bundle:nil];
     shareViewController.delegate = self;
     shareViewController.nineGoods = self.wishlist;
@@ -206,13 +200,14 @@
 -(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent startAnimation:(UIActivityIndicatorView *)activityView{
     [activityView startAnimating];
 #warning 发布信息给服务器
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [NSThread sleepForTimeInterval:5.f];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [activityView stopAnimating];
-//            [self dismissOrderConfirmViewController:orderConfirmViewController];
-//        });
-//    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:5.f];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [activityView stopAnimating];
+            [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+        });
+    });
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 #warning 清空数据库中9个项目
     BOOL flag = [self clearTableWishlist];
 #warning 成功后移除ShareViewController
@@ -223,7 +218,7 @@
         return ;
     }
     if (flag) {
-        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice choice!" message:@"Whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Continue",nil];
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Continue",nil];
         av.tag = 1;
         [av show];
     }
@@ -232,12 +227,13 @@
 -(void)dealloc{
     NSLog(@"likeornope页面销毁");
 }
-
+//完成整组秀场弹出的alertView
 -(void)finishOneSetAndReadyComeback{
-    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"This set has been choosen,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     av.tag = 2;
     [av show];
 }
+
 #pragma mark UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1) {
@@ -299,6 +295,7 @@
     [self.view insertSubview:self.fourthCardView belowSubview:self.thirdCardView];
 
 }
+//根据一个现有尺寸修改，返回一个尺寸
 -(CGRect)scaleRect:(CGRect)frame{
     CGRect rect = frame;
     rect.origin.x += 5.f;
@@ -307,7 +304,7 @@
     rect.size.height -= 10.f;
     return rect;
 }
-
+//从数据库中读取wishlist列表
 -(void)readTableWishlistFromDatabase{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
@@ -335,7 +332,7 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
-#pragma mark - MDCSwipeToChooseDelegate Protocol Methods
+#pragma mark - MDCSwipeToChooseDelegate Protocol Methods 手势
 
 // This is called when a user didn't fully swipe left or right.
 - (void)viewDidCancelSwipe:(UIView *)view {
@@ -345,35 +342,37 @@
 // This is called then a user swipes the view fully left or right.
 - (void)view:(UIView *)view wasChosenWithDirection:(MDCSwipeDirection)direction {
     self.number++;
-    self.tabLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.number>self.totalNumber?12:self.number,self.totalNumber];
+    self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?12:self.number),(int)self.totalNumber];
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"nope"} andCallback:^(id obj) {
-            NSLog(@"%@",[obj objectForKey:@"status"]);
+            NSLog(@"nope:%@",[obj objectForKey:@"status"]);
         }];
         // remove nope goods-Image from Disk
         [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.img_link lastPathComponent] fromDisk:YES];
         
     } else {
         //Like goods
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"nope"} andCallback:^(id obj) {
+        [self  writeCurrentClothIntoTableWishlist];//写入数据库
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"like"} andCallback:^(id obj) {
             if ([[obj objectForKey:@"status"]isEqualToString:@"success"]) {
-                [self  writeCurrentClothIntoTableWishlist];
+                NSLog(@"like:%@",[obj objectForKey:@"status"]);
             };
         }];
         [self.wishlist addObject:self.currentCloth];
         //判断移动方向为右则添加进数组
         int count = self.label.text.intValue;
         count++;
-        self.label.text = [NSString stringWithFormat:@"%d",count];
+        self.label.text = [NSString stringWithFormat:@"%d",(int)count];
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
         if (self.label.text.intValue == 9) {
             NSLog(@"before close:%@",self);
+            self.navigationItem.rightBarButtonItem.enabled = NO;//弹出九宫格  关闭导航栏右上的跳转按钮交互
+
             self.view.userInteractionEnabled = NO;
             [self showShareViewController];
-            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"likeOrNope"];
-            [[NSUserDefaults standardUserDefaults]synchronize];
+            self.anotherFlag = YES;
         }
     }
     self.firstCardView = self.secondCardView;
@@ -384,15 +383,16 @@
         self.fourthCardView.frame = [self fourthCardViewFrame];
         [self.view insertSubview:self.fourthCardView belowSubview:self.thirdCardView];
     }
-    if(![[NSUserDefaults standardUserDefaults]boolForKey:@"likeOrNope"]) {
+    if(!self.anotherFlag) {
         if (self.number>self.totalNumber) {
             [self finishOneSetAndReadyComeback];
         }
+    } else {
+        self.anotherFlag = NO;
     }
-    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"likeOrNope"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    
 }
-
+//把数据写入数据库
 -(void)writeCurrentClothIntoTableWishlist{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];

@@ -2988,10 +2988,10 @@
             </objects>
             <point key="canvasLocation" x="3781.5" y="-240"/>
         </scene>
-        <!--Passbook Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="4Oo-sY-R2I">
             <objects>
-                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bux-Fw-Dho" customClass="PassbookNavigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PassbookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="bux-Fw-Dho" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tNK-lW-6nH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3006,10 +3006,10 @@
             </objects>
             <point key="canvasLocation" x="2128.5" y="1150.5"/>
         </scene>
-        <!--Wishlist Nagigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="0c2-2E-hId">
             <objects>
-                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3Ey-xl-JLi" customClass="WishlistNagigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3Ey-xl-JLi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cht-pD-iTV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3024,10 +3024,10 @@
             </objects>
             <point key="canvasLocation" x="6652.5" y="207"/>
         </scene>
-        <!--Order Navigation View Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="ZYi-NF-55Y">
             <objects>
-                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="53M-td-iFT" customClass="OrderNavigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OrderNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="53M-td-iFT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MDX-1t-Jnw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3074,7 +3074,7 @@
         <image name="wishlist.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gjt-AA-Rcx"/>
         <segue reference="5iR-fH-Svb"/>
+        <segue reference="Ltb-0z-8pe"/>
     </inferredMetricsTieBreakers>
 </document>

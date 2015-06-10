@@ -26,7 +26,6 @@
 		11C183BD1B14CD62009F3819 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11C183BC1B14CD62009F3819 /* Default-568h@2x.png */; };
 		11FE48031B11AC9000255C1D /* JVLeftDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE48001B11AC9000255C1D /* JVLeftDrawerTableViewCell.m */; };
 		11FE48041B11AC9000255C1D /* JVLeftDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE48021B11AC9000255C1D /* JVLeftDrawerTableViewController.m */; };
-		11FE480B1B11B6E000255C1D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FE480A1B11B6DF00255C1D /* ProfileViewController.m */; };
 		AA9827CDCB6C528EADAAF092 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B79F925EE1658CDFB122AC77 /* libPods.a */; };
 		DB0D53231B0ECDC50012E321 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0D53221B0ECDC50012E321 /* LoginViewController.m */; };
 		DB0D532D1B0ED7F00012E321 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0D532C1B0ED7F00012E321 /* LoginView.m */; };
@@ -55,11 +54,7 @@
 		DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB17B6811B0EC59400D43B9F /* Main.storyboard */; };
 		DB17B6851B0EC59400D43B9F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB17B6841B0EC59400D43B9F /* Images.xcassets */; };
 		DB17B6941B0EC59400D43B9F /* ModeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB17B6931B0EC59400D43B9F /* ModeTests.m */; };
-		DB24CFD61B26785000102403 /* OrderNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD11B26785000102403 /* OrderNavigationViewController.m */; };
-		DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */; };
-		DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */; };
 		DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDB1B267E3B00102403 /* WebViewViewController.m */; };
-		DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */; };
 		DB4BDDD81B2136F900EFDE22 /* ModeBrandRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */; };
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
@@ -259,8 +254,6 @@
 		11FE48001B11AC9000255C1D /* JVLeftDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVLeftDrawerTableViewCell.m; sourceTree = "<group>"; };
 		11FE48011B11AC9000255C1D /* JVLeftDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVLeftDrawerTableViewController.h; sourceTree = "<group>"; };
 		11FE48021B11AC9000255C1D /* JVLeftDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVLeftDrawerTableViewController.m; sourceTree = "<group>"; };
-		11FE48091B11B6DF00255C1D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		11FE480A1B11B6DF00255C1D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		7573F3FA989C4D6E242F66EC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B79BDD8BA03DB78EF24C2D6A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B79F925EE1658CDFB122AC77 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,15 +312,8 @@
 		DB17B68D1B0EC59400D43B9F /* ModeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB17B6921B0EC59400D43B9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB17B6931B0EC59400D43B9F /* ModeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeTests.m; sourceTree = "<group>"; };
-		DB24CFD01B26785000102403 /* OrderNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderNavigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD11B26785000102403 /* OrderNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderNavigationViewController.m; sourceTree = "<group>"; };
-		DB24CFD21B26785000102403 /* PassbookNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassbookNavigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassbookNavigationViewController.m; sourceTree = "<group>"; };
-		DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistNagigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistNagigationViewController.m; sourceTree = "<group>"; };
 		DB24CFDA1B267E3B00102403 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DB24CFDB1B267E3B00102403 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
-		DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINOT-Light.otf"; sourceTree = "<group>"; };
 		DB4BDDD61B2136F900EFDE22 /* ModeBrandRunwayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunwayAPI.h; sourceTree = "<group>"; };
 		DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeBrandRunwayAPI.m; sourceTree = "<group>"; };
 		DB4BDDDA1B2138E200EFDE22 /* ModeBrandRunway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunway.h; sourceTree = "<group>"; };
@@ -579,12 +565,8 @@
 		118CC9941B18B24000AE5BD4 /* WishList */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */,
-				DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */,
 				DBA2E99D1B145AB0006B5CE4 /* WishListViewController.h */,
 				DBA2E99E1B145AB0006B5CE4 /* WishListViewController.m */,
-				DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */,
-				DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */,
 			);
 			name = WishList;
 			sourceTree = "<group>";
@@ -663,8 +645,8 @@
 		11FE48081B11B68C00255C1D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				11FE48091B11B6DF00255C1D /* ProfileViewController.h */,
-				11FE480A1B11B6DF00255C1D /* ProfileViewController.m */,
+				DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */,
+				DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -712,7 +694,7 @@
 		DB0D533F1B0F0B240012E321 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DB4BDDD91B2138A300EFDE22 /* New Group */,
+				DB4BDDD91B2138A300EFDE22 /* BrandRunway */,
 				DBB280AC1B1BF64300D8A3F1 /* BrandInfo.h */,
 				DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */,
 				116D388A1B1B3934009E9D14 /* Wishlist */,
@@ -959,20 +941,18 @@
 			name = Brand;
 			sourceTree = "<group>";
 		};
-		DB4BDDD91B2138A300EFDE22 /* New Group */ = {
+		DB4BDDD91B2138A300EFDE22 /* BrandRunway */ = {
 			isa = PBXGroup;
 			children = (
 				DB4BDDDA1B2138E200EFDE22 /* ModeBrandRunway.h */,
 				DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */,
 			);
-			name = "New Group";
+			name = BrandRunway;
 			sourceTree = "<group>";
 		};
 		DB9460641B15AD1100A7833B /* Passbook */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD21B26785000102403 /* PassbookNavigationViewController.h */,
-				DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */,
 				DB9E11FF1B22A3A200C92D6A /* PassbookViewController.h */,
 				DB9E12001B22A3A200C92D6A /* PassbookViewController.m */,
 				DBF6CB4E1B2587C000FEC1F5 /* OrderConfirmViewController.h */,
@@ -985,8 +965,6 @@
 		DB9E110E1B229A1F00C92D6A /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD01B26785000102403 /* OrderNavigationViewController.h */,
-				DB24CFD11B26785000102403 /* OrderNavigationViewController.m */,
 				DB9E110F1B229A2D00C92D6A /* OrderViewController.h */,
 				DB9E11101B229A2D00C92D6A /* OrderViewController.m */,
 				DB9E11F81B229FF100C92D6A /* OrderTableViewCell.h */,
@@ -1326,7 +1304,6 @@
 		DBF6CB411B25707300FEC1F5 /* FontResource */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */,
 			);
 			name = FontResource;
 			sourceTree = "<group>";
@@ -1587,7 +1564,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */,
 				DBA2E98C1B1448EC006B5CE4 /* ModeSysAPI.m in Sources */,
 				DBA2E97E1B140A2F006B5CE4 /* BrandIntroduceHeaderView.m in Sources */,
 				118CC99A1B18C68100AE5BD4 /* Coupon.m in Sources */,
@@ -1600,7 +1576,6 @@
 				DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */,
 				DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */,
 				DB9E12011B22A3A200C92D6A /* PassbookViewController.m in Sources */,
-				DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */,
 				DBAA3FC51B12D27F009D66D3 /* CustomCollectionViewFlowLayout.m in Sources */,
 				DBA2E99F1B145AB0006B5CE4 /* WishListViewController.m in Sources */,
 				DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */,
@@ -1614,7 +1589,6 @@
 				11BD57FE1B176D5A00A149C0 /* OccasionCollectionViewCell.m in Sources */,
 				DB169D4F1B199B1C0015D4A6 /* UIView+WebCacheOperation.m in Sources */,
 				DBA2E98F1B144AF6006B5CE4 /* JsonParser.m in Sources */,
-				DB24CFD61B26785000102403 /* OrderNavigationViewController.m in Sources */,
 				DB9F747A1B1DB1E000E0D6CA /* PassbookTableViewCell.m in Sources */,
 				DBB280B21B1C548800D8A3F1 /* WishlistTableViewController.m in Sources */,
 				DB9E120A1B22DB1500C92D6A /* ModeOrder.m in Sources */,
@@ -1642,7 +1616,6 @@
 				116D38841B1B1F99009E9D14 /* ModeRunwayAPI.m in Sources */,
 				116D38871B1B35BC009E9D14 /* ModeWishlistAPI.m in Sources */,
 				DB169D401B199B1C0015D4A6 /* MKAnnotationView+WebCache.m in Sources */,
-				11FE480B1B11B6E000255C1D /* ProfileViewController.m in Sources */,
 				11FE48041B11AC9000255C1D /* JVLeftDrawerTableViewController.m in Sources */,
 				DB169D441B199B1C0015D4A6 /* SDWebImageDecoder.m in Sources */,
 				DBC4976D1B16CE0A00F70A25 /* ModeGood.m in Sources */,
@@ -1658,7 +1631,6 @@
 				DB169D451B199B1C0015D4A6 /* SDWebImageDownloader.m in Sources */,
 				DBC4976A1B16C43600F70A25 /* ModeGoodAPI.m in Sources */,
 				DB9E11FB1B229FF100C92D6A /* OrderTableViewCell.m in Sources */,
-				DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */,
 				DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */,
 				DB9E12131B22EA4A00C92D6A /* UIColor+HexString.m in Sources */,
 				11BD58011B176E7B00A149C0 /* StyleCollectionViewCell.m in Sources */,

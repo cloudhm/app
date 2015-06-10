@@ -26,7 +26,6 @@
     self.shareFacebookBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.shareFacebookBtn.layer.borderWidth = 1.f;
     self.view.backgroundColor = [UIColor clearColor];
-//    self.shareTextContent.clearsOnInsertion = YES;
     self.shareTextContent.delegate = self;
     for (int i = 0; i<self.shareImageViews.count; i++) {
         ModeGood* modeGood = self.nineGoods[i];
@@ -39,11 +38,9 @@
     [sender setSelected:!sender.selected];
 }
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"ShareViewController addObserver");
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(modificationPosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"ShareViewController removeObserver");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 -(void)modificationPosition:(NSNotification*)noti{
@@ -57,6 +54,7 @@
         self.view.frame = rect;
     } completion:nil];
 }
+
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     if ([self.shareTextContent.text isEqualToString:@"My Collection..."]) {
         self.shareTextContent.text = @"";

@@ -13,6 +13,7 @@
 #import "WishListViewController.h"
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
+#import "WishListViewController.h"
 @interface WishlistTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *wishlists;
@@ -22,6 +23,39 @@
 @end
 
 @implementation WishlistTableViewController
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+-(void)gotoWishlistController:(NSNotification*)noti{
+    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
+        &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSLog(@"wishlistTable");
+        [av show];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
+        [self.navigationController pushViewController:wlvc animated:YES];
+    }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+}
+
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
@@ -38,14 +72,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    [self initUI];
     self.title = @"Profile";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    
+    
+    if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+    [self initUI];
+    
     [self getDataFromNetwork];
     self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
     // Uncomment the following line to preserve selection between presentations.
@@ -85,7 +122,6 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

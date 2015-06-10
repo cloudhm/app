@@ -22,7 +22,7 @@
         namelabel.textAlignment = NSTextAlignmentCenter;
         namelabel.textColor = [UIColor blackColor];
         namelabel.alpha = 0.9;
-        namelabel.font = [UIFont fontWithName:@"Verdana" size:12];
+        namelabel.font = [UIFont fontWithName:@"Verdana" size:14];
 //        namelabel.adjustsFontSizeToFitWidth = YES;
         self.name = namelabel;
         

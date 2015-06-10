@@ -16,11 +16,20 @@
 @end
 
 @implementation OrderViewController
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

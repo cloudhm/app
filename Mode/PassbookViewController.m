@@ -22,7 +22,14 @@
 @end
 
 @implementation PassbookViewController
-
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(void)dealloc{
     NSLog(@"passbook dealloc");
 }
@@ -43,7 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Profile";
+    self.title = @"Passbook";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];

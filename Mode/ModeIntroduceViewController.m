@@ -25,7 +25,7 @@
 }
 - (NSArray *)imageNames{
     if (!_imageNames) {
-        _imageNames = @[@"welcome1.png",@"welcome2.png",@"welcome3.png",@"welcome4.png"];
+        _imageNames = @[@"welcome1.png",@"welcome2.png",@"welcome3.png"];
     }
     return _imageNames;
 }

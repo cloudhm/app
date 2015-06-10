@@ -33,7 +33,14 @@
 @end
 
 @implementation LikeOrNopeViewController
-
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 #pragma mark - Object Lifecycle
 -(NSMutableArray *)allGoods{//准备接受一组秀场的数组
     if (!_allGoods) {

@@ -58,7 +58,6 @@
 		DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */; };
 		DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */; };
 		DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDB1B267E3B00102403 /* WebViewViewController.m */; };
-		DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */; };
 		DB4BDDD81B2136F900EFDE22 /* ModeBrandRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */; };
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
@@ -324,7 +323,6 @@
 		DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistNagigationViewController.m; sourceTree = "<group>"; };
 		DB24CFDA1B267E3B00102403 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DB24CFDB1B267E3B00102403 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
-		DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINOT-Light.otf"; sourceTree = "<group>"; };
 		DB4BDDD61B2136F900EFDE22 /* ModeBrandRunwayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunwayAPI.h; sourceTree = "<group>"; };
 		DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeBrandRunwayAPI.m; sourceTree = "<group>"; };
 		DB4BDDDA1B2138E200EFDE22 /* ModeBrandRunway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunway.h; sourceTree = "<group>"; };
@@ -707,7 +705,7 @@
 		DB0D533F1B0F0B240012E321 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DB4BDDD91B2138A300EFDE22 /* New Group */,
+				DB4BDDD91B2138A300EFDE22 /* BrandRunway */,
 				DBB280AC1B1BF64300D8A3F1 /* BrandInfo.h */,
 				DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */,
 				116D388A1B1B3934009E9D14 /* Wishlist */,
@@ -954,13 +952,13 @@
 			name = Brand;
 			sourceTree = "<group>";
 		};
-		DB4BDDD91B2138A300EFDE22 /* New Group */ = {
+		DB4BDDD91B2138A300EFDE22 /* BrandRunway */ = {
 			isa = PBXGroup;
 			children = (
 				DB4BDDDA1B2138E200EFDE22 /* ModeBrandRunway.h */,
 				DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */,
 			);
-			name = "New Group";
+			name = BrandRunway;
 			sourceTree = "<group>";
 		};
 		DB9460641B15AD1100A7833B /* Passbook */ = {
@@ -1321,7 +1319,6 @@
 		DBF6CB411B25707300FEC1F5 /* FontResource */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFDF1B26EDD500102403 /* DINOT-Light.otf */,
 			);
 			name = FontResource;
 			sourceTree = "<group>";
@@ -1582,7 +1579,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB24CFE01B26EDE500102403 /* DINOT-Light.otf in Sources */,
 				DBA2E98C1B1448EC006B5CE4 /* ModeSysAPI.m in Sources */,
 				DBA2E97E1B140A2F006B5CE4 /* BrandIntroduceHeaderView.m in Sources */,
 				118CC99A1B18C68100AE5BD4 /* Coupon.m in Sources */,

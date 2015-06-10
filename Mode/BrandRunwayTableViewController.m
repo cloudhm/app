@@ -25,6 +25,14 @@
 @end
 
 @implementation BrandRunwayTableViewController
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(BrandInfo *)brandInfo{
     if (!_brandInfo) {
         _brandInfo = [[BrandInfo alloc]init];

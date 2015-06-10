@@ -12,6 +12,7 @@
 #import "ModeBrandRunwayAPI.h"
 #import "ModeBrandRunway.h"
 #import "BrandRunwayTableViewCell.h"
+#import "UIColor+HexString.h"
 @interface BrandRunwayTableViewController ()
 
 
@@ -55,6 +56,7 @@
 //开始加载数据
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     //设置状态栏为白色字体
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {

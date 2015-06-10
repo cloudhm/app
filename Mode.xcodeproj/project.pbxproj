@@ -54,9 +54,6 @@
 		DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB17B6811B0EC59400D43B9F /* Main.storyboard */; };
 		DB17B6851B0EC59400D43B9F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB17B6841B0EC59400D43B9F /* Images.xcassets */; };
 		DB17B6941B0EC59400D43B9F /* ModeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB17B6931B0EC59400D43B9F /* ModeTests.m */; };
-		DB24CFD61B26785000102403 /* OrderNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD11B26785000102403 /* OrderNavigationViewController.m */; };
-		DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */; };
-		DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */; };
 		DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDB1B267E3B00102403 /* WebViewViewController.m */; };
 		DB4BDDD81B2136F900EFDE22 /* ModeBrandRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */; };
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
@@ -315,12 +312,6 @@
 		DB17B68D1B0EC59400D43B9F /* ModeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB17B6921B0EC59400D43B9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB17B6931B0EC59400D43B9F /* ModeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeTests.m; sourceTree = "<group>"; };
-		DB24CFD01B26785000102403 /* OrderNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderNavigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD11B26785000102403 /* OrderNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderNavigationViewController.m; sourceTree = "<group>"; };
-		DB24CFD21B26785000102403 /* PassbookNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassbookNavigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassbookNavigationViewController.m; sourceTree = "<group>"; };
-		DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistNagigationViewController.h; sourceTree = "<group>"; };
-		DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistNagigationViewController.m; sourceTree = "<group>"; };
 		DB24CFDA1B267E3B00102403 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DB24CFDB1B267E3B00102403 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
 		DB4BDDD61B2136F900EFDE22 /* ModeBrandRunwayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunwayAPI.h; sourceTree = "<group>"; };
@@ -654,8 +645,6 @@
 		11FE48081B11B68C00255C1D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD41B26785000102403 /* WishlistNagigationViewController.h */,
-				DB24CFD51B26785000102403 /* WishlistNagigationViewController.m */,
 				DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */,
 				DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */,
 			);
@@ -964,8 +953,6 @@
 		DB9460641B15AD1100A7833B /* Passbook */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD21B26785000102403 /* PassbookNavigationViewController.h */,
-				DB24CFD31B26785000102403 /* PassbookNavigationViewController.m */,
 				DB9E11FF1B22A3A200C92D6A /* PassbookViewController.h */,
 				DB9E12001B22A3A200C92D6A /* PassbookViewController.m */,
 				DBF6CB4E1B2587C000FEC1F5 /* OrderConfirmViewController.h */,
@@ -978,8 +965,6 @@
 		DB9E110E1B229A1F00C92D6A /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				DB24CFD01B26785000102403 /* OrderNavigationViewController.h */,
-				DB24CFD11B26785000102403 /* OrderNavigationViewController.m */,
 				DB9E110F1B229A2D00C92D6A /* OrderViewController.h */,
 				DB9E11101B229A2D00C92D6A /* OrderViewController.m */,
 				DB9E11F81B229FF100C92D6A /* OrderTableViewCell.h */,
@@ -1591,7 +1576,6 @@
 				DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */,
 				DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */,
 				DB9E12011B22A3A200C92D6A /* PassbookViewController.m in Sources */,
-				DB24CFD71B26785000102403 /* PassbookNavigationViewController.m in Sources */,
 				DBAA3FC51B12D27F009D66D3 /* CustomCollectionViewFlowLayout.m in Sources */,
 				DBA2E99F1B145AB0006B5CE4 /* WishListViewController.m in Sources */,
 				DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */,
@@ -1605,7 +1589,6 @@
 				11BD57FE1B176D5A00A149C0 /* OccasionCollectionViewCell.m in Sources */,
 				DB169D4F1B199B1C0015D4A6 /* UIView+WebCacheOperation.m in Sources */,
 				DBA2E98F1B144AF6006B5CE4 /* JsonParser.m in Sources */,
-				DB24CFD61B26785000102403 /* OrderNavigationViewController.m in Sources */,
 				DB9F747A1B1DB1E000E0D6CA /* PassbookTableViewCell.m in Sources */,
 				DBB280B21B1C548800D8A3F1 /* WishlistTableViewController.m in Sources */,
 				DB9E120A1B22DB1500C92D6A /* ModeOrder.m in Sources */,
@@ -1648,7 +1631,6 @@
 				DB169D451B199B1C0015D4A6 /* SDWebImageDownloader.m in Sources */,
 				DBC4976A1B16C43600F70A25 /* ModeGoodAPI.m in Sources */,
 				DB9E11FB1B229FF100C92D6A /* OrderTableViewCell.m in Sources */,
-				DB24CFD81B26785000102403 /* WishlistNagigationViewController.m in Sources */,
 				DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */,
 				DB9E12131B22EA4A00C92D6A /* UIColor+HexString.m in Sources */,
 				11BD58011B176E7B00A149C0 /* StyleCollectionViewCell.m in Sources */,

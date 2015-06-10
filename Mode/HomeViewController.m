@@ -24,14 +24,7 @@
 @end
 
 @implementation HomeViewController
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
+
 - (IBAction)clearCache:(UIBarButtonItem *)sender {
     NSLog(NSHomeDirectory());
     [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
@@ -68,6 +61,7 @@
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
 - (void)viewDidLoad {
+    
     self.delegate = self;
     self.dataSource = self;
     [super viewDidLoad];

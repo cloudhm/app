@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _wishlists = [wishlistArr mutableCopy];//控制器里把数据库里的数据读取出来  用来创建scrollView
-        self.backgroundColor = [UIColor yellowColor];
+//        self.backgroundColor = [UIColor yellowColor];
         self.bounces = NO;
         _wishlistViews = [NSMutableArray array];
         self.showsHorizontalScrollIndicator = NO;

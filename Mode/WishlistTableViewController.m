@@ -13,6 +13,7 @@
 #import "WishListViewController.h"
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
+#import "WishListViewController.h"
 @interface WishlistTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *wishlists;
@@ -30,6 +31,31 @@
 {
     return UIStatusBarStyleLightContent;
 }
+-(void)gotoWishlistController:(NSNotification*)noti{
+    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
+        &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSLog(@"wishlistTable");
+        [av show];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
+        [self.navigationController pushViewController:wlvc animated:YES];
+    }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+}
+
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }

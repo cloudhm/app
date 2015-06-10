@@ -14,6 +14,8 @@
 #import "OrderConfirmViewController.h"
 #import "UIViewController+CWPopup.h"
 #import "UIColor+HexString.h"
+
+#import "WishListViewController.h"
 @interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray* timeArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,12 +35,34 @@
 -(void)dealloc{
     NSLog(@"passbook dealloc");
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+}
 //设置CADisplayLink 并加入事件循环
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
+        [self.navigationController pushViewController:wlvc animated:YES];
+    }
     if (!self.gameTimer) {
         self.gameTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateDisplay:)];
         self.gameTimer.frameInterval = 60.f;//该控件默认1分钟刷新60次，设置为60 则1秒钟刷新1次
         [self.gameTimer addToRunLoop:[NSRunLoop currentRunLoop]forMode:NSDefaultRunLoopMode];
+    }
+}
+-(void)gotoWishlistController:(NSNotification*)noti{
+    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
+        && (![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSLog(@"passbook");
+        [av show];
     }
 }
 -(NSMutableArray *)timeArr{

@@ -65,6 +65,8 @@
     self.delegate = self;
     self.dataSource = self;
     [super viewDidLoad];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.title = @"MODE";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
 }

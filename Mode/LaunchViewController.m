@@ -15,15 +15,13 @@
 @end
 
 @implementation LaunchViewController
-#warning 暂时无法隐藏状态栏
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
+
 -(void)viewDidDisappear:(BOOL)animated{
     self.backgroundView = nil;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
 }
 -(void)viewWillAppear:(BOOL)animated{

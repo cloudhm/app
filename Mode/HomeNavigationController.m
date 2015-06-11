@@ -15,6 +15,7 @@
 @end
 
 @implementation HomeNavigationController
+
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];

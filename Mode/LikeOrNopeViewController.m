@@ -18,6 +18,7 @@
 #import "UIViewController+CWPopup.h"
 #import "ShareViewController.h"
 #import "UIColor+HexString.h"
+#import "AppDelegate.h"
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -33,12 +34,8 @@
 @end
 
 @implementation LikeOrNopeViewController
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 #pragma mark - Object Lifecycle
@@ -138,7 +135,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.parentViewController setNeedsStatusBarAppearanceUpdate];
 #warning 再造一个view在初次进这时显示
     [self createStartIntroduceView];//创建一个开场遮盖
     self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
@@ -159,7 +156,7 @@
     if (!self.startIntroduceView) {
         self.startIntroduceView = [[UIView alloc]initWithFrame:self.navigationController.view.bounds];
         self.startIntroduceView.backgroundColor = [UIColor colorWithRed:27/255.f green:27/255.f blue:27/255.f alpha:1];
-        self.startIntroduceView.alpha= 0.5f;
+        self.startIntroduceView.alpha= 0.7f;
         UILabel * titleLabel = [[UILabel alloc]init];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;

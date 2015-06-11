@@ -19,6 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ReN-Fk-kZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,6 +71,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="backgroundView" destination="Jb1-vT-Npq" id="wWM-ES-pPX"/>
                     </connections>
@@ -954,6 +956,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="iyK-Zx-vNq"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="bottomView" destination="5js-YX-o5L" id="Zfr-aD-FsW"/>
                         <outlet property="tabLabel" destination="HNR-4T-t3k" id="UCX-Cy-5ZA"/>
@@ -1183,6 +1186,7 @@
                             </view>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="goods_img_detail" destination="YXy-gZ-ejp" id="4Dp-Fj-Ob7"/>
                         <outlet property="goods_price" destination="FLf-Qs-CIb" id="enS-pR-8po"/>
@@ -1838,6 +1842,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="JpL-JO-OGN" id="IgN-Ff-cWl"/>
                         <outlet property="backgroundView" destination="7o0-hI-DV3" id="8wu-eE-kfC"/>
@@ -2975,6 +2980,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LikeOrNopeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1Eh-hU-dYo" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jSK-TG-8pf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2998,13 +3004,16 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hoV-sT-JBv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="zhX-5i-GJj" kind="relationship" relationship="rootViewController" id="x4Q-Ix-lou"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNc-IQ-Msu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128.5" y="1150.5"/>
+            <point key="canvasLocation" x="2377.5" y="1150.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0c2-2E-hId">

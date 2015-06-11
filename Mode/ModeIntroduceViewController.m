@@ -19,10 +19,7 @@
 @end
 
 @implementation ModeIntroduceViewController
-#warning 暂时无法隐藏状态栏
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
+
 - (NSArray *)imageNames{
     if (!_imageNames) {
         _imageNames = @[@"welcome1.png",@"welcome2.png",@"welcome3.png"];
@@ -38,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [ModeUtils initDatabase];
     UIScrollView* scrollView = [[UIScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.introScrollView = scrollView;

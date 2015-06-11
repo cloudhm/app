@@ -23,10 +23,7 @@
 @end
 
 @implementation LoginViewController
-#warning 暂时无法隐藏状态栏
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
+
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -40,10 +37,13 @@
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
     
 }

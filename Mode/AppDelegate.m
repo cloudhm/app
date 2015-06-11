@@ -24,6 +24,8 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
 
 //该方法暂时作为直接启动的显示页，以后需要在登录后实现跳转时要改写  注意：configureDrawerViewController 这个方法需要注意 今后如何调用
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if (![[NSUserDefaults standardUserDefaults]boolForKey:@"notFirstTime"]) {
         self.window.rootViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"ModeIntroduceViewController"];

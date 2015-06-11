@@ -58,7 +58,6 @@
 		DB4BDDD81B2136F900EFDE22 /* ModeBrandRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDD71B2136F900EFDE22 /* ModeBrandRunwayAPI.m */; };
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
-		DB671FEE1B2706C000769F36 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB671FED1B2706C000769F36 /* times.plist */; };
 		DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */; };
 		DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9E11101B229A2D00C92D6A /* OrderViewController.m */; };
 		DB9E118C1B229CD000C92D6A /* email_login_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11141B229CD000C92D6A /* email_login_normal.png */; };
@@ -198,6 +197,7 @@
 		DBC022CF1B203B6B00F27D1C /* ModeSysList.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022CE1B203B6B00F27D1C /* ModeSysList.m */; };
 		DBC4976A1B16C43600F70A25 /* ModeGoodAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC497691B16C43600F70A25 /* ModeGoodAPI.m */; };
 		DBC4976D1B16CE0A00F70A25 /* ModeGood.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC4976C1B16CE0A00F70A25 /* ModeGood.m */; };
+		DBDA43731B293ED100962B56 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43721B293ED100962B56 /* times.plist */; };
 		DBF0CD191B1EC8F00006F395 /* WishlistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD171B1EC8F00006F395 /* WishlistTableViewCell.m */; };
 		DBF0CD1A1B1EC8F00006F395 /* WishlistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */; };
 		DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */; };
@@ -321,7 +321,6 @@
 		DB4BDDDD1B21550300EFDE22 /* JsonParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		DB4BDDDE1B215C3E00EFDE22 /* BrandRunwayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandRunwayTableViewCell.h; sourceTree = "<group>"; };
 		DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayTableViewCell.m; sourceTree = "<group>"; };
-		DB671FED1B2706C000769F36 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
 		DB76ECD51B1FDDAE007E8B4E /* ModeAccountAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeAccountAPI.h; sourceTree = "<group>"; };
 		DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeAccountAPI.m; sourceTree = "<group>"; };
 		DB9E110F1B229A2D00C92D6A /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -486,6 +485,7 @@
 		DBC497691B16C43600F70A25 /* ModeGoodAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeGoodAPI.m; sourceTree = "<group>"; };
 		DBC4976B1B16CE0A00F70A25 /* ModeGood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeGood.h; sourceTree = "<group>"; };
 		DBC4976C1B16CE0A00F70A25 /* ModeGood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeGood.m; sourceTree = "<group>"; };
+		DBDA43721B293ED100962B56 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
 		DBE01EA31B1F0FE200AB3D21 /* PrefixFont.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixFont.pch; sourceTree = "<group>"; };
 		DBF0CD161B1EC8F00006F395 /* WishlistTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistTableViewCell.h; sourceTree = "<group>"; };
 		DBF0CD171B1EC8F00006F395 /* WishlistTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistTableViewCell.m; sourceTree = "<group>"; };
@@ -851,7 +851,7 @@
 			children = (
 				DBF6CB411B25707300FEC1F5 /* FontResource */,
 				DBC022CB1B20398300F27D1C /* init.plist */,
-				DB671FED1B2706C000769F36 /* times.plist */,
+				DBDA43721B293ED100962B56 /* times.plist */,
 				DBF6CB311B25270E00FEC1F5 /* CWPopup */,
 				DB169D1E1B199B1C0015D4A6 /* SDWebImage */,
 				118CC8E11B18A30200AE5BD4 /* andriod  整套切片 */,
@@ -1448,6 +1448,7 @@
 				DB9E11D71B229CD000C92D6A /* like.png in Resources */,
 				DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */,
 				DB9E11A11B229CD000C92D6A /* confirm_press.png in Resources */,
+				DBDA43731B293ED100962B56 /* times.plist in Resources */,
 				DB9E11D11B229CD000C92D6A /* card_left_two_bottom.png in Resources */,
 				DB9E11A61B229CD000C92D6A /* Pop up box_.png in Resources */,
 				DB9E11E11B229CD000C92D6A /* 格子_pressl.png in Resources */,
@@ -1465,7 +1466,6 @@
 				DB9E11E41B229CD000C92D6A /* _divider line.png in Resources */,
 				DB9E11BB1B229CD000C92D6A /* input_right_password.png in Resources */,
 				DB9E11CF1B229CD000C92D6A /* card_bg_01.png in Resources */,
-				DB671FEE1B2706C000769F36 /* times.plist in Resources */,
 				DB9E11AE1B229CD000C92D6A /* _new_secret_name_normal.png in Resources */,
 				DB9E11EE1B229CD000C92D6A /* delete_normal.png in Resources */,
 				DB9E11D51B229CD000C92D6A /* hand_unlike_press.png in Resources */,

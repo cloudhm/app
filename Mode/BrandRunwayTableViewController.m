@@ -87,7 +87,7 @@
     BrandIntroduceHeaderView*headerView = (BrandIntroduceHeaderView*)self.tableView.tableHeaderView;
     headerView.brandInfo = self.brandInfo;
     frame = headerView.frame;
-    frame.size.height = [self.brandInfo getBrandDetailHeigthtByWidth:(self.tableView.frame.size.width - 20.f)] + 137.f;
+    frame.size.height = [self.brandInfo getBrandDetailHeigthtByWidth:(self.tableView.frame.size.width - 40.f)] + 137.f;
     self.tableView.tableHeaderView.frame = frame;
 }
 -(void)initNavigationBar{

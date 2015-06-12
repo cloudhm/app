@@ -74,7 +74,7 @@ static NSString* reusedIdentifier = @"MyCell";
     [self.view addSubview:tview];
     
     UIImageView * iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cash_purse.png"]];
-    float ivX = 15.f;
+    float ivX = 5.f;
     float ivY = 15.f;
     float ivW = 45.f;
     float ivH = 45.f;
@@ -128,12 +128,12 @@ static NSString* reusedIdentifier = @"MyCell";
     [self.view addSubview:bView];
     
     UIView* tline = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 1.f)];
-    tline.backgroundColor = [UIColor colorWithHexString:@"#888888"];
+    tline.backgroundColor = [UIColor colorWithHexString:@"#888888" withAlpha:0.7];
     [bView addSubview:tline];
     
-    UIView* bline = [[UIView alloc]initWithFrame:CGRectMake(0, 59.f, KScreenWidth, 1)];
-    bline.backgroundColor = [UIColor colorWithHexString:@"#888888"];
-    [bView addSubview:bline];
+//    UIView* bline = [[UIView alloc]initWithFrame:CGRectMake(0, 59.f, KScreenWidth, 1)];
+//    bline.backgroundColor = [UIColor colorWithHexString:@"#888888" withAlpha:0.7];
+//    [bView addSubview:bline];
     
     UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-100.f, 5.f, 100.f, 40.f)];
     [btn setImage:[UIImage imageNamed:@"cash_normal.png"] forState:UIControlStateNormal];
@@ -141,8 +141,13 @@ static NSString* reusedIdentifier = @"MyCell";
     [btn addTarget:self action:@selector(getCash:) forControlEvents:UIControlEventTouchUpInside];
     [bView addSubview:btn];
     
-    UITextField* tf = [[UITextField alloc]initWithFrame:CGRectMake(5.f, 10.f, KScreenWidth - CGRectGetWidth(btn.frame) - 5.f, 30.f)];
-    tf.borderStyle = UITextBorderStyleBezel;
+    UIImageView* tfBgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cash_enter_the_total_amount.png"]];
+    tfBgView.frame = CGRectMake(5.f, 5.f, KScreenWidth - CGRectGetWidth(btn.frame), CGRectGetHeight(btn.frame));
+    tfBgView.userInteractionEnabled =YES;
+    [bView addSubview:tfBgView];
+    
+    UITextField* tf = [[UITextField alloc]initWithFrame:CGRectMake(15.f, 10.f, KScreenWidth - CGRectGetWidth(btn.frame) - 5.f, 30.f)];
+    tf.borderStyle = UITextBorderStyleNone;
     tf.placeholder = @"Enter the total amount...";
     [tf setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     tf.clearsOnBeginEditing = YES;

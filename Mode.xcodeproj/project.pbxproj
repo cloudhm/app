@@ -192,6 +192,7 @@
 		DBAA40091B130F79009D66D3 /* ChooseClothesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAA40081B130F79009D66D3 /* ChooseClothesView.m */; };
 		DBB280AE1B1BF64300D8A3F1 /* BrandInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */; };
 		DBB280B21B1C548800D8A3F1 /* WishlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */; };
+		DBB7DEF61B2AEDA500D86546 /* mode_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB7DEF51B2AEDA500D86546 /* mode_logo.png */; };
 		DBC022CA1B2034C500F27D1C /* ModeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022C91B2034C500F27D1C /* ModeUtils.m */; };
 		DBC022CC1B20398300F27D1C /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBC022CB1B20398300F27D1C /* init.plist */; };
 		DBC022CF1B203B6B00F27D1C /* ModeSysList.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022CE1B203B6B00F27D1C /* ModeSysList.m */; };
@@ -489,6 +490,7 @@
 		DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistTableViewController.h; sourceTree = "<group>"; };
 		DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistTableViewController.m; sourceTree = "<group>"; };
 		DBB433411B2A796F003C4CF0 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		DBB7DEF51B2AEDA500D86546 /* mode_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode_logo.png; sourceTree = "<group>"; };
 		DBC022C81B2034C500F27D1C /* ModeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeUtils.h; sourceTree = "<group>"; };
 		DBC022C91B2034C500F27D1C /* ModeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeUtils.m; sourceTree = "<group>"; };
 		DBC022CB1B20398300F27D1C /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				118CC8E21B18A30200AE5BD4 /* 0.start_page.png */,
+				DBB7DEF51B2AEDA500D86546 /* mode_logo.png */,
 				DB9E11121B229CD000C92D6A /* Mode Resource */,
 			);
 			name = ios_pic_source;
@@ -1524,6 +1527,7 @@
 				DB9E11D41B229CD000C92D6A /* hand_unlike_normal.png in Resources */,
 				DB9E11B61B229CD000C92D6A /* new_secret_name_normal.png in Resources */,
 				DB9E11C91B229CD000C92D6A /* passbook.png in Resources */,
+				DBB7DEF61B2AEDA500D86546 /* mode_logo.png in Resources */,
 				DB9E11CA1B229CD000C92D6A /* profile.png in Resources */,
 				DB9E11B41B229CD000C92D6A /* new_secret_login_press.png in Resources */,
 				DB9E11C51B229CD000C92D6A /* feedback.png in Resources */,

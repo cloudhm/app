@@ -7,7 +7,7 @@
 //
 
 #import "CashTableViewCell.h"
-
+#import "Common.h"
 @implementation CashTableViewCell
 
 - (void)awakeFromNib {
@@ -34,11 +34,11 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.cashView.cashNumStr = self.cashNumStr;
-    float padding = 15.f;
+    float padding = 10.f;
     float cashViewW = 230.f;
-    float cashViewH = 105.f;
-    float cashViewY = 15.f;
-    float cashViewX = self.cashNumStr.floatValue>0?(CGRectGetWidth([UIScreen mainScreen].applicationFrame) - padding - cashViewW):padding;
+    float cashViewH = 90.f;
+    float cashViewY = 10.f;
+    float cashViewX = self.cashNumStr.floatValue>0?(KScreenWidth - padding - cashViewW):padding;
     self.cashView.frame = CGRectMake(cashViewX, cashViewY, cashViewW, cashViewH);
     
 }

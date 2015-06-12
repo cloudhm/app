@@ -202,7 +202,7 @@
 		DBDA437B1B295A5C00962B56 /* CashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA43791B295A5C00962B56 /* CashTableViewCell.m */; };
 		DBDA437F1B295B0000962B56 /* CashView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA437E1B295B0000962B56 /* CashView.m */; };
 		DBDA43831B296D3F00962B56 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA43821B296D3F00962B56 /* SettingTableViewController.m */; };
-		DBDA438D1B29A88C00962B56 /* cash_ big box.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43851B29A88C00962B56 /* cash_ big box.png */; };
+		DBDA438D1B29A88C00962B56 /* cash_big_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43851B29A88C00962B56 /* cash_big_box.png */; };
 		DBDA438E1B29A88C00962B56 /* cash_down_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43861B29A88C00962B56 /* cash_down_box.png */; };
 		DBDA438F1B29A88C00962B56 /* cash_enter the total amount.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43871B29A88C00962B56 /* cash_enter the total amount.png */; };
 		DBDA43901B29A88C00962B56 /* cash_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43881B29A88C00962B56 /* cash_normal.png */; };
@@ -488,6 +488,7 @@
 		DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandInfo.m; sourceTree = "<group>"; };
 		DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistTableViewController.h; sourceTree = "<group>"; };
 		DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistTableViewController.m; sourceTree = "<group>"; };
+		DBB433411B2A796F003C4CF0 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		DBC022C81B2034C500F27D1C /* ModeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeUtils.h; sourceTree = "<group>"; };
 		DBC022C91B2034C500F27D1C /* ModeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeUtils.m; sourceTree = "<group>"; };
 		DBC022CB1B20398300F27D1C /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
@@ -506,7 +507,7 @@
 		DBDA437E1B295B0000962B56 /* CashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashView.m; sourceTree = "<group>"; };
 		DBDA43811B296D3F00962B56 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		DBDA43821B296D3F00962B56 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		DBDA43851B29A88C00962B56 /* cash_ big box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cash_ big box.png"; sourceTree = "<group>"; };
+		DBDA43851B29A88C00962B56 /* cash_big_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cash_big_box.png; sourceTree = "<group>"; };
 		DBDA43861B29A88C00962B56 /* cash_down_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cash_down_box.png; sourceTree = "<group>"; };
 		DBDA43871B29A88C00962B56 /* cash_enter the total amount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cash_enter the total amount.png"; sourceTree = "<group>"; };
 		DBDA43881B29A88C00962B56 /* cash_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cash_normal.png; sourceTree = "<group>"; };
@@ -1271,6 +1272,7 @@
 				DB9E12121B22EA4A00C92D6A /* UIColor+HexString.m */,
 				DBFA95AC1B219D0700362DAC /* ConvertTime.h */,
 				DBFA95AD1B219D0700362DAC /* ConvertTime.m */,
+				DBB433411B2A796F003C4CF0 /* Common.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1348,7 +1350,7 @@
 		DBDA43841B29A88C00962B56 /* 10.cash */ = {
 			isa = PBXGroup;
 			children = (
-				DBDA43851B29A88C00962B56 /* cash_ big box.png */,
+				DBDA43851B29A88C00962B56 /* cash_big_box.png */,
 				DBDA43861B29A88C00962B56 /* cash_down_box.png */,
 				DBDA43871B29A88C00962B56 /* cash_enter the total amount.png */,
 				DBDA43881B29A88C00962B56 /* cash_normal.png */,
@@ -1515,7 +1517,7 @@
 				DB9E11FE1B22A1CF00C92D6A /* _triangle.png in Resources */,
 				DB9E11DE1B229CD000C92D6A /* save_wishlist_normal.png in Resources */,
 				DB9E11A41B229CD000C92D6A /* line.png in Resources */,
-				DBDA438D1B29A88C00962B56 /* cash_ big box.png in Resources */,
+				DBDA438D1B29A88C00962B56 /* cash_big_box.png in Resources */,
 				DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */,
 				DB9E11D71B229CD000C92D6A /* like.png in Resources */,
 				DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */,

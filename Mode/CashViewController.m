@@ -10,14 +10,17 @@
 #import "CashTableViewCell.h"
 #import "UIColor+HexString.h"
 #import "AppDelegate.h"
-@interface CashViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "Common.h"
+
+@interface CashViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) UITableView *cashTableView;
 @property (strong, nonatomic) UIView *bottomView;
 @property (strong, nonatomic) NSMutableArray *allData;
+@property (strong, nonatomic) UIView *topView;
 @property (strong, nonatomic) UILabel* mysaveCount;
 @property (strong, nonatomic) UILabel* currency;
 @end
-#define APPLICATION_FRAME [UIScreen mainScreen].applicationFrame
+
 @implementation CashViewController
 static NSString* reusedIdentifier = @"MyCell";
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
@@ -29,7 +32,7 @@ static NSString* reusedIdentifier = @"MyCell";
     }
     return _allData;
 }
-
+#pragma mark View DidAppear And DidDisappear
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeViewFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -37,6 +40,7 @@ static NSString* reusedIdentifier = @"MyCell";
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+#pragma mark Notification
 -(void)changeViewFrame:(NSNotification*)noti{
     CGRect endRect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
     float timeDuration = [[noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
@@ -51,28 +55,24 @@ static NSString* reusedIdentifier = @"MyCell";
     
     [UIView animateWithDuration:timeDuration animations:^{
         self.bottomView.frame = bottomViewFrame;
-        
-        NSLog(@"%f",self.bottomView.frame.origin.y);
-        NSLog(@"%@",NSStringFromCGRect(self.bottomView.frame));
-        
+        self.cashTableView.frame = tableViewFrame;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.1f animations:^{
-            self.cashTableView.frame = tableViewFrame;
-            
-        } completion:^(BOOL finished) {
-            [self.cashTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.allData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        }];
-        
+        [self.cashTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.allData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }];
 }
+#pragma mark ScrollView
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
--(void)initTopView{
-    UIView* topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APPLICATION_FRAME.size.width, 60)];
-    topView.backgroundColor = [UIColor colorWithHexString:@"#3c3938"];
-    topView.clipsToBounds = YES;
-    [self.view addSubview:topView];
+#pragma mark createElements
+-(void)createTopView{
+    
+    UIView* tview = [[UIView alloc]initWithFrame:CGRectMake(0, kStatusNaviBarH, KScreenWidth, 60.f)];
+    tview.backgroundColor = [UIColor colorWithHexString:@"#3c3938"];
+    tview.clipsToBounds = YES;
+    self.topView = tview;
+    [self.view addSubview:tview];
+    
     UIImageView * iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cash_purse.png"]];
     float ivX = 15.f;
     float ivY = 15.f;
@@ -80,44 +80,97 @@ static NSString* reusedIdentifier = @"MyCell";
     float ivH = 45.f;
     iv.frame = CGRectMake(ivX, ivY, ivW, ivH);
     iv.backgroundColor = [UIColor clearColor];
-    [topView addSubview:iv];
+    [self.topView addSubview:iv];
     
-    UILabel* l1 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(iv.frame), CGRectGetMinY(iv.frame)+20.f, 80, 14)];
+    UILabel* l1 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(iv.frame), CGRectGetMinY(iv.frame)+20.f, 80.f, 14.f)];
     l1.text = @"MY SAVING :";
     l1.textColor = [UIColor whiteColor];
     l1.font = [UIFont fontWithName:@"Helvetica" size:12];
-    [topView addSubview:l1];
+    [self.topView addSubview:l1];
     
     UILabel* l2 = [[UILabel alloc]init];
     l2.text = @"0.00";
-    l2.textAlignment = NSTextAlignmentLeft;
+    l2.textAlignment = NSTextAlignmentRight;
     l2.textColor = [UIColor colorWithHexString:@"#dddcdc"];
     l2.font = [UIFont fontWithName:@"Helvetica" size:55];
     CGSize l2Size = [l2.text sizeWithAttributes:@{NSFontAttributeName:l2.font,NSForegroundColorAttributeName:l2.textColor}];
-    l2.frame = CGRectMake(APPLICATION_FRAME.size.width - l2Size.width -5.f, 0.f, l2Size.width, l2Size.height);
-    l2.backgroundColor = [UIColor yellowColor];
+    l2.frame = CGRectMake(KScreenWidth - l2Size.width - 5.f, 0.f, l2Size.width, l2Size.height);
     self.mysaveCount = l2;
-    [topView addSubview:l2];
+    [self.topView addSubview:l2];
     
     UILabel* l3 = [[UILabel alloc]init];
     l3.text = @"$";
     l3.textColor = [UIColor colorWithHexString:@"#dddcdc"];
-    l3.font = [UIFont fontWithName:@"Helvetica" size:30];
-    l3.frame = CGRectMake(CGRectGetMidX(l2.frame), CGRectGetMinY(l2.frame) +5.f, 30.f, 50.f);
-    [topView addSubview:l3];
+    l3.font = [UIFont fontWithName:@"Helvetica" size:24];
+    l3.frame = CGRectMake(CGRectGetMinX(self.mysaveCount.frame) - 15.f, CGRectGetMinY(self.mysaveCount.frame), 30.f, 50.f);
+    self.mysaveCount = l3;
+    [self.topView addSubview:l3];
 }
+-(void)createTableViewAndBackImageView{
+    UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cash_page.png"]];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.userInteractionEnabled = YES;
+    imageView.frame = CGRectMake(0, CGRectGetMaxY(self.topView.frame), KScreenWidth, KScreenHeight - CGRectGetHeight(self.topView.frame) - kStatusNaviBarH);
+    [self.view addSubview:imageView];
+    
+    UITableView* tableView = [[UITableView alloc]initWithFrame:CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height - 50.f) style:UITableViewStylePlain];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.cashTableView = tableView;
+    [self.view addSubview:tableView];
+}
+-(void)createBottomView{
+    UIView* bView = [[UIView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 50.f, KScreenWidth, 50.f)];
+    bView.backgroundColor = [UIColor whiteColor];
+    self.bottomView = bView;
+    [self.view addSubview:bView];
+    
+    UIView* tline = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 1.f)];
+    tline.backgroundColor = [UIColor colorWithHexString:@"#888888"];
+    [bView addSubview:tline];
+    
+    UIView* bline = [[UIView alloc]initWithFrame:CGRectMake(0, 59.f, KScreenWidth, 1)];
+    bline.backgroundColor = [UIColor colorWithHexString:@"#888888"];
+    [bView addSubview:bline];
+    
+    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-100.f, 5.f, 100.f, 40.f)];
+    [btn setImage:[UIImage imageNamed:@"cash_normal.png"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"cash_press.png"] forState:UIControlStateHighlighted];
+    [btn addTarget:self action:@selector(getCash:) forControlEvents:UIControlEventTouchUpInside];
+    [bView addSubview:btn];
+    
+    UITextField* tf = [[UITextField alloc]initWithFrame:CGRectMake(5.f, 10.f, KScreenWidth - CGRectGetWidth(btn.frame) - 5.f, 30.f)];
+    tf.borderStyle = UITextBorderStyleBezel;
+    tf.placeholder = @"Enter the total amount...";
+    [tf setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+    tf.clearsOnBeginEditing = YES;
+    tf.keyboardType =UIKeyboardTypeNumbersAndPunctuation;
+    tf.delegate = self;
+    [bView addSubview:tf];
+    
+}
+#pragma mark UITextFieldDelegate
+
+#pragma mark UIButton - action
+-(void)getCash:(UIButton*)btn{
+    NSLog(@"cash");
+    [self.view endEditing:YES];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    [self initTopView];
+
+    [self createTopView];
+    [self createTableViewAndBackImageView];
+    [self createBottomView];
     self.title = @"Cash";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    self.cashTableView.delegate = self;
-    self.cashTableView.dataSource = self;
     
     [self.cashTableView registerClass:[CashTableViewCell class] forCellReuseIdentifier:reusedIdentifier];
     
@@ -128,10 +181,7 @@ static NSString* reusedIdentifier = @"MyCell";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -140,10 +190,11 @@ static NSString* reusedIdentifier = @"MyCell";
     return self.allData.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 135;
+    return 100.f;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CashTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:reusedIdentifier];
+    cell.backgroundColor = [UIColor clearColor];
     if (!cell) {
         cell = [[CashTableViewCell alloc]init];
     }

@@ -60,9 +60,10 @@
     return _wishlists;
 }
 -(void)initUI{
-    self.brand_img.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.brand_img.layer.borderWidth = 1.f;
     self.brand_img.layer.cornerRadius = 29.f;
+    self.brand_img.layer.borderColor = [UIColor clearColor].CGColor;
+    self.brand_img.image = [UIImage imageNamed:@"headPortrait.png"];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,7 +71,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    
+    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
     
     if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -194,8 +195,13 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    WishListViewController* wvc=[segue destinationViewController];
-    wvc.receiveArr = sender;
+    if ([segue.identifier isEqualToString:@"gotoCash"]) {
+        
+    } else if ([segue.identifier isEqualToString:@"gotoWishlist2"]) {
+        WishListViewController* wvc=[segue destinationViewController];
+        wvc.receiveArr = sender;
+    }
+    
 }
 
 

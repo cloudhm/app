@@ -45,14 +45,17 @@
 @implementation WishListViewController
 
 
+
+
 //增加右下视图  商品详情控件
 -(void)addSomeElementsToRightView{
+    
+    
     UILabel* l1 = [[UILabel alloc]init];
     l1.numberOfLines=0;
-    l1.text = @"The Good's Name";
+    
     l1.font = [UIFont italicSystemFontOfSize:14];
     l1.textAlignment = NSTextAlignmentCenter;
-//    l1.backgroundColor = [UIColor yellowColor];
     l1.textColor = [UIColor colorWithRed:77/255.f green:77/255.f blue:77/255.f alpha:1];
     self.goods_title = l1;
     [self.rightView addSubview:l1];
@@ -64,7 +67,6 @@
     
     UILabel* l2 = [[UILabel alloc]init];
     l2.textColor = [UIColor colorWithRed:95/255.f green:197/255.f blue:66/255.f alpha:1];
-    l2.text = @"xxxx.xx.xx";
     self.releaseTime = l2;
     l2.textAlignment = NSTextAlignmentCenter;
     l2.font = [UIFont italicSystemFontOfSize:12];
@@ -122,13 +124,23 @@
     [self.rightView addSubview:self.colorView4];
     
     self.colorViews = @[self.colorView1,self.colorView2,self.colorView3,self.colorView4];
+    
+    
+    
+    
+    self.rightView.backgroundColor = [UIColor yellowColor];
+    
+    
+    
+    
+    
 }
 //设置右视图的所有子控件位置及大小
 -(void)resetAllElementsInRightView{
     CGRect frame = [self getGoodTitleFrame];
     self.goods_title.text = self.goodInfo.goods_title;
     self.goods_title.frame = CGRectMake(10.f, 15.f, frame.size.width, frame.size.height+10.f);
-    
+    NSLog(@"%@",NSStringFromCGRect(self.goods_title.frame));
     self.smallLineView.frame = CGRectMake(CGRectGetWidth(self.goods_title.frame)/2-15.f, CGRectGetMaxY(self.goods_title.frame)+5.f, 15.f*2, 2.f);
     
     self.releaseTime.text = self.goodInfo.ctime;
@@ -181,6 +193,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Wishlist";
+    
+    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
+    
+    
 //由于页面显示的关系  因此本通知写在viewDidLoad中   在页面显示的时候   会显示出第一件物品的信息
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
     if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
@@ -222,6 +239,7 @@
         }
         self.goodInfo = obj;
         self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodInfo.goods_price.floatValue];
+        
         [self.goods_img_detail sd_setImageWithURL:[NSURL URLWithString:self.goodInfo.img_detail_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodInfo.img_detail_link lastPathComponent] toDisk:YES];
         }];

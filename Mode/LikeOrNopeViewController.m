@@ -19,6 +19,7 @@
 #import "ShareViewController.h"
 #import "UIColor+HexString.h"
 #import "AppDelegate.h"
+#import "ModeRunwayAPI.h"
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -76,7 +77,7 @@
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
 #warning 临时左侧按钮
-    UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(comeback:)];
+    UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
 }
 #pragma mark －临时左侧按钮
@@ -115,7 +116,7 @@
         [db close];
         self.number = 1;
         self.totalNumber = self.allGoods.count;
-        self.tabLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.number,self.totalNumber];
+        self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
     } else {
         NSLog(@"数据库打开失败");
         [db close];
@@ -133,7 +134,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.parentViewController setNeedsStatusBarAppearanceUpdate];
+    
 #warning 再造一个view在初次进这时显示
     [self createStartIntroduceView];//创建一个开场遮盖
     self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
@@ -196,35 +197,44 @@
     [activityView startAnimating];
 #warning 发布信息给服务器
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:5.f];
+        [NSThread sleepForTimeInterval:2.f];
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityView stopAnimating];
             [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+            [self showAlertView];
         });
     });
-    self.navigationItem.rightBarButtonItem.enabled = YES;
+    
+
+
+    
+    
+
+}
+-(void)showAlertView{
+    self.navigationItem.rightBarButtonItem.enabled = YES;//弹出九宫格  关闭导航栏右上的跳转按钮交互
+    
+    self.view.userInteractionEnabled = YES;
 #warning 清空数据库中9个项目
     BOOL flag = [self clearTableWishlist];
-#warning 成功后移除ShareViewController
-    [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
     if (self.tabLabel.text.integerValue>=self.totalNumber) {
         [self finishOneSetAndReadyComeback];
         return ;
     }
     if (flag) {
-        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles:@"Continue",nil];
+        self.navigationController.navigationBar.userInteractionEnabled = NO;
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         av.tag = 1;
         [av show];
     }
 }
-
 -(void)dealloc{
     NSLog(@"likeornope页面销毁");
 }
 //完成整组秀场弹出的alertView
 -(void)finishOneSetAndReadyComeback{
-    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Continue",nil];
     av.tag = 2;
     [av show];
 }
@@ -233,14 +243,65 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1) {
         if (buttonIndex == alertView.cancelButtonIndex) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            NSLog(@"before open:%@",self);
-            self.view.userInteractionEnabled = YES;
             self.firstCardView.userInteractionEnabled = YES;
         }
     } else if (alertView.tag == 2) {
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            NSDictionary* newParams = [self.dictionary objectForKey:@"params"];
+            [ModeRunwayAPI requestGetNewWithParams:newParams andCallback:^(id obj) {
+                if ([obj isKindOfClass:[NSNull class]]) {
+                    return;
+                }
+                NSArray* allItems = [obj objectForKey:@"allItems"];
+                self.dictionary = @{@"title":self.title,@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":newParams};
+                [self saveDatabaseWithObj:allItems];
+                [self createStartIntroduceView];
+                [self.allGoods addObjectsFromArray:allItems];
+                
+                self.number = 1;
+                self.totalNumber = self.allGoods.count;
+                self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
+                [self updateUI];
+                self.view.userInteractionEnabled = YES;
+                [self.view setNeedsDisplay];
+            }];
+            
+        }
+        
+        
+    }
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
+}
+-(void)saveDatabaseWithObj:(id)obj{
+    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    FMDatabase* db = [FMDatabase databaseWithPath:path];
+    if ([db open]) {
+        BOOL result = [db executeUpdate:@"delete from likenope"];//只是为了清空原先加载的16张图片数据模型
+        if (result) {
+            NSLog(@"成功删除");
+        } else {
+            NSLog(@"该表不存在或未删除");
+        }
+#warning 这个表类型数据结构可能会修改
+        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
+        if (result) {
+            NSLog(@"创建likenope表成功");
+            for (ModeGood* modeGood in obj) {
+                BOOL res = [db executeUpdate:@"insert into likenope (goods_id,brand_name,brand_img_link,img_link,has_coupon) values(?,?,?,?,?)", modeGood.goods_id,modeGood.brand_name,modeGood.brand_img_link,modeGood.img_link,modeGood.has_coupon];
+                if (res == NO) {
+                    NSLog(@"插入数据失败");
+                }
+            }
+        } else {
+            NSLog(@"创建数据表失败");
+            [db close];
+        }
+    } else {
+        NSLog(@"数据库打开失败");
+        [db close];
     }
 }
 #pragma mark 清空wishlist数据
@@ -254,7 +315,7 @@
             NSLog(@"成功清空wishlist");
             self.label.text = @"0";
             [self.wishlist removeAllObjects];
-            NSLog(@"%ld",self.wishlist.count);
+            NSLog(@"%d",(int)self.wishlist.count);
             [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
             return YES;
         } else {
@@ -274,15 +335,18 @@
     
     self.firstCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]];
     self.firstCardView.userInteractionEnabled = YES;
+    self.firstCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:1.f].CGColor;
     [self.view addSubview:self.firstCardView];
     
     
     self.secondCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]];
     self.secondCardView.frame = [self scaleRect:self.secondCardView.frame];
+    self.secondCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.8f].CGColor;
     [self.view insertSubview:self.secondCardView belowSubview:self.firstCardView];
     
     self.thirdCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]];
     self.thirdCardView.frame = [self scaleRect:self.secondCardView.frame];
+    self.thirdCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.5f].CGColor;
     [self.view insertSubview:self.thirdCardView belowSubview:self.secondCardView];
     
     self.fourthCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]];
@@ -371,9 +435,12 @@
         }
     }
     self.firstCardView = self.secondCardView;
+    self.firstCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:1.f].CGColor;
     self.firstCardView.userInteractionEnabled = YES;
     self.secondCardView = self.thirdCardView;
+    self.secondCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.8f].CGColor;
     self.thirdCardView = self.fourthCardView;
+    self.thirdCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.5f].CGColor;
     if ((self.fourthCardView = [self popPersonViewWithFrame:[self firstCardViewFrame]])) {
         self.fourthCardView.frame = [self fourthCardViewFrame];
         [self.view insertSubview:self.fourthCardView belowSubview:self.thirdCardView];
@@ -427,12 +494,13 @@
                                                frame.origin.y - state.thresholdRatio * 15.f,
                                                CGRectGetWidth(frame) + 10.f *state.thresholdRatio,
                                                CGRectGetHeight(frame) +10.f*state.thresholdRatio);
-
+        self.secondCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:(.8f+state.thresholdRatio*.2f)].CGColor;
         frame = [self thirdCardViewFrame];
         self.thirdCardView.frame = CGRectMake(frame.origin.x - 5.f * state.thresholdRatio,
                                               frame.origin.y - state.thresholdRatio * 15.f,
                                               CGRectGetWidth(frame) + 10.f *state.thresholdRatio,
                                               CGRectGetHeight(frame) +10.f*state.thresholdRatio);
+        self.thirdCardView.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:(.5f+state.thresholdRatio*.3f)].CGColor;
         
     };
 

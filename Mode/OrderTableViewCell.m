@@ -27,6 +27,8 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.orderCellInnerView.modeOrder = self.modeOrder;
+#warning colorView如果要加边框  就在后面用layer来写
+    self.colorView.colorStr = [NSString stringWithFormat:@"#%d",arc4random()%999999];
 #warning hold
 //    self.frame = CGRectMake(CGFloat x, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
 }

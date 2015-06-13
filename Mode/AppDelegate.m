@@ -116,13 +116,7 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
     }
     return _settingViewController;
 }
-#warning 临时
--(UIViewController*) cashViewController{
-    if (!_cashViewController) {
-        _cashViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"CashNavigationController"];
-    }
-    return _cashViewController;
-}
+
 
 //配置抽屉控制器
 - (void)configureDrawerViewController {

@@ -11,11 +11,12 @@
 #import "LaunchViewController.h"
 #import "ModeUtils.h"
 #import "UIColor+HexString.h"
+#import "Common.h"
 @interface ModeIntroduceViewController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) UIScrollView *introScrollView;
 @property(nonatomic,strong)NSArray *imageNames;
 @property(nonatomic,strong)UIPageControl* pageControl;
-
+@property (weak, nonatomic) UIButton *startBtn;
 @end
 
 @implementation ModeIntroduceViewController
@@ -67,7 +68,7 @@
     //创建pageControl
     UIPageControl *pageControl = [[UIPageControl alloc]init];
     self.pageControl = pageControl;
-    pageControl.frame = CGRectMake(0, self.view.frame.size.height-20-30, self.view.frame.size.width, 30);
+    pageControl.frame = CGRectMake(0, self.view.frame.size.height-10-30, self.view.frame.size.width, 30);
     pageControl.numberOfPages = self.imageNames.count;
     //设置圆点的颜色
     pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#403434"];
@@ -78,18 +79,31 @@
     [self.view addSubview:pageControl];
     
     //为最后一屏添加按钮
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(self.introScrollView.frame.size.width*(self.imageNames.count-1), 0, self.introScrollView.frame.size.width, self.introScrollView.frame.size.height);
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"startGo.png"] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor clearColor];
+    button.alpha = 0.f;
+    button.frame = CGRectMake(0, 0, 140.f, 40.f);
+//    button.frame = CGRectMake(self.introScrollView.frame.size.width*(self.imageNames.count-1), 0, self.introScrollView.frame.size.width, self.introScrollView.frame.size.height);
+    self.startBtn = button;
     //为按钮添加点击事件
     [button addTarget:self action:@selector(enterApp) forControlEvents:UIControlEventTouchUpInside];
     [self.introScrollView addSubview:button];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.startBtn.center = CGPointMake(KScreenWidth*self.imageNames.count - KScreenWidth/2, KScreenHeight - 50.f);
+    NSLog(@"%@",NSStringFromCGRect(self.startBtn.frame));
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     // 获取移动的偏移定点坐标
     CGPoint offSet = scrollView.contentOffset;
     //根据坐标算出滚动到第几屏的位置下标
     NSInteger index = offSet.x/scrollView.frame.size.width;
     self.pageControl.currentPage=index;
+    
+    self.startBtn.alpha = (offSet.x-KScreenWidth)/(KScreenWidth)>=0?(offSet.x-KScreenWidth)/(KScreenWidth):0;
+    NSLog(@"%f",self.startBtn.alpha);
 }
 
 -(void)enterApp{

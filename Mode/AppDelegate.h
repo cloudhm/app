@@ -31,7 +31,7 @@
 @property (nonatomic,strong) UIViewController* launchViewController;
 @property (nonatomic, strong, readonly) UIStoryboard *drawersStoryboard;
 @property (strong, nonatomic) UIViewController *orderViewController;
-@property (strong, nonatomic) UIViewController *cashViewController;
+
 @property (strong, nonatomic) UIViewController *settingViewController;
 // ModeDelegate 的单例
 + (AppDelegate *)globalDelegate;

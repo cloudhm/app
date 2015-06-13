@@ -211,6 +211,10 @@
 		DBDA43921B29A88C00962B56 /* cash_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA438A1B29A88C00962B56 /* cash_press.png */; };
 		DBDA43931B29A88C00962B56 /* cash_purse.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA438B1B29A88C00962B56 /* cash_purse.png */; };
 		DBDA43941B29A88C00962B56 /* cash_up_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDA438C1B29A88C00962B56 /* cash_up_box.png */; };
+		DBEF15F61B2BD0BE00CDC07A /* startGo.png in Resources */ = {isa = PBXBuildFile; fileRef = DBEF15F51B2BD0BE00CDC07A /* startGo.png */; };
+		DBEF15FF1B2BED4D00CDC07A /* headPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DBEF15FE1B2BED4D00CDC07A /* headPortrait.png */; };
+		DBEF16011B2BEE1B00CDC07A /* headPortraitThumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = DBEF16001B2BEE1B00CDC07A /* headPortraitThumbnail.png */; };
+		DBEF16031B2C0E6D00CDC07A /* coupon_go_normal_rev1.png in Resources */ = {isa = PBXBuildFile; fileRef = DBEF16021B2C0E6D00CDC07A /* coupon_go_normal_rev1.png */; };
 		DBF0CD191B1EC8F00006F395 /* WishlistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD171B1EC8F00006F395 /* WishlistTableViewCell.m */; };
 		DBF0CD1A1B1EC8F00006F395 /* WishlistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */; };
 		DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */; };
@@ -518,6 +522,10 @@
 		DBDA438B1B29A88C00962B56 /* cash_purse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cash_purse.png; sourceTree = "<group>"; };
 		DBDA438C1B29A88C00962B56 /* cash_up_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cash_up_box.png; sourceTree = "<group>"; };
 		DBE01EA31B1F0FE200AB3D21 /* PrefixFont.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixFont.pch; sourceTree = "<group>"; };
+		DBEF15F51B2BD0BE00CDC07A /* startGo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startGo.png; sourceTree = "<group>"; };
+		DBEF15FE1B2BED4D00CDC07A /* headPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headPortrait.png; sourceTree = "<group>"; };
+		DBEF16001B2BEE1B00CDC07A /* headPortraitThumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headPortraitThumbnail.png; sourceTree = "<group>"; };
+		DBEF16021B2C0E6D00CDC07A /* coupon_go_normal_rev1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_go_normal_rev1.png; sourceTree = "<group>"; };
 		DBF0CD161B1EC8F00006F395 /* WishlistTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistTableViewCell.h; sourceTree = "<group>"; };
 		DBF0CD171B1EC8F00006F395 /* WishlistTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistTableViewCell.m; sourceTree = "<group>"; };
 		DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishlistTableViewCell.xib; sourceTree = "<group>"; };
@@ -587,7 +595,10 @@
 		118CC8E11B18A30200AE5BD4 /* ios_pic_source */ = {
 			isa = PBXGroup;
 			children = (
+				DBEF16001B2BEE1B00CDC07A /* headPortraitThumbnail.png */,
+				DBEF15FE1B2BED4D00CDC07A /* headPortrait.png */,
 				118CC8E21B18A30200AE5BD4 /* 0.start_page.png */,
+				DBEF15F51B2BD0BE00CDC07A /* startGo.png */,
 				DBB7DEF51B2AEDA500D86546 /* mode_logo.png */,
 				DB9E11121B229CD000C92D6A /* Mode Resource */,
 			);
@@ -1064,6 +1075,7 @@
 		DB9E11201B229CD000C92D6A /* passbook */ = {
 			isa = PBXGroup;
 			children = (
+				DBEF16021B2C0E6D00CDC07A /* coupon_go_normal_rev1.png */,
 				DB9E11FD1B22A1CF00C92D6A /* _triangle.png */,
 				DB9E11211B229CD000C92D6A /* coupon_box.png */,
 				DB9E11221B229CD000C92D6A /* coupon_go_normal.png */,
@@ -1536,13 +1548,17 @@
 				DB9E11DE1B229CD000C92D6A /* save_wishlist_normal.png in Resources */,
 				DB9E11A41B229CD000C92D6A /* line.png in Resources */,
 				DBDA438D1B29A88C00962B56 /* cash_big_box.png in Resources */,
+				DBEF16031B2C0E6D00CDC07A /* coupon_go_normal_rev1.png in Resources */,
 				DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */,
 				DB9E11D71B229CD000C92D6A /* like.png in Resources */,
 				DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */,
 				DB9E11A11B229CD000C92D6A /* confirm_press.png in Resources */,
+				DBEF15FF1B2BED4D00CDC07A /* headPortrait.png in Resources */,
 				DBDA43731B293ED100962B56 /* times.plist in Resources */,
 				DB9E11D11B229CD000C92D6A /* card_left_two_bottom.png in Resources */,
 				DB9E11A61B229CD000C92D6A /* Pop_up_box_.png in Resources */,
+				DBEF16011B2BEE1B00CDC07A /* headPortraitThumbnail.png in Resources */,
+				DBEF15F61B2BD0BE00CDC07A /* startGo.png in Resources */,
 				DB9E11E11B229CD000C92D6A /* blank_pressl.png in Resources */,
 				DB9E11C81B229CD000C92D6A /* orders.png in Resources */,
 				DB9E11D61B229CD000C92D6A /* heart_button.png in Resources */,

@@ -27,7 +27,7 @@
 #import "ModeGood.h"
 #import "SDWebImageManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-
+#import "UIColor+HexString.h"
 @interface ChooseClothesView ()
 @property (nonatomic, strong) UIView *informationView;
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -45,9 +45,8 @@
     self = [super initWithFrame:frame options:options];//MDCSwipeToChooseView的初始化方法
     if (self) {
         self.layer.borderWidth = 1.5f;//加边框
-        self.layer.borderColor = [UIColor blackColor].CGColor;//设置边框颜色
+        self.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.5f].CGColor;//设置边框颜色
         _modeGood = modeGood;
-        
         [self constructInformationView];
     }
     return self;

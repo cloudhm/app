@@ -23,9 +23,7 @@
 
 @implementation CashViewController
 static NSString* reusedIdentifier = @"MyCell";
-- (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
-    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
-}
+
 -(NSMutableArray *)allData{
     if (!_allData) {
         _allData = [NSMutableArray array];
@@ -74,7 +72,7 @@ static NSString* reusedIdentifier = @"MyCell";
     [self.view addSubview:tview];
     
     UIImageView * iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cash_purse.png"]];
-    float ivX = 5.f;
+    float ivX = 15.f;
     float ivY = 15.f;
     float ivW = 45.f;
     float ivH = 45.f;

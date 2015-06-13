@@ -295,7 +295,7 @@
                             <constraint firstAttribute="width" constant="30" id="VYn-b0-uGc"/>
                             <constraint firstAttribute="height" constant="30" id="sUK-sM-kJf"/>
                         </constraints>
-                        <state key="normal" image="coupon_go_normal.png">
+                        <state key="normal" image="coupon_go_normal_rev1.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="highlighted" image="coupon_go_press.png"/>
@@ -597,13 +597,13 @@
                 <outlet property="minuteLabel" destination="JeO-XC-XYp" id="Pna-jw-Aif"/>
                 <outlet property="secondLabel" destination="EdZ-eg-zU4" id="19B-pA-5zm"/>
             </connections>
-            <point key="canvasLocation" x="281" y="295"/>
+            <point key="canvasLocation" x="281" y="294.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="_triangle.png" width="32" height="27"/>
         <image name="coupon_box.png" width="720" height="435"/>
-        <image name="coupon_go_normal.png" width="45" height="45"/>
+        <image name="coupon_go_normal_rev1.png" width="49" height="47"/>
         <image name="coupon_go_press.png" width="45" height="45"/>
         <image name="coupon_mode.png" width="140" height="46"/>
     </resources>

@@ -116,7 +116,7 @@ static NSString *reuseIdentifier=@"MyCell";
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
         [self saveDatabaseWithObj:allItems];
-        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"]}];
+        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
     }];
 }
 //把网络请求回来的秀场数据 存入数据库

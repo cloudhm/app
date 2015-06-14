@@ -10,7 +10,6 @@
 #import "CustomCollectionViewFlowLayout.h"
 #import "BrandCollectionViewCell.h"
 #import "ModeSysAPI.h"
-#import <FMDB.h>
 #import "LikeOrNopeViewController.h"
 #import "ModeGood.h"
 #import "ModeRunwayAPI.h"
@@ -19,7 +18,6 @@
 #import "PrefixHeaderDatabase.pch"
 @interface BrandViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) UICollectionView *cv;
-
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) UIRefreshControl *refresh;
 @end
@@ -37,8 +35,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self readDataFromLocalDatabase];
-    
+    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:BRAND]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -78,7 +75,7 @@ static NSString *reuseIdentifier=@"MyCell";
         if (![obj isKindOfClass:[NSNull class]]) {
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
-            [self saveAllResponseDataByObject:obj];
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:BRAND];
             [self.refresh endRefreshing];
             NSLog(@"刷新视图");
             [self.cv reloadData];
@@ -114,7 +111,8 @@ static NSString *reuseIdentifier=@"MyCell";
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
-        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
+        
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
         [self performSegueWithIdentifier:@"bvcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
     }];
     
@@ -141,57 +139,14 @@ static NSString *reuseIdentifier=@"MyCell";
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
             [self.cv reloadData];//刷新集合视图
-            [self saveAllResponseDataByObject:self.dataArray];//将数据
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:BRAND];
         }
     }];
 }
--(void)readDataFromLocalDatabase{
-
-    //从本地数据库读取内容
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open] == NO) {
-        NSLog(@"打开失败");
-        return;
-    }
-    //查询数据
-    FMResultSet* set = [db executeQuery:@"select * from list_home where type = 'brand' "];
-    while ([set next]) {
-        ModeSysList* brand = [[ModeSysList alloc]init];
-        brand.name = [set stringForColumn:@"name"];
-        brand.pic_link = [set stringForColumn:@"pic_link"];
-        brand.event_id = [NSNumber numberWithInt:[set intForColumn:@"event_id"]];
-        brand.amount = [NSNumber numberWithInt:[set intForColumn:@"amount"]];
-        [self.dataArray addObject:brand];
-        
-    }
-    [db close];
-    
-}
 
 
--(void)saveAllResponseDataByObject:(NSArray*)array{
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (event_id primary key,type,name,pic_link)"];
-        if (result) {
-            for (ModeSysList* brand in self.dataArray) {
-                BOOL res = [db executeUpdate:@"replace into list_home (event_id,type,name,pic_link,amount) values(?,?,?,?,?)", brand.event_id,@"brand", brand.name, brand.pic_link,brand.amount];
-                if (res == NO) {
-                    NSLog(@"插入数据失败");
-                }
-            }
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
-}
+
+
 
 #pragma mark - Navigation
 

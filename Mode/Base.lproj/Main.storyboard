@@ -3311,8 +3311,8 @@
         <image name="wishlist.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lbH-oj-K9A"/>
+        <segue reference="yyR-l5-ALd"/>
         <segue reference="dq8-8E-9FX"/>
-        <segue reference="AXJ-1O-Fxs"/>
-        <segue reference="5iR-fH-Svb"/>
     </inferredMetricsTieBreakers>
 </document>

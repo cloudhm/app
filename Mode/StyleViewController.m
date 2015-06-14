@@ -10,7 +10,6 @@
 #import "CustomCollectionViewFlowLayout.h"
 #import "StyleCollectionViewCell.h"
 #import "ModeSysAPI.h"
-#import <FMDB.h>
 #import "LikeOrNopeViewController.h"
 #import "ModeRunwayAPI.h"
 #import "ModeGood.h"
@@ -40,9 +39,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self readDataFromLocalDatabase];
-    
-    
+    [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:STYLE];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -50,7 +47,6 @@ static NSString *reuseIdentifier=@"MyCell";
     CustomCollectionViewFlowLayout * cvLayout = [[CustomCollectionViewFlowLayout alloc]initWithFrame:frame];
     UICollectionView* brandCV = [[UICollectionView alloc]initWithFrame:frame collectionViewLayout:cvLayout];
     brandCV.backgroundColor = [UIColor clearColor];
-//    brandCV.pagingEnabled = YES;
     brandCV.delegate = self;
     brandCV.dataSource = self;
     brandCV.showsVerticalScrollIndicator = NO;
@@ -79,7 +75,7 @@ static NSString *reuseIdentifier=@"MyCell";
         if (![obj isKindOfClass:[NSNull class]]) {
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
-            [self saveAllResponseDataByObject:obj];
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:STYLE];
             [self.refresh endRefreshing];
             [self.cv reloadData];
         } else {
@@ -113,7 +109,7 @@ static NSString *reuseIdentifier=@"MyCell";
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
-        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
         [self performSegueWithIdentifier:@"svcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
     }];
     
@@ -144,51 +140,9 @@ static NSString *reuseIdentifier=@"MyCell";
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
             [self.cv reloadData];//刷新集合视图
-            [self saveAllResponseDataByObject:self.dataArray];//将数据
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:STYLE];
         }
     }];
-}
--(void)readDataFromLocalDatabase{
-    //从本地数据库读取内容
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open] == NO) {
-        NSLog(@"打开失败");
-        return;
-    }
-    //查询数据
-    FMResultSet* set = [db executeQuery:@"select * from list_home where type = 'style' " ];
-    while ([set next]) {
-        ModeSysList* mstyle = [[ModeSysList alloc]init];
-        mstyle.name = [set stringForColumn:@"name"];
-        mstyle.pic_link = [set stringForColumn:@"pic_link"];
-        mstyle.event_id = [NSNumber numberWithInt:[set intForColumn:@"event_id"]];
-        mstyle.amount = [NSNumber numberWithInt:[set intForColumn:@"amount"]];
-        [self.dataArray addObject:mstyle];
-    }
-    [db close];
-}
-//将数据按6的倍数存入数据库
--(void)saveAllResponseDataByObject:(NSArray*)array{
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (event_id primary key,name,pic_link,amount)"];
-        if (result) {
-            for (ModeSysList* mstyle in self.dataArray) {
-                BOOL res = [db executeUpdate:@"replace into list_home (event_id,type,name,pic_link,amount) values(?,?,?,?,?)", mstyle.event_id,@"style",mstyle.name, mstyle.pic_link,mstyle.amount];
-                if (res == NO) {
-                    NSLog(@"插入数据失败");
-                }
-            }
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
 }
 
 

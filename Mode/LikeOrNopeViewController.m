@@ -10,8 +10,6 @@
 
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 #import "WishListViewController.h"
-#import <FMDB.h>
-
 #import "ModeGoodAPI.h"
 #import "ModeGood.h"
 #import "SDWebImageManager.h"
@@ -77,12 +75,10 @@
     [rightView addSubview:btn];
     UIBarButtonItem* rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightView];
     self.navigationItem.rightBarButtonItem = rightBarItem;
-    
-#warning 临时左侧按钮
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
 }
-#pragma mark －临时左侧按钮
+#pragma mark navigationItem.leftBarButtonItem Action
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -90,8 +86,13 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self.view insertSubview:self.bottomView atIndex:0];
     [self.wishlist removeAllObjects];
-    [self readTableWishlistFromDatabase];
-    self.view.userInteractionEnabled = YES;
+    [self.wishlist addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
+    self.label.text = @"0";
+    if (self.wishlist.count>0) {
+        self.label.text = [NSString stringWithFormat:@"%d",(int)self.wishlist.count];
+        self.view.userInteractionEnabled = YES;
+    }
+    
 }
 //如果上一次未完成分享  会弹出分享视图
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,31 +100,7 @@
         [self showShareViewController];
     }
 }
-//读likenope中的数据 一组秀场数据 存入allGoods数组中
--(void)readDatabase{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        FMResultSet* set = [db executeQuery:@"select * from likenope"];
-        while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [self.allGoods addObject:modeGood];
-        }
-        [db close];
-        self.number = 1;
-        self.totalNumber = self.allGoods.count;
-        self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
-    } else {
-        NSLog(@"数据库打开失败");
-        [db close];
-    }
-}
+
 //点击手势 去除开场遮盖
 -(void)tap:(UITapGestureRecognizer*)gr{
     self.startIntroduceView=gr.view;
@@ -143,8 +120,17 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [self readDatabase];
+
     
+
+    
+    
+    [self.allGoods addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
+    if (self.allGoods.count>0) {
+        self.number = 1;
+        self.totalNumber = self.allGoods.count;
+        self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
+    }
     [self updateUI];
     [self defineRightBarItem];
     self.anotherFlag = NO;
@@ -218,14 +204,18 @@
     
     self.view.userInteractionEnabled = YES;
 #warning 清空数据库中9个项目
-    BOOL flag = [self clearTableWishlist];
+    BOOL flag = [ModeDatabase deleteTableWithName:WISHLIST_TABLENAME];
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
-    if (self.tabLabel.text.integerValue>=self.totalNumber) {
+    if (self.tabLabel.text.integerValue>=self.totalNumber) {//用来判断本组是否已经完成
+        self.label.text = @"0";
         [self finishOneSetAndReadyComeback];
         return ;
     }
     if (flag) {
-        self.navigationController.navigationBar.userInteractionEnabled = NO;
+        self.label.text = @"0";
+        [self.wishlist removeAllObjects];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
+        self.navigationController.navigationBar.userInteractionEnabled = YES;
         UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         av.tag = 1;
         [av show];
@@ -236,7 +226,7 @@
 }
 //完成整组秀场弹出的alertView
 -(void)finishOneSetAndReadyComeback{
-    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,please come back and choose another set" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Continue",nil];
+    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Continue",nil];
     av.tag = 2;
     [av show];
 }
@@ -258,9 +248,11 @@
                 }
                 NSArray* allItems = [obj objectForKey:@"allItems"];
                 self.dictionary = @{@"title":self.title,@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":newParams};
-                [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
+                [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
                 [self createStartIntroduceView];
                 [self.allGoods addObjectsFromArray:allItems];
+                
+                
                 
                 self.number = 1;
                 self.totalNumber = self.allGoods.count;
@@ -277,29 +269,6 @@
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 
-#pragma mark 清空wishlist数据
--(BOOL)clearTableWishlist{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL res = [db executeUpdate:@"delete from wishlist"];
-        if (res) {
-            NSLog(@"成功清空wishlist");
-            self.label.text = @"0";
-            [self.wishlist removeAllObjects];
-            NSLog(@"%d",(int)self.wishlist.count);
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
-            return YES;
-        } else {
-            NSLog(@"未清空wishlist");
-        }
-    } else {
-        NSLog(@"打开数据库失败");
-    }
-    [db close];
-    return NO;
-}
 #pragma mark UpdateUI
 -(void)updateUI{
     //由于使用自动布局和size class技术  屏幕宽度在首次使用时用常量持久保存，否则首次匹配会有问题
@@ -336,30 +305,7 @@
     rect.size.height -= 10.f;
     return rect;
 }
-//从数据库中读取wishlist列表
--(void)readTableWishlistFromDatabase{
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        FMResultSet* set = [db executeQuery:@"select * from wishlist"];
-        while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [self.wishlist addObject:modeGood];
-        }
-        self.label.text = [NSString stringWithFormat:@"%d",(int)self.wishlist.count];
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
-    
-}
+
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -385,7 +331,7 @@
         
     } else {
         //Like goods
-        [self  writeCurrentClothIntoTableWishlist];//写入数据库
+        [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"like"} andCallback:^(id obj) {
             if ([[obj objectForKey:@"status"]isEqualToString:@"success"]) {
                 NSLog(@"like:%@",[obj objectForKey:@"status"]);
@@ -427,28 +373,7 @@
     }
     
 }
-//把数据写入数据库
--(void)writeCurrentClothIntoTableWishlist{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL res = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS wishlist (goods_id primary key ,brand_img_link,brand_name,img_link,has_coupon)"];
-        if (res) {
-            NSLog(@"创建或打开wishlist成功");
-            res = [db executeUpdate:@"replace into wishlist(goods_id,brand_img_link,brand_name,img_link,has_coupon)values(?,?,?,?,?)",self.currentCloth.goods_id,self.currentCloth.brand_img_link,self.currentCloth.brand_name,self.currentCloth.img_link,self.currentCloth.has_coupon];
-            if (res) {
-                NSLog(@"insert wishlist success");
-            } else {
-                NSLog(@"insert wishlist failure");
-            }
-            [db close];
-        }
-    } else {
-        [db close];
-        NSLog(@"打开数据库失败");
-    }
-}
+
 #pragma mark - Internal Methods
 - (void)setFirstCardView:(ChooseClothesView *)firstCardView {
     _firstCardView = firstCardView;

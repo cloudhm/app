@@ -34,12 +34,7 @@
     [[SDImageCache sharedImageCache]clearMemory];
 }
 -(void)removeDataBase{
-//    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-//    
-//    NSError *err;
-//    [[NSFileManager defaultManager]removeItemAtPath:path error:&err];
-//    NSLog(@"%@",err);
+
     
     NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"brandlist_utime"];

@@ -9,8 +9,23 @@
 #ifndef Mode_PrefixHeaderDatabase_pch
 #define Mode_PrefixHeaderDatabase_pch
 
+#define TYPE @"type"
+#define OCCASION @"occasion"
+#define BRAND @"brand"
+#define STYLE @"style"
+
+
+#define HOME_LIST_TABLENAME @"list_home"
+#define HOME_LIST_ELEMENTS @[@"event_id",@"name",@"pic_link",@"amount"]
+
 
 #define LIKENOPE_TABLENAME @"likenope"
 #define LIKENOPE_ELEMENTS @[@"goods_id",@"brand_name",@"brand_img_link",@"img_link",@"has_coupon"]
+
+#define WISHLIST_TABLENAME @"wishlist"
+#define WISHLIST_ELEMENTS @[@"goods_id",@"brand_img_link",@"brand_name",@"img_link",@"has_coupon"]
+
+
+
 
 #endif

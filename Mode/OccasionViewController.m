@@ -9,7 +9,6 @@
 #import "OccasionViewController.h"
 #import "LikeOrNopeViewController.h"
 #import "ModeSysAPI.h"
-#import <FMDB.h>
 #import "CustomCollectionViewFlowLayout.h"
 #import "OccasionCollectionViewCell.h"
 #import "ModeRunwayAPI.h"
@@ -39,7 +38,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self readDataFromLocalDatabase];
+    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -47,7 +46,6 @@ static NSString *reuseIdentifier=@"MyCell";
     CustomCollectionViewFlowLayout * cvLayout = [[CustomCollectionViewFlowLayout alloc]initWithFrame:frame];
     UICollectionView* occasionCV = [[UICollectionView alloc]initWithFrame:frame collectionViewLayout:cvLayout];
     occasionCV.backgroundColor = [UIColor clearColor];
-//    occasionCV.pagingEnabled = YES;
     occasionCV.delegate = self;
     occasionCV.dataSource = self;
     occasionCV.showsVerticalScrollIndicator = NO;
@@ -71,7 +69,7 @@ static NSString *reuseIdentifier=@"MyCell";
         if (![obj isKindOfClass:[NSNull class]]) {
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
-            [self saveAllResponseDataByObject:obj];
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:OCCASION];
             [self.cv reloadData];
             [self.cv setNeedsLayout];
         } else {
@@ -117,8 +115,9 @@ static NSString *reuseIdentifier=@"MyCell";
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
-        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
         [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
+        
     }];
 }
 
@@ -146,53 +145,11 @@ static NSString *reuseIdentifier=@"MyCell";
         if (![obj isKindOfClass:[NSNull class]]) {//返回不为空
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
-            [self saveAllResponseDataByObject:self.dataArray];//将数据
+            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:OCCASION];
             [self.cv reloadData];//刷新集合视图
             
         }
     }];
-}
-//每次开机先从本地数据库中读取框架数据
--(void)readDataFromLocalDatabase{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open] == NO) {
-        NSLog(@"打开失败");
-        return;
-    }
-    //查询数据
-    FMResultSet* set = [db executeQuery:@"select * from list_home where type = 'occasion' "];
-    while ([set next]) {
-        ModeSysList* occasion = [[ModeSysList alloc]init];
-        occasion.name = [set stringForColumn:@"name"];
-        occasion.pic_link = [set stringForColumn:@"pic_link"];
-        occasion.event_id = [NSNumber numberWithInt:[set intForColumn:@"event_id"]];
-        occasion.amount = [NSNumber numberWithInt:[set intForColumn:@"amount"]];
-        [self.dataArray addObject:occasion];
-    }
-    [db close];
-}
-//把请求回来的框架数据存入本地数据库
--(void)saveAllResponseDataByObject:(NSArray*)array{
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (event_id primary key,type,name,pic_link,amount)"];
-        if (result) {
-            for (ModeSysList* occasion in self.dataArray) {
-                    BOOL res = [db executeUpdate:@"replace into list_home(event_id,type,name,pic_link,amount) values(?,?,?,?,?)", occasion.event_id,@"occasion",occasion.name, occasion.pic_link,occasion.amount];
-                    if (res == NO) {
-                        NSLog(@"插入数据失败");
-                    }
-            }
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
 }
 
  #pragma mark - Navigation

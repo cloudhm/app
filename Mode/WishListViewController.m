@@ -17,6 +17,7 @@
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
 #import "ColorView.h"
+#import "UIImage+PartlyImage.h"
 @interface WishListViewController ()<UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
@@ -241,6 +242,7 @@
         self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodInfo.goods_price.floatValue];
         
         [self.goods_img_detail sd_setImageWithURL:[NSURL URLWithString:self.goodInfo.img_detail_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            self.goods_img_detail.image = [UIImage getSubImageByImage:image ];
             [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodInfo.img_detail_link lastPathComponent] toDisk:YES];
         }];
         [self resetAllElementsInRightView];

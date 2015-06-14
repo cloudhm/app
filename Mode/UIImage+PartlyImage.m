@@ -7,16 +7,19 @@
 //
 
 #import "UIImage+PartlyImage.h"
-#define SCALE (1.0/5.0)
+#define DEFAULT_FRAME CGRectMake(0,0,400,200)
 @implementation UIImage (PartlyImage)
 +(UIImage*)getSubImageByImage:(UIImage*)image{
-    NSLog(@"%@",NSStringFromCGSize(image.size));
+    return [self getSubImageByImage:image andImageViewFrame:DEFAULT_FRAME];
+}
++(UIImage*)getSubImageByImage:(UIImage *)image andImageViewFrame:(CGRect)imageViewFrame{
+    float defaultScale = imageViewFrame.size.width/imageViewFrame.size.height;
     float scale = image.size.width/image.size.height;
     CGRect rect = CGRectZero;
-    if (scale >=  SCALE) {
-        rect = CGRectMake((image.size.width - image.size.height* SCALE)/2, 0.f, image.size.height*SCALE, image.size.height);
+    if (scale >=  defaultScale) {
+        rect = CGRectMake((image.size.width - image.size.height* defaultScale)/2, 0.f, image.size.height*defaultScale, image.size.height);
     } else {
-        rect = CGRectMake(0, (image.size.height - image.size.width/SCALE)/2, image.size.width, image.size.width/SCALE);
+        rect = CGRectMake(0, (image.size.height - image.size.width/defaultScale)/2, image.size.width, image.size.width/defaultScale);
     }
     CGImageRef subImage = CGImageCreateWithImageInRect(image.CGImage,rect);
     UIImage* newImage = [UIImage imageWithCGImage:subImage];

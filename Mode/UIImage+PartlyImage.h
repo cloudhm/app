@@ -10,4 +10,5 @@
 
 @interface UIImage (PartlyImage)
 +(UIImage*)getSubImageByImage:(UIImage*)image;
++(UIImage*)getSubImageByImage:(UIImage *)image andImageViewFrame:(CGRect)imageViewFrame;
 @end

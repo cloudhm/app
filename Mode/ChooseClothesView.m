@@ -28,6 +28,7 @@
 #import "SDWebImageManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIColor+HexString.h"
+#import "UIImage+PartlyImage.h"
 @interface ChooseClothesView ()
 @property (nonatomic, strong) UIView *informationView;
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -61,6 +62,7 @@
     self.imageView.frame = frame;
     self.imageView.backgroundColor = [UIColor grayColor];
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.modeGood.img_link] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.imageView.image = [UIImage getSubImageByImage:image andImageViewFrame:self.imageView.frame];
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeGood.img_link lastPathComponent] toDisk:YES];
     }];
 //    SDWebImageManager *manager = [SDWebImageManager sharedManager];

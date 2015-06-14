@@ -10,6 +10,7 @@
 #import "ModeGood.h"
 #import "SDWebImage/SDWebImageManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "UIImage+PartlyImage.h"
 @interface ShareViewController()<UITextViewDelegate>
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *shareImageViews;
 @property (weak, nonatomic) IBOutlet UIButton *shareFacebookBtn;
@@ -30,7 +31,7 @@
     for (int i = 0; i<self.shareImageViews.count; i++) {
         ModeGood* modeGood = self.nineGoods[i];
         UIImageView*iv=self.shareImageViews[i];
-        iv.image = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[modeGood.img_link lastPathComponent]];
+        iv.image = [UIImage getSubImageByImage:[[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[modeGood.img_link lastPathComponent]] andImageViewFrame:iv.frame];
     }
     
 }

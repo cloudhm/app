@@ -75,13 +75,13 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
 
 -(UIViewController *)wishlistViewController{
     if (!_wishlistViewController) {
-        _wishlistViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistViewController"];
+        _wishlistViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
     }
     return _wishlistViewController;
 }
 -(UITableViewController *)wishlistTableViewController{
     if (!_wishlistTableViewController) {
-        _wishlistTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
+        _wishlistTableViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistTableNavigationController"];
     }
     return _wishlistTableViewController;
 }

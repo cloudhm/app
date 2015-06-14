@@ -18,6 +18,7 @@
 #import "SDWebImageManager.h"
 #import "ColorView.h"
 #import "UIImage+PartlyImage.h"
+#import "UIColor+HexString.h"
 @interface WishListViewController ()<UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
@@ -196,6 +197,9 @@
     [super viewDidLoad];
     self.title = @"Wishlist";
     
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
     
     
@@ -341,7 +345,16 @@
     [rightView addSubview:l];
     UIBarButtonItem* rightBarItem = [[UIBarButtonItem alloc]initWithCustomView:rightView];
     self.navigationItem.rightBarButtonItem = rightBarItem;
-    
+    UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
+    self.navigationItem.leftBarButtonItem = barItem;
+}
+#pragma mark navigationItem.leftBarButtonItem Action
+-(void)comeback:(UIBarButtonItem*)btn{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)gotoBrandRunway:(UIButton *)sender {
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES; self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    [self performSegueWithIdentifier:@"gotoBrandRunway" sender:nil];
 }
 
 /*

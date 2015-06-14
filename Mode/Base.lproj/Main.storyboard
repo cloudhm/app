@@ -687,7 +687,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="brand_img" destination="ejS-PB-hic" id="1Ov-0o-T6M"/>
-                        <segue destination="53f-ci-DNR" kind="push" identifier="gotoWishlist2" id="lbH-oj-K9A"/>
+                        <segue destination="sqc-0Q-BjB" kind="presentation" identifier="gotoWishlist2" id="lbH-oj-K9A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sB2-gD-Y4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -984,7 +984,7 @@
                     <connections>
                         <outlet property="bottomView" destination="5js-YX-o5L" id="Zfr-aD-FsW"/>
                         <outlet property="tabLabel" destination="HNR-4T-t3k" id="UCX-Cy-5ZA"/>
-                        <segue destination="53f-ci-DNR" kind="push" identifier="gotoWishlistVC" id="5iR-fH-Svb"/>
+                        <segue destination="53f-ci-DNR" kind="show" identifier="gotoWishlistVC" id="feN-Lw-k7C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lj-TB-Vec" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1126,7 +1126,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AFB-jt-y8V" kind="show" identifier="gotoBrandRunway" id="8R7-TI-waA"/>
+                                    <action selector="gotoBrandRunway:" destination="53f-ci-DNR" eventType="touchUpInside" id="yWn-sb-6a0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1257,11 +1257,12 @@
                         <outlet property="goods_img_detail" destination="YXy-gZ-ejp" id="4Dp-Fj-Ob7"/>
                         <outlet property="goods_price" destination="FLf-Qs-CIb" id="enS-pR-8po"/>
                         <outlet property="rightView" destination="ZOt-H2-mZA" id="Ye9-V5-Pwl"/>
+                        <segue destination="AFB-jt-y8V" kind="show" identifier="gotoBrandRunway" id="dXz-fb-OVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tLc-Ig-FMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="757.5" y="411"/>
+            <point key="canvasLocation" x="1675.5" y="411"/>
         </scene>
         <!--Occasion View Controller-->
         <scene sceneID="I8C-jO-bHx">
@@ -2876,7 +2877,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moF-2A-uU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1537.5" y="417"/>
+            <point key="canvasLocation" x="2455.5" y="417"/>
         </scene>
         <!--Order View Controller-->
         <scene sceneID="W36-J1-1cC">
@@ -3209,7 +3210,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0c2-2E-hId">
             <objects>
-                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3Ey-xl-JLi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WishlistTableNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3Ey-xl-JLi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cht-pD-iTV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3278,6 +3279,25 @@
             </objects>
             <point key="canvasLocation" x="-1942.5" y="3061.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wjo-XU-PTK">
+            <objects>
+                <navigationController storyboardIdentifier="WishlistNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="sqc-0Q-BjB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="0TW-49-zEq"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pdJ-B0-yfM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="53f-ci-DNR" kind="relationship" relationship="rootViewController" id="Fme-6E-gLw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pgv-yz-DYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="757.5" y="411"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0.start_page.png" width="720" height="1280"/>
@@ -3311,8 +3331,8 @@
         <image name="wishlist.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lbH-oj-K9A"/>
-        <segue reference="yyR-l5-ALd"/>
+        <segue reference="Fme-6E-gLw"/>
         <segue reference="dq8-8E-9FX"/>
+        <segue reference="yyR-l5-ALd"/>
     </inferredMetricsTieBreakers>
 </document>

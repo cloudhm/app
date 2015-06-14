@@ -53,6 +53,8 @@
 #pragma mark - 跳转至Wishlist页面
 -(void)gotoWishlist:(UIBarButtonItem*)btn{
     if (self.label.text.integerValue>0) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
         [self performSegueWithIdentifier:@"gotoWishlistVC" sender:nil];
     } else {
         UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Hi,Friend!" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

@@ -38,8 +38,8 @@
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
         [[NSUserDefaults standardUserDefaults]synchronize];
-        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
-        [self.navigationController pushViewController:wlvc animated:YES];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
+        [self.navigationController presentViewController:wlvc animated:YES completion:nil];
     }
     if (!self.gameTimer) {
         self.gameTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateDisplay:)];

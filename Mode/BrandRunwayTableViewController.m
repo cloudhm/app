@@ -64,6 +64,12 @@
 //    self.lastScrollOffset = CGPointZero;
     [self updateRunwayList];
     [self createToolbar];
+    UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
+    self.navigationItem.leftBarButtonItem = barItem;
+}
+#pragma mark navigationItem.leftBarButtonItem Action
+-(void)comeback:(UIBarButtonItem*)btn{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)updateRunwayList{
     [ModeBrandRunwayAPI requestBrandRunwayListByBrandName:nil AndCallback:^(id obj) {

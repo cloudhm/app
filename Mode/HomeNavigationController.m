@@ -22,8 +22,8 @@
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
         [[NSUserDefaults standardUserDefaults]synchronize];
-        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
-        [self pushViewController:wlvc animated:YES];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
+        [self presentViewController:wlvc animated:YES completion:nil];
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{

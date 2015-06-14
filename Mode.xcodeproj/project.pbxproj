@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		115CA8571B2D90EE009C63C4 /* UIImage+PartlyImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115CA8551B2D90EE009C63C4 /* UIImage+PartlyImage.m */; };
 		116BD8641B242998008C01DB /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 116BD8631B242998008C01DB /* home.png */; };
 		116D38841B1B1F99009E9D14 /* ModeRunwayAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D38831B1B1F99009E9D14 /* ModeRunwayAPI.m */; };
 		116D38871B1B35BC009E9D14 /* ModeWishlistAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D38861B1B35BC009E9D14 /* ModeWishlistAPI.m */; };
@@ -239,6 +240,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		115CA8551B2D90EE009C63C4 /* UIImage+PartlyImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PartlyImage.m"; sourceTree = "<group>"; };
+		115CA8561B2D90EE009C63C4 /* UIImage+PartlyImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PartlyImage.h"; sourceTree = "<group>"; };
 		116BD8631B242998008C01DB /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		116D38821B1B1F99009E9D14 /* ModeRunwayAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeRunwayAPI.h; sourceTree = "<group>"; };
 		116D38831B1B1F99009E9D14 /* ModeRunwayAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeRunwayAPI.m; sourceTree = "<group>"; };
@@ -1319,6 +1322,8 @@
 				DBFA95AC1B219D0700362DAC /* ConvertTime.h */,
 				DBFA95AD1B219D0700362DAC /* ConvertTime.m */,
 				DBB433411B2A796F003C4CF0 /* Common.h */,
+				115CA8561B2D90EE009C63C4 /* UIImage+PartlyImage.h */,
+				115CA8551B2D90EE009C63C4 /* UIImage+PartlyImage.m */,
 				117BB3371B2D19E8004DFD11 /* ModeDatabase.h */,
 				117BB3381B2D19E8004DFD11 /* ModeDatabase.m */,
 				117BB33A1B2D2998004DFD11 /* PrefixHeaderDatabase.pch */,
@@ -1774,6 +1779,7 @@
 				11BD58011B176E7B00A149C0 /* StyleCollectionViewCell.m in Sources */,
 				DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */,
 				11BD57F51B17634B00A149C0 /* OccasionViewController.m in Sources */,
+				115CA8571B2D90EE009C63C4 /* UIImage+PartlyImage.m in Sources */,
 				DB0D53321B0EF15C0012E321 /* RegisterView.m in Sources */,
 				DBAA3FCB1B12D415009D66D3 /* BrandViewController.m in Sources */,
 			);

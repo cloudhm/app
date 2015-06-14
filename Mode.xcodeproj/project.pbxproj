@@ -13,10 +13,12 @@
 		116D388D1B1B3971009E9D14 /* ModeWishlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D388C1B1B3971009E9D14 /* ModeWishlist.m */; };
 		116D38961B1B46AE009E9D14 /* WishlistScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D38951B1B46AE009E9D14 /* WishlistScrollView.m */; };
 		116D38991B1B46E7009E9D14 /* WishlistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D38981B1B46E7009E9D14 /* WishlistView.m */; };
+		117BB3391B2D19E8004DFD11 /* ModeDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 117BB3381B2D19E8004DFD11 /* ModeDatabase.m */; };
 		118CC9401B18A30200AE5BD4 /* 0.start_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 118CC8E21B18A30200AE5BD4 /* 0.start_page.png */; };
 		118CC9971B18C4EC00AE5BD4 /* GoodInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 118CC9961B18C4EC00AE5BD4 /* GoodInfo.m */; };
 		118CC99A1B18C68100AE5BD4 /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 118CC9991B18C68100AE5BD4 /* Coupon.m */; };
 		11A3C2D11B1F3CED00D7B564 /* ModeIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A3C2D01B1F3CED00D7B564 /* ModeIntroduceViewController.m */; };
+		11B5A4CE1B2C8E4F004335CE /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B5A4CD1B2C8E4F004335CE /* FeedbackViewController.m */; };
 		11BD57F51B17634B00A149C0 /* OccasionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BD57F41B17634B00A149C0 /* OccasionViewController.m */; };
 		11BD57F81B176AEC00A149C0 /* BrandCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BD57F71B176AEC00A149C0 /* BrandCollectionViewCell.m */; };
 		11BD57FB1B176CFF00A149C0 /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BD57FA1B176CFF00A149C0 /* CustomCollectionViewCell.m */; };
@@ -248,6 +250,9 @@
 		116D38951B1B46AE009E9D14 /* WishlistScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistScrollView.m; sourceTree = "<group>"; };
 		116D38971B1B46E7009E9D14 /* WishlistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistView.h; sourceTree = "<group>"; };
 		116D38981B1B46E7009E9D14 /* WishlistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistView.m; sourceTree = "<group>"; };
+		117BB3371B2D19E8004DFD11 /* ModeDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeDatabase.h; sourceTree = "<group>"; };
+		117BB3381B2D19E8004DFD11 /* ModeDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeDatabase.m; sourceTree = "<group>"; };
+		117BB33A1B2D2998004DFD11 /* PrefixHeaderDatabase.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeaderDatabase.pch; sourceTree = "<group>"; };
 		118CC8E21B18A30200AE5BD4 /* 0.start_page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.start_page.png; sourceTree = "<group>"; };
 		118CC9951B18C4EC00AE5BD4 /* GoodInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodInfo.h; sourceTree = "<group>"; };
 		118CC9961B18C4EC00AE5BD4 /* GoodInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodInfo.m; sourceTree = "<group>"; };
@@ -255,6 +260,8 @@
 		118CC9991B18C68100AE5BD4 /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
 		11A3C2CF1B1F3CED00D7B564 /* ModeIntroduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeIntroduceViewController.h; sourceTree = "<group>"; };
 		11A3C2D01B1F3CED00D7B564 /* ModeIntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeIntroduceViewController.m; sourceTree = "<group>"; };
+		11B5A4CC1B2C8E4F004335CE /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		11B5A4CD1B2C8E4F004335CE /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		11BD57F31B17634B00A149C0 /* OccasionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OccasionViewController.h; sourceTree = "<group>"; };
 		11BD57F41B17634B00A149C0 /* OccasionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OccasionViewController.m; sourceTree = "<group>"; };
 		11BD57F61B176AEC00A149C0 /* BrandCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandCollectionViewCell.h; sourceTree = "<group>"; };
@@ -634,6 +641,15 @@
 			name = Introduce;
 			sourceTree = "<group>";
 		};
+		11B5A4CB1B2C8E37004335CE /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				11B5A4CC1B2C8E4F004335CE /* FeedbackViewController.h */,
+				11B5A4CD1B2C8E4F004335CE /* FeedbackViewController.m */,
+			);
+			name = Feedback;
+			sourceTree = "<group>";
+		};
 		11FE47FE1B11AC6500255C1D /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,7 +768,6 @@
 		DB0D53401B0F0B2C0012E321 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DBDA43801B296D2800962B56 /* Settings */,
 				11A3C2CE1B1F3CC800D7B564 /* Introduce */,
 				DB0D53421B0F0B6F0012E321 /* Login */,
 				DB0D53431B0F0B910012E321 /* Host */,
@@ -784,6 +799,8 @@
 		DB0D53431B0F0B910012E321 /* Host */ = {
 			isa = PBXGroup;
 			children = (
+				DBDA43801B296D2800962B56 /* Settings */,
+				11B5A4CB1B2C8E37004335CE /* Feedback */,
 				DBDA43741B29533200962B56 /* CashViewController */,
 				DB24CFD91B267E2700102403 /* WebView */,
 				DB9E110E1B229A1F00C92D6A /* Order */,
@@ -1302,6 +1319,9 @@
 				DBFA95AC1B219D0700362DAC /* ConvertTime.h */,
 				DBFA95AD1B219D0700362DAC /* ConvertTime.m */,
 				DBB433411B2A796F003C4CF0 /* Common.h */,
+				117BB3371B2D19E8004DFD11 /* ModeDatabase.h */,
+				117BB3381B2D19E8004DFD11 /* ModeDatabase.m */,
+				117BB33A1B2D2998004DFD11 /* PrefixHeaderDatabase.pch */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1677,6 +1697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBA2E98C1B1448EC006B5CE4 /* ModeSysAPI.m in Sources */,
+				11B5A4CE1B2C8E4F004335CE /* FeedbackViewController.m in Sources */,
 				DBA2E97E1B140A2F006B5CE4 /* BrandIntroduceHeaderView.m in Sources */,
 				118CC99A1B18C68100AE5BD4 /* Coupon.m in Sources */,
 				DBAA3FBB1B12CF46009D66D3 /* StyleViewController.m in Sources */,
@@ -1726,6 +1747,7 @@
 				DBC022CA1B2034C500F27D1C /* ModeUtils.m in Sources */,
 				DB0D53481B0F17090012E321 /* HomeNavigationController.m in Sources */,
 				DB169D481B199B1C0015D4A6 /* SDWebImagePrefetcher.m in Sources */,
+				117BB3391B2D19E8004DFD11 /* ModeDatabase.m in Sources */,
 				DBA2E99C1B145710006B5CE4 /* BrandRunwayTableViewController.m in Sources */,
 				DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */,
 				116D38841B1B1F99009E9D14 /* ModeRunwayAPI.m in Sources */,

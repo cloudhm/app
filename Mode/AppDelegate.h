@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UITableViewController *leftDrawerViewController;
 @property (nonatomic, strong) UIViewController *homeViewController;
 //@property (nonatomic, strong) UITableViewController *profileViewController;
-@property (strong, nonatomic) UITableViewController *brandRunwayViewController;
+
 @property (strong, nonatomic) UIViewController *wishlistViewController;
 @property (strong, nonatomic) UITableViewController *wishlistTableViewController;
 @property (strong, nonatomic) UIViewController *passbookViewController;
@@ -33,6 +33,7 @@
 @property (strong, nonatomic) UIViewController *orderViewController;
 
 @property (strong, nonatomic) UIViewController *settingViewController;
+@property (nonatomic,strong) UIViewController* feedbackViewController;
 // ModeDelegate 的单例
 + (AppDelegate *)globalDelegate;
 

@@ -16,6 +16,8 @@
 #import "ModeGood.h"
 #import "ModeSysList.h"
 #import "ModeWishlistAPI.h"
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
 @interface OccasionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) UICollectionView *cv;
 @property (assign, nonatomic) NSInteger num;
@@ -115,41 +117,11 @@ static NSString *reuseIdentifier=@"MyCell";
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
-        [self saveDatabaseWithObj:allItems];
-        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
+        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
     }];
 }
-//把网络请求回来的秀场数据 存入数据库
--(void)saveDatabaseWithObj:(id)obj{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"delete from likenope"];//只是为了清空原先加载的16张图片数据模型
-        if (result) {
-            NSLog(@"成功删除");
-        } else {
-            NSLog(@"该表不存在或未删除");
-        }
-#warning 这个表类型数据结构可能会修改
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
-        if (result) {
-            NSLog(@"创建likenope表成功");
-            for (ModeGood* modeGood in obj) {
-                BOOL res = [db executeUpdate:@"insert into likenope (goods_id,brand_name,brand_img_link,img_link,has_coupon) values(?,?,?,?,?)", modeGood.goods_id,modeGood.brand_name,modeGood.brand_img_link,modeGood.img_link,modeGood.has_coupon];
-                if (res == NO) {
-                    NSLog(@"插入数据失败");
-                }
-            }
-        } else {
-            NSLog(@"创建数据表失败");
-            [db close];
-        }
-    } else {
-        NSLog(@"数据库打开失败");
-        [db close];
-    }
-}
+
 
 #pragma mark CollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

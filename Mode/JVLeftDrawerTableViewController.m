@@ -118,8 +118,10 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
     } else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             destinationViewController = [[AppDelegate globalDelegate]settingViewController];
+            self.currentViewController = destinationViewController;
         } else if (indexPath.row == 1) {
-            destinationViewController = [[AppDelegate globalDelegate]brandRunwayViewController];
+            destinationViewController = [[AppDelegate globalDelegate]feedbackViewController];
+            self.currentViewController = destinationViewController;
         }
     }
     

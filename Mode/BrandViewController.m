@@ -15,6 +15,8 @@
 #import "ModeGood.h"
 #import "ModeRunwayAPI.h"
 #import "ModeSysList.h"
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
 @interface BrandViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) UICollectionView *cv;
 
@@ -112,36 +114,11 @@ static NSString *reuseIdentifier=@"MyCell";
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
-        [self saveDatabaseWithObj:allItems];
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS WithObj:allItems];
         [self performSegueWithIdentifier:@"bvcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
     }];
     
 }
--(void)saveDatabaseWithObj:(id)obj{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        [db executeUpdate:@"delete from likenope"];//只是为了清空原先加载的16张图片数据模型
-        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
-        if (result) {
-            NSLog(@"创建表成功");
-            for (ModeGood* modeGood in obj) {
-                BOOL res = [db executeUpdate:@"insert into likenope (goods_id,brand_name,brand_img_link,img_link,has_coupon) values(?,?,?,?,?)", modeGood.goods_id,modeGood.brand_name,modeGood.brand_img_link,modeGood.img_link,modeGood.has_coupon];
-                if (res == NO) {
-                    NSLog(@"插入数据失败");
-                }
-            }
-        } else {
-            NSLog(@"创建数据表失败");
-            [db close];
-        }
-    } else {
-        NSLog(@"数据库打开失败");
-        [db close];
-    }
-}
-
 
 #pragma mark CollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{

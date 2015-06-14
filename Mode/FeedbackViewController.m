@@ -1,20 +1,20 @@
 //
-//  SettingTableViewController.m
+//  FeedbackViewController.m
 //  Mode
 //
-//  Created by YedaoDEV on 15/6/11.
+//  Created by huangmin on 15/6/14.
 //  Copyright (c) 2015年 YedaoDEV. All rights reserved.
 //
 
-#import "SettingTableViewController.h"
+#import "FeedbackViewController.h"
+#import "WishListViewController.h"
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
-#import "WishListViewController.h"
-@interface SettingTableViewController ()
+@interface FeedbackViewController ()
 
 @end
 
-@implementation SettingTableViewController
+@implementation FeedbackViewController
 
 -(void)gotoWishlistController:(NSNotification*)noti{
     if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
@@ -41,82 +41,22 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
 }
 
-
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Settings";
+    self.title = @"Feedback";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    [self setExtraCellLineHidden:self.tableView];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-
-//隐藏多余的分割线
-- (void)setExtraCellLineHidden: (UITableView *)tableView{
-    UIView *view =[ [UIView alloc]init];
-    view.backgroundColor = [UIColor clearColor];
-    [tableView setTableFooterView:view];
-    [tableView setTableHeaderView:view];
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

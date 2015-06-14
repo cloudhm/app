@@ -13,6 +13,7 @@
 #import "ModeBrandRunway.h"
 #import "BrandRunwayTableViewCell.h"
 #import "UIColor+HexString.h"
+#import "LikeOrNopeViewController.h"
 @interface BrandRunwayTableViewController ()
 
 
@@ -56,9 +57,9 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self initHeaderView];
-    [self initNavigationBar];
+//    [self initNavigationBar];
 //    //偏移量初始化，用来判断表向上或向下移动
 //    self.lastScrollOffset = CGPointZero;
     [self updateRunwayList];
@@ -80,6 +81,13 @@
 -(void)viewDidAppear:(BOOL)animated{
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.toolbar removeFromSuperview];
+    self.toolbar = nil;
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    
+}
 #pragma mark InitUI
 -(void)initHeaderView{
     CGRect frame = [UIScreen mainScreen].applicationFrame;
@@ -90,18 +98,17 @@
     frame.size.height = [self.brandInfo getBrandDetailHeigthtByWidth:(self.tableView.frame.size.width - 40.f)] + 137.f;
     self.tableView.tableHeaderView.frame = frame;
 }
--(void)initNavigationBar{
-    //导航栏设置
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-}
+//-(void)initNavigationBar{
+//    //导航栏设置
+//    self.tableView.showsVerticalScrollIndicator = NO;
+////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+////    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
+////    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//}
 #pragma mark TableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog(@"%d",self.brandRunwayList.count);
-    NSLog(@"%@",self.brandRunwayList);
+
     return self.brandRunwayList.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -150,6 +157,11 @@
         self.toolbarLabel.text = [NSString stringWithFormat:@"%ld",--i];
     }
 }
+
+#pragma mark UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"brandRunwayToLikeNope" sender:@{@"title":@"aaaa",@"intro_desc":@"bbbbb",@"intro_title":@"ccccccc",@"params":@{@"mode":@"style",@"mode_val":@"dddd"}}];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -184,14 +196,14 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    LikeOrNopeViewController* ln=[segue destinationViewController];
+    ln.dictionary = sender;
 }
-*/
+
 
 @end

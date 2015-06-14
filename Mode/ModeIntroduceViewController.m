@@ -92,7 +92,6 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     self.startBtn.center = CGPointMake(KScreenWidth*self.imageNames.count - KScreenWidth/2, KScreenHeight - 50.f);
-    NSLog(@"%@",NSStringFromCGRect(self.startBtn.frame));
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -103,7 +102,6 @@
     self.pageControl.currentPage=index;
     
     self.startBtn.alpha = (offSet.x-KScreenWidth)/(KScreenWidth)>=0?(offSet.x-KScreenWidth)/(KScreenWidth):0;
-    NSLog(@"%f",self.startBtn.alpha);
 }
 
 -(void)enterApp{

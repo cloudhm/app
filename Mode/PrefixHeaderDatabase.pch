@@ -1,0 +1,16 @@
+//
+//  PrefixHeaderDatabase.pch
+//  Mode
+//
+//  Created by huangmin on 15/6/14.
+//  Copyright (c) 2015年 YedaoDEV. All rights reserved.
+//
+
+#ifndef Mode_PrefixHeaderDatabase_pch
+#define Mode_PrefixHeaderDatabase_pch
+
+
+#define LIKENOPE_TABLENAME @"likenope"
+#define LIKENOPE_ELEMENTS @[@"goods_id",@"brand_name",@"brand_img_link",@"img_link",@"has_coupon"]
+
+#endif

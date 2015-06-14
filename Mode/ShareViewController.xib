@@ -124,10 +124,10 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="98C-WF-5IX">
                             <rect key="frame" x="8" y="253" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="格子_normal.png">
+                            <state key="normal" image="blank_normal.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="格子_pressl.png"/>
+                            <state key="selected" image="blank_pressl.png"/>
                             <connections>
                                 <action selector="shareFacebook:" destination="-1" eventType="touchUpInside" id="6hF-7h-Ey5"/>
                             </connections>
@@ -165,11 +165,11 @@
         </view>
     </objects>
     <resources>
+        <image name="blank_normal.png" width="45" height="36"/>
+        <image name="blank_pressl.png" width="33" height="33"/>
         <image name="facebook.png" width="44" height="42"/>
         <image name="save_wishlist_highlight.png" width="486" height="82"/>
         <image name="save_wishlist_normal.png" width="486" height="82"/>
-        <image name="格子_normal.png" width="45" height="36"/>
-        <image name="格子_pressl.png" width="33" height="33"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

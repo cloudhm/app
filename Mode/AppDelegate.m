@@ -85,12 +85,7 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
     }
     return _wishlistTableViewController;
 }
--(UITableViewController *)brandRunwayViewController{
-    if (!_brandRunwayViewController) {
-        _brandRunwayViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"BrandRunwayNavigationController"];
-    }
-    return _brandRunwayViewController;
-}
+
 -(UIViewController *)passbookViewController{
     if (!_passbookViewController) {
         _passbookViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"PassbookNavigationController"];
@@ -116,7 +111,12 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
     }
     return _settingViewController;
 }
-
+-(UIViewController *)feedbackViewController{
+    if (!_feedbackViewController) {
+        _feedbackViewController = [self.drawersStoryboard instantiateViewControllerWithIdentifier:@"FeedbackNavigationController"];
+    }
+    return _feedbackViewController;
+}
 
 //配置抽屉控制器
 - (void)configureDrawerViewController {

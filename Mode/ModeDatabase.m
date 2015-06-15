@@ -205,6 +205,7 @@
         return fetchedDatabase;
     }
     NSString* sqlStr = [self selectTableStrWithTableName:tableName andSelectConditionKey:conditionKey andSelectConditionValue:conditionValue];
+    NSLog(@"%@",sqlStr);
     FMResultSet* set = [db executeQuery:sqlStr];
     //查询数据
     if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {

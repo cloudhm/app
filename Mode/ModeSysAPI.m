@@ -52,7 +52,7 @@
             }
             callback(brandArr);
         } else {
-            callback([NSNull null]);
+            callback(@(0));
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request fail");
@@ -82,7 +82,7 @@
             }
             callback(occasionArr);
         } else {
-            callback([NSNull null]);
+            callback(@(0));;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request fail");
@@ -112,7 +112,7 @@
             }
             callback(styleArr);
         } else {
-            callback([NSNull null]);
+            callback(@(0));
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request stylelist fail:%@",error);

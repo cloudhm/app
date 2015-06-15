@@ -18,7 +18,6 @@
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         id error = [dictionary objectForKey:@"error"];
-#warning ...
         if (![error isKindOfClass:[NSNull class]]) {
             NSString* userId = [dictionary objectForKey:@"user_id"];
             NSString* utime = [dictionary objectForKey:@"utime"];

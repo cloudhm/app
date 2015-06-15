@@ -195,7 +195,6 @@
 		DBAA40091B130F79009D66D3 /* ChooseClothesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAA40081B130F79009D66D3 /* ChooseClothesView.m */; };
 		DBB280AE1B1BF64300D8A3F1 /* BrandInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */; };
 		DBB280B21B1C548800D8A3F1 /* WishlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */; };
-		DBB7DEF61B2AEDA500D86546 /* mode_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB7DEF51B2AEDA500D86546 /* mode_logo.png */; };
 		DBC022CA1B2034C500F27D1C /* ModeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022C91B2034C500F27D1C /* ModeUtils.m */; };
 		DBC022CC1B20398300F27D1C /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBC022CB1B20398300F27D1C /* init.plist */; };
 		DBC022CF1B203B6B00F27D1C /* ModeSysList.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022CE1B203B6B00F27D1C /* ModeSysList.m */; };
@@ -222,6 +221,20 @@
 		DBF0CD1A1B1EC8F00006F395 /* WishlistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */; };
 		DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */; };
 		DBF1575A1B2E6A7C004F0903 /* TAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157591B2E6A7C004F0903 /* TAlertView.m */; };
+		DBF157991B2EBD47004F0903 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157941B2EBD47004F0903 /* Icon-Small@2x.png */; };
+		DBF1579A1B2EBD47004F0903 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157951B2EBD47004F0903 /* Icon-Small.png */; };
+		DBF1579B1B2EBD47004F0903 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157961B2EBD47004F0903 /* Icon@2x.png */; };
+		DBF1579C1B2EBD47004F0903 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157971B2EBD47004F0903 /* Icon.png */; };
+		DBF1579D1B2EBD47004F0903 /* iTunesArtWork.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157981B2EBD47004F0903 /* iTunesArtWork.png */; };
+		DBF1579F1B2EBE13004F0903 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF1579E1B2EBE13004F0903 /* Icon-60@3x.png */; };
+		DBF157A11B2EBFF0004F0903 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157A01B2EBFF0004F0903 /* Icon-60@2x.png */; };
+		DBF157A61B2ED4C4004F0903 /* QBRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157A51B2ED4C4004F0903 /* QBRefreshControl.m */; };
+		DBF157AD1B2ED4CD004F0903 /* QBAnimationGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157A81B2ED4CD004F0903 /* QBAnimationGroup.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DBF157AE1B2ED4CD004F0903 /* QBAnimationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157AA1B2ED4CD004F0903 /* QBAnimationItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DBF157AF1B2ED4CD004F0903 /* QBAnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157AC1B2ED4CD004F0903 /* QBAnimationSequence.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DBF157B61B2ED583004F0903 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157B21B2ED583004F0903 /* arrow.png */; };
+		DBF157B71B2ED583004F0903 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF157B31B2ED583004F0903 /* arrow@2x.png */; };
+		DBF157B81B2ED583004F0903 /* QBArrowRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157B51B2ED583004F0903 /* QBArrowRefreshControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */; };
 		DBF6CB371B25288600FEC1F5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB361B25288600FEC1F5 /* ShareViewController.m */; };
 		DBF6CB391B252D8200FEC1F5 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF6CB381B252D8200FEC1F5 /* ShareViewController.xib */; };
@@ -505,7 +518,6 @@
 		DBB280B01B1C548800D8A3F1 /* WishlistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistTableViewController.h; sourceTree = "<group>"; };
 		DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistTableViewController.m; sourceTree = "<group>"; };
 		DBB433411B2A796F003C4CF0 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		DBB7DEF51B2AEDA500D86546 /* mode_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode_logo.png; sourceTree = "<group>"; };
 		DBC022C81B2034C500F27D1C /* ModeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeUtils.h; sourceTree = "<group>"; };
 		DBC022C91B2034C500F27D1C /* ModeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeUtils.m; sourceTree = "<group>"; };
 		DBC022CB1B20398300F27D1C /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
@@ -544,6 +556,25 @@
 		DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistHeadView.m; sourceTree = "<group>"; };
 		DBF157581B2E6A7C004F0903 /* TAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAlertView.h; sourceTree = "<group>"; };
 		DBF157591B2E6A7C004F0903 /* TAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAlertView.m; sourceTree = "<group>"; };
+		DBF157941B2EBD47004F0903 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		DBF157951B2EBD47004F0903 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		DBF157961B2EBD47004F0903 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		DBF157971B2EBD47004F0903 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		DBF157981B2EBD47004F0903 /* iTunesArtWork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtWork.png; sourceTree = "<group>"; };
+		DBF1579E1B2EBE13004F0903 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		DBF157A01B2EBFF0004F0903 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		DBF157A41B2ED4C4004F0903 /* QBRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBRefreshControl.h; sourceTree = "<group>"; };
+		DBF157A51B2ED4C4004F0903 /* QBRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBRefreshControl.m; sourceTree = "<group>"; };
+		DBF157A71B2ED4CD004F0903 /* QBAnimationGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAnimationGroup.h; sourceTree = "<group>"; };
+		DBF157A81B2ED4CD004F0903 /* QBAnimationGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBAnimationGroup.m; sourceTree = "<group>"; };
+		DBF157A91B2ED4CD004F0903 /* QBAnimationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAnimationItem.h; sourceTree = "<group>"; };
+		DBF157AA1B2ED4CD004F0903 /* QBAnimationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBAnimationItem.m; sourceTree = "<group>"; };
+		DBF157AB1B2ED4CD004F0903 /* QBAnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAnimationSequence.h; sourceTree = "<group>"; };
+		DBF157AC1B2ED4CD004F0903 /* QBAnimationSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBAnimationSequence.m; sourceTree = "<group>"; };
+		DBF157B21B2ED583004F0903 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		DBF157B31B2ED583004F0903 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
+		DBF157B41B2ED583004F0903 /* QBArrowRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBArrowRefreshControl.h; sourceTree = "<group>"; };
+		DBF157B51B2ED583004F0903 /* QBArrowRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBArrowRefreshControl.m; sourceTree = "<group>"; };
 		DBF6CB2E1B25270A00FEC1F5 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		DBF6CB351B25288600FEC1F5 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -612,7 +643,6 @@
 				DBEF15FE1B2BED4D00CDC07A /* headPortrait.png */,
 				118CC8E21B18A30200AE5BD4 /* 0.start_page.png */,
 				DBEF15F51B2BD0BE00CDC07A /* startGo.png */,
-				DBB7DEF51B2AEDA500D86546 /* mode_logo.png */,
 				DB9E11121B229CD000C92D6A /* Mode Resource */,
 			);
 			name = ios_pic_source;
@@ -918,6 +948,7 @@
 		DB17B6771B0EC59400D43B9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBF157A31B2ECC52004F0903 /* QBRefreshControl */,
 				DBF157571B2E6A56004F0903 /* TAlertView */,
 				DBF6CB411B25707300FEC1F5 /* FontResource */,
 				DBC022CB1B20398300F27D1C /* init.plist */,
@@ -1051,6 +1082,7 @@
 		DB9E11121B229CD000C92D6A /* Mode Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DBF157A21B2EC079004F0903 /* Icon-logo */,
 				DBDA43841B29A88C00962B56 /* 10.cash */,
 				DB9E11131B229CD000C92D6A /* login */,
 				DB9E111A1B229CD000C92D6A /* brandIntroduce */,
@@ -1429,6 +1461,71 @@
 			name = TAlertView;
 			sourceTree = "<group>";
 		};
+		DBF157A21B2EC079004F0903 /* Icon-logo */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157A01B2EBFF0004F0903 /* Icon-60@2x.png */,
+				DBF1579E1B2EBE13004F0903 /* Icon-60@3x.png */,
+				DBF157941B2EBD47004F0903 /* Icon-Small@2x.png */,
+				DBF157951B2EBD47004F0903 /* Icon-Small.png */,
+				DBF157961B2EBD47004F0903 /* Icon@2x.png */,
+				DBF157971B2EBD47004F0903 /* Icon.png */,
+				DBF157981B2EBD47004F0903 /* iTunesArtWork.png */,
+			);
+			name = "Icon-logo";
+			sourceTree = "<group>";
+		};
+		DBF157A31B2ECC52004F0903 /* QBRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157B91B2ED591004F0903 /* QBArrowRefreshControl */,
+				DBF157B11B2ED4E8004F0903 /* QBRefreshControl */,
+				DBF157B01B2ED4D1004F0903 /* QBAnimationSequence */,
+			);
+			name = QBRefreshControl;
+			sourceTree = "<group>";
+		};
+		DBF157B01B2ED4D1004F0903 /* QBAnimationSequence */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157A71B2ED4CD004F0903 /* QBAnimationGroup.h */,
+				DBF157A81B2ED4CD004F0903 /* QBAnimationGroup.m */,
+				DBF157A91B2ED4CD004F0903 /* QBAnimationItem.h */,
+				DBF157AA1B2ED4CD004F0903 /* QBAnimationItem.m */,
+				DBF157AB1B2ED4CD004F0903 /* QBAnimationSequence.h */,
+				DBF157AC1B2ED4CD004F0903 /* QBAnimationSequence.m */,
+			);
+			name = QBAnimationSequence;
+			sourceTree = "<group>";
+		};
+		DBF157B11B2ED4E8004F0903 /* QBRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157A41B2ED4C4004F0903 /* QBRefreshControl.h */,
+				DBF157A51B2ED4C4004F0903 /* QBRefreshControl.m */,
+			);
+			name = QBRefreshControl;
+			sourceTree = "<group>";
+		};
+		DBF157B91B2ED591004F0903 /* QBArrowRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157BA1B2ED599004F0903 /* Resources */,
+				DBF157B41B2ED583004F0903 /* QBArrowRefreshControl.h */,
+				DBF157B51B2ED583004F0903 /* QBArrowRefreshControl.m */,
+			);
+			name = QBArrowRefreshControl;
+			sourceTree = "<group>";
+		};
+		DBF157BA1B2ED599004F0903 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157B21B2ED583004F0903 /* arrow.png */,
+				DBF157B31B2ED583004F0903 /* arrow@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		DBF6CB311B25270E00FEC1F5 /* CWPopup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1533,6 +1630,7 @@
 				DB9E119E1B229CD000C92D6A /* Arrow_left_button.png in Resources */,
 				DB9E119C1B229CD000C92D6A /* coupon_mode.png in Resources */,
 				DB9E11971B229CD000C92D6A /* coupon_box.png in Resources */,
+				DBF1579C1B2EBD47004F0903 /* Icon.png in Resources */,
 				DB9E11B11B229CD000C92D6A /* new_secret_email.png in Resources */,
 				DB9E11FC1B229FF100C92D6A /* OrderTableViewCell.xib in Resources */,
 				DB9E118F1B229CD000C92D6A /* facebook_login_press.png in Resources */,
@@ -1540,6 +1638,7 @@
 				DB9E11DF1B229CD000C92D6A /* save_wishlist_highlight.png in Resources */,
 				DB9E11A51B229CD000C92D6A /* Pencil_icon.png in Resources */,
 				DB9E11ED1B229CD000C92D6A /* coupon_press.png in Resources */,
+				DBF1579A1B2EBD47004F0903 /* Icon-Small.png in Resources */,
 				DB9E11BF1B229CD000C92D6A /* secret_page.png in Resources */,
 				DBC022CC1B20398300F27D1C /* init.plist in Resources */,
 				DB9E11BD1B229CD000C92D6A /* old_secret_login_press.png in Resources */,
@@ -1549,6 +1648,7 @@
 				DB9E118C1B229CD000C92D6A /* email_login_normal.png in Resources */,
 				DB9E11D21B229CD000C92D6A /* hand_like_normal.png in Resources */,
 				DB9E11F31B229CD000C92D6A /* heart_button.png in Resources */,
+				DBF157991B2EBD47004F0903 /* Icon-Small@2x.png in Resources */,
 				DB9E11B71B229CD000C92D6A /* new_secret_password.png in Resources */,
 				DB9E119B1B229CD000C92D6A /* coupon_line.png in Resources */,
 				DB9E11B21B229CD000C92D6A /* new_secret_email_normal.png in Resources */,
@@ -1577,14 +1677,15 @@
 				DB9E11D41B229CD000C92D6A /* hand_unlike_normal.png in Resources */,
 				DB9E11B61B229CD000C92D6A /* new_secret_name_normal.png in Resources */,
 				DB9E11C91B229CD000C92D6A /* passbook.png in Resources */,
-				DBB7DEF61B2AEDA500D86546 /* mode_logo.png in Resources */,
 				DB9E11CA1B229CD000C92D6A /* profile.png in Resources */,
 				DB9E11B41B229CD000C92D6A /* new_secret_login_press.png in Resources */,
 				DB9E11C51B229CD000C92D6A /* feedback.png in Resources */,
 				DB9E11CC1B229CD000C92D6A /* setting.png in Resources */,
 				DB9E11FE1B22A1CF00C92D6A /* _triangle.png in Resources */,
+				DBF157B61B2ED583004F0903 /* arrow.png in Resources */,
 				DB9E11DE1B229CD000C92D6A /* save_wishlist_normal.png in Resources */,
 				DB9E11A41B229CD000C92D6A /* line.png in Resources */,
+				DBF157A11B2EBFF0004F0903 /* Icon-60@2x.png in Resources */,
 				DBDA438D1B29A88C00962B56 /* cash_big_box.png in Resources */,
 				DBEF16031B2C0E6D00CDC07A /* coupon_go_normal_rev1.png in Resources */,
 				DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */,
@@ -1624,6 +1725,7 @@
 				DBDA43941B29A88C00962B56 /* cash_up_box.png in Resources */,
 				DB9E11D81B229CD000C92D6A /* nope.png in Resources */,
 				DB9E11B91B229CD000C92D6A /* email_input_left.png in Resources */,
+				DBF1579B1B2EBD47004F0903 /* Icon@2x.png in Resources */,
 				118CC9401B18A30200AE5BD4 /* 0.start_page.png in Resources */,
 				DB9E11F21B229CD000C92D6A /* green_rect.png in Resources */,
 				DB9E11E21B229CD000C92D6A /* _box.png in Resources */,
@@ -1639,6 +1741,8 @@
 				DB9E11EF1B229CD000C92D6A /* delete_press.png in Resources */,
 				DB9E119F1B229CD000C92D6A /* Close button.png in Resources */,
 				DB9E11BA1B229CD000C92D6A /* input_right_email_normal.png in Resources */,
+				DBF157B71B2ED583004F0903 /* arrow@2x.png in Resources */,
+				DBF1579D1B2EBD47004F0903 /* iTunesArtWork.png in Resources */,
 				DB9E120E1B22E06B00C92D6A /* finished_selected.png in Resources */,
 				DB9E11901B229CD000C92D6A /* login_page.png in Resources */,
 				DB9F747B1B1DB1E000E0D6CA /* PassbookTableViewCell.xib in Resources */,
@@ -1663,6 +1767,7 @@
 				DB9E11CB1B229CD000C92D6A /* round.png in Resources */,
 				DB9E11A71B229CD000C92D6A /* confirm_box.png in Resources */,
 				DBDA43921B29A88C00962B56 /* cash_press.png in Resources */,
+				DBF1579F1B2EBE13004F0903 /* Icon-60@3x.png in Resources */,
 				DB9E11C21B229CD000C92D6A /* home_divider_line.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1721,8 +1826,10 @@
 				DBAA3FBB1B12CF46009D66D3 /* StyleViewController.m in Sources */,
 				11BD57FB1B176CFF00A149C0 /* CustomCollectionViewCell.m in Sources */,
 				DB169D4A1B199B1C0015D4A6 /* UIImage+GIF.m in Sources */,
+				DBF157B81B2ED583004F0903 /* QBArrowRefreshControl.m in Sources */,
 				DBFA95AE1B219D0700362DAC /* ConvertTime.m in Sources */,
 				DB0D53231B0ECDC50012E321 /* LoginViewController.m in Sources */,
+				DBF157AD1B2ED4CD004F0903 /* QBAnimationGroup.m in Sources */,
 				DB169D461B199B1C0015D4A6 /* SDWebImageDownloaderOperation.m in Sources */,
 				DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */,
 				DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */,
@@ -1732,6 +1839,7 @@
 				DBAA3FC51B12D27F009D66D3 /* CustomCollectionViewFlowLayout.m in Sources */,
 				DBA2E99F1B145AB0006B5CE4 /* WishListViewController.m in Sources */,
 				DBDA43831B296D3F00962B56 /* SettingTableViewController.m in Sources */,
+				DBF157A61B2ED4C4004F0903 /* QBRefreshControl.m in Sources */,
 				DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */,
 				DB17B6801B0EC59400D43B9F /* LaunchViewController.m in Sources */,
 				DBF0CD191B1EC8F00006F395 /* WishlistTableViewCell.m in Sources */,
@@ -1754,6 +1862,7 @@
 				DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */,
 				DB9F74641B1D96F500E0D6CA /* ColorView.m in Sources */,
 				DBAA40031B130DA0009D66D3 /* LikeOrNopeViewController.m in Sources */,
+				DBF157AF1B2ED4CD004F0903 /* QBAnimationSequence.m in Sources */,
 				DB169D431B199B1C0015D4A6 /* SDWebImageCompat.m in Sources */,
 				DB169D4B1B199B1C0015D4A6 /* UIImage+MultiFormat.m in Sources */,
 				DBF6CB511B2587C000FEC1F5 /* OrderConfirmViewController.m in Sources */,
@@ -1764,6 +1873,7 @@
 				DB169D471B199B1C0015D4A6 /* SDWebImageManager.m in Sources */,
 				DB169D421B199B1C0015D4A6 /* SDImageCache.m in Sources */,
 				DBC022CA1B2034C500F27D1C /* ModeUtils.m in Sources */,
+				DBF157AE1B2ED4CD004F0903 /* QBAnimationItem.m in Sources */,
 				DB0D53481B0F17090012E321 /* HomeNavigationController.m in Sources */,
 				DB169D481B199B1C0015D4A6 /* SDWebImagePrefetcher.m in Sources */,
 				117BB3391B2D19E8004DFD11 /* ModeDatabase.m in Sources */,

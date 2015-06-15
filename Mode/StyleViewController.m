@@ -16,16 +16,29 @@
 #import "ModeSysList.h"
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
-@interface StyleViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+#import "TAlertView.h"
+#import "QBArrowRefreshControl.h"
+@interface StyleViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,QBRefreshControlDelegate>
 @property (weak, nonatomic) UICollectionView *cv;
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (strong, nonatomic) UIRefreshControl *refresh;
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @end
 
 @implementation StyleViewController
 static NSString *reuseIdentifier=@"MyCell";
-
+#pragma mark ShowAlertView
+-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 3;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 //懒加载可变数组
 -(NSMutableArray *)dataArray{
     if (!_dataArray) {
@@ -34,7 +47,7 @@ static NSString *reuseIdentifier=@"MyCell";
     return _dataArray;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self getData];
+    [self refreshData];
 }
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
@@ -57,10 +70,13 @@ static NSString *reuseIdentifier=@"MyCell";
     //注册集合视图单元格
     [self.cv registerClass:[StyleCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    self.refresh = [[UIRefreshControl alloc]init];
-    [self.refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    self.refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
-    [self.cv addSubview:self.refresh];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.cv addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.cv addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
 }
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"svcToLvc" object:nil];
@@ -69,33 +85,31 @@ static NSString *reuseIdentifier=@"MyCell";
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"svcToLvc" object:nil];
 }
+#pragma mark - QBRefreshControlDelegate
+
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
+{
+    [self refreshData];
+}
+//刷新数据
 -(void)refreshData{
     NSLog(@"update");
     [ModeSysAPI requestStyleListAndCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {
+        [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
+        if ([obj isKindOfClass:[NSArray class]]) {
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:obj];
             [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:STYLE];
-            [self.refresh endRefreshing];
             [self.cv reloadData];
-        } else {
-            [self.refresh endRefreshing];
-            UILabel * l = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
-            l.text = @"已是最新版";
-            l.textColor = [UIColor redColor];
-            l.center = self.view.center;
-            l.alpha = 0.f;
-            [self.view addSubview:l];
-            [UIView animateWithDuration:1.f animations:^{
-                l.alpha = 1.f;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:1.f animations:^{
-                    l.alpha = 0.f;
-                } completion:^(BOOL finished) {
-                    [l removeFromSuperview];
-                }];
-            }];
+            [self.cv setNeedsLayout];
+        } else if ([obj isKindOfClass:[NSNull class]]) {
+            NSString* cautionInfo = @"Net error!Fail to connect host servers.";
+            [self showAlertViewWithCautionInfo:cautionInfo];
         }
+//        else  if ([obj isKindOfClass:[NSNumber class]]){
+//            NSString* cautionInfo = @"It's the newest.";
+//            [self showAlertViewWithCautionInfo:cautionInfo];
+//        }
     }];
     
 }
@@ -130,19 +144,6 @@ static NSString *reuseIdentifier=@"MyCell";
     StyleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.mstyle = self.dataArray[indexPath.row];
     return cell;
-}
-
-
-
--(void)getData{
-    [ModeSysAPI requestStyleListAndCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {//返回不为空
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:obj];
-            [self.cv reloadData];//刷新集合视图
-            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:STYLE];
-        }
-    }];
 }
 
 

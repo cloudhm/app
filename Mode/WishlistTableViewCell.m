@@ -39,7 +39,6 @@
     self.commentLabel.text = self.modeWishlist.comments;
     float commentLabelW = (CGRectGetWidth(self.bounds)-60.f-10.f);
     float commentLabelH = [self.modeWishlist getCommentHeightByLabelWidth:commentLabelW];
-    NSLog(@"commentLabelH:%f",commentLabelH);
     self.commentLabel.frame = CGRectMake(60.f, 10.f, commentLabelW, commentLabelH);
     
     self.iconIV.frame =CGRectMake(15.f, 10.f, 35.f, 35.f);
@@ -49,7 +48,8 @@
     self.iconIV.layer.masksToBounds = YES;
     
     [self.shareIV sd_setImageWithURL:[NSURL URLWithString:self.modeWishlist.img_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        self.shareIV.image = [UIImage getSubImageByImage:image andImageViewFrame:self.shareIV.frame];
+        self.shareIV.image = [UIImage getSubImageByImage:image];
+        NSLog(@"%@",NSStringFromCGRect(self.shareIV.frame));
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeWishlist.img_link lastPathComponent] toDisk:YES];
     }];
     [self.iconIV sd_setImageWithURL:[NSURL URLWithString:self.modeWishlist.img_link] placeholderImage:[UIImage imageNamed:@"headPortraitThumbnail.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

@@ -4,7 +4,13 @@
 <dict>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>mode_logo.png</string>
+		<string>Ico-60@2x.png</string>
+		<string>Icon-60@3x.png</string>
+		<string>Icon-Small@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon.png</string>
+		<string>iTunesArtWork.png</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

@@ -94,7 +94,7 @@
         self.btn = b;
         [self addSubview:self.btn];
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

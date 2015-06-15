@@ -173,7 +173,7 @@
     [ModeAccountAPI loginWithParams:attributes andCallback:^(id obj) {
         [self.activityIndicatorView stopAnimating];
         if ([obj isKindOfClass:[NSNull class]]) {
-            NSString* errorInfo = @"Net error!Cannot connect host servers.";
+            NSString* errorInfo = @"Net error!Fail to connect host servers.";
             [self showAlertViewWithErrorInfo:errorInfo];
         } else {
             BOOL flag = [obj boolValue];

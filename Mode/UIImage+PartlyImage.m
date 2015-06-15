@@ -7,12 +7,12 @@
 //
 
 #import "UIImage+PartlyImage.h"
-#define DEFAULT_FRAME CGRectMake(0,0,300,400)
+#define DEFAULT_FRAME CGRectMake(0,0,300,500)
 @implementation UIImage (PartlyImage)
 +(UIImage*)getSubImageByImage:(UIImage*)image{
     return [self getSubImageByImage:image andImageViewFrame:DEFAULT_FRAME];
 }
-+(UIImage*)getSubImageByImage:(UIImage *)image andImageViewFrame:(CGRect)imageViewFrame{
++(UIImage*)getSubImageByImage:(UIImage *)image andImageViewFrame:(CGRect)imageViewFrame{//复用视图中frame不定，可能会有问题
     float defaultScale = imageViewFrame.size.width/imageViewFrame.size.height;
     float scale = image.size.width/image.size.height;
     CGRect rect = CGRectZero;

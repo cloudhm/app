@@ -28,18 +28,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
-}
--(void)viewDidDisappear:(BOOL)animated{
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
-    
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     
     if ([ud objectForKey:@"token"]) {
@@ -58,6 +46,18 @@
         }
         
     }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
+    
+    
 }
 -(void)click{
     NSLog(@"...");

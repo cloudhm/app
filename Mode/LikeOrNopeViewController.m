@@ -446,6 +446,9 @@
 #pragma mark Control Events
 
 - (IBAction)likeFrontCardView:(UIButton *)sender {
+    if (self.number == 9) {
+        return;
+    }
     [self.firstCardView mdc_swipe:MDCSwipeDirectionRight];
 }
 

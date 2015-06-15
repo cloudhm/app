@@ -1118,23 +1118,37 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38h-jQ-CV0">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-5N-Lgf">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="177" y="5" width="46" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="gotoBrandRunway:" destination="53f-ci-DNR" eventType="touchUpInside" id="yWn-sb-6a0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="3VC-5N-Lgf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="3VC-5N-Lgf"/>
+                                    </mask>
+                                </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-5N-Lgf">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="gotoBrandRunway:" destination="53f-ci-DNR" eventType="touchUpInside" id="yWn-sb-6a0"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="38h-jQ-CV0" firstAttribute="leading" secondItem="u3Y-Ex-E9m" secondAttribute="leading" id="01F-6e-sDA"/>
                             <constraint firstItem="ZOt-H2-mZA" firstAttribute="top" secondItem="jmA-1q-kgm" secondAttribute="bottom" id="3B2-Ai-D8T"/>
-                            <constraint firstItem="3VC-5N-Lgf" firstAttribute="centerY" secondItem="38h-jQ-CV0" secondAttribute="centerY" id="7yF-7C-kmY"/>
                             <constraint firstItem="Td4-vJ-2GC" firstAttribute="leading" secondItem="u3Y-Ex-E9m" secondAttribute="leading" id="8i0-HS-bPH"/>
                             <constraint firstItem="Td4-vJ-2GC" firstAttribute="width" secondItem="ZOt-H2-mZA" secondAttribute="width" id="FZb-vP-xyS"/>
                             <constraint firstAttribute="centerX" secondItem="38h-jQ-CV0" secondAttribute="centerX" id="Gr2-AP-bEd"/>
@@ -1152,7 +1166,6 @@
                             </constraint>
                             <constraint firstItem="ZOt-H2-mZA" firstAttribute="leading" secondItem="Td4-vJ-2GC" secondAttribute="trailing" id="uFc-AZ-1Uc"/>
                             <constraint firstItem="38h-jQ-CV0" firstAttribute="top" secondItem="Td4-vJ-2GC" secondAttribute="bottom" id="uJI-Ne-Zqt"/>
-                            <constraint firstItem="3VC-5N-Lgf" firstAttribute="centerX" secondItem="38h-jQ-CV0" secondAttribute="centerX" id="yuv-72-v3Z"/>
                             <constraint firstItem="jmA-1q-kgm" firstAttribute="trailing" secondItem="u3Y-Ex-E9m" secondAttribute="trailingMargin" id="zz9-dI-Kna"/>
                         </constraints>
                         <variation key="default">
@@ -1161,14 +1174,11 @@
                                 <exclude reference="ZOt-H2-mZA"/>
                                 <exclude reference="Td4-vJ-2GC"/>
                                 <exclude reference="38h-jQ-CV0"/>
-                                <exclude reference="3VC-5N-Lgf"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="KXP-Gc-cWk"/>
                                 <exclude reference="Vmo-g4-gXV"/>
                                 <exclude reference="p0i-r3-Jgi"/>
-                                <exclude reference="7yF-7C-kmY"/>
-                                <exclude reference="yuv-72-v3Z"/>
                                 <exclude reference="01F-6e-sDA"/>
                                 <exclude reference="Gr2-AP-bEd"/>
                                 <exclude reference="eUC-Sr-PHJ"/>
@@ -1190,14 +1200,11 @@
                                 <include reference="ZOt-H2-mZA"/>
                                 <include reference="Td4-vJ-2GC"/>
                                 <include reference="38h-jQ-CV0"/>
-                                <include reference="3VC-5N-Lgf"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="KXP-Gc-cWk"/>
                                 <include reference="Vmo-g4-gXV"/>
                                 <include reference="p0i-r3-Jgi"/>
-                                <include reference="7yF-7C-kmY"/>
-                                <include reference="yuv-72-v3Z"/>
                                 <include reference="01F-6e-sDA"/>
                                 <include reference="Gr2-AP-bEd"/>
                                 <include reference="eUC-Sr-PHJ"/>

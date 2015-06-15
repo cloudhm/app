@@ -5,14 +5,15 @@
 //  Created by YedaoDEV on 15/5/22.
 //  Copyright (c) 2015年 YedaoDEV. All rights reserved.
 //
-#define LOGINVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,210)
-#define REGISTERVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,260)
+
+
 #import "LoginViewController.h"
 #import "LoginView.h"
 #import "RegisterView.h"
 #import "AppDelegate.h"
 #import "ModeAccountAPI.h"
 #import "JVFloatingDrawerViewController.h"
+#import "TAlertView.h"
 @interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (strong, nonatomic) LoginView *lvc;
@@ -27,14 +28,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"token"]) {
-        self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
-        [self.activityIndicatorView startAnimating];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [NSThread sleepForTimeInterval:3.f];
-            [self enterHostView];
-        });
-    }
+    
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -46,6 +40,24 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
     
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    
+    if ([ud objectForKey:@"token"]) {
+        NSInteger utime  = [[ud objectForKey:@"utime"] integerValue];
+        NSInteger currentTime = (NSInteger)[NSDate date].timeIntervalSince1970;
+        if (utime>=currentTime) {
+            self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
+            [self.activityIndicatorView startAnimating];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [NSThread sleepForTimeInterval:3.f];
+                [self enterHostView];
+            });
+        } else {
+            NSString* errorInfo = @"Please relogin and regrant.";
+            [self showAlertViewWithErrorInfo:errorInfo];
+        }
+        
+    }
 }
 -(void)click{
     NSLog(@"...");
@@ -139,42 +151,57 @@
     [self.view bringSubviewToFront:self.activityIndicatorView];
     [self.activityIndicatorView startAnimating];
     [ModeAccountAPI signupWithParams:attributes andCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {
-            [self.activityIndicatorView stopAnimating];
-            NSString* token = [obj objectForKey:@"token"];
-            NSNumber* user_id = [obj objectForKey:@"user_id"];
-            NSString* utime = [obj objectForKey:@"utime"];
-            NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-            [ud setObject:token forKey:@"token"];
-            [ud setObject:user_id forKey:@"user_id"];
-            [ud setObject:utime forKey:@"token_utime"];
-            [ud synchronize];
-            [NSThread sleepForTimeInterval:2.f];
-            [self enterHostView];
-            
-            
+        [self.activityIndicatorView stopAnimating];
+        if ([obj isKindOfClass:[NSNull class]]) {//返回空 网络问题
+            NSString* errorInfo = @"Net error!Cannot connect host servers.";
+            [self showAlertViewWithErrorInfo:errorInfo];
         } else {
-#warning 这里要根据错误error信息来判断提示用户出现什么类型的错误
-            [self.activityIndicatorView stopAnimating];
-            UILabel* label = [[UILabel alloc]init];
-            label.bounds = CGRectMake(0, 0, 150, 30);
-            label.text = @"请检查网络／已有相同账号";
-            label.alpha = 0.f;
-            label.textColor = [UIColor redColor];
-            [self.view addSubview: label];
-            [UIView animateWithDuration:.5f animations:^{
-                label.alpha = 1.f;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:.5f animations:^{
-                    label.alpha = 0.f;
-                } completion:^(BOOL finished) {
-                    [label removeFromSuperview];
-                }];
-            }];
-            
+            BOOL flag = [obj boolValue];
+            if (flag) {//返回yes 成功获得token 并且登陆
+                [self enterHostView];
+            } else {//用户名或密码问题
+                NSString* errorInfo = @"Email has exist. Please try it again.";
+                [self showAlertViewWithErrorInfo:errorInfo];
+            }
         }
-        
     }];
+}
+#pragma mark LoginViewDelegate
+-(void)loginView:(LoginView *)loginView withAttributes:(NSDictionary *)attributes{
+    [self.view bringSubviewToFront:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
+    [ModeAccountAPI loginWithParams:attributes andCallback:^(id obj) {
+        [self.activityIndicatorView stopAnimating];
+        if ([obj isKindOfClass:[NSNull class]]) {
+            NSString* errorInfo = @"Net error!Cannot connect host servers.";
+            [self showAlertViewWithErrorInfo:errorInfo];
+        } else {
+            BOOL flag = [obj boolValue];
+            if (flag) {//返回yes 成功获得token 并且登陆
+                [self enterHostView];
+            } else {//用户名或密码问题
+                NSString* errorInfo = @"Email or Password error.";
+                [self showAlertViewWithErrorInfo:errorInfo];
+            }
+        }
+    }];
+    
+    
+    
+}
+
+
+#pragma mark ShowAlertView
+-(void)showAlertViewWithErrorInfo:(NSString*)errorInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:errorInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 3;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
 }
 -(void)enterHostView{
     dispatch_async(dispatch_get_main_queue(), ^{

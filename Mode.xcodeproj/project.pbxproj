@@ -221,6 +221,7 @@
 		DBF0CD191B1EC8F00006F395 /* WishlistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD171B1EC8F00006F395 /* WishlistTableViewCell.m */; };
 		DBF0CD1A1B1EC8F00006F395 /* WishlistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */; };
 		DBF0CD1D1B1EE1550006F395 /* WishlistHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */; };
+		DBF1575A1B2E6A7C004F0903 /* TAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF157591B2E6A7C004F0903 /* TAlertView.m */; };
 		DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */; };
 		DBF6CB371B25288600FEC1F5 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB361B25288600FEC1F5 /* ShareViewController.m */; };
 		DBF6CB391B252D8200FEC1F5 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBF6CB381B252D8200FEC1F5 /* ShareViewController.xib */; };
@@ -541,6 +542,8 @@
 		DBF0CD181B1EC8F00006F395 /* WishlistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishlistTableViewCell.xib; sourceTree = "<group>"; };
 		DBF0CD1B1B1EE1550006F395 /* WishlistHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistHeadView.h; sourceTree = "<group>"; };
 		DBF0CD1C1B1EE1550006F395 /* WishlistHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistHeadView.m; sourceTree = "<group>"; };
+		DBF157581B2E6A7C004F0903 /* TAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAlertView.h; sourceTree = "<group>"; };
+		DBF157591B2E6A7C004F0903 /* TAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAlertView.m; sourceTree = "<group>"; };
 		DBF6CB2E1B25270A00FEC1F5 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		DBF6CB351B25288600FEC1F5 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -915,6 +918,7 @@
 		DB17B6771B0EC59400D43B9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBF157571B2E6A56004F0903 /* TAlertView */,
 				DBF6CB411B25707300FEC1F5 /* FontResource */,
 				DBC022CB1B20398300F27D1C /* init.plist */,
 				DBDA43721B293ED100962B56 /* times.plist */,
@@ -1416,6 +1420,15 @@
 			path = 10.cash;
 			sourceTree = "<group>";
 		};
+		DBF157571B2E6A56004F0903 /* TAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				DBF157581B2E6A7C004F0903 /* TAlertView.h */,
+				DBF157591B2E6A7C004F0903 /* TAlertView.m */,
+			);
+			name = TAlertView;
+			sourceTree = "<group>";
+		};
 		DBF6CB311B25270E00FEC1F5 /* CWPopup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1735,6 +1748,7 @@
 				DB9E120A1B22DB1500C92D6A /* ModeOrder.m in Sources */,
 				11BD57F81B176AEC00A149C0 /* BrandCollectionViewCell.m in Sources */,
 				116D38961B1B46AE009E9D14 /* WishlistScrollView.m in Sources */,
+				DBF1575A1B2E6A7C004F0903 /* TAlertView.m in Sources */,
 				118CC9971B18C4EC00AE5BD4 /* GoodInfo.m in Sources */,
 				DB17B67D1B0EC59400D43B9F /* AppDelegate.m in Sources */,
 				DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */,

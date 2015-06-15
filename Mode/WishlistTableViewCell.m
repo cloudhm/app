@@ -9,6 +9,7 @@
 #import "WishlistTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
+#import "UIImage+PartlyImage.h"
 @implementation WishlistTableViewCell
 
 - (void)awakeFromNib {
@@ -48,9 +49,11 @@
     self.iconIV.layer.masksToBounds = YES;
     
     [self.shareIV sd_setImageWithURL:[NSURL URLWithString:self.modeWishlist.img_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.shareIV.image = [UIImage getSubImageByImage:image andImageViewFrame:self.shareIV.frame];
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeWishlist.img_link lastPathComponent] toDisk:YES];
     }];
     [self.iconIV sd_setImageWithURL:[NSURL URLWithString:self.modeWishlist.img_link] placeholderImage:[UIImage imageNamed:@"headPortraitThumbnail.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.iconIV.image = [UIImage getSubImageByImage:image andImageViewFrame:self.iconIV.frame];
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeWishlist.img_link lastPathComponent] toDisk:YES];
     }];
     self.ctimeLabel.text = self.modeWishlist.ctime;

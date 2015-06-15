@@ -64,7 +64,7 @@
 //    }
     
     [imageView sd_setImageWithURL:[NSURL URLWithString:_modeGood.img_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        imageView.image = [UIImage getSubImageByImage:image];//根据横宽比切图
+        imageView.image = [UIImage getSubImageByImage:image andImageViewFrame:imageView.frame];//根据横宽比切图
         [[SDImageCache sharedImageCache]storeImage:image forKey:[_modeGood.img_link lastPathComponent] toDisk:YES];
     }];
     

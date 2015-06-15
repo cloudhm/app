@@ -10,8 +10,8 @@
 #define Mode_PrefixHeader_pch
 
 //账号接口
-#define ACCOUNT_SIGNUP @"http://120.26.107.42/api/account/signup" //邮箱注册
-
+#define ACCOUNT_SIGNUP @"http://120.26.107.42/api/account/signup"// @"http://192.168.1.122:8080/signup"//邮箱注册
+#define ACCOUNT_LOGIN @"http://192.168.1.122:8080/login"//账号登陆
 
 //系统接口
 #define BRAND_LIST @"http://120.26.107.42/api/sys/brand_list" //获取活跃中的品牌名称列表

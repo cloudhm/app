@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+PartlyImage.h"
-#define DEFAULT_FRAME CGRectMake(0,0,400,200)
+#define DEFAULT_FRAME CGRectMake(0,0,300,400)
 @implementation UIImage (PartlyImage)
 +(UIImage*)getSubImageByImage:(UIImage*)image{
     return [self getSubImageByImage:image andImageViewFrame:DEFAULT_FRAME];

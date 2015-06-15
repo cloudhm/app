@@ -20,6 +20,7 @@
 +(void)requestGetNewWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = GET_NEW;
     NSMutableDictionary* allParams = [params mutableCopy];
+    NSLog(NSHomeDirectory());
     [allParams setObject:[self getUserID] forKey:@"user_id"];
     AFHTTPRequestOperationManager*manager=[AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];

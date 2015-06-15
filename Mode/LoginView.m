@@ -99,8 +99,7 @@
         (![self.tf1.text isEqualToString:@"JOIN WITH EMAIL"])&&
         (![self.tf2.text isEqualToString:@""])&&
         [self.delegate respondsToSelector:@selector(loginView:withAttributes:)]) {
-#warning 登录接口暂时未开放
-        [self.delegate loginView:self withAttributes:@{}];
+        [self.delegate loginView:self withAttributes:@{@"username":self.tf1.text,@"password":self.tf2.text}];
     }
 }
 @end

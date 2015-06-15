@@ -100,8 +100,9 @@
     _brandImageView.layer.cornerRadius = CGRectGetWidth(frame)/2;
     _brandImageView.layer.masksToBounds = YES;
     _brandImageView.layer.borderWidth = 1.f;
-    _brandImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    _brandImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.brandImageView sd_setImageWithURL:[NSURL URLWithString:self.modeGood.brand_img_link] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.brandImageView.image = [UIImage getSubImageByImage:image andImageViewFrame:self.brandImageView.frame];
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeGood.brand_img_link lastPathComponent] toDisk:YES];
     }];
 //    if (![[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[self.modeGood.brand_img_link lastPathComponent]]) {

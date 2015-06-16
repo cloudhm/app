@@ -83,11 +83,11 @@
     float totalWidth = 5.f;
     BOOL withoutBtn = (self.wishlists.count==9)?YES:NO;
     for (ModeGood*modeGood in _wishlists) {
-        WishlistView* wishlistView = [[WishlistView alloc]initWithFrame:CGRectMake(totalWidth, 0, INTERVIEW_WIDTH, CGRectGetHeight(self.bounds)) andModeGood:modeGood andWithoutBtn:withoutBtn];
+        WishlistView* wishlistView = [[WishlistView alloc]initWithFrame:CGRectMake(totalWidth, 0, CGRectGetHeight(self.bounds)*3/4, CGRectGetHeight(self.bounds)) andModeGood:modeGood andWithoutBtn:withoutBtn];
         [self addSubview:wishlistView];
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
         [wishlistView addGestureRecognizer:tapGestureRecognizer];
-        totalWidth += (INTERVIEW_WIDTH +5.f);
+        totalWidth += (CGRectGetHeight(self.bounds)*3/4 +5.f);
         [_wishlistViews addObject:wishlistView];
     }
     self.contentSize = CGSizeMake(totalWidth, 0);
@@ -100,8 +100,8 @@
     for (int i = 0 ;i<self.wishlistViews.count ; i++) {
         WishlistView* wishlistView = self.wishlistViews[i];
         CGRect frame = wishlistView.frame;
-        frame.origin.x = (i+1) * 5.f + i*INTERVIEW_WIDTH;
-        newContentWidth += (5.f+ INTERVIEW_WIDTH);
+        frame.origin.x = (i+1) * 5.f + i*CGRectGetHeight(self.bounds)*3/4;
+        newContentWidth += (5.f+ CGRectGetHeight(self.bounds)*3/4);
         [UIView animateWithDuration:0.5 animations:^{
             wishlistView.frame = frame;
         } completion:nil];

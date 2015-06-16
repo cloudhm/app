@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, TAlertViewDisplayStyle) {
         _title                  = title;
         _message                = message;
         _buttonsTexts           = buttons;
-        _buttonsAlign           = TAlertViewButtonsAlignVertical;
+        _buttonsAlign           = TAlertViewButtonsAlignHorizontal;
         _buttonsViews           = [[NSMutableArray alloc] init];
         _separatorsLines        = [[NSMutableArray alloc] init];
     }

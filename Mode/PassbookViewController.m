@@ -128,6 +128,7 @@
     return 220.f;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.tableView.userInteractionEnabled = NO;
     OrderConfirmViewController* orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];
     orderConfirmViewController.delegate = self;
     [self presentPopupViewController:orderConfirmViewController animated:YES completion:nil];
@@ -147,6 +148,7 @@
         [NSThread sleepForTimeInterval:5.f];
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityView stopAnimating];
+            self.tableView.userInteractionEnabled = YES;
             [self dismissOrderConfirmViewController:orderConfirmViewController];
         });
     });

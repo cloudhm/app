@@ -148,43 +148,53 @@
 
 #pragma mark RegisterViewDelegate
 -(void)registerView:(RegisterView *)registerView withAttributes:(NSDictionary *)attributes{
-    [self.view bringSubviewToFront:self.activityIndicatorView];
-    [self.activityIndicatorView startAnimating];
-    [ModeAccountAPI signupWithParams:attributes andCallback:^(id obj) {
-        [self.activityIndicatorView stopAnimating];
-        if ([obj isKindOfClass:[NSNull class]]) {//返回空 网络问题
-            NSString* errorInfo = @"Net error!Cannot connect host servers.";
-            [self showAlertViewWithErrorInfo:errorInfo];
-        } else {
-            BOOL flag = [obj boolValue];
-            if (flag) {//返回yes 成功获得token 并且登陆
-                [self enterHostView];
-            } else {//用户名或密码问题
-                NSString* errorInfo = @"Email has exist. Please try it again.";
+    if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+        [self.activityIndicatorView startAnimating];
+        [ModeAccountAPI signupWithParams:attributes andCallback:^(id obj) {
+            [self.activityIndicatorView stopAnimating];
+            if ([obj isKindOfClass:[NSNull class]]) {//返回空 网络问题
+                NSString* errorInfo = @"Net error!Cannot connect host servers.";
                 [self showAlertViewWithErrorInfo:errorInfo];
+            } else {
+                BOOL flag = [obj boolValue];
+                if (flag) {//返回yes 成功获得token 并且登陆
+                    [self enterHostView];
+                } else {//用户名或密码问题
+                    NSString* errorInfo = @"Email has exist. Please try it again.";
+                    [self showAlertViewWithErrorInfo:errorInfo];
+                }
             }
-        }
-    }];
+        }];
+    } else {
+        [self showAlertViewWithErrorInfo:@"Error input."];
+    }
+    
 }
 #pragma mark LoginViewDelegate
 -(void)loginView:(LoginView *)loginView withAttributes:(NSDictionary *)attributes{
-    [self.view bringSubviewToFront:self.activityIndicatorView];
-    [self.activityIndicatorView startAnimating];
-    [ModeAccountAPI loginWithParams:attributes andCallback:^(id obj) {
-        [self.activityIndicatorView stopAnimating];
-        if ([obj isKindOfClass:[NSNull class]]) {
-            NSString* errorInfo = @"Net error!Fail to connect host servers.";
-            [self showAlertViewWithErrorInfo:errorInfo];
-        } else {
-            BOOL flag = [obj boolValue];
-            if (flag) {//返回yes 成功获得token 并且登陆
-                [self enterHostView];
-            } else {//用户名或密码问题
-                NSString* errorInfo = @"Email or Password error.";
+    if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+        [self.activityIndicatorView startAnimating];
+        [ModeAccountAPI loginWithParams:attributes andCallback:^(id obj) {
+            [self.activityIndicatorView stopAnimating];
+            if ([obj isKindOfClass:[NSNull class]]) {
+                NSString* errorInfo = @"Net error!Fail to connect host servers.";
                 [self showAlertViewWithErrorInfo:errorInfo];
+            } else {
+                BOOL flag = [obj boolValue];
+                if (flag) {//返回yes 成功获得token 并且登陆
+                    [self enterHostView];
+                } else {//用户名或密码问题
+                    NSString* errorInfo = @"Email or Password error.";
+                    [self showAlertViewWithErrorInfo:errorInfo];
+                }
             }
-        }
-    }];
+        }];
+    } else {
+        [self showAlertViewWithErrorInfo:@"Error input."];
+    }
+    
     
     
     
@@ -198,7 +208,7 @@
     alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
     [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
     alert.tapToClose = NO;
-    alert.timeToClose = 3;
+    alert.timeToClose = 1.f;
     alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
     alert.style = TAlertViewStyleInformation;
     [alert showAsMessage];

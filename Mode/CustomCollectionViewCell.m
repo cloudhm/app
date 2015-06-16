@@ -7,7 +7,7 @@
 //
 
 #import "CustomCollectionViewCell.h"
-
+#import "UIColor+HexString.h"
 @implementation CustomCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -35,10 +35,17 @@
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(btnX, btnY, btnW , btnH)];
         [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         self.button = btn;
+        self.button.layer.shadowOffset = CGSizeMake(2, 2);
+        self.button.layer.shadowColor = [UIColor redColor].CGColor;
         self.button.layer.cornerRadius = CGRectGetWidth(self.button.bounds)/2;
-        self.button.layer.borderWidth = 1.f;
-        self.button.layer.backgroundColor = [UIColor colorWithRed:234/255.f green:234/255.f blue:234/255.f alpha:1].CGColor;
-        self.button.clipsToBounds=YES;
+        self.button.layer.borderWidth = 3.f;
+        self.button.layer.borderColor = [UIColor clearColor].CGColor;
+        self.button.layer.masksToBounds = YES;
+//        CALayer* imageLayer = [CALayer new];
+//        imageLayer.frame = CGRectMake(btnX - 1.f, btnY - 1.f, btnW + 2.f, btnH + 2.f);
+//        imageLayer.contents = (id)[UIImage imageNamed:@"homeShadow.png"];
+//        [self.button.layer addSublayer:imageLayer];
+        
         [self.contentView addSubview:btn];
     }
     return self;

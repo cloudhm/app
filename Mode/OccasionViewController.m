@@ -124,11 +124,12 @@ static NSString *reuseIdentifier=@"MyCell";
     [ModeRunwayAPI requestGetNewWithParams:params andCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
         if ([obj isKindOfClass:[NSNull class]]) {
+            [self showAlertViewWithCautionInfo:@"Bad net.Please hold a mement."];
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];
         [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
-        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
+        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
         
     }];
 }

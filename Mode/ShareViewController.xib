@@ -8,18 +8,19 @@
             <connections>
                 <outlet property="activityIndicatorView" destination="r5D-tN-szW" id="NqO-JW-NeE"/>
                 <outlet property="avtivityView" destination="DxD-JN-jiE" id="A4V-EE-QQE"/>
+                <outlet property="editView" destination="wwS-Jh-SsH" id="6eT-Yj-ARh"/>
                 <outlet property="shareFacebookBtn" destination="98C-WF-5IX" id="7Ew-OQ-CZ1"/>
                 <outlet property="shareTextContent" destination="fGB-Pt-gCE" id="0fd-4g-JDI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jbd-KL-IHJ"/>
-                <outletCollection property="shareImageViews" destination="AvE-SU-Jlg" id="aDk-xj-PVM"/>
-                <outletCollection property="shareImageViews" destination="zjG-tU-VX8" id="GJI-Pj-8GS"/>
-                <outletCollection property="shareImageViews" destination="0OF-O2-PEW" id="5G9-yo-Sua"/>
-                <outletCollection property="shareImageViews" destination="Ovu-Pn-f9X" id="saP-te-KBW"/>
-                <outletCollection property="shareImageViews" destination="3gE-n8-c1n" id="nNG-Oz-uwJ"/>
-                <outletCollection property="shareImageViews" destination="FZs-mP-q2n" id="gNR-rD-mQ3"/>
-                <outletCollection property="shareImageViews" destination="fxp-TB-1jt" id="usN-hJ-V3Q"/>
-                <outletCollection property="shareImageViews" destination="VUG-6B-iXE" id="9Hx-wF-VOE"/>
-                <outletCollection property="shareImageViews" destination="Im4-XH-qYk" id="6qu-5d-Qgl"/>
+                <outletCollection property="shareImageViews" destination="AvE-SU-Jlg" id="gdV-mR-c5A"/>
+                <outletCollection property="shareImageViews" destination="zjG-tU-VX8" id="WdR-lt-BS4"/>
+                <outletCollection property="shareImageViews" destination="0OF-O2-PEW" id="wQu-aQ-nU6"/>
+                <outletCollection property="shareImageViews" destination="Ovu-Pn-f9X" id="YJZ-SX-bSH"/>
+                <outletCollection property="shareImageViews" destination="3gE-n8-c1n" id="hSS-MZ-bEV"/>
+                <outletCollection property="shareImageViews" destination="FZs-mP-q2n" id="FiZ-Md-x6Z"/>
+                <outletCollection property="shareImageViews" destination="fxp-TB-1jt" id="DrV-a2-exH"/>
+                <outletCollection property="shareImageViews" destination="VUG-6B-iXE" id="VoD-w2-eEf"/>
+                <outletCollection property="shareImageViews" destination="Im4-XH-qYk" id="fjN-Wv-rbZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -36,52 +37,11 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="AvE-SU-Jlg">
-                            <rect key="frame" x="28" y="54" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.90196078430000004" green="0.89455966509999996" blue="0.22603744049999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zjG-tU-VX8">
-                            <rect key="frame" x="89" y="54" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ovu-Pn-f9X">
-                            <rect key="frame" x="28" y="115" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="3gE-n8-c1n">
-                            <rect key="frame" x="89" y="115" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FZs-mP-q2n">
-                            <rect key="frame" x="150" y="115" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fxp-TB-1jt">
-                            <rect key="frame" x="28" y="176" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="VUG-6B-iXE">
-                            <rect key="frame" x="89" y="176" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Im4-XH-qYk">
-                            <rect key="frame" x="150" y="176" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="My Collection..." id="fGB-Pt-gCE">
                             <rect key="frame" x="29" y="287" width="180" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
@@ -116,11 +76,6 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0OF-O2-PEW">
-                            <rect key="frame" x="150" y="54" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="98C-WF-5IX">
                             <rect key="frame" x="8" y="253" width="15" height="15"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -142,6 +97,71 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="color" red="1" green="0.8901478531" blue="0.1481260854" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" id="usl-b7-7U4">
+                            <rect key="frame" x="192" y="8" width="33" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fK9-YY-avh">
+                            <rect key="frame" x="192" y="8" width="33" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="wwS-Jh-SsH">
+                            <rect key="frame" x="22" y="49" width="195" height="196"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="AvE-SU-Jlg">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.89455966509999996" blue="0.22603744049999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zjG-tU-VX8">
+                                    <rect key="frame" x="67" y="0.0" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="VUG-6B-iXE">
+                                    <rect key="frame" x="67" y="136" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="3gE-n8-c1n">
+                                    <rect key="frame" x="67" y="68" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.50908972460000002" green="0.90196078430000004" blue="0.28889322490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fxp-TB-1jt">
+                                    <rect key="frame" x="-1" y="136" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FZs-mP-q2n">
+                                    <rect key="frame" x="135" y="68" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ovu-Pn-f9X">
+                                    <rect key="frame" x="0.0" y="68" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.3921568627" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0OF-O2-PEW">
+                                    <rect key="frame" x="135" y="0.0" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Im4-XH-qYk">
+                                    <rect key="frame" x="135" y="136" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.51739035950000001" green="1" blue="0.85744286690000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.1843137255" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
@@ -168,6 +188,7 @@
         <image name="blank_normal.png" width="45" height="36"/>
         <image name="blank_pressl.png" width="33" height="33"/>
         <image name="facebook.png" width="44" height="42"/>
+        <image name="heart.png" width="64" height="53"/>
         <image name="save_wishlist_highlight.png" width="486" height="82"/>
         <image name="save_wishlist_normal.png" width="486" height="82"/>
     </resources>

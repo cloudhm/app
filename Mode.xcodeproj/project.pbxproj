@@ -62,6 +62,10 @@
 		DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDB1B2138E200EFDE22 /* ModeBrandRunway.m */; };
 		DB4BDDE01B215C3E00EFDE22 /* BrandRunwayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */; };
 		DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */; };
+		DB89845C1B30130A0066EFF9 /* homeShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = DB89845B1B30130A0066EFF9 /* homeShadow.png */; };
+		DB89845E1B30442A0066EFF9 /* copper_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB89845D1B30442A0066EFF9 /* copper_normal.png */; };
+		DB8984631B304BE10066EFF9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8984601B304BE10066EFF9 /* UIView+AutoLayout.m */; };
+		DB8984641B304BE10066EFF9 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8984621B304BE10066EFF9 /* UIView+Extension.m */; };
 		DB9E11111B229A2D00C92D6A /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9E11101B229A2D00C92D6A /* OrderViewController.m */; };
 		DB9E118C1B229CD000C92D6A /* email_login_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11141B229CD000C92D6A /* email_login_normal.png */; };
 		DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11151B229CD000C92D6A /* email_login_press.png */; };
@@ -364,6 +368,12 @@
 		DB4BDDDF1B215C3E00EFDE22 /* BrandRunwayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayTableViewCell.m; sourceTree = "<group>"; };
 		DB76ECD51B1FDDAE007E8B4E /* ModeAccountAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeAccountAPI.h; sourceTree = "<group>"; };
 		DB76ECD61B1FDDAE007E8B4E /* ModeAccountAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeAccountAPI.m; sourceTree = "<group>"; };
+		DB89845B1B30130A0066EFF9 /* homeShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeShadow.png; sourceTree = "<group>"; };
+		DB89845D1B30442A0066EFF9 /* copper_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copper_normal.png; sourceTree = "<group>"; };
+		DB89845F1B304BE10066EFF9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		DB8984601B304BE10066EFF9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		DB8984611B304BE10066EFF9 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		DB8984621B304BE10066EFF9 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		DB9E110F1B229A2D00C92D6A /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
 		DB9E11101B229A2D00C92D6A /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
 		DB9E11141B229CD000C92D6A /* email_login_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_login_normal.png; sourceTree = "<group>"; };
@@ -639,6 +649,8 @@
 		118CC8E11B18A30200AE5BD4 /* ios_pic_source */ = {
 			isa = PBXGroup;
 			children = (
+				DB89845B1B30130A0066EFF9 /* homeShadow.png */,
+				DB89845D1B30442A0066EFF9 /* copper_normal.png */,
 				DBEF16001B2BEE1B00CDC07A /* headPortraitThumbnail.png */,
 				DBEF15FE1B2BED4D00CDC07A /* headPortrait.png */,
 				118CC8E21B18A30200AE5BD4 /* 0.start_page.png */,
@@ -1358,6 +1370,10 @@
 				DBFA95AC1B219D0700362DAC /* ConvertTime.h */,
 				DBFA95AD1B219D0700362DAC /* ConvertTime.m */,
 				DBB433411B2A796F003C4CF0 /* Common.h */,
+				DB89845F1B304BE10066EFF9 /* UIView+AutoLayout.h */,
+				DB8984601B304BE10066EFF9 /* UIView+AutoLayout.m */,
+				DB8984611B304BE10066EFF9 /* UIView+Extension.h */,
+				DB8984621B304BE10066EFF9 /* UIView+Extension.m */,
 				115CA8561B2D90EE009C63C4 /* UIImage+PartlyImage.h */,
 				115CA8551B2D90EE009C63C4 /* UIImage+PartlyImage.m */,
 				117BB3371B2D19E8004DFD11 /* ModeDatabase.h */,
@@ -1626,6 +1642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9E11B31B229CD000C92D6A /* new_secret_login_normal.png in Resources */,
+				DB89845E1B30442A0066EFF9 /* copper_normal.png in Resources */,
 				DB9E11EB1B229CD000C92D6A /* box_press.png in Resources */,
 				DB9E119E1B229CD000C92D6A /* Arrow_left_button.png in Resources */,
 				DB9E119C1B229CD000C92D6A /* coupon_mode.png in Resources */,
@@ -1662,6 +1679,7 @@
 				DB9E11A21B229CD000C92D6A /* five-pointed star.png in Resources */,
 				DBF0CD1A1B1EC8F00006F395 /* WishlistTableViewCell.xib in Resources */,
 				DB9E11E81B229CD000C92D6A /* apply_normal.png in Resources */,
+				DB89845C1B30130A0066EFF9 /* homeShadow.png in Resources */,
 				DB9E11DA1B229CD000C92D6A /* facebook.png in Resources */,
 				DB9E11AB1B229CD000C92D6A /* finished.png in Resources */,
 				DB9E11AC1B229CD000C92D6A /* purchased.png in Resources */,
@@ -1860,6 +1878,7 @@
 				118CC9971B18C4EC00AE5BD4 /* GoodInfo.m in Sources */,
 				DB17B67D1B0EC59400D43B9F /* AppDelegate.m in Sources */,
 				DB76ECD71B1FDDAE007E8B4E /* ModeAccountAPI.m in Sources */,
+				DB8984631B304BE10066EFF9 /* UIView+AutoLayout.m in Sources */,
 				DB9F74641B1D96F500E0D6CA /* ColorView.m in Sources */,
 				DBAA40031B130DA0009D66D3 /* LikeOrNopeViewController.m in Sources */,
 				DBF157AF1B2ED4CD004F0903 /* QBAnimationSequence.m in Sources */,
@@ -1900,6 +1919,7 @@
 				DB9E11FB1B229FF100C92D6A /* OrderTableViewCell.m in Sources */,
 				DB4BDDDC1B2138E200EFDE22 /* ModeBrandRunway.m in Sources */,
 				DB9E12131B22EA4A00C92D6A /* UIColor+HexString.m in Sources */,
+				DB8984641B304BE10066EFF9 /* UIView+Extension.m in Sources */,
 				11BD58011B176E7B00A149C0 /* StyleCollectionViewCell.m in Sources */,
 				DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */,
 				11BD57F51B17634B00A149C0 /* OccasionViewController.m in Sources */,

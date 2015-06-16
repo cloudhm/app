@@ -122,6 +122,7 @@ static NSString *reuseIdentifier=@"MyCell";
     [ModeRunwayAPI requestGetNewWithParams:params andCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"bvcToLvc" object:nil];
         if ([obj isKindOfClass:[NSNull class]]) {
+            [self showAlertViewWithCautionInfo:@"Bad net.Please hold a mement."];
             return;
         }
         NSArray* allItems = [obj objectForKey:@"allItems"];

@@ -19,15 +19,17 @@
 #import "ColorView.h"
 #import "UIImage+PartlyImage.h"
 #import "UIColor+HexString.h"
+#import "Common.h"
+
 @interface WishListViewController ()<UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
 @property (weak, nonatomic) UILabel *label;
 @property (nonatomic, weak) WishlistScrollView *bigSV;
 @property (strong, nonatomic) GoodInfo *goodInfo;
-@property (weak, nonatomic) IBOutlet UIImageView *goods_img_detail;
-@property (weak, nonatomic) IBOutlet UILabel *goods_price;
-@property (weak, nonatomic) IBOutlet UIView *rightView;
+@property (weak, nonatomic) UIImageView *goods_img_detail;
+@property (weak, nonatomic) UILabel *goods_price;
+@property (weak, nonatomic) UIView *rightView;
 @property (weak, nonatomic) UILabel *goods_title;
 @property (weak, nonatomic) UIView *smallLineView;
 @property (weak, nonatomic) UILabel *releaseTime;
@@ -50,8 +52,15 @@
 
 
 //增加右下视图  商品详情控件
--(void)addSomeElementsToRightView{
-    
+-(void)createRightView{
+    float padding = 10.f;
+    float x = KScreenWidth/2;
+    float y = CGRectGetMaxY(self.bigSV.frame) + 2* padding;
+    float w = KScreenWidth/2;
+    float h = KScreenHeight - y - kStatusNaviBarH - 40.f;
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(x, y, w, h)];
+    self.rightView = view;
+    [self.view addSubview:self.rightView];
     
     UILabel* l1 = [[UILabel alloc]init];
     l1.numberOfLines=0;
@@ -130,7 +139,7 @@
     
     
     
-    self.rightView.backgroundColor = [UIColor yellowColor];
+    self.rightView.backgroundColor = [UIColor clearColor];
     
     
     
@@ -141,14 +150,14 @@
 -(void)resetAllElementsInRightView{
     CGRect frame = [self getGoodTitleFrame];
     self.goods_title.text = self.goodInfo.goods_title;
-    self.goods_title.frame = CGRectMake(10.f, 15.f, frame.size.width, frame.size.height+10.f);
-    NSLog(@"%@",NSStringFromCGRect(self.goods_title.frame));
+    
+    self.goods_title.frame = CGRectMake(10.f, 0.f, frame.size.width, frame.size.height+10.f);
     self.smallLineView.frame = CGRectMake(CGRectGetWidth(self.goods_title.frame)/2-15.f, CGRectGetMaxY(self.goods_title.frame)+5.f, 15.f*2, 2.f);
     
     self.releaseTime.text = self.goodInfo.ctime;
-    self.releaseTime.frame = CGRectMake(0, CGRectGetMaxY(self.smallLineView.frame) + 15.f, CGRectGetWidth(self.rightView.frame), 20.f);
+    self.releaseTime.frame = CGRectMake(0, CGRectGetMaxY(self.smallLineView.frame) + 10.f, CGRectGetWidth(self.rightView.frame), 20.f);
     
-    self.colorLabel.frame = CGRectMake(CGRectGetMinX(self.releaseTime.frame)+10.f, CGRectGetMaxY(self.releaseTime.frame)+15.f, 50.f, 20.f);
+    self.colorLabel.frame = CGRectMake(CGRectGetMinX(self.releaseTime.frame)+10.f, CGRectGetMaxY(self.releaseTime.frame)+10.f, 50.f, 20.f);
     
     
     NSArray* colorArr= [self.goodInfo.goods_color componentsSeparatedByString:@","];
@@ -214,12 +223,13 @@
     } else {
         [self.clothes addObjectsFromArray:self.receiveArr];
     }
-    
-    [self addSomeElementsToRightView];
+    [self createScrollView];
+    [self createRightView];
+    [self createLeftView];
 //从数据库读取数据
     [self resetAllElementsInRightView];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addUI];
+    
     
     
 }
@@ -246,7 +256,7 @@
         self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodInfo.goods_price.floatValue];
         
         [self.goods_img_detail sd_setImageWithURL:[NSURL URLWithString:self.goodInfo.img_detail_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            self.goods_img_detail.image = [UIImage getSubImageByImage:image ];
+            self.goods_img_detail.image = [UIImage getSubImageByImage:image andImageViewFrame:self.goods_img_detail.frame];
             [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodInfo.img_detail_link lastPathComponent] toDisk:YES];
         }];
         [self resetAllElementsInRightView];
@@ -283,13 +293,66 @@
     }
 }
 //增加横向滚动的scrollView视图
--(void)addUI{
+-(void)createScrollView{
     [self defineRightBarItem];
-    WishlistScrollView* sv = [[WishlistScrollView alloc]initWithFrame:CGRectMake(0, 20.f, CGRectGetWidth(self.view.bounds), 125) WithWishlistArr:self.clothes];
+    WishlistScrollView* sv = [[WishlistScrollView alloc]initWithFrame:CGRectMake(0, 10.f, CGRectGetWidth(self.view.bounds), (KScreenHeight - kStatusNaviBarH)/3.5) WithWishlistArr:self.clothes];
     self.bigSV = sv;
     [self.view addSubview:sv];
+    float padding = 10.f;
+    UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, CGRectGetMaxY(self.bigSV.frame)+padding, KScreenWidth - 4*padding, 2.f)];
+    topLineView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    [self.view addSubview:topLineView];
+    UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, KScreenHeight- kStatusNaviBarH - 40.f, KScreenWidth - 4* padding, 2.f)];
+    bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    [self.view addSubview:bottomLineView];
 }
-
+-(void)createLeftView{
+    float padding = 10.f;
+    float leftViewX = 0;
+    float leftViewY = CGRectGetMaxY(self.bigSV.frame) + 2* padding;
+    float leftViewW = KScreenWidth/2;
+    float leftViewH = KScreenHeight - kStatusNaviBarH - leftViewY - 40.f;
+    UIView* leftView = [[UIView alloc]initWithFrame:CGRectMake(leftViewX, leftViewY, leftViewW, leftViewH)];
+    [self.view addSubview:leftView];
+    
+    leftView.backgroundColor = [UIColor clearColor];
+    
+    float labelX = 0;
+    float labelH = 20.f;
+    float labelY = leftViewH - padding -labelH;
+    float labelW = leftViewW;
+    UILabel * l1 = [[UILabel alloc]initWithFrame:CGRectMake(labelX, labelY, labelW, labelH)];
+    l1.textAlignment = NSTextAlignmentCenter;
+    l1.font = [UIFont systemFontOfSize:15];
+    l1.minimumScaleFactor = 0.7;
+    self.goods_price = l1;
+    [leftView addSubview:l1];
+    
+    float leftH = leftViewH - labelH - padding;
+    float leftW = leftViewW - 2* padding;
+    float imageViewX,imageViewY,imageViewW,imageViewH;
+    float scale = 0.6;
+    if (leftW/leftH>=scale) {
+        imageViewX = (leftW - scale * leftH)/2 + padding;
+        imageViewY = 0;
+        imageViewW = scale * leftH;
+        imageViewH = leftH;
+    } else {
+        imageViewX = padding;
+        imageViewY = (leftH - leftW/scale)/2;
+        imageViewW = leftW;
+        imageViewH = leftW/scale;
+    }
+    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
+    self.goods_img_detail = imageView;
+    [leftView addSubview:imageView];
+    
+    
+    
+    
+    
+    
+}
 //根据滚动视图中的子视图删除按钮的通知  把该视图从scrollView中删除  并且从数据库删除，更新右上角红心数 重置选中视图下标
 -(void)removeDataFromWishlist:(NSNotification*)noti{
     NSString* nopedGoods_id = [noti.userInfo objectForKey:@"goods_id"];

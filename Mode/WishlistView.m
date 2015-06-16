@@ -73,8 +73,9 @@
     self.mainImageView = imageView;
 }
 -(void)createCouponView{
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(5.f, 5.f, 20.f, 10.f)];
-    imageView.image = [UIImage imageNamed:@"coupon_normal.png"];
+    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0.f, 0.f, 21.f, 20.f)];
+    imageView.image = [UIImage imageNamed:@"copper_normal.png"];
+    imageView.backgroundColor = [UIColor clearColor];
     [self addSubview:imageView];
     self.couponImageView = imageView;
     [self bringSubviewToFront:self.couponImageView];

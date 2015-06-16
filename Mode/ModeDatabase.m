@@ -14,7 +14,15 @@
 @implementation ModeDatabase
 //清空表内容 sql语句
 +(NSString*)deleteTableStrWithTableName:(NSString*)tableName{
-    return [NSString stringWithFormat:@"delete from %@",tableName];
+    return [self deletaTableStrWithTableName:tableName andConditionKey:nil andConditionValue:nil];
+}
++(NSString*)deletaTableStrWithTableName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue{
+    if (conditionKey==nil||conditionValue==nil) {
+        return [NSString stringWithFormat:@"delete from %@",tableName];
+    } else {
+        return [NSString stringWithFormat:@"delete from %@ where %@ = '%@'",tableName,conditionKey,conditionValue];
+    }
+    
 }
 //创建表命令
 +(NSString*)createTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
@@ -108,7 +116,7 @@
     }
     return [NSString stringWithFormat:@"select * from %@ where %@ = '%@' ",tableName,conditionKey,conditionValue];
 }
-+(BOOL)deleteTableWithName:(NSString*)tableName{
++(BOOL)deleteTableWithName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];

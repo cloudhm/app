@@ -10,25 +10,27 @@
 #import <AFNetworking.h>
 #import "JsonParser.h"
 #import <FMDB.h>
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
 @implementation ModeSysAPI
-+(void)clearTable:(NSString*)style_type{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        NSString* sql = [NSString stringWithFormat:@"delete from list_home where type = ? "];
-        BOOL res = [db executeUpdate:sql,style_type];
-        if (res) {
-            NSLog(@"删除成功");
-        } else {
-            NSLog(@"删除不成功");
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"未打开数据库");
-    }
-}
+//+(void)clearTable:(NSString*)style_type{
+//    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
+//    FMDatabase* db = [FMDatabase databaseWithPath:path];
+//    if ([db open]) {
+//        NSString* sql = [NSString stringWithFormat:@"delete from list_home where type = ? "];
+//        BOOL res = [db executeUpdate:sql,style_type];
+//        if (res) {
+//            NSLog(@"删除成功");
+//        } else {
+//            NSLog(@"删除不成功");
+//        }
+//        [db close];
+//    } else {
+//        [db close];
+//        NSLog(@"未打开数据库");
+//    }
+//}
 //主页面品牌列表请求
 +(void)requestBrandListAndCallback:(MyCallback)callback{
     NSString* path = BRAND_LIST;
@@ -42,7 +44,8 @@
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"brandlist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-            [self clearTable:@"brand"];
+            
+            [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:BRAND];
             NSDictionary* brandDics = [dictionary objectForKey:@"list"];
             NSMutableArray * brandArr = [NSMutableArray array];
             for (int i = 1; i<=amount.integerValue; i++) {
@@ -72,7 +75,8 @@
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"occssionlist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-            [self clearTable:@"occasion"];
+//            [self clearTable:@"occasion"];
+            [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:OCCASION];
             NSDictionary* occasionDics = [dictionary objectForKey:@"list"];
             NSMutableArray * occasionArr = [NSMutableArray array];
             for (int i = 1; i<=amount.integerValue; i++) {
@@ -88,6 +92,7 @@
         NSLog(@"request fail");
         callback([NSNull null]);
     }];
+    
 }
 //主页面风格请求
 +(void)requestStyleListAndCallback:(MyCallback)callback{
@@ -102,7 +107,8 @@
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"stylelist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-            [self clearTable:@"style"];
+//            [self clearTable:@"style"];
+            [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:STYLE];
             NSDictionary* styleDics = [dictionary objectForKey:@"list"];
             NSMutableArray * styleArr = [NSMutableArray array];
             for (int i = 1; i<=amount.integerValue; i++) {

@@ -20,6 +20,7 @@
 #import "ModeRunwayAPI.h"
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
+#import "TAlertView.h"
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -28,6 +29,7 @@
 
 @property (nonatomic,assign) CGRect mainFrame;
 @property (weak, nonatomic) UILabel *label;
+@property (weak, nonatomic) UIImageView *heartIV;
 @property (strong, nonatomic) NSMutableArray *allGoods;
 @property (strong, nonatomic) NSMutableArray *wishlist;
 @property (strong, nonatomic) UIView *startIntroduceView;
@@ -66,6 +68,7 @@
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
     bgIV.image = [UIImage imageNamed:@"heart.png"];
+    self.heartIV = bgIV;
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
     l.textAlignment = NSTextAlignmentCenter;
     l.textColor = [UIColor whiteColor];
@@ -115,17 +118,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self useCustomAppearance];
 #warning 再造一个view在初次进这时显示
     [self createStartIntroduceView];//创建一个开场遮盖
     self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
-    
-
-    
     
     [self.allGoods addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
     if (self.allGoods.count>0) {
@@ -176,6 +175,8 @@
 }
 //九宫格弹出的控件
 -(void)showShareViewController{
+    self.heartIV.alpha = 0.f;
+    self.label.alpha = 0.f;
     ShareViewController* shareViewController = [[ShareViewController alloc]initWithNibName:@"ShareViewController" bundle:nil];
     shareViewController.delegate = self;
     shareViewController.nineGoods = self.wishlist;
@@ -191,6 +192,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityView stopAnimating];
             [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+            self.heartIV.alpha = 1.f;
+            self.label.alpha = 1.f;
             [self showAlertView];
         });
     });
@@ -201,12 +204,14 @@
     
 
 }
+
+
 -(void)showAlertView{
-    self.navigationItem.rightBarButtonItem.enabled = YES;//弹出九宫格  关闭导航栏右上的跳转按钮交互
+    self.navigationItem.rightBarButtonItem.enabled = NO;//弹出九宫格  关闭导航栏右上的跳转按钮交互
     
     self.view.userInteractionEnabled = YES;
 #warning 清空数据库中9个项目
-    BOOL flag = [ModeDatabase deleteTableWithName:WISHLIST_TABLENAME];
+    BOOL flag = [ModeDatabase deleteTableWithName:WISHLIST_TABLENAME andConditionKey:nil andConditionValue:nil];
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
     if (self.tabLabel.text.integerValue>=self.totalNumber) {//用来判断本组是否已经完成
         self.label.text = @"0";
@@ -223,13 +228,73 @@
         [av show];
     }
 }
+
+
+#pragma mark ShowAlertView
+-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 -(void)dealloc{
     NSLog(@"likeornope页面销毁");
 }
+-(void)useCustomAppearance{
+    TAlertView *appearance = [TAlertView appearance];
+    appearance.alertBackgroundColor     = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+    appearance.titleFont                = [UIFont fontWithName:@"Baskerville" size:22];
+    appearance.messageColor             = [UIColor whiteColor];
+    appearance.messageFont              = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    appearance.buttonsTextColor         = [UIColor whiteColor];
+    appearance.buttonsFont              = [UIFont fontWithName:@"Baskerville-Bold" size:16];
+    appearance.separatorsLinesColor     = [UIColor grayColor];
+    appearance.tapToCloseFont           = [UIFont fontWithName:@"Baskerville" size:10];
+    appearance.tapToCloseColor          = [UIColor grayColor];
+    appearance.tapToCloseText           = @"Touch to close";
+    [appearance setTitleColor:[UIColor orangeColor] forAlertViewStyle:TAlertViewStyleError];
+    [appearance setDefaultTitle:@"Error" forAlertViewStyle:TAlertViewStyleError];
+    [appearance setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleNeutral];
+}
 //完成整组秀场弹出的alertView
 -(void)finishOneSetAndReadyComeback{
-    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Continue",nil];
-    av.tag = 2;
+    
+    TAlertView* av = [[TAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" buttons:@[@"Back",@"Continue"] andCallBack:^(TAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            NSDictionary* newParams = [self.dictionary objectForKey:@"params"];
+            [ModeRunwayAPI requestGetNewWithParams:newParams andCallback:^(id obj) {
+                if ([obj isKindOfClass:[NSNull class]]) {
+                    return;
+                }
+                NSArray* allItems = [obj objectForKey:@"allItems"];
+                self.dictionary = @{@"title":self.title,@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":newParams};
+                [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
+                [self createStartIntroduceView];
+                [self.allGoods addObjectsFromArray:allItems];
+                
+                
+                
+                self.number = 1;
+                self.totalNumber = self.allGoods.count;
+                self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
+                [self updateUI];
+                self.view.userInteractionEnabled = YES;
+                [self.view setNeedsDisplay];
+            }];
+            
+        }
+
+    }];
+    
+//    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles: @"Continue",nil];
+//    av.tag = 2;
     [av show];
 }
 
@@ -268,7 +333,7 @@
         
         
     }
-    self.navigationController.navigationBar.userInteractionEnabled = YES;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 #pragma mark UpdateUI

@@ -125,9 +125,9 @@
         (![self.tf2.text isEqualToString:@"YOUR EMAIL"])&&
         (![self.tf3.text isEqualToString:@""])&&
         [self.delegate respondsToSelector:@selector(registerView:withAttributes:)]) {
-        [self.delegate registerView:self withAttributes:@{@"nickname":self.tf1.text,@"email":self.tf2.text,@"password":self.tf3.text}];
+        [self.delegate registerView:self withAttributes:@{@"nickname":self.tf1.text,@"email":self.tf2.text,@"password":self.tf3.text,@"error":[NSNull null]}];
     } else {
-        NSLog(@"输入不正确");
+        [self.delegate registerView:self withAttributes:@{@"nickname":@"",@"email":@"",@"password":@"",@"error":@"error"}];
     }
 }
 #pragma UITextFieldDelegate

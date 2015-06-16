@@ -20,7 +20,7 @@
 #import "UIImage+PartlyImage.h"
 #import "UIColor+HexString.h"
 #import "Common.h"
-
+#import "UIView+AutoLayout.h"
 @interface WishListViewController ()<UIAlertViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
@@ -53,18 +53,20 @@
 
 //增加右下视图  商品详情控件
 -(void)createRightView{
-    float padding = 10.f;
-    float x = KScreenWidth/2;
-    float y = CGRectGetMaxY(self.bigSV.frame) + 2* padding;
-    float w = KScreenWidth/2;
-    float h = KScreenHeight - y - kStatusNaviBarH - 40.f;
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(x, y, w, h)];
+//    float padding = 10.f;
+//    float x = KScreenWidth/2;
+//    float y = CGRectGetMaxY(self.bigSV.frame) + 2* padding;
+//    float w = KScreenWidth/2;
+//    float h = KScreenHeight - y - kStatusNaviBarH - 40.f;
+//    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(x, y, w, h)];
+    UIView* view = [[UIView alloc]init];
+    view.translatesAutoresizingMaskIntoConstraints = NO;
     self.rightView = view;
     [self.view addSubview:self.rightView];
     
     UILabel* l1 = [[UILabel alloc]init];
+    l1.translatesAutoresizingMaskIntoConstraints = NO;
     l1.numberOfLines=0;
-    
     l1.font = [UIFont italicSystemFontOfSize:14];
     l1.textAlignment = NSTextAlignmentCenter;
     l1.textColor = [UIColor colorWithRed:77/255.f green:77/255.f blue:77/255.f alpha:1];
@@ -73,20 +75,23 @@
     
     UIView* v1 = [[UIView alloc]init];
     v1.backgroundColor = [UIColor colorWithRed:115/255.f green:115/255.f blue:115/255.f alpha:1];
+    v1.translatesAutoresizingMaskIntoConstraints = NO;
     self.smallLineView = v1;
     [self.rightView addSubview:v1];
     
     UILabel* l2 = [[UILabel alloc]init];
     l2.textColor = [UIColor colorWithRed:95/255.f green:197/255.f blue:66/255.f alpha:1];
-    self.releaseTime = l2;
+    l2.translatesAutoresizingMaskIntoConstraints = NO;
     l2.textAlignment = NSTextAlignmentCenter;
     l2.font = [UIFont italicSystemFontOfSize:12];
+    self.releaseTime = l2;
     [self.rightView addSubview:l2];
     
     UILabel* l3 = [[UILabel alloc]init];
     l3.text = @"COLOUR";
     l3.font = [UIFont systemFontOfSize:11];
     l3.textColor = [UIColor blackColor];
+    l3.translatesAutoresizingMaskIntoConstraints = NO;
     self.colorLabel = l3;
     [self.rightView addSubview:l3];
     
@@ -94,6 +99,7 @@
     l4.text = @"SIZE:";
     l4.font = [UIFont systemFontOfSize:11];
     l4.textColor = [UIColor blackColor];
+    l4.translatesAutoresizingMaskIntoConstraints = NO;
     self.sizeLabel = l4;
     [self.rightView addSubview:l4];
     
@@ -103,12 +109,14 @@
     [self.rightView addSubview:iv];
     
     UIButton* b1 = [[UIButton alloc]init];
+    b1.translatesAutoresizingMaskIntoConstraints = NO;
     [b1 setImage:[UIImage imageNamed:@"apply_normal.png"] forState:UIControlStateNormal];
     [b1 setImage:[UIImage imageNamed:@"apply_press.png"] forState:UIControlStateHighlighted];
     self.couponBtn = b1;
     [self.couponIV addSubview:b1];
     
     UIButton* b2 = [[UIButton alloc]init];
+    b2.translatesAutoresizingMaskIntoConstraints = NO;
     [b2 setImage:[UIImage imageNamed:@"view detal_normal.png"] forState:UIControlStateNormal];
     [b2 setImage:[UIImage imageNamed:@"view detal_press.png"] forState:UIControlStateHighlighted];
     self.goodDetailBtn = b2;
@@ -117,21 +125,25 @@
     ColorView* colorView = [[ColorView alloc]init];
     colorView.colorStr = @"";
     self.colorView1 = colorView;
+    self.colorView1.translatesAutoresizingMaskIntoConstraints = NO;
     [self.rightView addSubview:self.colorView1];
     
     colorView = [[ColorView alloc]init];
     colorView.colorStr = @"";
     self.colorView2 = colorView;
+    self.colorView2.translatesAutoresizingMaskIntoConstraints = NO;
     [self.rightView addSubview:self.colorView2];
     
     colorView = [[ColorView alloc]init];
     colorView.colorStr = @"";
     self.colorView3 = colorView;
+    self.colorView3.translatesAutoresizingMaskIntoConstraints = NO;
     [self.rightView addSubview:self.colorView3];
     
     colorView = [[ColorView alloc]init];
     colorView.colorStr = @"";
     self.colorView4 = colorView;
+    self.colorView4.translatesAutoresizingMaskIntoConstraints = NO;
     [self.rightView addSubview:self.colorView4];
     
     self.colorViews = @[self.colorView1,self.colorView2,self.colorView3,self.colorView4];
@@ -146,12 +158,45 @@
     
     
 }
+- (void)updateViewConstraints
+{
+    [super updateViewConstraints];
+    
+    [self setupConstraintsForRightView];
+}
+-(void)setupConstraintsForRightView{
+    [self.rightView autoRemoveConstraintsAffectingViewAndSubviews];
+    
+    [self.rightView autoPinToTopLayoutGuideOfViewController:self withInset:(CGRectGetMaxY(self.bigSV.frame) + 2* 10.f)];
+    [self.rightView autoPinToBottomLayoutGuideOfViewController:self withInset:40.0f];
+    [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:KScreenWidth/2];
+    [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0.0f];
+    [self resetAllElementsInRightView];
+    
+    
+}
 //设置右视图的所有子控件位置及大小
 -(void)resetAllElementsInRightView{
+    NSArray* subViews = @[self.goods_title,self.smallLineView,self.releaseTime,self.colorLabel,self.sizeLabel,self.couponBtn,self.goodDetailBtn];
     CGRect frame = [self getGoodTitleFrame];
-    self.goods_title.text = self.goodInfo.goods_title;
+    [self.goods_title autoSetDimensionsToSize:CGSizeMake(frame.size.width, frame.size.height+10.f)];
+    [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0.f];
+    [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0.f];
+    [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:10.f];
     
+    [self.smallLineView autoSetDimensionsToSize:CGSizeMake(30.f, 2.f)];
+    [self.releaseTime autoSetDimensionsToSize:CGSizeMake(frame.size.width, 20.f)];
+    
+    
+    
+    
+    
+    self.goods_title.text = self.goodInfo.goods_title;
     self.goods_title.frame = CGRectMake(10.f, 0.f, frame.size.width, frame.size.height+10.f);
+    
+    
+    
+    
     self.smallLineView.frame = CGRectMake(CGRectGetWidth(self.goods_title.frame)/2-15.f, CGRectGetMaxY(self.goods_title.frame)+5.f, 15.f*2, 2.f);
     
     self.releaseTime.text = self.goodInfo.ctime;
@@ -247,7 +292,6 @@
 }
 //收到通知  网络请求商品详情
 -(void)requestLoadGoodInfo:(NSNotification*)noti{
-    NSLog(@"noti");
     [ModeGoodAPI requestGoodInfoWithGoodID:[noti.userInfo objectForKey:@"goods_id"] andCallback:^(id obj) {
         if ([obj isKindOfClass:[NSNull class]]) {
             return ;
@@ -259,14 +303,16 @@
             self.goods_img_detail.image = [UIImage getSubImageByImage:image andImageViewFrame:self.goods_img_detail.frame];
             [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodInfo.img_detail_link lastPathComponent] toDisk:YES];
         }];
+        
         [self resetAllElementsInRightView];
         [self.view setNeedsLayout];
+        [self.view setNeedsUpdateConstraints];
     }];
 }
 //计算右视图中商品标题的大小
 -(CGRect)getGoodTitleFrame {
     NSDictionary* attributes = @{NSFontAttributeName:[UIFont italicSystemFontOfSize:14],NSForegroundColorAttributeName:[UIColor colorWithRed:77/255.f green:77/255.f blue:77/255.f alpha:1]};
-    return [self.goodInfo.goods_title boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.rightView.bounds), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+    return [self.goodInfo.goods_title boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.rightView.bounds)-10.f, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
 }
 
 //导入wishlist数据  主要用来显示右上角红心数
@@ -300,10 +346,10 @@
     [self.view addSubview:sv];
     float padding = 10.f;
     UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, CGRectGetMaxY(self.bigSV.frame)+padding, KScreenWidth - 4*padding, 2.f)];
-    topLineView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    topLineView.backgroundColor = [UIColor colorWithHexString:@"#dbdbdb"];
     [self.view addSubview:topLineView];
     UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, KScreenHeight- kStatusNaviBarH - 40.f, KScreenWidth - 4* padding, 2.f)];
-    bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#dbdbdb"];
     [self.view addSubview:bottomLineView];
 }
 -(void)createLeftView{

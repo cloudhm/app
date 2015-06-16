@@ -10,7 +10,7 @@
 #define Mode_PrefixHeader_pch
 
 /*
- * http://120.16.107.42:8080  等于  api.10buck.com
+ * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
 #define HOSTADDRESS @"http://120.26.107.42/api/account"

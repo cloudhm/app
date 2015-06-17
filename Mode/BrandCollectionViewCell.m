@@ -18,8 +18,8 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
 //        self.name.text = self.brand.name;
-    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.brand.pic_link] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.brand.pic_link lastPathComponent] toDisk:YES];
+    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.brand.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.brand.picLink lastPathComponent] toDisk:YES];
     }];
 //    if (![[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.brand.pic_link lastPathComponent]]) {
 //        SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -39,6 +39,6 @@
 }
 -(void)click:(UIButton*)btn{
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"mode":@"brand",@"mode_val":self.brand.event_id,@"category":self.brand.name}];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"mode":@"brand",@"mode_val":self.brand.eventId,@"category":self.brand.name}];
 }
 @end

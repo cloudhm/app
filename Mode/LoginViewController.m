@@ -31,7 +31,7 @@
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     
     if ([ud objectForKey:@"token"]) {
-        NSInteger utime  = [[ud objectForKey:@"utime"] integerValue];
+        NSInteger utime  = [[ud objectForKey:@"utime"]integerValue];
         NSInteger currentTime = (NSInteger)[NSDate date].timeIntervalSince1970;
         if (utime>=currentTime) {
             self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
@@ -92,7 +92,7 @@
     NSLog(@"1");
     
 }
-#warning 登录接口暂时未开放
+
 - (IBAction)showLoginView:(UIButton *)sender {
     NSLog(@"2");
     if (self.lvc == nil) {
@@ -149,9 +149,11 @@
 #pragma mark RegisterViewDelegate
 -(void)registerView:(RegisterView *)registerView withAttributes:(NSDictionary *)attributes{
     if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        NSMutableDictionary* params = [attributes mutableCopy];
+        [params removeObjectForKey:@"error"];
         [self.view bringSubviewToFront:self.activityIndicatorView];
         [self.activityIndicatorView startAnimating];
-        [ModeAccountAPI signupWithParams:attributes andCallback:^(id obj) {
+        [ModeAccountAPI signupWithParams:params andCallback:^(id obj) {
             [self.activityIndicatorView stopAnimating];
             if ([obj isKindOfClass:[NSNull class]]) {//返回空 网络问题
                 NSString* errorInfo = @"Net error!Cannot connect host servers.";
@@ -174,9 +176,11 @@
 #pragma mark LoginViewDelegate
 -(void)loginView:(LoginView *)loginView withAttributes:(NSDictionary *)attributes{
     if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        NSMutableDictionary* params = [attributes mutableCopy];
+        [params removeObjectForKey:@"error"];
         [self.view bringSubviewToFront:self.activityIndicatorView];
         [self.activityIndicatorView startAnimating];
-        [ModeAccountAPI loginWithParams:attributes andCallback:^(id obj) {
+        [ModeAccountAPI loginWithParams:params andCallback:^(id obj) {
             [self.activityIndicatorView stopAnimating];
             if ([obj isKindOfClass:[NSNull class]]) {
                 NSString* errorInfo = @"Net error!Fail to connect host servers.";

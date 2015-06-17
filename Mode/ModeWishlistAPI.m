@@ -14,7 +14,7 @@
 @implementation ModeWishlistAPI
 
 +(NSString*)getUserID{
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
 +(void)requestWishlistsAndCallback:(MyCallback)callback{
     NSString* path = GET_WISHLISTS;

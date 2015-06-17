@@ -50,7 +50,7 @@
         firstTF.borderStyle = UITextBorderStyleNone;
         firstTF.placeholder = @"JOIN WITH EMAIL";
         [firstTF setValue:[UIFont fontWithName:@"Helvetica" size:16.f] forKeyPath:@"_placeholderLabel.font"];
-        firstTF.clearsOnBeginEditing = YES;
+        firstTF.clearsOnBeginEditing = NO;
         firstTF.returnKeyType=UIReturnKeyNext;
         self.tf1 = firstTF;
         [self addSubview:self.tf1];

@@ -7,7 +7,7 @@
 //
 
 #import "OrderCellInnerView.h"
-
+#define X(a) a * a
 @implementation OrderCellInnerView
 -(void)setModeOrder:(ModeOrder *)modeOrder{
     _modeOrder = modeOrder;
@@ -23,6 +23,7 @@
 
 
 -(CGFloat) getBoundsByWidth:(CGFloat)width{
+    
     return 0;
 }
 /*

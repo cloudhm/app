@@ -18,5 +18,5 @@ typedef void (^MyCallback)(id obj);
 +(NSArray*)readDatabaseFromTableName:(NSString*)tableName andSelectConditionKey:(NSString*)conditionKey andSelectConditionValue:(NSString*)conditionValue;
 
 +(BOOL)deleteTableWithName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue;
-+(void)replaceIntoTable:(NSString*)tableName andTableElements:(NSArray*)elements andInsertContent:(id)obj;
++(BOOL)replaceIntoTable:(NSString*)tableName andTableElements:(NSArray*)elements andInsertContent:(id)obj;
 @end

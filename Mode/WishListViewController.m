@@ -35,10 +35,13 @@
 @property (weak, nonatomic) UILabel *releaseTime;
 @property (weak, nonatomic) UILabel *colorLabel;
 @property (weak, nonatomic) UILabel *sizeLabel;
-@property (weak, nonatomic) UIImageView *couponIV;
+
+
+@property (weak, nonatomic) UIImageView *brandImageView;
+@property (weak, nonatomic) UIButton *brandInfoBtn;
+@property (weak, nonatomic) UIButton *viewDetailBtn;
 @property (weak, nonatomic) UIButton *couponBtn;
-@property (weak, nonatomic) UIButton *goodDetailBtn;
-;
+
 @property (weak, nonatomic) ColorView *colorView1;
 @property (weak, nonatomic) ColorView *colorView2;
 @property (weak, nonatomic) ColorView *colorView3;
@@ -103,24 +106,33 @@
     self.sizeLabel = l4;
     [self.rightView addSubview:l4];
     
-    UIImageView* iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"red coupon_normal.png"]];
-    iv.userInteractionEnabled = YES;
-    self.couponIV = iv;
-    [self.rightView addSubview:iv];
-    
     UIButton* b1 = [[UIButton alloc]init];
     b1.translatesAutoresizingMaskIntoConstraints = NO;
-    [b1 setImage:[UIImage imageNamed:@"apply_normal.png"] forState:UIControlStateNormal];
-    [b1 setImage:[UIImage imageNamed:@"apply_press.png"] forState:UIControlStateHighlighted];
-    self.couponBtn = b1;
-    [self.couponIV addSubview:b1];
+    [b1 setImage:[UIImage imageNamed:@"brand_info_normal.png"] forState:UIControlStateNormal];
+    [b1 setImage:[UIImage imageNamed:@"brand_info_press.png"] forState:UIControlStateHighlighted];
+    b1.tag = 1;
+    self.brandInfoBtn = b1;
+    [self.rightView addSubview:b1];
     
     UIButton* b2 = [[UIButton alloc]init];
     b2.translatesAutoresizingMaskIntoConstraints = NO;
-    [b2 setImage:[UIImage imageNamed:@"view detal_normal.png"] forState:UIControlStateNormal];
-    [b2 setImage:[UIImage imageNamed:@"view detal_press.png"] forState:UIControlStateHighlighted];
-    self.goodDetailBtn = b2;
+    [b2 setImage:[UIImage imageNamed:@"view_detal_normal.png"] forState:UIControlStateNormal];
+    [b2 setImage:[UIImage imageNamed:@"view_detal_press.png"] forState:UIControlStateHighlighted];
+    b2.tag = 2;
+    self.viewDetailBtn = b2;
     [self.rightView addSubview: b2];
+    
+    UIImageView* iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"red_coupon_normal.png"]];
+    iv.userInteractionEnabled = YES;
+    self.brandImageView = iv;
+    [self.brandInfoBtn addSubview:iv];
+    
+    UIButton* b3 = [[UIButton alloc]init];
+    [b3 setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [b3 setImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
+    b3.tag = 3;
+    self.couponBtn = b3;
+    [self.rightView addSubview:b3];
     
     ColorView* colorView = [[ColorView alloc]init];
     colorView.colorStr = @"";
@@ -148,15 +160,7 @@
     
     self.colorViews = @[self.colorView1,self.colorView2,self.colorView3,self.colorView4];
     
-    
-    
-    
     self.rightView.backgroundColor = [UIColor clearColor];
-    
-    
-    
-    
-    
 }
 - (void)updateViewConstraints
 {
@@ -164,6 +168,7 @@
     
     [self setupConstraintsForRightView];
 }
+
 -(void)setupConstraintsForRightView{
     [self.rightView autoRemoveConstraintsAffectingViewAndSubviews];
     
@@ -172,49 +177,80 @@
     [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:KScreenWidth/2];
     [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0.0f];
     [self resetAllElementsInRightView];
-    
-    
 }
 //设置右视图的所有子控件位置及大小
 -(void)resetAllElementsInRightView{
-    NSArray* subViews = @[self.goods_title,self.smallLineView,self.releaseTime,self.colorLabel,self.sizeLabel,self.couponBtn,self.goodDetailBtn];
+    
+    
+    //配置goods_title位置
     CGRect frame = [self getGoodTitleFrame];
-    [self.goods_title autoSetDimensionsToSize:CGSizeMake(frame.size.width, frame.size.height+10.f)];
     [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0.f];
     [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0.f];
     [self.goods_title autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:10.f];
+    [self.goods_title autoSetDimension:ALDimensionHeight toSize:frame.size.height+10.f];
     
     [self.smallLineView autoSetDimensionsToSize:CGSizeMake(30.f, 2.f)];
+    [self.smallLineView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.goods_title withOffset:5.f relation:NSLayoutRelationGreaterThanOrEqual];
+    [self.smallLineView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.goods_title];
+    
     [self.releaseTime autoSetDimensionsToSize:CGSizeMake(frame.size.width, 20.f)];
+    [self.releaseTime autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.smallLineView withOffset:5.f relation:NSLayoutRelationGreaterThanOrEqual];
+    [self.releaseTime autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.releaseTime];
     
+    [self.colorLabel autoSetDimensionsToSize:CGSizeMake(50.f, 20.f)];
+    [self.colorLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20.f];
+    [self.colorLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.releaseTime withOffset:5.f];
     
-    
-    
+    [self.colorView1 autoSetDimensionsToSize:CGSizeMake(20.f, 20.f)];
+    [self.colorView1 autoAlignAxis:ALAxisVertical toSameAxisOfView:self.colorLabel];
+    [self.colorView1 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.colorLabel withOffset:0.f];
+    [self.colorView2 autoSetDimensionsToSize:CGSizeMake(20.f, 20.f)];
+    [self.colorView2 autoAlignAxis:ALAxisVertical toSameAxisOfView:self.colorLabel];
+    [self.colorView2 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.colorView1 withOffset:0.f];
+    [self.colorView3 autoSetDimensionsToSize:CGSizeMake(20.f, 20.f)];
+    [self.colorView3 autoAlignAxis:ALAxisVertical toSameAxisOfView:self.colorLabel];
+    [self.colorView3 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.colorView2 withOffset:0.f];
+    [self.colorView4 autoSetDimensionsToSize:CGSizeMake(20.f, 20.f)];
+    [self.colorView4 autoAlignAxis:ALAxisVertical toSameAxisOfView:self.colorLabel];
+    [self.colorView4 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.colorView3 withOffset:0.f];
     
     self.goods_title.text = self.goodInfo.goods_title;
-    self.goods_title.frame = CGRectMake(10.f, 0.f, frame.size.width, frame.size.height+10.f);
-    
-    
-    
-    
-    self.smallLineView.frame = CGRectMake(CGRectGetWidth(self.goods_title.frame)/2-15.f, CGRectGetMaxY(self.goods_title.frame)+5.f, 15.f*2, 2.f);
-    
     self.releaseTime.text = self.goodInfo.ctime;
-    self.releaseTime.frame = CGRectMake(0, CGRectGetMaxY(self.smallLineView.frame) + 10.f, CGRectGetWidth(self.rightView.frame), 20.f);
     
-    self.colorLabel.frame = CGRectMake(CGRectGetMinX(self.releaseTime.frame)+10.f, CGRectGetMaxY(self.releaseTime.frame)+10.f, 50.f, 20.f);
+    [self.brandInfoBtn autoSetDimensionsToSize:CGSizeMake(50.f, 20.f)];
+    [self.brandInfoBtn autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.goods_title];
+    [self.brandInfoBtn autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.sizeLabel withOffset:5.f];
+    [self.viewDetailBtn autoSetDimensionsToSize:CGSizeMake(50.f, 20.f)];
+    [self.viewDetailBtn autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.goods_title];
+    [self.viewDetailBtn autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.brandInfoBtn withOffset:5.f];
     
+    [self.brandImageView autoSetDimensionsToSize:CGSizeMake(18.f, 18.f)];
+    [self.brandImageView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10.f];
+    [self.brandImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:1.f];
     
+//    self.goods_title.frame = CGRectMake(10.f, 0.f, frame.size.width, frame.size.height+10.f);
+//    
+//    
+//    
+//    
+//    self.smallLineView.frame = CGRectMake(CGRectGetWidth(self.goods_title.frame)/2-15.f, CGRectGetMaxY(self.goods_title.frame)+5.f, 15.f*2, 2.f);
+//    
+//
+//    self.releaseTime.frame = CGRectMake(0, CGRectGetMaxY(self.smallLineView.frame) + 10.f, CGRectGetWidth(self.rightView.frame), 20.f);
+//    
+//    self.colorLabel.frame = CGRectMake(CGRectGetMinX(self.releaseTime.frame)+10.f, CGRectGetMaxY(self.releaseTime.frame)+10.f, 50.f, 20.f);
+//    
+//    
     NSArray* colorArr= [self.goodInfo.goods_color componentsSeparatedByString:@","];
-    float colorViewW = 20.f;
-    float colorViewH = 20.f;
-    
-    self.colorView1.frame = CGRectMake(CGRectGetMaxX(self.colorLabel.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
-    self.colorView2.frame = CGRectMake(CGRectGetMaxX(self.colorView1.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
-    self.colorView3.frame = CGRectMake(CGRectGetMaxX(self.colorView2.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
-    self.colorView4.frame = CGRectMake(CGRectGetMaxX(self.colorView3.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
-    
-    
+//    float colorViewW = 20.f;
+//    float colorViewH = 20.f;
+//    
+//    self.colorView1.frame = CGRectMake(CGRectGetMaxX(self.colorLabel.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
+//    self.colorView2.frame = CGRectMake(CGRectGetMaxX(self.colorView1.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
+//    self.colorView3.frame = CGRectMake(CGRectGetMaxX(self.colorView2.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
+//    self.colorView4.frame = CGRectMake(CGRectGetMaxX(self.colorView3.frame), CGRectGetMinY(self.colorLabel.frame), colorViewW, colorViewH);
+//    
+//    
     for (int i = 0; i<self.colorViews.count; i++) {
         ColorView*colorView = self.colorViews[i];
         if (i>=colorArr.count) {
@@ -224,18 +260,24 @@
         colorView.colorStr = colorArr[i];
         //重绘在View中的类的setter方法已写
     }
-    self.sizeLabel.frame = CGRectMake(CGRectGetMinX(self.colorLabel.frame), CGRectGetMaxY(self.colorLabel.frame)+5.f, 100, 20);
-    self.sizeLabel.text = [NSString stringWithFormat:@"SIZE:  %@",self.goodInfo.goods_size];
+    [self.sizeLabel autoSetDimensionsToSize:CGSizeMake(100.f, 20.f)];
+    [self.sizeLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20.f];
+    [self.sizeLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.colorLabel withOffset:5.f];
     
     
     
-    
-    float couponIVX = 20.f;
-    self.couponIV.frame = CGRectMake(couponIVX, CGRectGetMaxY(self.sizeLabel.frame)+10.f, CGRectGetWidth(self.rightView.bounds)-2* couponIVX, 40.f);
-    
-    self.couponBtn.frame = CGRectMake(10.f, 10.f, 40.f, 20.f);
-    
-    self.goodDetailBtn.frame = CGRectMake(CGRectGetMinX(self.couponIV.frame), CGRectGetMaxY(self.couponIV.frame)+10.f, CGRectGetWidth(self.couponIV.frame), 40.f);
+//    self.sizeLabel.frame = CGRectMake(CGRectGetMinX(self.colorLabel.frame), CGRectGetMaxY(self.colorLabel.frame)+5.f, 100, 20);
+//    self.sizeLabel.text = [NSString stringWithFormat:@"SIZE:  %@",self.goodInfo.goods_size];
+//    
+//    
+//    
+//    
+//    float couponIVX = 20.f;
+//    self.couponIV.frame = CGRectMake(couponIVX, CGRectGetMaxY(self.sizeLabel.frame)+10.f, CGRectGetWidth(self.rightView.bounds)-2* couponIVX, 40.f);
+//    
+//    self.couponBtn.frame = CGRectMake(10.f, 10.f, 40.f, 20.f);
+//    
+//    self.goodDetailBtn.frame = CGRectMake(CGRectGetMinX(self.couponIV.frame), CGRectGetMaxY(self.couponIV.frame)+10.f, CGRectGetWidth(self.couponIV.frame), 40.f);
     
     
 }

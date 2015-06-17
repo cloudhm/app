@@ -21,7 +21,7 @@
 #import "QBArrowRefreshControl.h"
 @interface OccasionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,QBRefreshControlDelegate>
 @property (weak, nonatomic) UICollectionView *cv;
-@property (assign, nonatomic) NSInteger num;
+
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @end

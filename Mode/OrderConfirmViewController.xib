@@ -121,7 +121,7 @@
     <resources>
         <image name="Close button.png" width="55" height="51"/>
         <image name="Pencil icon.png" width="114" height="119"/>
-        <image name="Pop up box_.png" width="579" height="526"/>
+        <image name="Pop up box_.png" width="720" height="435"/>
         <image name="confirm_normal.png" width="492" height="104"/>
         <image name="confirm_press.png" width="492" height="104"/>
         <image name="five-pointed star.png" width="42" height="40"/>

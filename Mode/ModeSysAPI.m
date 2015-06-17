@@ -13,24 +13,68 @@
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
 @implementation ModeSysAPI
-//+(void)clearTable:(NSString*)style_type{
-//    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-//    FMDatabase* db = [FMDatabase databaseWithPath:path];
-//    if ([db open]) {
-//        NSString* sql = [NSString stringWithFormat:@"delete from list_home where type = ? "];
-//        BOOL res = [db executeUpdate:sql,style_type];
-//        if (res) {
-//            NSLog(@"删除成功");
-//        } else {
-//            NSLog(@"删除不成功");
++(NSString*)getUserId{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
+//主页面请求数据
++(void)requestMenuListAndCallback:(MyCallback)callback{
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [manager GET:MENU parameters:[self getUserId] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        NSString* utime = [dictionary objectForKey:@"utime"];
+        NSString* last_utime = [[NSUserDefaults standardUserDefaults]objectForKey:@"menu_utime"];
+        if (![utime isEqualToString:last_utime]) {
+            [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"menu_time"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
+            NSArray* allData = [JsonParser parserMenuListByDictionary:dictionary];
+            callback(@([ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:allData]));
+//            NSArray* styleDics = [dictionary objectForKey:@"styles"];
+//            BOOL flag1 = NO,flag2 = NO,flag3 = NO;
+//            if (![styleDics isKindOfClass:[NSNull class]]) {
+//                flag1 = [self createModalByMoalArr:styleDics andKeyword:@"styles" andSaveIntoTable:HOME_LIST_TABLENAME];
+//            }
+//            
+//            NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
+//            if (![occasionDics isKindOfClass:[NSNull class]]) {
+//                flag2 = [self createModalByMoalArr:occasionDics andKeyword:@"occasions" andSaveIntoTable:HOME_LIST_TABLENAME];
+//            }
+//            
+//            NSArray* brandDics = [dictionary objectForKey:@"brands"];
+//            if (![brandDics isKindOfClass:[NSNull class]]) {
+//                flag3 = [self createModalByMoalArr:brandDics andKeyword:@"brands" andSaveIntoTable:HOME_LIST_TABLENAME];
+//            }
+//            
+//            if (flag1&&flag2&&flag3) {
+//                callback(@(YES));//请求成功，并且存入数据库
+//            } else {
+//                callback(@(NO));
+//            }
+        } else {
+            callback(@(NO));
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"menu request fail : %@",error);
+        callback([NSNull null]);
+    }];
+    
+    
+    
+}
+//+(BOOL) createModalByMoalArr:(NSArray*)modalArr andKeyword:(NSString*)keyword andSaveIntoTable:(NSString*)tableName{
+////    return [ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:modalArr];
+//    if (modalArr.count>0) {
+//        for (int i = 0; i<modalArr.count; i++) {
+//            ModeSysList* syslist = [JsonParser parserMenuListByDictionary:modalArr[i] withKeyword:keyword];
+//            
 //        }
-//        [db close];
-//    } else {
-//        [db close];
-//        NSLog(@"未打开数据库");
 //    }
+//    return NO;
 //}
+
+
+/* //  deprecated request method
 //主页面品牌列表请求
 +(void)requestBrandListAndCallback:(MyCallback)callback{
     NSString* path = BRAND_LIST;
@@ -38,19 +82,16 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString *amount = [dictionary objectForKey:@"amount"];
+        NSArray* brandDics = [dictionary objectForKey:@"menuBrands"];
         NSString *utime = [dictionary objectForKey:@"utime"];
         NSString *last_utime=[[NSUserDefaults standardUserDefaults]objectForKey:@"brandlist_utime"];
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"brandlist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-            
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:BRAND];
-            NSDictionary* brandDics = [dictionary objectForKey:@"list"];
             NSMutableArray * brandArr = [NSMutableArray array];
-            for (int i = 1; i<=amount.integerValue; i++) {
-                NSDictionary *brandDic = [brandDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-                ModeSysList* sysList = [JsonParser parserModeListByDictionary:brandDic];
+            for (int i = 0; i<brandDics.count; i++) {
+                ModeSysList* sysList = [JsonParser parserModeListByDictionary:brandDics[i]];
                 [brandArr addObject:sysList];
             }
             callback(brandArr);
@@ -69,19 +110,16 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString *amount = [dictionary objectForKey:@"amount"];
         NSString *utime = [dictionary objectForKey:@"utime"];
+        NSArray* occasionDics = [dictionary objectForKey:@"menuOccasions"];
         NSString *last_utime=[[NSUserDefaults standardUserDefaults]objectForKey:@"occssionlist_utime"];
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"occssionlist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-//            [self clearTable:@"occasion"];
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:OCCASION];
-            NSDictionary* occasionDics = [dictionary objectForKey:@"list"];
             NSMutableArray * occasionArr = [NSMutableArray array];
-            for (int i = 1; i<=amount.integerValue; i++) {
-                NSDictionary *occasionDic = [occasionDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-                ModeSysList* sysList = [JsonParser parserModeListByDictionary:occasionDic];
+            for (int i = 0; i<occasionDics.count; i++) {
+                ModeSysList* sysList = [JsonParser parserModeListByDictionary:occasionDics[i]];
                 [occasionArr addObject:sysList];
             }
             callback(occasionArr);
@@ -101,19 +139,16 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString *amount = [dictionary objectForKey:@"amount"];
+        NSArray* styleDics = [dictionary objectForKey:@"menuStyles"];
         NSString *utime = [dictionary objectForKey:@"utime"];
         NSString *last_utime=[[NSUserDefaults standardUserDefaults]objectForKey:@"stylelist_utime"];
         if (![utime isEqualToString:last_utime]) {
             [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"stylelist_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
-//            [self clearTable:@"style"];
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:TYPE andConditionValue:STYLE];
-            NSDictionary* styleDics = [dictionary objectForKey:@"list"];
             NSMutableArray * styleArr = [NSMutableArray array];
-            for (int i = 1; i<=amount.integerValue; i++) {
-                NSDictionary *styleDic = [styleDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-                ModeSysList* sysList = [JsonParser parserModeListByDictionary:styleDic];
+            for (int i = 0; i<styleDics.count; i++) {
+                ModeSysList* sysList = [JsonParser parserModeListByDictionary:styleDics[i]];
                 [styleArr addObject:sysList];
             }
             callback(styleArr);
@@ -125,4 +160,5 @@
         callback([NSNull null]);
     }];
 }
+*/
 @end

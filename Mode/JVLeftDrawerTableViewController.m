@@ -27,6 +27,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
 
 @implementation JVLeftDrawerTableViewController
 
+         
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -36,7 +37,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
     self.wishlistCount.layer.borderColor = [UIColor greenColor].CGColor;
     self.wishlistCount.layer.masksToBounds = YES;
     
-    self.tableView.backgroundColor = [UIColor colorWithRed:56/255.f green:56/255.f blue:56/255.f alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#2a2d37"];
     self.tableView.contentInset = UIEdgeInsetsMake(kJVTableViewTopInset, 0.0, 0.0, 0.0);
     self.clearsSelectionOnViewWillAppear = NO;
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, 0, 44);

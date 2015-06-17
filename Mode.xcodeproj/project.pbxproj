@@ -79,8 +79,6 @@
 		DB9E11951B229CD000C92D6A /* long line.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E111E1B229CD000C92D6A /* long line.png */; };
 		DB9E11961B229CD000C92D6A /* short line.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E111F1B229CD000C92D6A /* short line.png */; };
 		DB9E11971B229CD000C92D6A /* coupon_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11211B229CD000C92D6A /* coupon_box.png */; };
-		DB9E11981B229CD000C92D6A /* coupon_go_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11221B229CD000C92D6A /* coupon_go_normal.png */; };
-		DB9E11991B229CD000C92D6A /* coupon_go_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11231B229CD000C92D6A /* coupon_go_press.png */; };
 		DB9E119A1B229CD000C92D6A /* coupon_left_time_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11241B229CD000C92D6A /* coupon_left_time_box.png */; };
 		DB9E119B1B229CD000C92D6A /* coupon_line.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11251B229CD000C92D6A /* coupon_line.png */; };
 		DB9E119C1B229CD000C92D6A /* coupon_mode.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11261B229CD000C92D6A /* coupon_mode.png */; };
@@ -172,8 +170,6 @@
 		DB9E11F31B229CD000C92D6A /* heart_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11871B229CD000C92D6A /* heart_button.png */; };
 		DB9E11F41B229CD000C92D6A /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11881B229CD000C92D6A /* line.png */; };
 		DB9E11F51B229CD000C92D6A /* red_coupon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11891B229CD000C92D6A /* red_coupon_normal.png */; };
-		DB9E11F61B229CD000C92D6A /* view_detal_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E118A1B229CD000C92D6A /* view_detal_normal.png */; };
-		DB9E11F71B229CD000C92D6A /* view_detal_pressl.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E118B1B229CD000C92D6A /* view_detal_pressl.png */; };
 		DB9E11FB1B229FF100C92D6A /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9E11F91B229FF100C92D6A /* OrderTableViewCell.m */; };
 		DB9E11FC1B229FF100C92D6A /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11FA1B229FF100C92D6A /* OrderTableViewCell.xib */; };
 		DB9E11FE1B22A1CF00C92D6A /* _triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9E11FD1B22A1CF00C92D6A /* _triangle.png */; };
@@ -200,10 +196,22 @@
 		DBB280AE1B1BF64300D8A3F1 /* BrandInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280AD1B1BF64300D8A3F1 /* BrandInfo.m */; };
 		DBB280B21B1C548800D8A3F1 /* WishlistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB280B11B1C548800D8A3F1 /* WishlistTableViewController.m */; };
 		DBC022CA1B2034C500F27D1C /* ModeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022C91B2034C500F27D1C /* ModeUtils.m */; };
-		DBC022CC1B20398300F27D1C /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBC022CB1B20398300F27D1C /* init.plist */; };
 		DBC022CF1B203B6B00F27D1C /* ModeSysList.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC022CE1B203B6B00F27D1C /* ModeSysList.m */; };
 		DBC4976A1B16C43600F70A25 /* ModeGoodAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC497691B16C43600F70A25 /* ModeGoodAPI.m */; };
 		DBC4976D1B16CE0A00F70A25 /* ModeGood.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC4976C1B16CE0A00F70A25 /* ModeGood.m */; };
+		DBC742861B311CD100F6CAA5 /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBC742851B311CD100F6CAA5 /* init.plist */; };
+		DBC7428E1B31408500F6CAA5 /* home_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC742871B31408500F6CAA5 /* home_normal.png */; };
+		DBC7428F1B31408500F6CAA5 /* passbook_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC742881B31408500F6CAA5 /* passbook_press.png */; };
+		DBC742901B31408500F6CAA5 /* orders_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC742891B31408500F6CAA5 /* orders_press.png */; };
+		DBC742911B31408500F6CAA5 /* wishlist_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7428A1B31408500F6CAA5 /* wishlist_press.png */; };
+		DBC742921B31408500F6CAA5 /* feedback_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7428B1B31408500F6CAA5 /* feedback_press.png */; };
+		DBC742931B31408500F6CAA5 /* profile_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7428C1B31408500F6CAA5 /* profile_press.png */; };
+		DBC742941B31408500F6CAA5 /* setting_press.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7428D1B31408500F6CAA5 /* setting_press.png */; };
+		DBC742961B31554D00F6CAA5 /* coupon_go_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC742951B31554D00F6CAA5 /* coupon_go_normal.png */; };
+		DBC7429D1B315E8A00F6CAA5 /* view_detal_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7429B1B315E8A00F6CAA5 /* view_detal_normal.png */; };
+		DBC7429E1B315E8A00F6CAA5 /* view_detal_pressl.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7429C1B315E8A00F6CAA5 /* view_detal_pressl.png */; };
+		DBC742A11B315F4700F6CAA5 /* brand_info_pressl.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC7429F1B315F4700F6CAA5 /* brand_info_pressl.png */; };
+		DBC742A21B315F4700F6CAA5 /* brand_info_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC742A01B315F4700F6CAA5 /* brand_info_normal.png */; };
 		DBDA43731B293ED100962B56 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBDA43721B293ED100962B56 /* times.plist */; };
 		DBDA43771B29536000962B56 /* CashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA43761B29536000962B56 /* CashViewController.m */; };
 		DBDA437B1B295A5C00962B56 /* CashTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA43791B295A5C00962B56 /* CashTableViewCell.m */; };
@@ -388,8 +396,6 @@
 		DB9E111E1B229CD000C92D6A /* long line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "long line.png"; sourceTree = "<group>"; };
 		DB9E111F1B229CD000C92D6A /* short line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "short line.png"; sourceTree = "<group>"; };
 		DB9E11211B229CD000C92D6A /* coupon_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_box.png; sourceTree = "<group>"; };
-		DB9E11221B229CD000C92D6A /* coupon_go_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_go_normal.png; sourceTree = "<group>"; };
-		DB9E11231B229CD000C92D6A /* coupon_go_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_go_press.png; sourceTree = "<group>"; };
 		DB9E11241B229CD000C92D6A /* coupon_left_time_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_left_time_box.png; sourceTree = "<group>"; };
 		DB9E11251B229CD000C92D6A /* coupon_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_line.png; sourceTree = "<group>"; };
 		DB9E11261B229CD000C92D6A /* coupon_mode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_mode.png; sourceTree = "<group>"; };
@@ -481,8 +487,6 @@
 		DB9E11871B229CD000C92D6A /* heart_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_button.png; sourceTree = "<group>"; };
 		DB9E11881B229CD000C92D6A /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		DB9E11891B229CD000C92D6A /* red_coupon_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_coupon_normal.png; sourceTree = "<group>"; };
-		DB9E118A1B229CD000C92D6A /* view_detal_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_detal_normal.png; sourceTree = "<group>"; };
-		DB9E118B1B229CD000C92D6A /* view_detal_pressl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_detal_pressl.png; sourceTree = "<group>"; };
 		DB9E11F81B229FF100C92D6A /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		DB9E11F91B229FF100C92D6A /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		DB9E11FA1B229FF100C92D6A /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
@@ -530,13 +534,25 @@
 		DBB433411B2A796F003C4CF0 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		DBC022C81B2034C500F27D1C /* ModeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeUtils.h; sourceTree = "<group>"; };
 		DBC022C91B2034C500F27D1C /* ModeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeUtils.m; sourceTree = "<group>"; };
-		DBC022CB1B20398300F27D1C /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
 		DBC022CD1B203B6B00F27D1C /* ModeSysList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeSysList.h; sourceTree = "<group>"; };
 		DBC022CE1B203B6B00F27D1C /* ModeSysList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeSysList.m; sourceTree = "<group>"; };
 		DBC497681B16C43600F70A25 /* ModeGoodAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeGoodAPI.h; sourceTree = "<group>"; };
 		DBC497691B16C43600F70A25 /* ModeGoodAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeGoodAPI.m; sourceTree = "<group>"; };
 		DBC4976B1B16CE0A00F70A25 /* ModeGood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeGood.h; sourceTree = "<group>"; };
 		DBC4976C1B16CE0A00F70A25 /* ModeGood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeGood.m; sourceTree = "<group>"; };
+		DBC742851B311CD100F6CAA5 /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
+		DBC742871B31408500F6CAA5 /* home_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_normal.png; sourceTree = "<group>"; };
+		DBC742881B31408500F6CAA5 /* passbook_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passbook_press.png; sourceTree = "<group>"; };
+		DBC742891B31408500F6CAA5 /* orders_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orders_press.png; sourceTree = "<group>"; };
+		DBC7428A1B31408500F6CAA5 /* wishlist_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wishlist_press.png; sourceTree = "<group>"; };
+		DBC7428B1B31408500F6CAA5 /* feedback_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_press.png; sourceTree = "<group>"; };
+		DBC7428C1B31408500F6CAA5 /* profile_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_press.png; sourceTree = "<group>"; };
+		DBC7428D1B31408500F6CAA5 /* setting_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_press.png; sourceTree = "<group>"; };
+		DBC742951B31554D00F6CAA5 /* coupon_go_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_go_normal.png; sourceTree = "<group>"; };
+		DBC7429B1B315E8A00F6CAA5 /* view_detal_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_detal_normal.png; sourceTree = "<group>"; };
+		DBC7429C1B315E8A00F6CAA5 /* view_detal_pressl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_detal_pressl.png; sourceTree = "<group>"; };
+		DBC7429F1B315F4700F6CAA5 /* brand_info_pressl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brand_info_pressl.png; sourceTree = "<group>"; };
+		DBC742A01B315F4700F6CAA5 /* brand_info_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brand_info_normal.png; sourceTree = "<group>"; };
 		DBDA43721B293ED100962B56 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
 		DBDA43751B29536000962B56 /* CashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashViewController.h; sourceTree = "<group>"; };
 		DBDA43761B29536000962B56 /* CashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashViewController.m; sourceTree = "<group>"; };
@@ -649,6 +665,14 @@
 		118CC8E11B18A30200AE5BD4 /* ios_pic_source */ = {
 			isa = PBXGroup;
 			children = (
+				DBC742951B31554D00F6CAA5 /* coupon_go_normal.png */,
+				DBC742871B31408500F6CAA5 /* home_normal.png */,
+				DBC742881B31408500F6CAA5 /* passbook_press.png */,
+				DBC742891B31408500F6CAA5 /* orders_press.png */,
+				DBC7428A1B31408500F6CAA5 /* wishlist_press.png */,
+				DBC7428B1B31408500F6CAA5 /* feedback_press.png */,
+				DBC7428C1B31408500F6CAA5 /* profile_press.png */,
+				DBC7428D1B31408500F6CAA5 /* setting_press.png */,
 				DB89845B1B30130A0066EFF9 /* homeShadow.png */,
 				DB89845D1B30442A0066EFF9 /* copper_normal.png */,
 				DBEF16001B2BEE1B00CDC07A /* headPortraitThumbnail.png */,
@@ -963,8 +987,8 @@
 				DBF157A31B2ECC52004F0903 /* QBRefreshControl */,
 				DBF157571B2E6A56004F0903 /* TAlertView */,
 				DBF6CB411B25707300FEC1F5 /* FontResource */,
-				DBC022CB1B20398300F27D1C /* init.plist */,
 				DBDA43721B293ED100962B56 /* times.plist */,
+				DBC742851B311CD100F6CAA5 /* init.plist */,
 				DBF6CB311B25270E00FEC1F5 /* CWPopup */,
 				DB169D1E1B199B1C0015D4A6 /* SDWebImage */,
 				118CC8E11B18A30200AE5BD4 /* ios_pic_source */,
@@ -1146,8 +1170,6 @@
 				DBEF16021B2C0E6D00CDC07A /* coupon_go_normal_rev1.png */,
 				DB9E11FD1B22A1CF00C92D6A /* _triangle.png */,
 				DB9E11211B229CD000C92D6A /* coupon_box.png */,
-				DB9E11221B229CD000C92D6A /* coupon_go_normal.png */,
-				DB9E11231B229CD000C92D6A /* coupon_go_press.png */,
 				DB9E11241B229CD000C92D6A /* coupon_left_time_box.png */,
 				DB9E11251B229CD000C92D6A /* coupon_line.png */,
 				DB9E11261B229CD000C92D6A /* coupon_mode.png */,
@@ -1322,9 +1344,11 @@
 				DB9E11861B229CD000C92D6A /* green_rect.png */,
 				DB9E11871B229CD000C92D6A /* heart_button.png */,
 				DB9E11881B229CD000C92D6A /* line.png */,
+				DBC7429B1B315E8A00F6CAA5 /* view_detal_normal.png */,
+				DBC7429C1B315E8A00F6CAA5 /* view_detal_pressl.png */,
+				DBC7429F1B315F4700F6CAA5 /* brand_info_pressl.png */,
+				DBC742A01B315F4700F6CAA5 /* brand_info_normal.png */,
 				DB9E11891B229CD000C92D6A /* red_coupon_normal.png */,
-				DB9E118A1B229CD000C92D6A /* view_detal_normal.png */,
-				DB9E118B1B229CD000C92D6A /* view_detal_pressl.png */,
 			);
 			name = purchase;
 			path = "9.购买页切图";
@@ -1645,6 +1669,7 @@
 				DB89845E1B30442A0066EFF9 /* copper_normal.png in Resources */,
 				DB9E11EB1B229CD000C92D6A /* box_press.png in Resources */,
 				DB9E119E1B229CD000C92D6A /* Arrow_left_button.png in Resources */,
+				DBC7429D1B315E8A00F6CAA5 /* view_detal_normal.png in Resources */,
 				DB9E119C1B229CD000C92D6A /* coupon_mode.png in Resources */,
 				DB9E11971B229CD000C92D6A /* coupon_box.png in Resources */,
 				DBF1579C1B2EBD47004F0903 /* Icon.png in Resources */,
@@ -1653,17 +1678,20 @@
 				DB9E118F1B229CD000C92D6A /* facebook_login_press.png in Resources */,
 				DB9E11C61B229CD000C92D6A /* home_press.png in Resources */,
 				DB9E11DF1B229CD000C92D6A /* save_wishlist_highlight.png in Resources */,
+				DBC742861B311CD100F6CAA5 /* init.plist in Resources */,
 				DB9E11A51B229CD000C92D6A /* Pencil_icon.png in Resources */,
 				DB9E11ED1B229CD000C92D6A /* coupon_press.png in Resources */,
 				DBF1579A1B2EBD47004F0903 /* Icon-Small.png in Resources */,
 				DB9E11BF1B229CD000C92D6A /* secret_page.png in Resources */,
-				DBC022CC1B20398300F27D1C /* init.plist in Resources */,
+				DBC742931B31408500F6CAA5 /* profile_press.png in Resources */,
 				DB9E11BD1B229CD000C92D6A /* old_secret_login_press.png in Resources */,
 				DB9E11DC1B229CD000C92D6A /* line.png in Resources */,
 				DB9E11A81B229CD000C92D6A /* Arrow_left_button.png in Resources */,
+				DBC742911B31408500F6CAA5 /* wishlist_press.png in Resources */,
 				DB9E11921B229CD000C92D6A /* _hollow.png in Resources */,
 				DB9E118C1B229CD000C92D6A /* email_login_normal.png in Resources */,
 				DB9E11D21B229CD000C92D6A /* hand_like_normal.png in Resources */,
+				DBC742921B31408500F6CAA5 /* feedback_press.png in Resources */,
 				DB9E11F31B229CD000C92D6A /* heart_button.png in Resources */,
 				DBF157991B2EBD47004F0903 /* Icon-Small@2x.png in Resources */,
 				DB9E11B71B229CD000C92D6A /* new_secret_password.png in Resources */,
@@ -1681,6 +1709,7 @@
 				DB9E11E81B229CD000C92D6A /* apply_normal.png in Resources */,
 				DB89845C1B30130A0066EFF9 /* homeShadow.png in Resources */,
 				DB9E11DA1B229CD000C92D6A /* facebook.png in Resources */,
+				DBC7429E1B315E8A00F6CAA5 /* view_detal_pressl.png in Resources */,
 				DB9E11AB1B229CD000C92D6A /* finished.png in Resources */,
 				DB9E11AC1B229CD000C92D6A /* purchased.png in Resources */,
 				DB9E11E01B229CD000C92D6A /* blank_normal.png in Resources */,
@@ -1698,16 +1727,19 @@
 				DB9E11CA1B229CD000C92D6A /* profile.png in Resources */,
 				DB9E11B41B229CD000C92D6A /* new_secret_login_press.png in Resources */,
 				DB9E11C51B229CD000C92D6A /* feedback.png in Resources */,
+				DBC742941B31408500F6CAA5 /* setting_press.png in Resources */,
 				DB9E11CC1B229CD000C92D6A /* setting.png in Resources */,
 				DB9E11FE1B22A1CF00C92D6A /* _triangle.png in Resources */,
 				DBF157B61B2ED583004F0903 /* arrow.png in Resources */,
 				DB9E11DE1B229CD000C92D6A /* save_wishlist_normal.png in Resources */,
+				DBC7428E1B31408500F6CAA5 /* home_normal.png in Resources */,
 				DB9E11A41B229CD000C92D6A /* line.png in Resources */,
 				DBF157A11B2EBFF0004F0903 /* Icon-60@2x.png in Resources */,
 				DBDA438D1B29A88C00962B56 /* cash_big_box.png in Resources */,
 				DBEF16031B2C0E6D00CDC07A /* coupon_go_normal_rev1.png in Resources */,
 				DB9E118D1B229CD000C92D6A /* email_login_press.png in Resources */,
 				DB9E11D71B229CD000C92D6A /* like.png in Resources */,
+				DBC742901B31408500F6CAA5 /* orders_press.png in Resources */,
 				DB17B6831B0EC59400D43B9F /* Main.storyboard in Resources */,
 				DB9E11A11B229CD000C92D6A /* confirm_press.png in Resources */,
 				DBEF15FF1B2BED4D00CDC07A /* headPortrait.png in Resources */,
@@ -1727,6 +1759,7 @@
 				DB9E11C31B229CD000C92D6A /* home_menu.png in Resources */,
 				DB9E11E71B229CD000C92D6A /* Arrow_right.png in Resources */,
 				DB9E11A01B229CD000C92D6A /* confirm_normal.png in Resources */,
+				DBC742A21B315F4700F6CAA5 /* brand_info_normal.png in Resources */,
 				DB9E11E31B229CD000C92D6A /* _line.png in Resources */,
 				DB9E11E41B229CD000C92D6A /* _divider line.png in Resources */,
 				DB9E11BB1B229CD000C92D6A /* input_right_password.png in Resources */,
@@ -1736,9 +1769,8 @@
 				DB9E11EE1B229CD000C92D6A /* delete_normal.png in Resources */,
 				DB9E11D51B229CD000C92D6A /* hand_unlike_press.png in Resources */,
 				DB9E11A31B229CD000C92D6A /* input box.png in Resources */,
-				DB9E11F71B229CD000C92D6A /* view_detal_pressl.png in Resources */,
+				DBC742A11B315F4700F6CAA5 /* brand_info_pressl.png in Resources */,
 				DB9E12101B22E06B00C92D6A /* purchased_selected.png in Resources */,
-				DB9E11F61B229CD000C92D6A /* view_detal_normal.png in Resources */,
 				DB9E11961B229CD000C92D6A /* short line.png in Resources */,
 				DBDA43941B29A88C00962B56 /* cash_up_box.png in Resources */,
 				DB9E11D81B229CD000C92D6A /* nope.png in Resources */,
@@ -1772,13 +1804,11 @@
 				DB9E11CD1B229CD000C92D6A /* wishlist.png in Resources */,
 				DB9E11EC1B229CD000C92D6A /* coupon_normal.png in Resources */,
 				DB9E118E1B229CD000C92D6A /* facebook_login_normal.png in Resources */,
-				DB9E11981B229CD000C92D6A /* coupon_go_normal.png in Resources */,
 				DB9E11AF1B229CD000C92D6A /* _new_secret_password_normal.png in Resources */,
 				DB9E11BE1B229CD000C92D6A /* pass_input_left.png in Resources */,
 				DB17B6851B0EC59400D43B9F /* Images.xcassets in Resources */,
 				DB9E11AD1B229CD000C92D6A /* _new_secret_email_normal.png in Resources */,
 				DB9E11F41B229CD000C92D6A /* line.png in Resources */,
-				DB9E11991B229CD000C92D6A /* coupon_go_press.png in Resources */,
 				116BD8641B242998008C01DB /* home.png in Resources */,
 				DB9E11D31B229CD000C92D6A /* hand_like_press.png in Resources */,
 				DB9E11A91B229CD000C92D6A /* confirmed_normal.png in Resources */,
@@ -1787,6 +1817,8 @@
 				DBDA43921B29A88C00962B56 /* cash_press.png in Resources */,
 				DBF1579F1B2EBE13004F0903 /* Icon-60@3x.png in Resources */,
 				DB9E11C21B229CD000C92D6A /* home_divider_line.png in Resources */,
+				DBC742961B31554D00F6CAA5 /* coupon_go_normal.png in Resources */,
+				DBC7428F1B31408500F6CAA5 /* passbook_press.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

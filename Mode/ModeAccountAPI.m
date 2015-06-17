@@ -16,15 +16,20 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString* userId = [dictionary objectForKey:@"user_id"];
-        NSString* utime = [dictionary objectForKey:@"utime"];
-        NSString* token = [dictionary objectForKey:@"token"];
-        NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-        [ud setObject:userId forKey:@"user_id"];
-        [ud setObject:utime forKey:@"utime"];
-        [ud setObject:token forKey:@"token"];
-        [ud synchronize];
-        callback(@(1));
+        if (![dictionary objectForKey:@"code"]) {
+            NSString* userId = [dictionary objectForKey:@"userId"];
+            NSString* utime = [dictionary objectForKey:@"utime"];
+            NSString* token = [dictionary objectForKey:@"token"];
+            NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+            [ud setObject:userId forKey:@"userId"];
+            [ud setObject:utime forKey:@"utime"];
+            [ud setObject:token forKey:@"token"];
+            [ud synchronize];
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"signup error:%@",error);
         callback([NSNull null]);
@@ -37,15 +42,19 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString* userId = [dictionary objectForKey:@"userId"];
-        NSString* utime = [dictionary objectForKey:@"utime"];
-        NSString* token = [dictionary objectForKey:@"token"];
-        NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-        [ud setObject:userId forKey:@"userId"];
-        [ud setObject:utime forKey:@"utime"];
-        [ud setObject:token forKey:@"token"];
-        [ud synchronize];
-        callback(@(1));
+        if (![dictionary objectForKey:@"code"]) {
+            NSString* userId = [dictionary objectForKey:@"userId"];
+            NSString* utime = [dictionary objectForKey:@"utime"];
+            NSString* token = [dictionary objectForKey:@"token"];
+            NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+            [ud setObject:userId forKey:@"userId"];
+            [ud setObject:utime forKey:@"utime"];
+            [ud setObject:token forKey:@"token"];
+            [ud synchronize];
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"login error:%@",error);
         callback([NSNull null]);

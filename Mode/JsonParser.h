@@ -12,7 +12,7 @@
 @interface JsonParser : NSObject
 
 //主页面SYS_LIST
-+(ModeSysList*)parserModeListByDictionary:(NSDictionary*)dictionary;
++(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary;
 
 //商品对象解析
 +(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary;

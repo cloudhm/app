@@ -19,8 +19,8 @@
     
     self.name.text = [self.occasion.name uppercaseString];
     
-    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.occasion.pic_link] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.occasion.pic_link lastPathComponent] toDisk:YES];
+    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.occasion.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.occasion.picLink lastPathComponent] toDisk:YES];
     }];
 //    if (![[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.occasion.pic_link lastPathComponent]]) {
 //        
@@ -43,7 +43,7 @@
 -(void)click:(UIButton*)btn{
 
     if (self.occasion) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"ovcToLvc" object:nil userInfo:@{@"mode":@"occasion",@"mode_val":self.occasion.event_id,@"category":self.occasion.name}];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ovcToLvc" object:nil userInfo:@{@"mode":@"occasion",@"mode_val":self.occasion.eventId,@"category":self.occasion.name}];
     }
     
 }

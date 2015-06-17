@@ -13,7 +13,7 @@
 #import "JsonParser.h"
 @implementation ModeRunwayAPI
 +(NSNumber*)getUserID{
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
 
 //新建一组秀场心愿单接口

@@ -64,26 +64,26 @@
 //替换表内容 sql语句 多了一列type for home_list
 +(NSString*)replaceTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"replace into %@",tableName];
-    if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-        for (int i = 0 ; i<=elements.count; i++) {
-            if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
-            } else if (i == elements.count){
-                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"type"];
-            } else {
-                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
-            }
-        }
-        for (int i =0 ; i<= elements.count; i++) {
-            if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@ values(%@,",sqlStr,@"?"];
-            } else if (i == elements.count){
-                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"?"];
-            } else {
-                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
-            }
-        }
-    } else {
+//    if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
+//        for (int i = 0 ; i<=elements.count; i++) {
+//            if (i == 0) {
+//                sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
+//            } else if (i == elements.count){
+//                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"type"];
+//            } else {
+//                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
+//            }
+//        }
+//        for (int i =0 ; i<= elements.count; i++) {
+//            if (i == 0) {
+//                sqlStr = [NSString stringWithFormat:@"%@ values(%@,",sqlStr,@"?"];
+//            } else if (i == elements.count){
+//                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"?"];
+//            } else {
+//                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
+//            }
+//        }
+//    } else {
         for (int i = 0 ; i<elements.count; i++) {
             if (i == 0) {
                 sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
@@ -102,7 +102,7 @@
                 sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
             }
         }
-    }
+//    }
     
     return sqlStr;
 }
@@ -183,7 +183,7 @@
         if (result) {
             for (ModeSysList* occasion in obj) {
                 sqlStr = [self replaceTableStrWithTableName:tableName andTableElements:elements];
-                BOOL res = [db executeUpdate:sqlStr, occasion.event_id,occasion.name, occasion.pic_link,occasion.amount,keyword];
+                BOOL res = [db executeUpdate:sqlStr, occasion.eventId,occasion.name, occasion.picLink,occasion.amount,keyword];
                 if (res == YES) {
                     NSLog(@"插入或替换成功");
                 } else {
@@ -220,9 +220,9 @@
         while ([set next]) {
             ModeSysList* mstyle = [[ModeSysList alloc]init];
             mstyle.name = [set stringForColumn:@"name"];
-            mstyle.pic_link = [set stringForColumn:@"pic_link"];
-            mstyle.event_id = [NSNumber numberWithInt:[set intForColumn:@"event_id"]];
-            mstyle.amount = [NSNumber numberWithInt:[set intForColumn:@"amount"]];
+            mstyle.picLink = [set stringForColumn:@"picLink"];
+            mstyle.eventId = [set stringForColumn:@"eventId"];
+            mstyle.amount = [set stringForColumn:@"amount"];
             [fetchedDatabase addObject:mstyle];
         }
     }
@@ -261,15 +261,45 @@
         if (res) {
             NSLog(@"创建或打开wishlist成功");
             sqlStr = [self replaceTableStrWithTableName:tableName andTableElements:elements];
-            if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
-                ModeGood* modeGood = (ModeGood*)obj;
-                res = [db executeUpdate:sqlStr,modeGood.goods_id,modeGood.brand_img_link,modeGood.brand_name,modeGood.img_link,modeGood.has_coupon];
-                if (res) {
-                    NSLog(@"插入成功");
-                    return  YES;
-                } else {
-                    NSLog(@"插入失败");
+            if (![obj isKindOfClass:[NSArray class]]) {//单条数据插入
+                
+                if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
+                    ModeGood* modeGood = (ModeGood*)obj;
+                    BOOL flag = [db executeUpdate:sqlStr,modeGood.goods_id,modeGood.brand_img_link,modeGood.brand_name,modeGood.img_link,modeGood.has_coupon];
+                    res = flag&&res;
                 }
+                if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
+                    ModeSysList* modeSysList = (ModeSysList*)obj;
+                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.eventId,modeSysList.name,modeSysList.menutype,modeSysList.picLink,modeSysList.amount];
+                    res = flag&&res;
+                }
+                
+            } else {//多条数据插入
+                if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
+                    for (ModeGood* modeGood in obj) {
+                        BOOL flag = [db executeUpdate:sqlStr,modeGood.goods_id,modeGood.brand_img_link,modeGood.brand_name,modeGood.img_link,modeGood.has_coupon];
+                        if (!flag) {
+                            NSLog(@"数组插入失败");
+                            res = flag&&res;
+                        }
+                    }
+                    
+                }
+                if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
+                    for (ModeSysList* modeSysList in obj) {
+                        BOOL flag = [db executeUpdate:sqlStr,modeSysList.eventId,modeSysList.name,modeSysList.picLink,modeSysList.amount,modeSysList.menutype];
+                        if (!flag) {
+                            NSLog(@"数组插入失败");
+                            res = flag&&res;
+                        }
+                    }
+                }
+            }
+            if (res) {
+                NSLog(@"插入成功");
+                return  YES;
+            } else {
+                NSLog(@"插入失败");
             }
         } else {
             NSLog(@"创建失败");
@@ -277,6 +307,9 @@
     } else {
         NSLog(@"打开数据库失败");
     }
+    
+    
+    
     [db close];
 
     return NO;

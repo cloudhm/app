@@ -38,8 +38,8 @@
         self.button.layer.shadowOffset = CGSizeMake(2, 2);
         self.button.layer.shadowColor = [UIColor redColor].CGColor;
         self.button.layer.cornerRadius = CGRectGetWidth(self.button.bounds)/2;
-        self.button.layer.borderWidth = 3.f;
-        self.button.layer.borderColor = [UIColor clearColor].CGColor;
+        self.button.layer.borderWidth = 1.f;
+        self.button.layer.borderColor = [UIColor colorWithHexString:@"#dbdbdb"].CGColor;
         self.button.layer.masksToBounds = YES;
 //        CALayer* imageLayer = [CALayer new];
 //        imageLayer.frame = CGRectMake(btnX - 1.f, btnY - 1.f, btnW + 2.f, btnH + 2.f);

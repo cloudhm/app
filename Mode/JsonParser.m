@@ -23,12 +23,36 @@
     NSString *strDate = [df stringFromDate:createDate];
     return strDate;
 }
-+(ModeSysList*)parserModeListByDictionary:(NSDictionary*)dictionary{
++(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary{
+    NSMutableArray* allData = [NSMutableArray array];
+    NSArray* styleDics = [dictionary objectForKey:@"styles"];
+    for (NSDictionary* styleDic in styleDics) {
+        ModeSysList* modeSysList = [self parserMenuListByDictionary:styleDic withKeyword:@"styles"];
+        [allData addObject:modeSysList];
+    }
+    NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
+    for (NSDictionary* occasionDic in occasionDics) {
+        ModeSysList* modeSysList = [self parserMenuListByDictionary:occasionDic withKeyword:@"occasions"];
+        [allData addObject:modeSysList];
+    }
+    
+    NSArray* brandDics = [dictionary objectForKey:@"brands"];
+    for (NSDictionary* brandDic in brandDics) {
+        ModeSysList* modeSysList = [self parserMenuListByDictionary:brandDic withKeyword:@"brands"];
+        [allData addObject:modeSysList];
+    }
+    return allData;
+}
++(ModeSysList*)parserMenuListByDictionary:(NSDictionary*)dictionary withKeyword:(NSString*)keyword{
     ModeSysList* sysList = [[ModeSysList alloc]init];
-    sysList.event_id = [dictionary objectForKey:@"event_id"];
+    sysList.eventId = [dictionary objectForKey:@"eventId"];
     sysList.name = [dictionary objectForKey:@"name"];
     sysList.amount = [dictionary objectForKey:@"amount"];
-    sysList.pic_link = [dictionary objectForKey:@"pic_link"];
+    sysList.menutype = keyword;
+    sysList.picLink = [dictionary objectForKey:@"picLink"];
+    if ([sysList.picLink isKindOfClass:[NSNull class]]) {
+        sysList.picLink = @"";
+    }
     return sysList;
 }
 +(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary{

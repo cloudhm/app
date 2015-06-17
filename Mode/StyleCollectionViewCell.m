@@ -17,8 +17,8 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.name.text = [self.mstyle.name uppercaseString];
-    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.mstyle.pic_link] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.mstyle.pic_link lastPathComponent] toDisk:YES];
+    [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.mstyle.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.mstyle.picLink lastPathComponent] toDisk:YES];
     }];
 //    if (![[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.mstyle.pic_link lastPathComponent]]) {
 //        SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -34,7 +34,7 @@
 //    }
 }
 -(void)click:(UIButton*)btn{
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"svcToLvc" object:nil userInfo:@{@"mode":@"style",@"mode_val":self.mstyle.event_id,@"category":self.mstyle.name,@"category":self.mstyle.name}];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"svcToLvc" object:nil userInfo:@{@"mode":@"style",@"mode_val":self.mstyle.eventId,@"category":self.mstyle.name,@"category":self.mstyle.name}];
 }
 
 @end

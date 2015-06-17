@@ -9,6 +9,7 @@
 #ifndef Mode_PrefixHeaderDatabase_pch
 #define Mode_PrefixHeaderDatabase_pch
 
+
 #define TYPE @"type"
 #define OCCASION @"occasion"
 #define BRAND @"brand"
@@ -16,7 +17,7 @@
 
 
 #define HOME_LIST_TABLENAME @"list_home"
-#define HOME_LIST_ELEMENTS @[@"event_id",@"name",@"pic_link",@"amount"]
+#define HOME_LIST_ELEMENTS @[@"eventId",@"name",@"picLink",@"amount",@"menutype"]
 
 
 #define LIKENOPE_TABLENAME @"likenope"

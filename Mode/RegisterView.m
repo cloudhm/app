@@ -55,7 +55,7 @@
         firstTF.borderStyle = UITextBorderStyleNone;
         firstTF.placeholder = @"NICK NAME";
         [firstTF setValue:[UIFont fontWithName:@"Helvetica" size:16.f] forKeyPath:@"_placeholderLabel.font"];
-        firstTF.clearsOnBeginEditing = YES;
+        firstTF.clearsOnBeginEditing = NO;
         firstTF.returnKeyType=UIReturnKeyNext;
         self.tf1 = firstTF;
         self.tf1.tag = 1;
@@ -67,7 +67,7 @@
         [secondTF setValue:[UIFont fontWithName:@"Helvetica" size:16.f] forKeyPath:@"_placeholderLabel.font"];
         secondTF.font = [UIFont systemFontOfSize:16];
         secondTF.borderStyle = UITextBorderStyleNone;
-        secondTF.clearsOnBeginEditing = YES;
+        secondTF.clearsOnBeginEditing = NO;
         secondTF.returnKeyType=UIReturnKeyNext;
         self.tf2 = secondTF;
         self.tf2.tag = 2;
@@ -123,11 +123,12 @@
         (![self.tf1.text isEqualToString:@"NICK NAME"])&&
         (![self.tf2.text isEqualToString:@""])&&
         (![self.tf2.text isEqualToString:@"YOUR EMAIL"])&&
+        ([self.tf2.text containsString:@"@"])&&
         (![self.tf3.text isEqualToString:@""])&&
         [self.delegate respondsToSelector:@selector(registerView:withAttributes:)]) {
-        [self.delegate registerView:self withAttributes:@{@"nickname":self.tf1.text,@"email":self.tf2.text,@"password":self.tf3.text,@"error":[NSNull null]}];
+        [self.delegate registerView:self withAttributes:@{@"nickname":self.tf1.text,@"username":self.tf2.text,@"password":self.tf3.text,@"error":[NSNull null]}];
     } else {
-        [self.delegate registerView:self withAttributes:@{@"nickname":@"",@"email":@"",@"password":@"",@"error":@"error"}];
+        [self.delegate registerView:self withAttributes:@{@"nickname":@"",@"username":@"",@"password":@"",@"error":@"error"}];
     }
 }
 #pragma UITextFieldDelegate

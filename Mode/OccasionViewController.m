@@ -89,7 +89,10 @@ static NSString *reuseIdentifier=@"MyCell";
 //刷新数据
 -(void)refreshData{
     NSLog(@"update");
-    [ModeSysAPI requestOccasionListAndCallback:^(id obj) {
+    [ModeSysAPI requestMenuListAndCallback:^(id obj) {
+        
+    }];
+    /*{
         [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
         if ([obj isKindOfClass:[NSArray class]]) {
             [self.dataArray removeAllObjects];
@@ -101,7 +104,7 @@ static NSString *reuseIdentifier=@"MyCell";
             NSString* cautionInfo = @"Net error!Fail to connect host servers.";
             [self showAlertViewWithCautionInfo:cautionInfo];
         }
-    }];
+    }];*/
     
 }
 

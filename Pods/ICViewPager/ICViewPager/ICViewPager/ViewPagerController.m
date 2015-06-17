@@ -869,9 +869,9 @@
             contentSizeWidth += CGRectGetWidth(self.tabsView.frame) - [self.tabWidth floatValue] - [self.tabOffset floatValue];
         }
     }
-    //由于不需要翻页滚动  设定成0，0就行了
-//    self.tabsView.contentSize = CGSizeMake(contentSizeWidth, [self.tabHeight floatValue]);
-    self.tabsView.contentSize = CGSizeMake(0, 0);
+    
+    self.tabsView.contentSize = CGSizeMake(contentSizeWidth, [self.tabHeight floatValue]);
+    
     // Add contentView
     self.contentView = [self.view viewWithTag:kContentViewTag];
     

@@ -25,7 +25,7 @@
         NSString* utime = [dictionary objectForKey:@"utime"];
         NSString* last_utime = [[NSUserDefaults standardUserDefaults]objectForKey:@"menu_utime"];
         if (![utime isEqualToString:last_utime]) {
-            [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"menu_time"];
+            [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"menu_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
             NSArray* allData = [JsonParser parserMenuListByDictionary:dictionary];

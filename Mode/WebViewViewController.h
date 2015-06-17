@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//webView页面
+
 @interface WebViewViewController : UIViewController
 @property (copy, nonatomic) NSString *website;
 @end

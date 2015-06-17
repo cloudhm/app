@@ -95,7 +95,10 @@ static NSString *reuseIdentifier=@"MyCell";
 //刷新数据
 -(void)refreshData{
     NSLog(@"update");
-    [ModeSysAPI requestBrandListAndCallback:^(id obj) {
+    [ModeSysAPI requestMenuListAndCallback:^(id obj) {
+        
+    }];
+    /*{
         [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
         if ([obj isKindOfClass:[NSArray class]]) {
             [self.dataArray removeAllObjects];
@@ -111,7 +114,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //            NSString* cautionInfo = @"It's the newest.";
 //            [self showAlertViewWithCautionInfo:cautionInfo];
 //        }
-    }];
+    }];*/
     
 }
 

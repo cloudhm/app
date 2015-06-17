@@ -26,20 +26,28 @@
 +(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary{
     NSMutableArray* allData = [NSMutableArray array];
     NSArray* styleDics = [dictionary objectForKey:@"styles"];
-    for (NSDictionary* styleDic in styleDics) {
-        ModeSysList* modeSysList = [self parserMenuListByDictionary:styleDic withKeyword:@"styles"];
-        [allData addObject:modeSysList];
-    }
-    NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
-    for (NSDictionary* occasionDic in occasionDics) {
-        ModeSysList* modeSysList = [self parserMenuListByDictionary:occasionDic withKeyword:@"occasions"];
-        [allData addObject:modeSysList];
+    if (![styleDics isKindOfClass:[NSNull class]]) {
+        for (NSDictionary* styleDic in styleDics) {
+            ModeSysList* modeSysList = [self parserMenuListByDictionary:styleDic withKeyword:@"styles"];
+            [allData addObject:modeSysList];
+        }
     }
     
+    NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
+    if (![occasionDics isKindOfClass:[NSNull class]]) {
+        for (NSDictionary* occasionDic in occasionDics) {
+            ModeSysList* modeSysList = [self parserMenuListByDictionary:occasionDic withKeyword:@"occasions"];
+            [allData addObject:modeSysList];
+        }
+    }
+    
+    
     NSArray* brandDics = [dictionary objectForKey:@"brands"];
-    for (NSDictionary* brandDic in brandDics) {
-        ModeSysList* modeSysList = [self parserMenuListByDictionary:brandDic withKeyword:@"brands"];
-        [allData addObject:modeSysList];
+    if (![brandDics isKindOfClass:[NSNull class]]) {
+        for (NSDictionary* brandDic in brandDics) {
+            ModeSysList* modeSysList = [self parserMenuListByDictionary:brandDic withKeyword:@"brands"];
+            [allData addObject:modeSysList];
+        }
     }
     return allData;
 }

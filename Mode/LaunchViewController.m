@@ -9,6 +9,7 @@
 #import "LaunchViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+
 @interface LaunchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (weak, nonatomic) AppDelegate *delegate;

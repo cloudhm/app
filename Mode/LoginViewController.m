@@ -6,24 +6,40 @@
 //  Copyright (c) 2015年 YedaoDEV. All rights reserved.
 //
 
-
 #import "LoginViewController.h"
 #import "LoginView.h"
 #import "RegisterView.h"
 #import "AppDelegate.h"
 #import "ModeAccountAPI.h"
 #import "JVFloatingDrawerViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "TAlertView.h"
-@interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate>
+
+@interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate,UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (strong, nonatomic) LoginView *lvc;
 @property (strong, nonatomic) RegisterView *rvc;
 @property (weak, nonatomic) AppDelegate *delegate;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-
+@property (nonatomic, strong) NSString *userID;
+@property(nonatomic,retain) UITableView *tableView;
 @end
 
+
+
 @implementation LoginViewController
+{
+    NSIndexPath *_currentIndexPath;
+
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -52,13 +68,22 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
+#pragma mark - Actions
+
+- (IBAction)showLogin:(UIStoryboardSegue *)segue
+{
+    // This method exists in order to create an unwind segue to this controller.
+}
+
+#pragma mark - FBSDKLoginButtonDelegate
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
-    
-    
+
 }
+
 -(void)click{
     NSLog(@"...");
 }
@@ -88,10 +113,129 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)gotoFacebook:(UIButton *)sender {
-    NSLog(@"1");
+
+
+- (IBAction)gotoFacebook:(FBSDKLoginButton *)sender {
+
+
+    [self loginFB];
+    
     
 }
+- (void)loginFB
+{
+
+    //登录 添加参数 允许获取好友信息
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+      login.loginBehavior = FBSDKLoginBehaviorWeb;
+    //获取授权
+    [login logInWithReadPermissions:@[@"user_friends",@"email"]
+                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                             NSLog(@"用户信息 111:%@", result.token);
+                                NSLog(@"%@",result.token.tokenString);
+                                
+                                        NSLog(@"---%@",result.grantedPermissions);
+                                BOOL isHaveEmail =[result.grantedPermissions containsObject:@"email"];
+                                
+                                
+                                if (result.token) {
+                                                [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+                                                 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                                                     
+                                                      NSLog(@"用户信息2" );
+                                                     if (error) {
+                                                          NSLog(@"%@",error);
+                                                        
+                                    
+                                                     }else{
+                                                          NSLog(@"用户信息:%@", result);
+                                                         _userID = result[@"id"];
+                                                         if (_userID) {
+                                                             
+                                                             if (isHaveEmail) {
+                                                                 NSLog(@"haha");
+                                                                 [self fetchEmail];
+                                                                 
+                                                             }
+                                                         }
+                                                     }
+                                                 }];
+                                            }
+                                if ([result.grantedPermissions containsObject:@"user_friends"]) {
+                                    [self fetchData];
+            
+                                }else {
+                                    [self dismissViewControllerAnimated:YES completion:NULL];
+                                }
+                            }];
+
+}
+//
+- (void)fetchEmail
+{
+
+    //        初始化请求
+ 
+    NSString *string = [NSString stringWithFormat:@"%@",_userID];
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:string
+                                  parameters:@{@"me":@"email"}];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        
+        if (!error) {
+            NSLog(@"fetched email:%@", result);
+            
+        }else{
+            NSLog(@"%@",error);
+        }
+
+    }];
+
+   
+
+}
+//获取好友列表
+- (void)fetchData
+{
+    
+//        初始化请求
+    
+         FBSDKGraphRequest* request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/taggable_friends?limit=100"
+                                                       parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"
+                                                                     }];
+    
+    
+    //    发送请求
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"Picker loading error:%@", error);
+            if (!error.userInfo[FBSDKErrorLocalizedDescriptionKey]) {
+                [[[UIAlertView alloc] initWithTitle:@"Oops"
+                                            message:@"There was a problem fetching the list"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            }
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            
+            //请求成功
+            
+            NSArray *friendArray =  [NSArray arrayWithArray:result[@"data"]] ;
+           
+            NSLog(@"好友数量_______%ld",friendArray.count);
+            
+        }
+    }];
+}
+
+
+
+
 
 - (IBAction)showLoginView:(UIButton *)sender {
     NSLog(@"2");
@@ -145,6 +289,8 @@
         [self.view endEditing:YES];
     }
 }
+
+
 
 #pragma mark RegisterViewDelegate
 -(void)registerView:(RegisterView *)registerView withAttributes:(NSDictionary *)attributes{
@@ -224,19 +370,8 @@
         [AppDelegate globalDelegate].window.rootViewController = jvc;
     }) ;
 }
--(void)dealloc{
-    
-    
-    NSLog(@"loginVc dealloc");
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 @end

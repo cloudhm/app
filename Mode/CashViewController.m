@@ -11,14 +11,17 @@
 #import "UIColor+HexString.h"
 #import "AppDelegate.h"
 #import "Common.h"
-
-@interface CashViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+#import "ModeTransactionsAPI.h"
+#import "QBArrowRefreshControl.h"
+#import "TAlertView.h"
+@interface CashViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,QBRefreshControlDelegate>
 @property (strong, nonatomic) UITableView *cashTableView;
 @property (strong, nonatomic) UIView *bottomView;
 @property (strong, nonatomic) NSMutableArray *allData;
 @property (strong, nonatomic) UIView *topView;
 @property (strong, nonatomic) UILabel* mysaveCount;
 @property (strong, nonatomic) UILabel* currency;
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @end
 
 @implementation CashViewController
@@ -87,7 +90,7 @@ static NSString* reusedIdentifier = @"MyCell";
     [self.topView addSubview:l1];
     
     UILabel* l2 = [[UILabel alloc]init];
-    l2.text = @"0.00";
+    l2.text = self.currentCash;
     l2.textAlignment = NSTextAlignmentRight;
     l2.textColor = [UIColor colorWithHexString:@"#dddcdc"];
     l2.font = [UIFont fontWithName:@"Helvetica" size:55];
@@ -129,10 +132,6 @@ static NSString* reusedIdentifier = @"MyCell";
     tline.backgroundColor = [UIColor colorWithHexString:@"#888888" withAlpha:0.7];
     [bView addSubview:tline];
     
-//    UIView* bline = [[UIView alloc]initWithFrame:CGRectMake(0, 59.f, KScreenWidth, 1)];
-//    bline.backgroundColor = [UIColor colorWithHexString:@"#888888" withAlpha:0.7];
-//    [bView addSubview:bline];
-    
     UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-100.f, 5.f, 100.f, 40.f)];
     [btn setImage:[UIImage imageNamed:@"cash_normal.png"] forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:@"cash_press.png"] forState:UIControlStateHighlighted];
@@ -157,7 +156,7 @@ static NSString* reusedIdentifier = @"MyCell";
 #pragma mark UITextFieldDelegate
 
 #pragma mark UIButton - action
--(void)getCash:(UIButton*)btn{
+-(void)getCash:(UIButton*)btn{//提现接口
     NSLog(@"cash");
     [self.view endEditing:YES];
 }
@@ -177,14 +176,45 @@ static NSString* reusedIdentifier = @"MyCell";
     
     [self.cashTableView registerClass:[CashTableViewCell class] forCellReuseIdentifier:reusedIdentifier];
     
-    for (int i = 0; i<100; i++) {
-        int j = arc4random()%200 - 100;
-        NSString* str = [NSString stringWithFormat:@"%d",j];
-        [self.allData addObject:str];
-    }
+    [self getTransactionArr];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.cashTableView addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.cashTableView addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
 }
+#pragma mark - QBRefreshControlDelegate
 
-
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
+{
+    [self getTransactionArr];
+}
+-(void)getTransactionArr{
+    [ModeTransactionsAPI requestTransactionsAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];
+        if (![obj isKindOfClass:[NSNull class]]) {
+            [self.allData removeAllObjects];
+            [self.allData addObjectsFromArray:obj];
+            [self.cashTableView reloadData];
+        } else {
+            [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
+        }
+    }];
+}
+#pragma mark ShowAlertView
+-(void)showAlertViewWithErrorInfo:(NSString*)errorInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:errorInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -202,7 +232,7 @@ static NSString* reusedIdentifier = @"MyCell";
         cell = [[CashTableViewCell alloc]init];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.cashNumStr = self.allData[indexPath.row];
+    cell.transaction = self.allData[indexPath.row];
     return cell;
 }
 

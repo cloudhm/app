@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//用户交易的历史
+typedef void (^MyCallback)(id obj);
 @interface ModeTransactionsAPI : NSObject
-
++(void)requestTransactionsAndCallback:(MyCallback)callback;
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CashViewController : UIViewController
-
+@property (strong, nonatomic) NSString *currentCash;
 @end

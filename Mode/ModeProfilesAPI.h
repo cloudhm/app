@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+//用户的明细信息
 typedef void (^MyCallback)(id obj);
 @interface ModeProfilesAPI : NSObject
 +(void)requestProfilesAndCallback:(MyCallback)callback;

@@ -25,6 +25,7 @@
     NSString* profilesInfoPath = [path stringByAppendingPathComponent:[self getUserId]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [self setTimeoutIntervalBy:manager];
     [manager GET:profilesInfoPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         ProfileInfo* profileInfo = [JsonParser parserProfileInfoByDictionary:dictionary];

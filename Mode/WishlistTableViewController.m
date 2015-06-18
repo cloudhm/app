@@ -17,11 +17,11 @@
 #import "ModeProfilesAPI.h"
 #import "ProfileInfo.h"
 #import "QBArrowRefreshControl.h"
-
-
+#import "TAlertView.h"
+#import "CashViewController.h"
 @interface WishlistTableViewController ()<QBRefreshControlDelegate>
 
-@property (strong, nonatomic) NSMutableArray *wishlists;
+@property (strong, nonatomic) NSMutableArray *modeCollections;
 
 @property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @property (weak, nonatomic) IBOutlet UIImageView *brand_img;//用户头像 暂时用系统自定义头像
@@ -38,7 +38,18 @@
 
 @implementation WishlistTableViewController
 
-
+#pragma mark ShowAlertView
+-(void)showAlertViewWithErrorInfo:(NSString*)errorInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:errorInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 -(void)gotoWishlistController:(NSNotification*)noti{
     if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
         &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
@@ -67,11 +78,12 @@
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
--(NSMutableArray *)wishlists{
-    if (!_wishlists) {
-        _wishlists = [NSMutableArray array];
+
+-(NSMutableArray *)modeCollections{
+    if (!_modeCollections) {
+        _modeCollections = [NSMutableArray array];
     }
-    return _wishlists;
+    return _modeCollections;
 }
 -(void)initUI{
     self.brand_img.layer.borderWidth = 1.f;
@@ -94,14 +106,7 @@
     
     [self getDataFromNetwork];
     self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//    self.refresh = [[UIRefreshControl alloc]init];
-//    [self.refresh addTarget:self action:@selector(getDataFromNetwork:) forControlEvents:UIControlEventValueChanged];
-//    [self.tableView addSubview:self.refresh];
+ 
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
     bgView.backgroundColor = [UIColor whiteColor];
     [self.tableView addSubview:bgView];
@@ -109,7 +114,9 @@
     refreshControl.delegate = self;
     [self.tableView addSubview:refreshControl];
     self.myRefreshControl = refreshControl;
-
+    
+    
+    
 }
 #pragma mark - QBRefreshControlDelegate
 
@@ -117,18 +124,7 @@
 {
     [self getDataFromNetwork];
 }
-//-(void)refreshView{
-//    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
-//        [self.refresh endRefreshing];
-//        if (![obj isKindOfClass:[NSNull class]]) {
-//            [self.wishlists removeAllObjects];
-//            [self.wishlists addObjectsFromArray:obj];
-//            [self.tableView reloadData];
-//        } else {
-//            NSLog(@"....");
-//        }
-//    }];
-//}
+
 -(void)setProfileInfo:(ProfileInfo *)profileInfo{
     _profileInfo = profileInfo;
     self.likes.text = [NSString stringWithFormat:@"%d",profileInfo.likes.integerValue];
@@ -137,13 +133,18 @@
 -(void)getDataFromNetwork{
     [ModeProfilesAPI requestProfilesAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];
-        self.profileInfo = obj;
+        if (![obj isKindOfClass:[NSNull class]]) {
+            self.profileInfo = obj;
+        } else {
+            [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
+        }
+        
     }];
-    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
+    [ModeWishlistAPI requestCollectionsAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];
         if (![obj isKindOfClass:[NSNull class]]) {
-            [self.wishlists removeAllObjects];
-            [self.wishlists addObjectsFromArray:obj];
+            [self.modeCollections removeAllObjects];
+            [self.modeCollections addObjectsFromArray:obj];
             [self.tableView reloadData];
         } else {
             NSLog(@"failure");
@@ -158,11 +159,11 @@
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ModeWishlist* modewishlist = self.wishlists[indexPath.row];
-    return [modewishlist getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]+170.f+15.f;
+    ModeCollection* modeCollection = self.modeCollections[indexPath.row];
+    return [modeCollection getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]+170.f+15.f;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.wishlists.count;
+    return self.modeCollections.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 30.f;
@@ -177,7 +178,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"WishlistTableViewCell" owner:nil options:nil]lastObject];
     }
-    cell.modeWishlist = self.wishlists[indexPath.row];
+    cell.modeCollection = self.modeCollections[indexPath.row];
     return cell;
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -185,8 +186,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tableView.userInteractionEnabled = NO;
-    ModeWishlist* wishlist = self.wishlists[indexPath.row];
-    [ModeWishlistAPI requestWishlistsByWishlist_ID:wishlist.wishlist_id AndCallback:^(id obj) {
+    ModeCollection* modeCollection = self.modeCollections[indexPath.row];
+    [ModeWishlistAPI requestCollectionItems:modeCollection.collectionId AndCallback:^(id obj) {
         if(![obj isKindOfClass:[NSNull class]]) {
             [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
         } else {
@@ -194,6 +195,13 @@
         }
     }];
 }
+////隐藏多余的分割线
+//- (void)setExtraCellLineHidden: (UITableView *)tableView{
+//    UIView *view =[ [UIView alloc]init];
+//    view.backgroundColor = [UIColor clearColor];
+//    [tableView setTableFooterView:view];
+////    [tableView setTableHeaderView:view];
+//}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,13 +236,17 @@
 }
 */
 
+- (IBAction)gotoCash:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"gotoCash" sender:self.money.text];
+}
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"gotoCash"]) {
-        
+        CashViewController*cc = [segue destinationViewController];
+        cc.currentCash = sender;
     } else if ([segue.identifier isEqualToString:@"gotoWishlist2"]) {
         UINavigationController* navi=[segue destinationViewController];
         WishListViewController* wvc = (WishListViewController*)navi.topViewController;

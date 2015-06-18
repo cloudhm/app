@@ -15,14 +15,14 @@
         
     }
 }
-
+-(void)setTransaction:(Transaction *)transaction{
+    _transaction = transaction;
+}
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        if (!self.cashNumStr) {
-            self.cashView = [[CashView alloc]init];
-            [self.contentView addSubview:self.cashView];
-        }
+        self.cashView = [[CashView alloc]init];
+        [self.contentView addSubview:self.cashView];
     }
     return self;
 }
@@ -33,12 +33,12 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.cashView.cashNumStr = self.cashNumStr;
+    self.cashView.transaction = self.transaction;
     float padding = 10.f;
     float cashViewW = 230.f;
     float cashViewH = 90.f;
     float cashViewY = 10.f;
-    float cashViewX = self.cashNumStr.floatValue>0?(KScreenWidth - padding - cashViewW):padding;
+    float cashViewX = self.transaction.amount.floatValue>=0?(KScreenWidth - padding - cashViewW):padding;
     self.cashView.frame = CGRectMake(cashViewX, cashViewY, cashViewW, cashViewH);
     
 }

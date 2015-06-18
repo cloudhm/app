@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Transaction.h"
 @interface CashView : UIView
-@property (strong, nonatomic) NSString *cashNumStr;
+@property (strong, nonatomic) Transaction *transaction;
 @end

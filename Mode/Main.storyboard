@@ -239,7 +239,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="vA8-Ka-MKE" kind="show" identifier="gotoCash" id="lwN-nJ-FxC"/>
+                                                <action selector="gotoCash:" destination="sAZ-L8-2sM" eventType="touchUpInside" id="Rda-mt-bh1"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -692,6 +692,7 @@
                         <outlet property="likes" destination="Lj4-K5-03i" id="Yqp-fe-Gpf"/>
                         <outlet property="money" destination="HeW-Fb-3p9" id="XHi-Ee-N4Q"/>
                         <segue destination="sqc-0Q-BjB" kind="presentation" identifier="gotoWishlist2" id="lbH-oj-K9A"/>
+                        <segue destination="vA8-Ka-MKE" kind="show" identifier="gotoCash" id="4NE-kb-uTe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sB2-gD-Y4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1219,7 +1220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAP-B6-XoR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="769.5" y="1191"/>
+            <point key="canvasLocation" x="-321" y="267.75"/>
         </scene>
         <!--Brand View Controller-->
         <scene sceneID="hSi-FY-W3T">
@@ -3138,8 +3139,8 @@
         <image name="wishlist_press.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="feN-Lw-k7C"/>
+        <segue reference="Ltb-0z-8pe"/>
         <segue reference="yyR-l5-ALd"/>
-        <segue reference="dq8-8E-9FX"/>
+        <segue reference="feN-Lw-k7C"/>
     </inferredMetricsTieBreakers>
 </document>

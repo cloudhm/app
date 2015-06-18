@@ -17,6 +17,14 @@
 //获取个人信息
 +(ProfileInfo*)parserProfileInfoByDictionary:(NSDictionary*)dictionary;
 
+//获取用户历史交易信息
++(NSArray*)parserAllTransactionByTransactionArr:(NSArray*)transactionArr;
+
+//获取用户Collection列表
++(NSArray*)parserModeCollectionArrBy:(NSArray*)array;
+//获取一个collection中的items
++(NSArray*)parserCollectionItemsBy:(NSArray*)array;
+
 //商品对象解析
 +(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary;
 

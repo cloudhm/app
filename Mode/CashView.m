@@ -53,16 +53,20 @@
     }
     return self;
 }
--(void)setCashNumStr:(NSString *)cashNumStr{
-    _cashNumStr = cashNumStr;
+-(void)setTransaction:(Transaction *)transaction{
+    _transaction = transaction;
     [self layoutSubviews];
 }
+//-(void)setCashNumStr:(NSString *)cashNumStr{
+//    _cashNumStr = cashNumStr;
+//    [self layoutSubviews];
+//}
 
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.bgIV.frame = self.bounds;
     self.currency.text = @"$";
-    if (self.cashNumStr.floatValue>=0) {
+    if (self.transaction.amount.floatValue>=0) {
         
         self.addOrDel.text = @"＋";
         self.addOrDel.textColor = [UIColor colorWithHexString:@"#5a5959"];
@@ -76,15 +80,15 @@
         self.num.textColor = [UIColor colorWithHexString:@"#e43a71"];
     }
     self.addOrDel.frame = CGRectMake(15.f, 0.f, 30.f, 30.f);
-    self.num.text = [NSString stringWithFormat:@"%.2f",self.cashNumStr.floatValue>0?self.cashNumStr.floatValue:(self.cashNumStr.floatValue*(-1))];
+    self.num.text = [NSString stringWithFormat:@"%.2f",self.transaction.amount.floatValue>=0?self.transaction.amount.floatValue:(self.transaction.amount.floatValue*(-1))];
     CGSize numSize = [self.num.text sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:40]}];
     self.num.frame = CGRectMake(CGRectGetWidth(self.bounds)-5.f - numSize.width -10.f, 10.f, numSize.width, numSize.height);
     
     
     self.currency.frame = CGRectMake(CGRectGetMinX(self.num.frame)-20.f, CGRectGetMinY(self.num.frame), 30, 40);
     
-    NSString* cStr = [NSString stringWithFormat:@"%02d/%02d/%04d",arc4random()%30+1,arc4random()%12+1,arc4random()%2+2014];
-    self.ctime.text = cStr;
+//    NSString* cStr = [NSString stringWithFormat:@"%02d/%02d/%04d",arc4random()%30+1,arc4random()%12+1,arc4random()%2+2014];
+    self.ctime.text = self.transaction.ctime;
     
     
     

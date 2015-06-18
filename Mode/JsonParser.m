@@ -11,18 +11,28 @@
 #import "ModeGood.h"
 #import "GoodInfo.h"
 #import "Coupon.h"
-#import "ModeWishlist.h"
+#import "ModeCollection.h"
 #import "ModeBrandRunway.h"
 #import "PrefixHeaderDatabase.pch"
 #import "ProfileInfo.h"
+#import "Transaction.h"
+#import "CollectionItem.h"
 @implementation JsonParser
 
 #pragma mark TIME-CONVERT
-+(NSString*)getRelativeTimeBySeconds:(NSString*)seconds{
-    NSTimeInterval timeInterval = seconds.doubleValue;
-    NSDate* createDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
++(NSString*)getRelativeTimeBySeconds:(id)seconds{
+    NSTimeInterval  t = [seconds doubleValue];//把字符串或者NSNumber类型转成double
+    NSDate* createDate = [NSDate dateWithTimeIntervalSince1970:t];
     NSDateFormatter* df = [[NSDateFormatter alloc]init];
     df.dateFormat = @"YYYY.MM.dd";
+    NSString *strDate = [df stringFromDate:createDate];
+    return strDate;
+}
++(NSString*)getRelativeTimeModeTwoBySeconds:(id)seconds{
+    NSTimeInterval  t = [seconds doubleValue];//把字符串或者NSNumber类型转成double
+    NSDate* createDate = [NSDate dateWithTimeIntervalSince1970:t];
+    NSDateFormatter* df = [[NSDateFormatter alloc]init];
+    df.dateFormat = @"dd/MM/YYYY";
     NSString *strDate = [df stringFromDate:createDate];
     return strDate;
 }
@@ -98,6 +108,22 @@
     
     return profileInfo;
 }
+#pragma mark TRANSACTIONS
++(NSArray*)parserAllTransactionByTransactionArr:(NSArray*)transactionArr{
+    NSMutableArray* array = [NSMutableArray array];
+    for (NSDictionary* dictionary in transactionArr) {
+        Transaction* transaction = [self parserTransactionBy:dictionary];
+        [array addObject:transaction];
+    }
+    return array;
+}
++(Transaction*)parserTransactionBy:(NSDictionary*)dictionary{
+    Transaction* transaction = [[Transaction alloc]init];
+    NSNumber* t = [dictionary objectForKey:@"ctime"];
+    transaction.ctime = [self getRelativeTimeModeTwoBySeconds:t];
+    transaction.amount = [NSString stringWithFormat:@"%.2lf",[[dictionary objectForKey:@"amount"]doubleValue]];
+    return transaction;
+}
 #pragma mark 
 +(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary{
     ModeGood* modeGood = [[ModeGood alloc]init];
@@ -141,15 +167,46 @@
     coupon.left_amount = [dictionary objectForKey:@"left_amount"];
     return coupon;
 }
-+(ModeWishlist*)parserWishlistByDictionary:(NSDictionary*)dictionary{
-    ModeWishlist* modeWishlist = [[ModeWishlist alloc]init];
-    modeWishlist.wishlist_id = [dictionary objectForKey:@"wishlist_id"];
-    modeWishlist.comments = [dictionary objectForKey:@"comments"];
-    modeWishlist.img_link = [dictionary objectForKey:@"img_link"];
-    modeWishlist.ctime = [dictionary objectForKey:@"ctime"];
-    modeWishlist.ctime = [self getRelativeTimeBySeconds:modeWishlist.ctime];
-    return modeWishlist;
+#pragma mark Collection－List
++(NSArray*)parserModeCollectionArrBy:(NSArray*)array{
+    NSMutableArray* array1 = [NSMutableArray array];
+    for (NSDictionary* dic in array) {
+        ModeCollection* modeCollection = [self parserModeCollectionBy:dic];
+        [array1 addObject:modeCollection];
+    }
+    return array1;
 }
++(ModeCollection*)parserModeCollectionBy:(NSDictionary*)dictionary{
+    ModeCollection* modeCollection = [[ModeCollection alloc]init];
+    modeCollection.ctime = [self getRelativeTimeBySeconds:[dictionary objectForKey:@"ctime"]];
+    modeCollection.defaultThumb = [dictionary objectForKey:@"defaultThumb"];
+    modeCollection.comments = [dictionary objectForKey:@"comments"];
+    modeCollection.collectionId = [dictionary objectForKey:@"collectionId"];
+    return modeCollection;
+}
+
++(NSArray*)parserCollectionItemsBy:(NSArray*)array{
+    NSMutableArray* array1 = [NSMutableArray array];
+    for (NSDictionary* dic in array) {
+        CollectionItem* collectionItem = [self parserCollectionItemBy:dic];
+        [array1 addObject:collectionItem];
+    }
+    return array1;
+}
++(CollectionItem*)parserCollectionItemBy:(NSDictionary*)dictionary{
+    CollectionItem* collectionItem = [[CollectionItem alloc]init];
+    collectionItem.itemId = [dictionary objectForKey:@"itemId"];
+    return collectionItem;
+}
+//+(ModeWishlist*)parserWishlistByDictionary:(NSArray*)array{
+//    ModeWishlist* modeWishlist = [[ModeWishlist alloc]init];
+//    modeWishlist.wishlist_id = [dictionary objectForKey:@"wishlist_id"];
+//    modeWishlist.comments = [dictionary objectForKey:@"comments"];
+//    modeWishlist.img_link = [dictionary objectForKey:@"img_link"];
+//    modeWishlist.ctime = [dictionary objectForKey:@"ctime"];
+//    modeWishlist.ctime = [self getRelativeTimeBySeconds:modeWishlist.ctime];
+//    return modeWishlist;
+//}
 +(ModeBrandRunway*)parserBrandRunwayByDictionary:(NSDictionary*)dictionary{
     ModeBrandRunway* brandRunway = [[ModeBrandRunway alloc]init];
     brandRunway.ctime = [dictionary objectForKey:@"ctime"];

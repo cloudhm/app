@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CashView.h"
+#import "Transaction.h"
 @interface CashTableViewCell : UITableViewCell
-@property (copy, nonatomic) NSString *cashNumStr;
+@property (strong, nonatomic) Transaction *transaction;
 @property (strong, nonatomic) CashView *cashView;
 @end

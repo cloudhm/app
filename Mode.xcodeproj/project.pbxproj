@@ -188,6 +188,8 @@
 		14F2B8B51B27AD750047A039 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B41B27AD750047A039 /* Bolts.framework */; };
 		14F2B8B71B27ADCC0047A039 /* FacebookSDKStrings.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B61B27ADCC0047A039 /* FacebookSDKStrings.bundle */; };
 		AA9827CDCB6C528EADAAF092 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B79F925EE1658CDFB122AC77 /* libPods.a */; };
+		DB0CA3F81B327FC800611C82 /* red_CouponNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0CA3F61B327FC800611C82 /* red_CouponNormal.png */; };
+		DB0CA3F91B327FC800611C82 /* red_CouponSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0CA3F71B327FC800611C82 /* red_CouponSelected.png */; };
 		DB0D53231B0ECDC50012E321 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0D53221B0ECDC50012E321 /* LoginViewController.m */; };
 		DB169D401B199B1C0015D4A6 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB169D201B199B1C0015D4A6 /* MKAnnotationView+WebCache.m */; };
 		DB169D411B199B1C0015D4A6 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = DB169D221B199B1C0015D4A6 /* NSData+ImageContentType.m */; };
@@ -480,6 +482,8 @@
 		7573F3FA989C4D6E242F66EC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B79BDD8BA03DB78EF24C2D6A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B79F925EE1658CDFB122AC77 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB0CA3F61B327FC800611C82 /* red_CouponNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_CouponNormal.png; sourceTree = "<group>"; };
+		DB0CA3F71B327FC800611C82 /* red_CouponSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_CouponSelected.png; sourceTree = "<group>"; };
 		DB0D53211B0ECDC40012E321 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DB0D53221B0ECDC50012E321 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DB169D1F1B199B1C0015D4A6 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -818,6 +822,8 @@
 				14080E851B31889B00060666 /* _hollow.png */,
 				14080E861B31889B00060666 /* _menu.png */,
 				14080E871B31889B00060666 /* _solid.png */,
+				DB0CA3F61B327FC800611C82 /* red_CouponNormal.png */,
+				DB0CA3F71B327FC800611C82 /* red_CouponSelected.png */,
 				14080E881B31889B00060666 /* long line.png */,
 				14080E891B31889B00060666 /* short line.png */,
 				14080E7A1B31889300060666 /* email_login_press.png */,
@@ -992,8 +998,8 @@
 		DB0D53411B0F0B330012E321 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				DB17B67B1B0EC59400D43B9F /* AppDelegate.h */,
 				14080E221B31848B00060666 /* Main.storyboard */,
+				DB17B67B1B0EC59400D43B9F /* AppDelegate.h */,
 				DB17B67C1B0EC59400D43B9F /* AppDelegate.m */,
 			);
 			name = Others;
@@ -1132,7 +1138,6 @@
 				14C235DC1B318208006A63F5 /* init.plist */,
 				14C235D61B316560006A63F5 /* Flurry */,
 				14F2B8971B27AA630047A039 /* FacebookSDK */,
-				DBF6CB411B25707300FEC1F5 /* FontResource */,
 				DB169D1E1B199B1C0015D4A6 /* SDWebImage */,
 				DB17B6781B0EC59400D43B9F /* Info.plist */,
 				DB17B6791B0EC59400D43B9F /* main.m */,
@@ -1271,13 +1276,6 @@
 			name = Wishlist;
 			sourceTree = "<group>";
 		};
-		DBF6CB411B25707300FEC1F5 /* FontResource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = FontResource;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1381,6 +1379,7 @@
 				14080EDE1B3188D300060666 /* tab_line.png in Resources */,
 				14F2B8AA1B27AA630047A039 /* LICENSE in Resources */,
 				14080EBE1B3188C200060666 /* new_secret_box.png in Resources */,
+				DB0CA3F91B327FC800611C82 /* red_CouponSelected.png in Resources */,
 				14080E621B31888300060666 /* Icon-60@2x.png in Resources */,
 				14080E721B31888B00060666 /* cash_down_box.png in Resources */,
 				14080ED31B3188CB00060666 /* pass_input_left.png in Resources */,
@@ -1392,6 +1391,7 @@
 				14080E5A1B31887300060666 /* startGo.png in Resources */,
 				14080E831B31889300060666 /* login_page.png in Resources */,
 				14080EA81B3188AB00060666 /* confirm_normal.png in Resources */,
+				DB0CA3F81B327FC800611C82 /* red_CouponNormal.png in Resources */,
 				14080E521B31887300060666 /* feedback_press.png in Resources */,
 				14080ECF1B3188CB00060666 /* input_right_email_normal.png in Resources */,
 				114B7E321B31CCF80066B4EE /* Images.xcassets in Resources */,
@@ -1719,7 +1719,7 @@
 					"$(PROJECT_DIR)/Mode/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d529e67f-df8e-4018-8993-5b9e7b549c28";
+				PROVISIONING_PROFILE = "a86a787e-d0d3-4150-84b1-076ac9748419";
 			};
 			name = Debug;
 		};
@@ -1744,7 +1744,7 @@
 					"$(PROJECT_DIR)/Mode/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d529e67f-df8e-4018-8993-5b9e7b549c28";
+				PROVISIONING_PROFILE = "a86a787e-d0d3-4150-84b1-076ac9748419";
 			};
 			name = Release;
 		};

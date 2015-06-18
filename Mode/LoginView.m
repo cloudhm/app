@@ -102,9 +102,9 @@
         (![self.tf1.text isEqualToString:@"JOIN WITH EMAIL"])&&
         (![self.tf2.text isEqualToString:@""])&&
         [self.delegate respondsToSelector:@selector(loginView:withAttributes:)]) {
-        [self.delegate loginView:self withAttributes:@{@"username":self.tf1.text,@"password":self.tf2.text,@"error":[NSNull null]}];
+        [self.delegate loginView:self withAttributes:@{@"email":self.tf1.text,@"password":self.tf2.text,@"error":[NSNull null]}];
     } else {
-        [self.delegate loginView:self withAttributes:@{@"username":@"",@"password":@"",@"error":@"error"}];
+        [self.delegate loginView:self withAttributes:@{@"email":@"",@"password":@"",@"error":@"error"}];
     }
 }
 @end

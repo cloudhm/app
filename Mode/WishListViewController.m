@@ -173,7 +173,7 @@
     [self.rightView autoRemoveConstraintsAffectingViewAndSubviews];
     
     [self.rightView autoPinToTopLayoutGuideOfViewController:self withInset:(CGRectGetMaxY(self.bigSV.frame) + 2* 10.f)];
-    [self.rightView autoPinToBottomLayoutGuideOfViewController:self withInset:40.0f];
+    [self.rightView autoPinToBottomLayoutGuideOfViewController:self withInset:50.0f];
     [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:KScreenWidth/2];
     [self.rightView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0.0f];
     [self resetAllElementsInRightView];
@@ -227,7 +227,10 @@
     [self.brandImageView autoSetDimensionsToSize:CGSizeMake(18.f, 18.f)];
     [self.brandImageView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10.f];
     [self.brandImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:1.f];
-    
+    self.brandImageView.layer.borderWidth = 1.f;
+    self.brandImageView.layer.borderColor = [UIColor colorWithHexString:@"#dbdbdb"].CGColor;
+    self.brandImageView.layer.cornerRadius = 9.f;
+    self.brandImageView.layer.masksToBounds = YES;
 //    self.goods_title.frame = CGRectMake(10.f, 0.f, frame.size.width, frame.size.height+10.f);
 //    
 //    
@@ -390,7 +393,7 @@
     UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, CGRectGetMaxY(self.bigSV.frame)+padding, KScreenWidth - 4*padding, 2.f)];
     topLineView.backgroundColor = [UIColor colorWithHexString:@"#dbdbdb"];
     [self.view addSubview:topLineView];
-    UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, KScreenHeight- kStatusNaviBarH - 40.f, KScreenWidth - 4* padding, 2.f)];
+    UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, KScreenHeight- kStatusNaviBarH - 50.f, KScreenWidth - 4* padding, 2.f)];
     bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#dbdbdb"];
     [self.view addSubview:bottomLineView];
 }
@@ -399,7 +402,7 @@
     float leftViewX = 0;
     float leftViewY = CGRectGetMaxY(self.bigSV.frame) + 2* padding;
     float leftViewW = KScreenWidth/2;
-    float leftViewH = KScreenHeight - kStatusNaviBarH - leftViewY - 40.f;
+    float leftViewH = KScreenHeight - kStatusNaviBarH - leftViewY - 50.f;
     UIView* leftView = [[UIView alloc]initWithFrame:CGRectMake(leftViewX, leftViewY, leftViewW, leftViewH)];
     [self.view addSubview:leftView];
     
@@ -503,8 +506,9 @@
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-- (IBAction)gotoBrandRunway:(UIButton *)sender {
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES; self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+- (IBAction)gotoBrandRunway:(UIButton *)sender {//跳转时响应
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     [self performSegueWithIdentifier:@"gotoBrandRunway" sender:nil];
 }
 

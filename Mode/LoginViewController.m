@@ -18,6 +18,7 @@
 #import "TAlertView.h"
 
 @interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate,UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (strong, nonatomic) LoginView *lvc;
 @property (strong, nonatomic) RegisterView *rvc;
@@ -35,6 +36,7 @@
 
 }
 
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -46,9 +48,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     
-    if ([ud objectForKey:@"token"]) {
-        NSInteger utime  = [[ud objectForKey:@"utime"]integerValue];
-        NSInteger currentTime = (NSInteger)[NSDate date].timeIntervalSince1970;
+    if ([ud objectForKey:@"token"]) {//token存在则确定是否在有效期内
+        NSTimeInterval utime  = [ud doubleForKey:@"utime"];
+        NSTimeInterval currentTime = [NSDate date].timeIntervalSince1970;
         if (utime>=currentTime) {
             self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
             [self.activityIndicatorView startAnimating];
@@ -180,7 +182,7 @@
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:string
-                                  parameters:@{@"me":@"email"}];
+                                  parameters:@{@"fields":@"email"}];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                           id result,
                                           NSError *error) {

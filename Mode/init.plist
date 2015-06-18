@@ -3,10 +3,6 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900018</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -15,10 +11,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900017</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -27,10 +19,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900016</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -39,10 +27,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900015</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -51,10 +35,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900014</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -63,10 +43,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900013</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -75,10 +51,6 @@
 		<string>occasion</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900012</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -87,10 +59,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900011</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -99,10 +67,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900010</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -111,10 +75,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900009</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -123,10 +83,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900008</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -135,10 +91,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900007</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -147,10 +99,6 @@
 		<string>brand</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900006</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -159,10 +107,6 @@
 		<string>style</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900005</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -171,10 +115,6 @@
 		<string>style</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900004</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -183,10 +123,6 @@
 		<string>style</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900003</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -195,10 +131,6 @@
 		<string>style</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900002</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>
@@ -207,10 +139,6 @@
 		<string>style</string>
 	</dict>
 	<dict>
-		<key>amount</key>
-		<string></string>
-		<key>eventId</key>
-		<string>900001</string>
 		<key>name</key>
 		<string></string>
 		<key>picLink</key>

@@ -39,6 +39,6 @@
 }
 -(void)click:(UIButton*)btn{
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"mode":@"brand",@"mode_val":self.brand.eventId,@"category":self.brand.name}];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"mode":@"brand",@"category":self.brand.name}];
 }
 @end

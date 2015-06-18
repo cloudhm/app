@@ -10,8 +10,6 @@
 	<string>Mode</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4F796A939DA9105FB9073BE6A05F4D68B0452AAD</key>
-		<string>github.com:cloudhm/app</string>
 		<key>D5F1517F0978CFE6F4F76CA799A92453769FAB41</key>
 		<string>github.com:cloudhm/app.git</string>
 	</dict>
@@ -19,8 +17,6 @@
 	<string>Mode.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4F796A939DA9105FB9073BE6A05F4D68B0452AAD</key>
-		<string>..</string>
 		<key>D5F1517F0978CFE6F4F76CA799A92453769FAB41</key>
 		<string>../../20150617</string>
 	</dict>
@@ -29,7 +25,7 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4F796A939DA9105FB9073BE6A05F4D68B0452AAD</string>
+	<string>D5F1517F0978CFE6F4F76CA799A92453769FAB41</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,7 +40,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4F796A939DA9105FB9073BE6A05F4D68B0452AAD</string>
+			<string>D5F1517F0978CFE6F4F76CA799A92453769FAB41</string>
 			<key>IDESourceControlWCCName</key>
 			<string>mode</string>
 		</dict>

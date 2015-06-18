@@ -12,7 +12,11 @@
 #import "JsonParser.h"
 #import "ModeWishlist.h"
 @implementation ModeWishlistAPI
-
++(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+}
 +(NSString*)getUserID{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }

@@ -43,7 +43,7 @@
 -(void)click:(UIButton*)btn{
 
     if (self.occasion) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"ovcToLvc" object:nil userInfo:@{@"mode":@"occasion",@"mode_val":self.occasion.eventId,@"category":self.occasion.name}];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ovcToLvc" object:nil userInfo:@{@"mode":@"occasion",@"category":self.occasion.name}];
     }
     
 }

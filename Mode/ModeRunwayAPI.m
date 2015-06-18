@@ -12,6 +12,11 @@
 #import "ModeGood.h"
 #import "JsonParser.h"
 @implementation ModeRunwayAPI
++(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+}
 +(NSNumber*)getUserID{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }

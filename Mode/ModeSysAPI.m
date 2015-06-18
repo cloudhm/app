@@ -13,6 +13,11 @@
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
 @implementation ModeSysAPI
++(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+}
 +(NSString*)getUserId{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }

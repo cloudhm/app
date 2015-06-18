@@ -183,7 +183,7 @@
         if (result) {
             for (ModeSysList* occasion in obj) {
                 sqlStr = [self replaceTableStrWithTableName:tableName andTableElements:elements];
-                BOOL res = [db executeUpdate:sqlStr, occasion.eventId,occasion.name, occasion.picLink,occasion.amount,keyword];
+                BOOL res = [db executeUpdate:sqlStr, occasion.name, occasion.picLink,keyword];
                 if (res == YES) {
                     NSLog(@"插入或替换成功");
                 } else {
@@ -221,8 +221,8 @@
             ModeSysList* mstyle = [[ModeSysList alloc]init];
             mstyle.name = [set stringForColumn:@"name"];
             mstyle.picLink = [set stringForColumn:@"picLink"];
-            mstyle.eventId = [set stringForColumn:@"eventId"];
-            mstyle.amount = [set stringForColumn:@"amount"];
+//            mstyle.eventId = [set stringForColumn:@"eventId"];
+//            mstyle.amount = [set stringForColumn:@"amount"];
             [fetchedDatabase addObject:mstyle];
         }
     }
@@ -270,7 +270,7 @@
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
                     ModeSysList* modeSysList = (ModeSysList*)obj;
-                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.eventId,modeSysList.name,modeSysList.menutype,modeSysList.picLink,modeSysList.amount];
+                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.menutype,modeSysList.picLink];
                     res = flag&&res;
                 }
                 
@@ -287,7 +287,7 @@
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
                     for (ModeSysList* modeSysList in obj) {
-                        BOOL flag = [db executeUpdate:sqlStr,modeSysList.eventId,modeSysList.name,modeSysList.picLink,modeSysList.amount,modeSysList.menutype];
+                        BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.picLink,modeSysList.menutype];
                         if (!flag) {
                             NSLog(@"数组插入失败");
                             res = flag&&res;

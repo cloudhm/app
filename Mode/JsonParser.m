@@ -53,9 +53,9 @@
 }
 +(ModeSysList*)parserMenuListByDictionary:(NSDictionary*)dictionary withKeyword:(NSString*)keyword{
     ModeSysList* sysList = [[ModeSysList alloc]init];
-    sysList.eventId = [dictionary objectForKey:@"eventId"];
+//    sysList.eventId = [dictionary objectForKey:@"eventId"];
     sysList.name = [dictionary objectForKey:@"name"];
-    sysList.amount = [dictionary objectForKey:@"amount"];
+//    sysList.amount = [dictionary objectForKey:@"amount"];
     sysList.menutype = keyword;
     sysList.picLink = [dictionary objectForKey:@"picLink"];
     if ([sysList.picLink isKindOfClass:[NSNull class]]) {

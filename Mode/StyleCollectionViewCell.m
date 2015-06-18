@@ -34,7 +34,7 @@
 //    }
 }
 -(void)click:(UIButton*)btn{
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"svcToLvc" object:nil userInfo:@{@"mode":@"style",@"mode_val":self.mstyle.eventId,@"category":self.mstyle.name,@"category":self.mstyle.name}];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"svcToLvc" object:nil userInfo:@{@"mode":@"style",@"category":self.mstyle.name,@"category":self.mstyle.name}];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 
 #define HOME_LIST_TABLENAME @"list_home"
-#define HOME_LIST_ELEMENTS @[@"eventId",@"name",@"picLink",@"amount",@"menutype"]
+#define HOME_LIST_ELEMENTS @[@"name",@"picLink",@"menutype"]
 
 
 #define LIKENOPE_TABLENAME @"likenope"

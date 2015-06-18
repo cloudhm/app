@@ -11,7 +11,7 @@
 @interface ModeSysList : NSObject
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* picLink;
-@property (nonatomic,strong) NSString* amount;
-@property (nonatomic,strong) NSString* eventId;
+//@property (nonatomic,strong) NSString* amount;
+//@property (nonatomic,strong) NSString* eventId;
 @property (strong, nonatomic) NSString *menutype;
 @end

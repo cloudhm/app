@@ -21,7 +21,7 @@
 		<string>../../20150617</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:cloudhm/app</string>
+	<string>github.com:cloudhm/app.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

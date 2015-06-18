@@ -13,20 +13,25 @@
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://192.168.1.118:8080"
+#define HOSTADDRESS @"http://120.26.107.42:8080"
 
 
 //账号接口
-#define ACCOUNT_SIGNUP [HOSTADDRESS stringByAppendingPathComponent:@"signup"]//邮箱注册
-#define ACCOUNT_LOGIN [HOSTADDRESS stringByAppendingPathComponent:@"login"]//账号登陆
+#define ACCOUNT_SIGNUP [HOSTADDRESS stringByAppendingPathComponent:@"signup"]//邮箱注册 POST
+#define ACCOUNT_LOGIN [HOSTADDRESS stringByAppendingPathComponent:@"login"]//账号登陆 POST
 
 //系统接口
-#define MENU [HOSTADDRESS stringByAppendingPathComponent:@"menu"]//获取所有主页面数据
+#define MENU [HOSTADDRESS stringByAppendingPathComponent:@"menus"]//获取所有主页面数据  GET
 /*  // deprecated interface
 #define BRAND_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/brands"] //获取活跃中的品牌名称列表
 #define OCCASION_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/occasions"] //获取场合列表
 #define STYLE_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/styles"] //获取商品风格列表
 */
+
+
+//http://120.26.107.42:8080/profiles/users/362
+//获得用户的明细信息
+#define PROFILEINFO [HOSTADDRESS stringByAppendingPathComponent:@"profiles/users"]//用户明细信息 GET
 
 //商品接口
 #define GET_GOODS @"http://120.26.107.42/api/goods/get_goods" //获取商品的基本信息

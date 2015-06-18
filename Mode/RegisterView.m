@@ -131,11 +131,11 @@
         [self.delegate registerView:self withAttributes:@{@"username":@"",@"email":@"",@"password":@"",@"error":@"error"}];
     }
 }
-#pragma UITextFieldDelegate
+//#pragma UITextFieldDelegate
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    textField.text = @"";
-}
+//-(void)textFieldDidBeginEditing:(UITextField *)textField{
+//    textField.text = @"";
+//}
 //- (void)textFieldDidEndEditing:(UITextField *)textField{
 //    if (textField.tag==1) {
 //        [self.tf2 becomeFirstResponder];

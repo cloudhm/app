@@ -212,6 +212,9 @@
 		DB17B6801B0EC59400D43B9F /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB17B67F1B0EC59400D43B9F /* LaunchViewController.m */; };
 		DB17B6941B0EC59400D43B9F /* ModeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB17B6931B0EC59400D43B9F /* ModeTests.m */; };
 		DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB24CFDB1B267E3B00102403 /* WebViewViewController.m */; };
+		DBE4904E1B32A29800DAA443 /* ModeTransactionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE4904D1B32A29800DAA443 /* ModeTransactionsAPI.m */; };
+		DBE490511B32A2A900DAA443 /* ModeProfilesAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE490501B32A2A900DAA443 /* ModeProfilesAPI.m */; };
+		DBE490541B32BAF300DAA443 /* ProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE490531B32BAF300DAA443 /* ProfileInfo.m */; };
 		DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */; };
 /* End PBXBuildFile section */
 
@@ -531,6 +534,12 @@
 		DB17B6931B0EC59400D43B9F /* ModeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeTests.m; sourceTree = "<group>"; };
 		DB24CFDA1B267E3B00102403 /* WebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
 		DB24CFDB1B267E3B00102403 /* WebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
+		DBE4904C1B32A29800DAA443 /* ModeTransactionsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeTransactionsAPI.h; sourceTree = "<group>"; };
+		DBE4904D1B32A29800DAA443 /* ModeTransactionsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeTransactionsAPI.m; sourceTree = "<group>"; };
+		DBE4904F1B32A2A900DAA443 /* ModeProfilesAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeProfilesAPI.h; sourceTree = "<group>"; };
+		DBE490501B32A2A900DAA443 /* ModeProfilesAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeProfilesAPI.m; sourceTree = "<group>"; };
+		DBE490521B32BAF300DAA443 /* ProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInfo.h; sourceTree = "<group>"; };
+		DBE490531B32BAF300DAA443 /* ProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInfo.m; sourceTree = "<group>"; };
 		DBF6CB2E1B25270A00FEC1F5 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -574,6 +583,11 @@
 		114B7E2E1B31C46B0066B4EE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				14080E061B31846F00060666 /* PrefixHeader.pch */,
+				DBE4904F1B32A2A900DAA443 /* ModeProfilesAPI.h */,
+				DBE490501B32A2A900DAA443 /* ModeProfilesAPI.m */,
+				DBE4904C1B32A29800DAA443 /* ModeTransactionsAPI.h */,
+				DBE4904D1B32A29800DAA443 /* ModeTransactionsAPI.m */,
 				14080DF71B31844A00060666 /* ModeAccountAPI.h */,
 				14080DF81B31844A00060666 /* ModeAccountAPI.m */,
 				14080DFD1B31845900060666 /* ModeRunwayAPI.h */,
@@ -607,7 +621,6 @@
 				14080E121B31846F00060666 /* UIView+AutoLayout.m */,
 				14080E131B31846F00060666 /* UIView+Extension.h */,
 				14080E141B31846F00060666 /* UIView+Extension.m */,
-				14080E061B31846F00060666 /* PrefixHeader.pch */,
 				14080E091B31846F00060666 /* PrefixFont.pch */,
 			);
 			name = Others;
@@ -976,6 +989,8 @@
 			children = (
 				14080F311B318ED400060666 /* BrandInfo.h */,
 				14080F321B318ED400060666 /* BrandInfo.m */,
+				DBE490521B32BAF300DAA443 /* ProfileInfo.h */,
+				DBE490531B32BAF300DAA443 /* ProfileInfo.m */,
 				DB4BDDD91B2138A300EFDE22 /* BrandRunway */,
 				116D388A1B1B3934009E9D14 /* Wishlist */,
 				116D38891B1B3923009E9D14 /* Runway */,
@@ -1531,6 +1546,7 @@
 				14080E1E1B31847000060666 /* UIView+AutoLayout.m in Sources */,
 				14080EFB1B318DE300060666 /* OrderViewController.m in Sources */,
 				14080F5D1B318F4B00060666 /* PassbookTableViewCell.m in Sources */,
+				DBE4904E1B32A29800DAA443 /* ModeTransactionsAPI.m in Sources */,
 				14080F1E1B318E9000060666 /* JVLeftDrawerTableViewController.m in Sources */,
 				DB17B67D1B0EC59400D43B9F /* AppDelegate.m in Sources */,
 				14080DFC1B31845100060666 /* ModeGoodAPI.m in Sources */,
@@ -1586,10 +1602,12 @@
 				14080F3E1B318F0300060666 /* GoodInfo.m in Sources */,
 				14080F501B318F2700060666 /* WishlistView.m in Sources */,
 				14080F391B318EF400060666 /* ModeGood.m in Sources */,
+				DBE490511B32A2A900DAA443 /* ModeProfilesAPI.m in Sources */,
 				DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */,
 				14080F4E1B318F2700060666 /* ColorView.m in Sources */,
 				14080E021B31845F00060666 /* ModeWishlistAPI.m in Sources */,
 				14080F111B318E6100060666 /* OrderConfirmViewController.m in Sources */,
+				DBE490541B32BAF300DAA443 /* ProfileInfo.m in Sources */,
 				14080F091B318E4E00060666 /* ShareViewController.m in Sources */,
 				14080F731B318F9D00060666 /* CustomCollectionViewCell.m in Sources */,
 				14080F421B318F1000060666 /* ModeSysList.m in Sources */,

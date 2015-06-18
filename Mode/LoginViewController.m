@@ -26,6 +26,13 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) NSString *userID;
 @property(nonatomic,retain) UITableView *tableView;
+
+
+
+
+
+
+
 @end
 
 
@@ -118,7 +125,7 @@
 
 
 - (IBAction)gotoFacebook:(FBSDKLoginButton *)sender {
-
+    
 
     [self loginFB];
     
@@ -240,7 +247,13 @@
 
 
 - (IBAction)showLoginView:(UIButton *)sender {
-    NSLog(@"2");
+#warning 暂时跳过此阶段
+    [[NSUserDefaults standardUserDefaults]setObject:@"362" forKey:@"userId"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self enterHostView];
+    
+    
+    return;
     if (self.lvc == nil) {
         self.lvc = [[LoginView alloc]init];
         self.lvc.delegate = self;

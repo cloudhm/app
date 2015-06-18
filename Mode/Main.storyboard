@@ -687,6 +687,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="brand_img" destination="ejS-PB-hic" id="1Ov-0o-T6M"/>
+                        <outlet property="following" destination="X8x-GZ-ybZ" id="5qr-6e-DXc"/>
+                        <outlet property="invitaions" destination="kUy-eB-iAF" id="u2L-2I-dhb"/>
+                        <outlet property="likes" destination="Lj4-K5-03i" id="Yqp-fe-Gpf"/>
+                        <outlet property="money" destination="HeW-Fb-3p9" id="XHi-Ee-N4Q"/>
                         <segue destination="sqc-0Q-BjB" kind="presentation" identifier="gotoWishlist2" id="lbH-oj-K9A"/>
                     </connections>
                 </tableViewController>

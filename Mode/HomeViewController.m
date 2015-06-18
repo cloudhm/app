@@ -37,9 +37,7 @@
 
     
     NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
-    [ud removeObjectForKey:@"brandlist_utime"];
-    [ud removeObjectForKey:@"occssionlist_utime"];
-    [ud removeObjectForKey:@"stylelist_utime"];
+    [ud removeObjectForKey:@"menu_utime"];
     [ud synchronize];
     
 }

@@ -10,10 +10,10 @@
 #define Mode_PrefixHeaderDatabase_pch
 
 
-#define TYPE @"type"
-#define OCCASION @"occasion"
-#define BRAND @"brand"
-#define STYLE @"style"
+#define TYPE @"menutype"
+#define OCCASION @"occasions"
+#define BRAND @"brands"
+#define STYLE @"styles"
 
 
 #define HOME_LIST_TABLENAME @"list_home"

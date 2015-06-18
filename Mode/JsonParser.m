@@ -13,8 +13,11 @@
 #import "Coupon.h"
 #import "ModeWishlist.h"
 #import "ModeBrandRunway.h"
-
+#import "PrefixHeaderDatabase.pch"
+#import "ProfileInfo.h"
 @implementation JsonParser
+
+#pragma mark TIME-CONVERT
 +(NSString*)getRelativeTimeBySeconds:(NSString*)seconds{
     NSTimeInterval timeInterval = seconds.doubleValue;
     NSDate* createDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
@@ -23,46 +26,79 @@
     NSString *strDate = [df stringFromDate:createDate];
     return strDate;
 }
+#pragma mark MENUS
 +(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary{
     NSMutableArray* allData = [NSMutableArray array];
-    NSArray* styleDics = [dictionary objectForKey:@"styles"];
-    if (![styleDics isKindOfClass:[NSNull class]]) {
-        for (NSDictionary* styleDic in styleDics) {
-            ModeSysList* modeSysList = [self parserMenuListByDictionary:styleDic withKeyword:@"styles"];
-            [allData addObject:modeSysList];
-        }
+    NSArray* stylesArr = [dictionary objectForKey:STYLE];
+    if (![stylesArr isKindOfClass:[NSNull class]]) {
+        NSArray* modeSysLists = [self parserMenuListByArray:stylesArr withKeyword:STYLE];
+        [allData addObjectsFromArray:modeSysLists];
+
     }
-    
-    NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
-    if (![occasionDics isKindOfClass:[NSNull class]]) {
-        for (NSDictionary* occasionDic in occasionDics) {
-            ModeSysList* modeSysList = [self parserMenuListByDictionary:occasionDic withKeyword:@"occasions"];
-            [allData addObject:modeSysList];
-        }
+    NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
+    if (![occasionsArr isKindOfClass:[NSNull class]]) {
+        NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
+        [allData addObjectsFromArray:modeSysLists];
+
     }
-    
-    
-    NSArray* brandDics = [dictionary objectForKey:@"brands"];
-    if (![brandDics isKindOfClass:[NSNull class]]) {
-        for (NSDictionary* brandDic in brandDics) {
-            ModeSysList* modeSysList = [self parserMenuListByDictionary:brandDic withKeyword:@"brands"];
-            [allData addObject:modeSysList];
-        }
+    NSArray* brandsArr = [dictionary objectForKey:BRAND];
+    if (![brandsArr isKindOfClass:[NSNull class]]) {
+        NSArray* modeSysLists = [self parserMenuListByArray:brandsArr withKeyword:BRAND];
+        [allData addObjectsFromArray:modeSysLists];
+
     }
     return allData;
 }
-+(ModeSysList*)parserMenuListByDictionary:(NSDictionary*)dictionary withKeyword:(NSString*)keyword{
++(NSArray*)parserMenuListByArray:(NSArray*)array withKeyword:(NSString*)keyword{
+    NSMutableArray* array1 = [NSMutableArray array];
+    for (NSArray* subArray in array) {
+        ModeSysList* sysList = [self parserMenuListBySubArray:subArray withKeyword:keyword];
+        [array1 addObject:sysList];
+    }
+    return array1;
+}
++(ModeSysList*)parserMenuListBySubArray:(NSArray*)subArray withKeyword:(NSString*)keyword{
     ModeSysList* sysList = [[ModeSysList alloc]init];
-//    sysList.eventId = [dictionary objectForKey:@"eventId"];
-    sysList.name = [dictionary objectForKey:@"name"];
-//    sysList.amount = [dictionary objectForKey:@"amount"];
+    sysList.name = subArray[0];
+    sysList.picLink = subArray[1];
     sysList.menutype = keyword;
-    sysList.picLink = [dictionary objectForKey:@"picLink"];
     if ([sysList.picLink isKindOfClass:[NSNull class]]) {
         sysList.picLink = @"";
     }
     return sysList;
 }
+#pragma mark PROFILE_INFO
++(ProfileInfo*)parserProfileInfoByDictionary:(NSDictionary*)dictionary{
+    ProfileInfo* profileInfo = [[ProfileInfo alloc]init];
+//    profileInfo.level = [dictionary objectForKey:@"level"];
+//    profileInfo.profileId = [dictionary objectForKey:@"profileId"];
+//    profileInfo.uuid = [dictionary objectForKey:@"uuid"];
+//    profileInfo.profilePoint = [dictionary objectForKey:@"profilePoint"];
+//    profileInfo.utime = [dictionary objectForKey:@"utime"];
+//    profileInfo.userId = [dictionary objectForKey:@"userId"];
+//    profileInfo.rmb = [dictionary objectForKey:@"rmb"];
+//    profileInfo.source = [dictionary objectForKey:@"source"];
+//    profileInfo.ctime = [dictionary objectForKey:@"ctime"];
+//    profileInfo.birthday = [dictionary objectForKey:@"birthday"];
+//    profileInfo.wishes = [dictionary objectForKey:@"wishes"];
+//    profileInfo.vip = [dictionary objectForKey:@"vip"];
+//    profileInfo.orders = [dictionary objectForKey:@"orders"];
+//    profileInfo.inviteBy = [dictionary objectForKey:@"inviteBy"];
+//    profileInfo.inviteCode = [dictionary objectForKey:@"inviteCode"];
+//    profileInfo.username = [dictionary objectForKey:@"username"];
+//    profileInfo.countryCode = [dictionary objectForKey:@"countryCode"];
+//    profileInfo.longitude = [dictionary objectForKey:@"longitude"];
+//    profileInfo.latitude = [dictionary objectForKey:@"latitude"];
+//    profileInfo.gender = [dictionary objectForKey:@"gender"];
+    profileInfo.likes = [dictionary objectForKey:@"likes"];
+//    profileInfo.shares = [dictionary objectForKey:@"shares"];
+    profileInfo.usd = [dictionary objectForKey:@"usd"];
+//    profileInfo.avatar = [dictionary objectForKey:@"avatar"];
+//    profileInfo.fbToken = [dictionary objectForKey:@"fbToken"];
+    
+    return profileInfo;
+}
+#pragma mark 
 +(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary{
     ModeGood* modeGood = [[ModeGood alloc]init];
     modeGood.brand_img_link = [dictionary objectForKey:@"brand_img_link"];

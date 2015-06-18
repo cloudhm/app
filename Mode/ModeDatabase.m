@@ -270,7 +270,7 @@
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
                     ModeSysList* modeSysList = (ModeSysList*)obj;
-                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.menutype,modeSysList.picLink];
+                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.picLink,modeSysList.menutype];
                     res = flag&&res;
                 }
                 

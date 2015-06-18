@@ -94,28 +94,18 @@ static NSString *reuseIdentifier=@"MyCell";
 }
 //刷新数据
 -(void)refreshData{
-    NSLog(@"update");
     [ModeSysAPI requestMenuListAndCallback:^(id obj) {
-        
-    }];
-    /*{
         [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
-        if ([obj isKindOfClass:[NSArray class]]) {
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:obj];
-            [ModeDatabase saveSystemListDatabaseIntoTableName:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andObject:self.dataArray andKeyWord:BRAND];
-            [self.cv reloadData];
-            [self.cv setNeedsLayout];
-        } else if ([obj isKindOfClass:[NSNull class]]) {
+        if ([obj isKindOfClass:[NSNull class]]) {
             NSString* cautionInfo = @"Net error!Fail to connect host servers.";
             [self showAlertViewWithCautionInfo:cautionInfo];
+        } else if ([obj boolValue] == YES || [obj boolValue] == NO ) {
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:BRAND]];
+            [self.cv reloadData];
+            [self.cv setNeedsDisplay];
         }
-//        else  if ([obj isKindOfClass:[NSNumber class]]){
-//            NSString* cautionInfo = @"It's the newest.";
-//            [self showAlertViewWithCautionInfo:cautionInfo];
-//        }
-    }];*/
-    
+    }];
 }
 
 

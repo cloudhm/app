@@ -25,37 +25,16 @@
 +(void)requestMenuListAndCallback:(MyCallback)callback{
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    [manager GET:MENU parameters:[self getUserId] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:MENU parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString* utime = [dictionary objectForKey:@"utime"];
-        NSString* last_utime = [[NSUserDefaults standardUserDefaults]objectForKey:@"menu_utime"];
-        if (![utime isEqualToString:last_utime]) {
-            [[NSUserDefaults standardUserDefaults]setObject:utime forKey:@"menu_utime"];
+        NSInteger utime = [[dictionary objectForKey:@"utime"] integerValue];
+        NSInteger last_utime = [[NSUserDefaults standardUserDefaults]integerForKey:@"menu_utime"];
+        if (utime>last_utime) {
+            [[NSUserDefaults standardUserDefaults]setInteger:utime forKey:@"menu_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
             NSArray* allData = [JsonParser parserMenuListByDictionary:dictionary];
             callback(@([ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:allData]));
-//            NSArray* styleDics = [dictionary objectForKey:@"styles"];
-//            BOOL flag1 = NO,flag2 = NO,flag3 = NO;
-//            if (![styleDics isKindOfClass:[NSNull class]]) {
-//                flag1 = [self createModalByMoalArr:styleDics andKeyword:@"styles" andSaveIntoTable:HOME_LIST_TABLENAME];
-//            }
-//            
-//            NSArray* occasionDics = [dictionary objectForKey:@"occasions"];
-//            if (![occasionDics isKindOfClass:[NSNull class]]) {
-//                flag2 = [self createModalByMoalArr:occasionDics andKeyword:@"occasions" andSaveIntoTable:HOME_LIST_TABLENAME];
-//            }
-//            
-//            NSArray* brandDics = [dictionary objectForKey:@"brands"];
-//            if (![brandDics isKindOfClass:[NSNull class]]) {
-//                flag3 = [self createModalByMoalArr:brandDics andKeyword:@"brands" andSaveIntoTable:HOME_LIST_TABLENAME];
-//            }
-//            
-//            if (flag1&&flag2&&flag3) {
-//                callback(@(YES));//请求成功，并且存入数据库
-//            } else {
-//                callback(@(NO));
-//            }
         } else {
             callback(@(NO));
         }

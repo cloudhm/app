@@ -14,11 +14,25 @@
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
 #import "WishListViewController.h"
-@interface WishlistTableViewController ()
+#import "ModeProfilesAPI.h"
+#import "ProfileInfo.h"
+#import "QBArrowRefreshControl.h"
+
+
+@interface WishlistTableViewController ()<QBRefreshControlDelegate>
 
 @property (strong, nonatomic) NSMutableArray *wishlists;
-@property (strong, nonatomic) UIRefreshControl *refresh;
-@property (weak, nonatomic) IBOutlet UIImageView *brand_img;
+
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
+@property (weak, nonatomic) IBOutlet UIImageView *brand_img;//用户头像 暂时用系统自定义头像
+
+@property (weak, nonatomic) IBOutlet UILabel *following;
+@property (weak, nonatomic) IBOutlet UILabel *likes;
+@property (weak, nonatomic) IBOutlet UILabel *invitaions;
+@property (weak, nonatomic) IBOutlet UILabel *money;
+
+
+@property (strong, nonatomic) ProfileInfo *profileInfo;
 
 @end
 
@@ -85,24 +99,48 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.refresh = [[UIRefreshControl alloc]init];
-    [self.refresh addTarget:self action:@selector(refreshView) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refresh];
+//    self.refresh = [[UIRefreshControl alloc]init];
+//    [self.refresh addTarget:self action:@selector(getDataFromNetwork:) forControlEvents:UIControlEventValueChanged];
+//    [self.tableView addSubview:self.refresh];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.tableView addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.tableView addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
+
 }
--(void)refreshView{
-    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
-        [self.refresh endRefreshing];
-        if (![obj isKindOfClass:[NSNull class]]) {
-            [self.wishlists removeAllObjects];
-            [self.wishlists addObjectsFromArray:obj];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"....");
-        }
-    }];
+#pragma mark - QBRefreshControlDelegate
+
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
+{
+    [self getDataFromNetwork];
+}
+//-(void)refreshView{
+//    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
+//        [self.refresh endRefreshing];
+//        if (![obj isKindOfClass:[NSNull class]]) {
+//            [self.wishlists removeAllObjects];
+//            [self.wishlists addObjectsFromArray:obj];
+//            [self.tableView reloadData];
+//        } else {
+//            NSLog(@"....");
+//        }
+//    }];
+//}
+-(void)setProfileInfo:(ProfileInfo *)profileInfo{
+    _profileInfo = profileInfo;
+    self.likes.text = [NSString stringWithFormat:@"%d",profileInfo.likes.integerValue];
+    self.money.text = [NSString stringWithFormat:@"%.2f",profileInfo.usd.doubleValue];
 }
 -(void)getDataFromNetwork{
+    [ModeProfilesAPI requestProfilesAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];
+        self.profileInfo = obj;
+    }];
     [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];
         if (![obj isKindOfClass:[NSNull class]]) {
             [self.wishlists removeAllObjects];
             [self.wishlists addObjectsFromArray:obj];

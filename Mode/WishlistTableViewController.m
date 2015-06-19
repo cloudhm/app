@@ -19,6 +19,7 @@
 #import "QBArrowRefreshControl.h"
 #import "TAlertView.h"
 #import "CashViewController.h"
+#import "CollectionItem.h"
 @interface WishlistTableViewController ()<QBRefreshControlDelegate>
 
 @property (strong, nonatomic) NSMutableArray *modeCollections;
@@ -195,6 +196,7 @@
         }
     }];
 }
+
 ////隐藏多余的分割线
 //- (void)setExtraCellLineHidden: (UITableView *)tableView{
 //    UIView *view =[ [UIView alloc]init];

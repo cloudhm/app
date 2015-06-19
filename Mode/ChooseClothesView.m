@@ -24,7 +24,7 @@
 
 #import "ChooseClothesView.h"
 
-#import "ModeGood.h"
+#import "GoodItem.h"
 #import "SDWebImageManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIColor+HexString.h"
@@ -41,13 +41,13 @@
 #pragma mark - Object Lifecycle
 
 - (instancetype)initWithFrame:(CGRect)frame
-                       modeGood:(ModeGood *)modeGood
+                       goodItem:(GoodItem *)goodItem
                       options:(MDCSwipeToChooseViewOptions *)options {
     self = [super initWithFrame:frame options:options];//MDCSwipeToChooseView的初始化方法
     if (self) {
         self.layer.borderWidth = 1.5f;//加边框
         self.layer.borderColor = [UIColor colorWithHexString:@"#4c4c4c" withAlpha:.5f].CGColor;//设置边框颜色
-        _modeGood = modeGood;
+        _goodItem = goodItem;
         [self constructInformationView];
     }
     return self;
@@ -61,9 +61,9 @@
     frame.size.height -= 60.f;
     self.imageView.frame = frame;
     self.imageView.backgroundColor = [UIColor grayColor];
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.modeGood.img_link] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.goodItem.defaultImage] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.imageView.image = [UIImage getSubImageByImage:image andImageViewFrame:self.imageView.frame];
-        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeGood.img_link lastPathComponent] toDisk:YES];
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodItem.defaultImage lastPathComponent] toDisk:YES];
     }];
 //    SDWebImageManager *manager = [SDWebImageManager sharedManager];
 //    [manager downloadImageWithURL:[NSURL URLWithString:self.modeGood.img_link] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -101,9 +101,9 @@
     _brandImageView.layer.masksToBounds = YES;
     _brandImageView.layer.borderWidth = 1.f;
     _brandImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    [self.brandImageView sd_setImageWithURL:[NSURL URLWithString:self.modeGood.brand_img_link] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.brandImageView sd_setImageWithURL:[NSURL URLWithString:self.goodItem.defaultThumb] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.brandImageView.image = [UIImage getSubImageByImage:image andImageViewFrame:self.brandImageView.frame];
-        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeGood.brand_img_link lastPathComponent] toDisk:YES];
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodItem.defaultThumb lastPathComponent] toDisk:YES];
     }];
 //    if (![[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[self.modeGood.brand_img_link lastPathComponent]]) {
 //        SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -130,7 +130,7 @@
     _nameLabel.textAlignment = NSTextAlignmentLeft;
     _nameLabel.font = [UIFont systemFontOfSize:17];
     _nameLabel.adjustsFontSizeToFitWidth = YES;
-    _nameLabel.text = [_modeGood.brand_name uppercaseString];
+    _nameLabel.text = [_goodItem.itemName uppercaseString];
     [_informationView addSubview:_nameLabel];
 }
 

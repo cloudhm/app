@@ -99,11 +99,6 @@
                                 <action selector="actionToggleLeftDrawer:" destination="vRH-lO-nU6" id="aS2-0Q-gSV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Wnr-bI-PJi">
-                            <connections>
-                                <action selector="clearCache:" destination="vRH-lO-nU6" id="ReK-mx-hwv"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zbo-dB-bHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -226,7 +221,7 @@
                                             <color key="textColor" red="0.20392156862745098" green="0.63137254901960782" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeW-Fb-3p9">
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-.--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeW-Fb-3p9">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                             <color key="textColor" red="0.19607843137254902" green="0.69019607843137254" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
@@ -1012,6 +1007,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUL-x8-AVa">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="B6s-FJ-Jt7">
                                         <variation key="heightClass=regular-widthClass=compact" constant="40"/>
@@ -1019,12 +1015,15 @@
                                     <constraint firstAttribute="width" constant="109" id="yA3-iI-8lj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="titleEdgeInsets" minX="13" minY="10" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="10" backgroundImage="red_CouponNormal.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" backgroundImage="red_CouponSelected.png"/>
+                                <state key="selected" backgroundImage="red_CouponSelected.png">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="B6s-FJ-Jt7"/>
@@ -1037,6 +1036,9 @@
                                         <include reference="yA3-iI-8lj"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="clickConpon:" destination="53f-ci-DNR" eventType="touchUpInside" id="gif-Bb-w5h"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1105,6 +1107,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="couponBtn" destination="hUL-x8-AVa" id="MS9-jh-VQn"/>
                         <segue destination="AFB-jt-y8V" kind="show" identifier="gotoBrandRunway" id="dXz-fb-OVt"/>
                     </connections>
                 </viewController>

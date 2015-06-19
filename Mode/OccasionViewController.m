@@ -49,7 +49,7 @@ static NSString *reuseIdentifier=@"MyCell";
     return _dataArray;
 }
 
-//由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
@@ -84,7 +84,7 @@ static NSString *reuseIdentifier=@"MyCell";
 
 - (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
 {
-    [self refreshData];
+//    [self refreshData];
 }
 //刷新数据
 -(void)refreshData{
@@ -101,10 +101,17 @@ static NSString *reuseIdentifier=@"MyCell";
         }
     }];
 }
+
 -(void)viewWillAppear:(BOOL)animated{
+    
     [self refreshData];
 }
 -(void)viewDidAppear:(BOOL)animated{
+//    [self.dataArray removeAllObjects];
+//    [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
+//    [self.cv reloadData];
+//    [self.cv setNeedsDisplay];
+    
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
 }
@@ -113,18 +120,18 @@ static NSString *reuseIdentifier=@"MyCell";
 }
 //接受到通知后响应此方法
 -(void)gotoChoose:(NSNotification*)noti{
-    NSDictionary* params = @{@"mode":[noti.userInfo objectForKey:@"mode"],@"mode_val":[noti.userInfo objectForKey:@"mode_val"]};
+    NSDictionary* params = @{@"name":[noti.userInfo objectForKey:@"name"],@"source":[noti.userInfo objectForKey:@"source"]};
     NSLog(@"页面即将切换");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
-    [ModeRunwayAPI requestGetNewWithParams:params andCallback:^(id obj) {
+    [ModeRunwayAPI requestRunwayWithParams:params andCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
         if ([obj isKindOfClass:[NSNull class]]) {
             [self showAlertViewWithCautionInfo:@"Bad net.Please hold a mement."];
             return;
         }
-        NSArray* allItems = [obj objectForKey:@"allItems"];
+        NSArray* allItems = obj[1];
         [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
-        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
+        [self performSegueWithIdentifier:@"ovcToLvc" sender:obj];
         
     }];
 }
@@ -157,7 +164,7 @@ static NSString *reuseIdentifier=@"MyCell";
      UINavigationController*navi = [segue destinationViewController];
      LikeOrNopeViewController* lvc = (LikeOrNopeViewController*)navi.topViewController;
      NSLog(@"%@",lvc);
-     lvc.dictionary = sender;
+     lvc.receiveArr = sender;
  }
 
 

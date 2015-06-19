@@ -16,19 +16,12 @@
 +(void)initDatabase{
     NSString* plistPath = [[NSBundle mainBundle]pathForResource:@"init" ofType:@"plist"];
     NSArray* array = [NSArray arrayWithContentsOfFile:plistPath];
-//    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-//    FMDatabase* db = [FMDatabase databaseWithPath:path];
-//    if ([db open]) {
-//        for (int i = 0; i<array.count; i++) {
     NSMutableArray* listArr = [NSMutableArray array];
     for (NSDictionary* dic in array) {
         ModeSysList* modeSysList = [[ModeSysList alloc]init];
-//        modeSysList.eventId = [dic objectForKey:@"eventId"];
         modeSysList.name = [dic objectForKey:@"name"];
         modeSysList.picLink = [dic objectForKey:@"picLink"];
-//        modeSysList.amount = [dic objectForKey:@"amount"];
-        modeSysList.menutype = [dic objectForKey:@"menutype"];
+        modeSysList.menutype = [dic objectForKey:@"type"];
         [listArr addObject:modeSysList];
     }
     BOOL res = [ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:listArr];

@@ -26,8 +26,7 @@
                                 <exclude reference="MeB-YA-8Pg"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                            <rect key="frame" x="85" y="-2" width="150" height="150"/>
+                        <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
                                 <include reference="Hql-3E-0Ss"/>
                                 <include reference="MeB-YA-8Pg"/>

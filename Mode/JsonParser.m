@@ -17,6 +17,8 @@
 #import "ProfileInfo.h"
 #import "Transaction.h"
 #import "CollectionItem.h"
+#import "GoodItem.h"
+#import "Runway.h"
 @implementation JsonParser
 
 #pragma mark TIME-CONVERT
@@ -45,17 +47,17 @@
         [allData addObjectsFromArray:modeSysLists];
 
     }
-    NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
-    if (![occasionsArr isKindOfClass:[NSNull class]]) {
-        NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
-        [allData addObjectsFromArray:modeSysLists];
-
-    }
+    
     NSArray* brandsArr = [dictionary objectForKey:BRAND];
     if (![brandsArr isKindOfClass:[NSNull class]]) {
         NSArray* modeSysLists = [self parserMenuListByArray:brandsArr withKeyword:BRAND];
         [allData addObjectsFromArray:modeSysLists];
-
+    }
+    NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
+    if (![occasionsArr isKindOfClass:[NSNull class]]) {
+        NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
+        [allData addObjectsFromArray:modeSysLists];
+        
     }
     return allData;
 }
@@ -120,7 +122,7 @@
 +(Transaction*)parserTransactionBy:(NSDictionary*)dictionary{
     Transaction* transaction = [[Transaction alloc]init];
     NSNumber* t = [dictionary objectForKey:@"ctime"];
-    transaction.ctime = [self getRelativeTimeModeTwoBySeconds:t];
+    transaction.ctimeStr = [self getRelativeTimeModeTwoBySeconds:t];
     transaction.amount = [NSString stringWithFormat:@"%.2lf",[[dictionary objectForKey:@"amount"]doubleValue]];
     return transaction;
 }
@@ -178,25 +180,67 @@
 }
 +(ModeCollection*)parserModeCollectionBy:(NSDictionary*)dictionary{
     ModeCollection* modeCollection = [[ModeCollection alloc]init];
-    modeCollection.ctime = [self getRelativeTimeBySeconds:[dictionary objectForKey:@"ctime"]];
+    modeCollection.ctimeStr = [self getRelativeTimeBySeconds:[dictionary objectForKey:@"ctime"]];
     modeCollection.defaultThumb = [dictionary objectForKey:@"defaultThumb"];
     modeCollection.comments = [dictionary objectForKey:@"comments"];
     modeCollection.collectionId = [dictionary objectForKey:@"collectionId"];
     return modeCollection;
 }
 
-+(NSArray*)parserCollectionItemsBy:(NSArray*)array{
+#pragma mark CollectionItems
+#warning 这个返回的数组在另一个页面要重新发请求  需要调整
++(NSArray*)parserCollectionItemsBy:(NSDictionary*)dictionary{
     NSMutableArray* array1 = [NSMutableArray array];
-    for (NSDictionary* dic in array) {
-        CollectionItem* collectionItem = [self parserCollectionItemBy:dic];
-        [array1 addObject:collectionItem];
+    NSArray* itemArr = [dictionary objectForKey:@"items"];
+    for (NSDictionary* itemDic in itemArr) {
+        GoodItem* goodItem = [JsonParser parserGoodItemByDictionary:itemDic];
+        [array1 addObject:goodItem];
     }
     return array1;
 }
-+(CollectionItem*)parserCollectionItemBy:(NSDictionary*)dictionary{
-    CollectionItem* collectionItem = [[CollectionItem alloc]init];
-    collectionItem.itemId = [dictionary objectForKey:@"itemId"];
-    return collectionItem;
+//解析商品item
++(GoodItem*)parserGoodItemByDictionary:(NSDictionary*)dictionary{
+    GoodItem* goodItem = [[GoodItem alloc]init];
+    goodItem.moreProperty = [self stringObjectForKey:@"moreProperty" byDictionary:dictionary];
+    goodItem.saletime = [dictionary objectForKey:@"saletime"];
+    goodItem.sku = [self stringObjectForKey:@"sku" byDictionary:dictionary];
+    goodItem.utime = [dictionary objectForKey:@"utime"];
+    goodItem.color = [self stringObjectForKey:@"color" byDictionary:dictionary];
+    goodItem.itemId = [dictionary objectForKey:@"itemId"];
+    goodItem.ctime = [self getRelativeTimeBySeconds:[dictionary objectForKey:@"ctime"]];
+    goodItem.goodSize = [dictionary objectForKey:@"size"];
+    goodItem.expires = [dictionary objectForKey:@"expires"];
+    goodItem.itemName = [dictionary objectForKey:@"itemName"];
+    goodItem.merchantId = [dictionary objectForKey:@"merchantId"];
+    goodItem.defaultImage = [dictionary objectForKey:@"defaultImage"];
+    goodItem.goodPrice = [dictionary objectForKey:@"goodPrice"];
+    goodItem.style = [self stringObjectForKey:@"style" byDictionary:dictionary];
+    goodItem.defaultThumb = [dictionary objectForKey:@"defaultThumb"];
+    goodItem.productLink = [self stringObjectForKey:@"productLink" byDictionary:dictionary];
+    goodItem.goodTitle = [self stringObjectForKey:@"goodTitle" byDictionary:dictionary];
+    goodItem.brandId = [dictionary objectForKey:@"brandId"];
+    goodItem.occasion = [self stringObjectForKey:@"occasion" byDictionary:dictionary];
+    goodItem.status = [dictionary objectForKey:@"status"];
+    goodItem.goodDescription = [self stringObjectForKey:@"goodDescription" byDictionary:dictionary];
+    goodItem.hasCoupon = @"true";//自己设的
+    goodItem.hasSelected = NO;
+    return goodItem;
+}
+//+(CollectionItem*)parserCollectionItemBy:(NSDictionary*)dictionary{
+//    CollectionItem* collectionItem = [[CollectionItem alloc]init];
+//    collectionItem.itemId = [dictionary objectForKey:@"itemId"];
+//    collectionItem.ctime = [dictionary objectForKey:@"ctime"];
+//    collectionItem.utime = [dictionary objectForKey:@"utime"];
+//    return collectionItem;
+//}
+
+
++(NSString*)stringObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{
+    if ([[dictionary objectForKey:key]isKindOfClass:[NSNull class]]||[dictionary objectForKey:key]==nil||[[dictionary objectForKey:key]isEqualToString:@"null"]||[[dictionary objectForKey:key]isEqualToString:@"red"]||[[dictionary objectForKey:key]isEqualToString:@"Array"]) {
+        return @"";
+    } else {
+        return [dictionary objectForKey:key];
+    }
 }
 //+(ModeWishlist*)parserWishlistByDictionary:(NSArray*)array{
 //    ModeWishlist* modeWishlist = [[ModeWishlist alloc]init];
@@ -214,5 +258,21 @@
     brandRunway.event_id = [dictionary objectForKey:@"event_id"];
     return brandRunway;
 }
-
++(Runway*)parserRunwayByDictionary:(NSDictionary*)dictionary{
+    Runway* runway = [[Runway alloc]init];
+    runway.runwayDescription = [dictionary objectForKey:@"description"];
+    runway.runwayTitle = [dictionary objectForKey:@"title"];
+    return runway;
+}
++(NSArray*)parserRunwayInfoByDictionary:(NSDictionary*)dictionary{
+    NSDictionary* runwayDic = [dictionary objectForKey:@"runway"];
+    Runway* runway = [self parserRunwayByDictionary:runwayDic];
+    NSMutableArray* goodItems = [NSMutableArray array];
+    NSArray* goodItemDics = [dictionary objectForKey:@"items"];
+    for (NSDictionary* goodItemDic in goodItemDics) {
+        GoodItem* goodItem = [self parserGoodItemByDictionary:goodItemDic];
+        [goodItems addObject:goodItem];
+    }
+    return @[runway,goodItems];
+}
 @end

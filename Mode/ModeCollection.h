@@ -12,7 +12,7 @@
 @property (nonatomic,strong) NSString* defaultThumb;
 @property (nonatomic,strong) NSNumber* userId;
 @property (nonatomic,strong) NSNumber* utime;
-@property (nonatomic,strong) NSString* ctime;
+@property (nonatomic,strong) NSString* ctimeStr;
 @property (strong, nonatomic) NSString *comments;
 @property (strong, nonatomic) NSString *defaultImage;
 @property (strong, nonatomic) NSNumber *collectionId;

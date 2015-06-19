@@ -10,7 +10,8 @@
 #import "ModeGood.h"
 #import "ModeSysList.h"
 #import "PrefixHeaderDatabase.pch"
-#import "ModeGood.h"
+//#import "ModeGood.h"
+#import "GoodItem.h"
 @implementation ModeDatabase
 //清空表内容 sql语句
 +(NSString*)deleteTableStrWithTableName:(NSString*)tableName{
@@ -152,9 +153,9 @@
         result = [db executeUpdate:sqlStr];
         if (result) {
             NSLog(@"创建likenope表成功");
-            for (ModeGood* modeGood in obj) {
+            for (GoodItem* goodItem in obj) {
                 sqlStr = [self insertTableStrWithTableName:tableName andTableElements:elements];
-                BOOL res = [db executeUpdate:sqlStr, modeGood.goods_id,modeGood.brand_name,modeGood.brand_img_link,modeGood.img_link,modeGood.has_coupon];
+                BOOL res = [db executeUpdate:sqlStr, goodItem.itemId,goodItem.moreProperty,goodItem.saletime,goodItem.sku,goodItem.utime,goodItem.color,goodItem.ctime,goodItem.goodSize,goodItem.expires,goodItem.itemName,goodItem.merchantId,goodItem.defaultImage,goodItem.goodPrice,goodItem.style,goodItem.defaultThumb,goodItem.productLink,goodItem.goodTitle,goodItem.brandId,goodItem.occasion,goodItem.status,goodItem.goodDescription,goodItem.hasCoupon,goodItem.hasSelected];
                 if (res == YES) {
                     NSLog(@"插入成功");
                 } else {

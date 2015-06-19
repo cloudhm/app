@@ -34,8 +34,8 @@
         NSMutableArray* brandRunwaylist = [NSMutableArray array];
         for (int i = 1; i<=amount.integerValue; i++) {
             NSDictionary* brandRunwayDic = [brandRunwayDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-            ModeBrandRunway* brandRunway = [JsonParser parserBrandRunwayByDictionary:brandRunwayDic];
-            [brandRunwaylist addObject:brandRunway];
+//            ModeBrandRunway* brandRunway = [JsonParser parserBrandRunwayByDictionary:brandRunwayDic];
+//            [brandRunwaylist addObject:brandRunway];
         }
         callback(brandRunwaylist);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

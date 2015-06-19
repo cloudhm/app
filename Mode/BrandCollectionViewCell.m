@@ -17,28 +17,21 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-//        self.name.text = self.brand.name;
+
     [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.brand.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [[SDImageCache sharedImageCache] storeImage:image forKey:[self.brand.picLink lastPathComponent] toDisk:YES];
     }];
-//    if (![[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.brand.pic_link lastPathComponent]]) {
-//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//        [manager downloadImageWithURL:[NSURL URLWithString:self.brand.pic_link] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//            nil;
-//        }completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//            
-//            [[SDImageCache sharedImageCache] storeImage:image forKey:[self.brand.pic_link lastPathComponent] toDisk:YES];
-//            [self.button setImage:[[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.brand.pic_link lastPathComponent]] forState:UIControlStateNormal];
-//            
-//        }];
-//    } else {
-//        [self.button setImage:[[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.brand.pic_link lastPathComponent]] forState:UIControlStateNormal];
-//        
-//    }
+
 
 }
 -(void)click:(UIButton*)btn{
+    if (self.brand) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"source":@"brand",@"name":self.brand.name}];
+    }
+//    if ([self.delegate respondsToSelector:@selector(brandCollectionViewCell:didSelectedWithParams:)]) {
+//        [self.delegate brandCollectionViewCell:self didSelectedWithParams:@{@"source":@"brand",@"name":self.brand.name}];
+//    }
     
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"bvcToLvc" object:nil userInfo:@{@"mode":@"brand",@"category":self.brand.name}];
 }
+
 @end

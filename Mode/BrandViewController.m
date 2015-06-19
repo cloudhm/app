@@ -111,17 +111,16 @@ static NSString *reuseIdentifier=@"MyCell";
 
 -(void)gotoChoose:(NSNotification*)noti{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bvcToLvc" object:nil];
-    NSDictionary* params = @{@"mode":[noti.userInfo objectForKey:@"mode"],@"mode_val":[noti.userInfo objectForKey:@"mode_val"]};
-    [ModeRunwayAPI requestGetNewWithParams:params andCallback:^(id obj) {
+    NSDictionary* params = @{@"name":[noti.userInfo objectForKey:@"name"],@"source":[noti.userInfo objectForKey:@"source"]};
+    [ModeRunwayAPI requestRunwayWithParams:params andCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"bvcToLvc" object:nil];
         if ([obj isKindOfClass:[NSNull class]]) {
             [self showAlertViewWithCautionInfo:@"Bad net.Please hold a mement."];
             return;
         }
-        NSArray* allItems = [obj objectForKey:@"allItems"];
-        
+        NSArray* allItems = obj[1];
         [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
-        [self performSegueWithIdentifier:@"bvcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":params}];
+        [self performSegueWithIdentifier:@"bvcToLvc" sender:obj];
     }];
     
 }
@@ -150,7 +149,7 @@ static NSString *reuseIdentifier=@"MyCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController*navi = [segue destinationViewController];
     LikeOrNopeViewController* lvc = (LikeOrNopeViewController*)navi.topViewController;
-    lvc.dictionary = sender;
+    lvc.receiveArr = sender;
 }
 
 

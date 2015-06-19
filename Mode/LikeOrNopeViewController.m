@@ -11,7 +11,7 @@
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 #import "WishListViewController.h"
 #import "ModeGoodAPI.h"
-#import "ModeGood.h"
+//#import "ModeGood.h"
 #import "SDWebImageManager.h"
 #import "UIViewController+CWPopup.h"
 #import "ShareViewController.h"
@@ -21,6 +21,8 @@
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
 #import "TAlertView.h"
+#import "Runway.h"
+#import "GoodItem.h"
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -30,7 +32,7 @@
 @property (nonatomic,assign) CGRect mainFrame;
 @property (weak, nonatomic) UILabel *label;
 @property (weak, nonatomic) UIImageView *heartIV;
-@property (strong, nonatomic) NSMutableArray *allGoods;
+@property (strong, nonatomic) NSMutableArray *goodItems;
 @property (strong, nonatomic) NSMutableArray *wishlist;
 @property (strong, nonatomic) UIView *startIntroduceView;
 @property (nonatomic,assign) BOOL anotherFlag;
@@ -41,10 +43,10 @@
 
 #pragma mark - Object Lifecycle
 -(NSMutableArray *)allGoods{//准备接受一组秀场的数组
-    if (!_allGoods) {
-        _allGoods = [NSMutableArray array];
+    if (!_goodItems) {
+        _goodItems = [NSMutableArray array];
     }
-    return _allGoods;
+    return _goodItems;
 }
 -(NSMutableArray *)wishlist{//喜欢产品的数组，从数据库先读取
     if (!_wishlist) {
@@ -121,12 +123,12 @@
     [self useCustomAppearance];
 #warning 再造一个view在初次进这时显示
     [self createStartIntroduceView];//创建一个开场遮盖
-    self.title = [[self.dictionary objectForKey:@"title"]uppercaseString];
+    self.title = [[[self.receiveArr lastObject] objectForKey:@"name"]uppercaseString];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    [self.allGoods addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
+    [self.goodItems addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
     if (self.allGoods.count>0) {
         self.number = 1;
         self.totalNumber = self.allGoods.count;
@@ -149,14 +151,15 @@
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         NSDictionary* attributes =@{NSFontAttributeName:[UIFont fontWithName:@"Verdana-Bold" size:17],NSForegroundColorAttributeName:[UIColor colorWithRed:202/255.f green:228/255.f blue:194/255.f alpha:1]};
-        titleLabel.attributedText = [[NSAttributedString alloc]initWithString:[self.dictionary objectForKey:@"intro_title"]attributes:attributes];
+        Runway* runway = [self.receiveArr firstObject];
+        titleLabel.attributedText = [[NSAttributedString alloc]initWithString:runway.runwayTitle attributes:attributes];
         CGRect rect = [titleLabel.text boundingRectWithSize:CGSizeMake(220, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
         titleLabel.frame = CGRectMake((CGRectGetWidth(self.navigationController.view.bounds) - 220.f)/2, CGRectGetHeight(self.navigationController.view.bounds)/2 - 100.f, 220, rect.size.height + 10.f);
         [self.startIntroduceView addSubview:titleLabel];
         
         UILabel * descLabel = [[UILabel alloc]init];
         descLabel.numberOfLines = 0;
-        descLabel.text = [self.dictionary objectForKey:@"intro_desc"] ;
+        descLabel.text = runway.runwayDescription ;
         descLabel.font = [UIFont fontWithName:@"Georgia-Italic" size:15];
         descLabel.textColor = [UIColor whiteColor];
         descLabel.textAlignment = NSTextAlignmentCenter;
@@ -268,13 +271,13 @@
         if (buttonIndex == 0) {
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         } else {
-            NSDictionary* newParams = [self.dictionary objectForKey:@"params"];
-            [ModeRunwayAPI requestGetNewWithParams:newParams andCallback:^(id obj) {
+            NSDictionary* newParams = [self.receiveArr lastObject];
+            [ModeRunwayAPI requestRunwayWithParams:newParams andCallback:^(id obj) {
                 if ([obj isKindOfClass:[NSNull class]]) {
                     return;
                 }
                 NSArray* allItems = [obj objectForKey:@"allItems"];
-                self.dictionary = @{@"title":self.title,@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":newParams};
+                self.receiveArr = obj;
                 [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
                 [self createStartIntroduceView];
                 [self.allGoods addObjectsFromArray:allItems];
@@ -308,13 +311,13 @@
         if (buttonIndex == alertView.cancelButtonIndex) {
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         } else {
-            NSDictionary* newParams = [self.dictionary objectForKey:@"params"];
-            [ModeRunwayAPI requestGetNewWithParams:newParams andCallback:^(id obj) {
+            NSDictionary* newParams = [self.receiveArr lastObject];
+            [ModeRunwayAPI requestRunwayWithParams:newParams andCallback:^(id obj) {
                 if ([obj isKindOfClass:[NSNull class]]) {
                     return;
                 }
                 NSArray* allItems = [obj objectForKey:@"allItems"];
-                self.dictionary = @{@"title":self.title,@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"],@"params":newParams};
+                self.receiveArr =obj;
                 [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
                 [self createStartIntroduceView];
                 [self.allGoods addObjectsFromArray:allItems];
@@ -381,7 +384,7 @@
 
 // This is called when a user didn't fully swipe left or right.
 - (void)viewDidCancelSwipe:(UIView *)view {
-    NSLog(@"You couldn't decide on %@.", self.currentCloth.goods_id);
+    NSLog(@"You couldn't decide on %@.", self.currentCloth.itemId);
 }
 
 // This is called then a user swipes the view fully left or right.
@@ -390,16 +393,16 @@
     self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?12:self.number),(int)self.totalNumber];
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"nope"} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.itemId,@"fd":@"nope"} andCallback:^(id obj) {
             NSLog(@"nope:%@",[obj objectForKey:@"status"]);
         }];
         // remove nope goods-Image from Disk
-        [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.img_link lastPathComponent] fromDisk:YES];
+        [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.defaultImage lastPathComponent] fromDisk:YES];
         
     } else {
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.goods_id,@"fd":@"like"} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.itemId,@"fd":@"like"} andCallback:^(id obj) {
             if ([[obj objectForKey:@"status"]isEqualToString:@"success"]) {
                 NSLog(@"like:%@",[obj objectForKey:@"status"]);
             };
@@ -444,7 +447,7 @@
 #pragma mark - Internal Methods
 - (void)setFirstCardView:(ChooseClothesView *)firstCardView {
     _firstCardView = firstCardView;
-    self.currentCloth = firstCardView.modeGood;
+    self.currentCloth = firstCardView.goodItem;
 }
 - (ChooseClothesView *)popPersonViewWithFrame:(CGRect)frame {
     if ([self.allGoods count] == 0) {
@@ -470,7 +473,7 @@
     };
 
     ChooseClothesView *clothesView = [[ChooseClothesView alloc] initWithFrame:frame
-                                                                    modeGood:self.allGoods[0]
+                                                                    goodItem:self.allGoods[0]
                                                                    options:options];
     clothesView.userInteractionEnabled = NO;
     

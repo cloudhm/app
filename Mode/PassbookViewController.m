@@ -139,6 +139,7 @@
 }
 #pragma mark OrderConfirmViewControllerDelegate
 -(void)dismissOrderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController{
+    self.tableView.userInteractionEnabled = YES;
     [self dismissPopupViewControllerAnimated:YES completion:nil];
 }
 -(void)orderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController editFinishWithName:(NSString *)name andZipCode:(NSString *)zipcode beginAnimation:(UIActivityIndicatorView *)activityView{

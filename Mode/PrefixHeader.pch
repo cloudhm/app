@@ -13,7 +13,7 @@
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://120.26.107.42:8080"
+#define HOSTADDRESS @"http://192.168.1.118:8080"//@"http://120.26.107.42:8080"
 
 
 //账号接口
@@ -39,11 +39,12 @@
 #define SET_GOODS_FEEDBACK @"http://120.26.107.42/api/goods/set_goods_feedback" //设置商品测试反馈秀场接口
 
 //秀场接口
-#define GET_NEW @"http://120.26.107.42/api/runway/get_new" //新建一组秀场心愿单接口
+#define RUNWAY [HOSTADDRESS stringByAppendingPathComponent:@"runway"]  //新建一组秀场心愿单接口
 
 //心愿单接口
 #define GET_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/users"]//获取用户的collection
-#define GET_COLLECTION_ITEMS [HOSTADDRESS stringByAppendingPathComponent:@"collectionitems"] //按collectionId
+#define GET_COLLECTION_ITEMS [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"] //按collectionId(此参数暂时不传)
+
 #define GET_NEWEST_WISHLIST @"http://120.26.107.42/api/wishlist/get_newest_wishlist" //获取用户最新的wishlist
 
 

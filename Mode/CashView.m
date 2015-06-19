@@ -88,7 +88,7 @@
     self.currency.frame = CGRectMake(CGRectGetMinX(self.num.frame)-20.f, CGRectGetMinY(self.num.frame), 30, 40);
     
 //    NSString* cStr = [NSString stringWithFormat:@"%02d/%02d/%04d",arc4random()%30+1,arc4random()%12+1,arc4random()%2+2014];
-    self.ctime.text = self.transaction.ctime;
+    self.ctime.text = self.transaction.ctimeStr;
     
     
     

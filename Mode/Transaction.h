@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSString *amount;//source:double->string
 @property (strong, nonatomic) NSNumber *formerAmount;//double
 @property (strong, nonatomic) NSString *unit;//currency type
-@property (strong, nonatomic) NSString *ctime;//source：long int-string
+@property (strong, nonatomic) NSString *ctimeStr;//source：long int-string
 @property (strong, nonatomic) NSNumber *utime;//int
 @property (strong, nonatomic) NSNumber *status;//int
 @property (strong, nonatomic) NSString *sn;

@@ -8,7 +8,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -16,7 +16,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -24,7 +24,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -32,7 +32,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -40,7 +40,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -48,7 +48,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>occasion</string>
+		<string>occasions</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -56,7 +56,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -64,7 +64,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -72,7 +72,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -80,7 +80,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -88,7 +88,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -96,7 +96,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>brand</string>
+		<string>brands</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -104,7 +104,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -112,7 +112,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -120,7 +120,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -128,7 +128,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -136,7 +136,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -144,7 +144,7 @@
 		<key>picLink</key>
 		<string></string>
 		<key>type</key>
-		<string>style</string>
+		<string>styles</string>
 	</dict>
 </array>
 </plist>

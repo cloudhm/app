@@ -8,7 +8,7 @@
 
 #import "WishlistView.h"
 #import "SDWebImageManager.h"
-#import "ModeGood.h"
+#import "GoodItem.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+PartlyImage.h"
 @interface WishlistView()
@@ -17,10 +17,10 @@
 @property (nonatomic,weak) UIButton* delBtn;
 @end
 @implementation WishlistView
--(instancetype)initWithFrame:(CGRect)frame andModeGood:(ModeGood*)modeGood andWithoutBtn:(BOOL)withoutBtn{
+-(instancetype)initWithFrame:(CGRect)frame andGoodItem:(GoodItem*)goodItem andWithoutBtn:(BOOL)withoutBtn{
     self = [super initWithFrame:frame];
     if (self) {
-        _modeGood = modeGood;
+        _goodItem = goodItem;
         self.backgroundColor = [UIColor whiteColor];
         [self createImageView];
         [self createCouponView];
@@ -28,7 +28,7 @@
             [self createDelBtn];
         }
 
-        if (![_modeGood.has_coupon isEqualToString:@"true"]) {
+        if (![_goodItem.hasCoupon isEqualToString:@"true"]) {
             self.couponImageView.alpha = 0.f;
         } else {
             self.couponImageView.alpha = 1.f;
@@ -63,9 +63,9 @@
 //        }];
 //    }
     
-    [imageView sd_setImageWithURL:[NSURL URLWithString:_modeGood.img_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:_goodItem.defaultThumb] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         imageView.image = [UIImage getSubImageByImage:image andImageViewFrame:imageView.frame];//根据横宽比切图
-        [[SDImageCache sharedImageCache]storeImage:image forKey:[_modeGood.img_link lastPathComponent] toDisk:YES];
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[_goodItem.defaultThumb lastPathComponent] toDisk:YES];
     }];
     
     
@@ -90,7 +90,7 @@
 }
 -(void)click:(UIButton*)btn{
 //发送通知给控制器，要求控制器来执行删除视图及更新数据库的操作
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"removeNopedGood" object:self userInfo:@{@"goods_id":self.modeGood.goods_id}];
+//    [[NSNotificationCenter defaultCenter]postNotificationName:@"removeNopedGood" object:self userInfo:@{@"goods_id":self.modeGood.goods_id}];
 }
 //selected属性变更时，刷新本控件 和 刷新子视图
 - (void)setSelected:(BOOL)selected {

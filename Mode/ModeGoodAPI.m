@@ -37,18 +37,18 @@
     }];
 }
 
-+(void)requestGoodInfoWithGoodID:(NSString*)goodID andCallback:(MyCallback)callback{
-    NSString* path = GET_GOODS;
-    NSDictionary* params = @{@"id":goodID};
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        GoodInfo* goodInfo=[JsonParser parserGoodInfoByDictionary:dictionary];
-        callback(goodInfo);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        callback([NSNull null]);
-        NSLog(@"requestGoodInfo error:%@",error);
-    }];
-}
+//+(void)requestGoodInfoWithGoodID:(NSString*)goodID andCallback:(MyCallback)callback{
+//    NSString* path = GET_GOODS;
+//    NSDictionary* params = @{@"id":goodID};
+//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+//    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+//    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//        GoodInfo* goodInfo=[JsonParser parserGoodInfoByDictionary:dictionary];
+//        callback(goodInfo);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        callback([NSNull null]);
+//        NSLog(@"requestGoodInfo error:%@",error);
+//    }];
+//}
 @end

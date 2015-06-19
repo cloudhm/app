@@ -57,6 +57,6 @@
 //        self.iconIV.image = [UIImage getSubImageByImage:image andImageViewFrame:self.iconIV.frame];
 //        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeWishlist.img_link lastPathComponent] toDisk:YES];
 //    }];
-    self.ctimeLabel.text = self.modeCollection.ctime;
+    self.ctimeLabel.text = self.modeCollection.ctimeStr;
 }
 @end

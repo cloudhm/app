@@ -4,18 +4,76 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mode/ModeAccountAPI.m"
-            timestampString = "456302121.058834"
+            filePath = "Mode/StyleViewController.m"
+            timestampString = "456397541.610291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "+signupWithParams:andCallback:"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-gotoChoose:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[StyleViewController gotoChoose:]"
+                  moduleName = "Mode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/YedaoDev/Desktop/project/mode/Mode/StyleViewController.m"
+                  timestampString = "456402530.543709"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "582">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[StyleViewController gotoChoose:]_block_invoke"
+                  moduleName = "Mode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/YedaoDev/Desktop/project/mode/Mode/StyleViewController.m"
+                  timestampString = "456402530.543894"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mode/OccasionViewController.m"
+            timestampString = "456401869.865404"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-gotoChoose:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mode/ModeSysAPI.m"
-            timestampString = "456307741.226031"
+            filePath = "Mode/ModeDatabase.m"
+            timestampString = "456402454.656642"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "+requestMenuListAndCallback:"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "+saveGetNewDatabaseIntoTableName:andTableElements:andObj:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +99,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mode/ModeWishlistAPI.m"
-            timestampString = "456323026.449296"
+            filePath = "Mode/ModeDatabase.m"
+            timestampString = "456402507.63413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "+requestCollectionItems:AndCallback:"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "+saveGetNewDatabaseIntoTableName:andTableElements:andObj:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mode/ModeDatabase.m"
+            timestampString = "456402759.765912"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "+saveGetNewDatabaseIntoTableName:andTableElements:andObj:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mode/ModeDatabase.m"
+            timestampString = "456402752.233812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "+saveGetNewDatabaseIntoTableName:andTableElements:andObj:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

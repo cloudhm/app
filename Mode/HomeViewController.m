@@ -18,6 +18,8 @@
 #import "SDWebImage/SDImageCache.h"
 #import "FMDB.h"
 #import "UIColor+HexString.h"
+//#import "ModeSysAPI.h"
+//#import "TAlertView.h"
 @interface HomeViewController ()<ViewPagerDataSource,ViewPagerDelegate>
 @property (strong, nonatomic) NSArray *tabNames;
 
@@ -25,22 +27,22 @@
 
 @implementation HomeViewController
 
-- (IBAction)clearCache:(UIBarButtonItem *)sender {
-    NSLog(NSHomeDirectory());
-    [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
-        [self removeDataBase];
-        NSLog(@"clear success");
-    }];
-    [[SDImageCache sharedImageCache]clearMemory];
-}
--(void)removeDataBase{
-
-    
-    NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
-    [ud removeObjectForKey:@"menu_utime"];
-    [ud synchronize];
-    
-}
+//- (IBAction)clearCache:(UIBarButtonItem *)sender {
+//    NSLog(NSHomeDirectory());
+//    [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
+//        [self removeDataBase];
+//        NSLog(@"clear success");
+//    }];
+//    [[SDImageCache sharedImageCache]clearMemory];
+//}
+//-(void)removeDataBase{
+//
+//    
+//    NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
+//    [ud removeObjectForKey:@"menu_utime"];
+//    [ud synchronize];
+//    
+//}
 /**
  *  标签栏
  */
@@ -62,8 +64,27 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.title = @"MODE";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+//    [ModeSysAPI requestMenuListAndCallback:^(id obj) {
+//        if ([obj isKindOfClass:[NSNull class]]) {
+//            NSString* cautionInfo = @"Net error!Fail to connect host servers.";
+//            [self showAlertViewWithCautionInfo:cautionInfo];
+//        }
+//    }];
+    
 }
-
+//#pragma mark ShowAlertView
+//-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+//    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+//    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+//    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+//    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+//    alert.tapToClose = NO;
+//    alert.timeToClose = 1.f;
+//    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+//    alert.style = TAlertViewStyleInformation;
+//    [alert showAsMessage];
+//}
 #pragma mark ViewPagerDatasource
 -(NSUInteger)numberOfTabsForViewPager:(ViewPagerController *)viewPager{
     return 3;

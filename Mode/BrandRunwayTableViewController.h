@@ -11,8 +11,8 @@
 
 //品牌所有秀场 及品牌详情介绍
 @interface BrandRunwayTableViewController : UITableViewController
-@property (copy, nonatomic) NSString *brandName;
+@property (strong, nonatomic) NSNumber *brandId;
 #warning 暂时没有数据源 
-@property (strong, nonatomic) BrandInfo *brandInfo;
+
 
 @end

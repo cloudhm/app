@@ -7,6 +7,7 @@
 //
 
 #import "BrandIntroduceHeaderView.h"
+#import "UIImageView+WebCache.h"
 @interface BrandIntroduceHeaderView()
 
 @property (weak, nonatomic) UIImageView*brandImageView;
@@ -41,7 +42,7 @@
 
 -(void)setBrandInfo:(BrandInfo *)brandInfo{
     _brandInfo = brandInfo;
-    self.brandDetail.text = _brandInfo.brandIntroduce;
+    self.brandDetail.text = _brandInfo.brandDescription;
 }
 
 -(void)layoutSubviews{
@@ -56,18 +57,22 @@
     self.brandImageView.layer.cornerRadius = CGRectGetWidth(self.brandImageView.bounds)/2;
     self.brandImageView.layer.borderWidth = 1.f;
     self.brandImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
+    [self.brandImageView sd_setImageWithURL:[NSURL URLWithString:self.brandInfo.brandLogo] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.brandInfo.brandLogo lastPathComponent] toDisk:YES];
+    }];
     
     float brandDetailW = CGRectGetWidth(currentDeviceFrame) - 4 * padding;
     float brandDetailH = [self.brandInfo getBrandDetailHeigthtByWidth:brandDetailW];
     float brandDetailX = padding*2;
     float brandDetailY = CGRectGetMaxY(self.brandImageView.frame) + padding;
-    NSMutableAttributedString* attributedStr = [[NSMutableAttributedString alloc]initWithString:self.brandInfo.brandIntroduce];
-    NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    [paragraphStyle setLineSpacing:2.f];
-    [attributedStr setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle,NSFontAttributeName:[UIFont fontWithName:@"TimesNewRomanPS-ItalicMT" size:14],NSForegroundColorAttributeName:[UIColor colorWithRed:74/255.f green:74/255.f blue:74/255.f alpha:1]} range:NSMakeRange(0,[self.brandInfo.brandIntroduce length])];
-    [self.brandDetail setAttributedText:attributedStr];
-    self.brandDetail.textAlignment = NSTextAlignmentCenter;
+    if (self.brandInfo.brandDescription) {
+        NSMutableAttributedString* attributedStr = [[NSMutableAttributedString alloc]initWithString:self.brandInfo.brandDescription];
+        NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        [paragraphStyle setLineSpacing:2.f];
+        [attributedStr setAttributes:@{NSParagraphStyleAttributeName:paragraphStyle,NSFontAttributeName:[UIFont fontWithName:@"TimesNewRomanPS-ItalicMT" size:14],NSForegroundColorAttributeName:[UIColor colorWithRed:74/255.f green:74/255.f blue:74/255.f alpha:1]} range:NSMakeRange(0,[self.brandInfo.brandDescription length])];
+        [self.brandDetail setAttributedText:attributedStr];
+        self.brandDetail.textAlignment = NSTextAlignmentCenter;
+    }
     self.brandDetail.frame = CGRectMake(brandDetailX, brandDetailY, brandDetailW, brandDetailH+10);
     
     float brandStyleX = 0;

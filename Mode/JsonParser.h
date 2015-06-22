@@ -8,7 +8,7 @@
 
 //数据模型类JSON解析
 #import <Foundation/Foundation.h>
-@class ModeSysList,ModeGood,GoodInfo,ModeWishlist,ModeBrandRunway,ProfileInfo;
+@class ModeSysList,ModeWishlist,ModeBrandRunway,ProfileInfo,BrandInfo;
 @interface JsonParser : NSObject
 
 //主页面SYS_LIST
@@ -25,11 +25,11 @@
 //获取一个collection中的items
 +(NSArray*)parserCollectionItemsBy:(NSDictionary*)dictionary;
 
-//商品对象解析
-+(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary;
+////商品对象解析
+//+(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary;
 
-//商品基本信息
-+(GoodInfo*)parserGoodInfoByDictionary:(NSDictionary*)dictionary;
+////商品基本信息
+//+(GoodInfo*)parserGoodInfoByDictionary:(NSDictionary*)dictionary;
 
 //心愿单
 //+(ModeWishlist*)parserWishlistByDictionary:(NSDictionary*)dictionary;
@@ -37,4 +37,6 @@
 //品牌秀场
 //+(ModeBrandRunway*)parserBrandRunwayByDictionary:(NSDictionary*)dictionary;
 +(NSArray*)parserRunwayInfoByDictionary:(NSDictionary*)dictionary;
+
++(BrandInfo*)parserBrandInfoByDictionary:(NSDictionary*)dictionary;
 @end

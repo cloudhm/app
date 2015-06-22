@@ -14,6 +14,7 @@
 #import "BrandRunwayTableViewCell.h"
 #import "UIColor+HexString.h"
 #import "LikeOrNopeViewController.h"
+#import "TAlertView.h"
 @interface BrandRunwayTableViewController ()
 
 
@@ -23,18 +24,29 @@
 @property (assign, nonatomic) CGPoint lastScrollOffset;
 @property (strong, nonatomic) NSMutableArray *brandRunwayList;
 @property (strong, nonatomic) ModeBrandRunway *brandRunway;
-
+@property (strong, nonatomic) BrandInfo *brandInfo;
 @end
 
 @implementation BrandRunwayTableViewController
-
--(BrandInfo *)brandInfo{
-    if (!_brandInfo) {
-        _brandInfo = [[BrandInfo alloc]init];
-        _brandInfo.brandIntroduce = @"BEIJING - The capsized Eastern Star cruise ship will be moved to allow divers to search for victims at the site.With eight victims still missing, the search and rescue headquarters will move the ship as soon as weather and water movements are favorable, Minister of Transport Yang Chuantang said Monday.\"A glimmer of hope deserves all-out efforts,\" he said.Ministry sources said on Saturday the search for the missing victims would be extended for nearly 1,300 km along the Yangtze River between Jianli in Hubei Province, where the ship sank, downstream to the Wusong Estuary in Shanghai.The Eastern Star with 456 people onboard was on an 11-day trip along the Yangtze when it was overturned by a tornado last Monday night.Fourteen people survived the disaster. As of Monday, rescuers had retrieved the bodies of 434 victims.";
-    }
-    return _brandInfo;
+#pragma mark ShowAlertView
+-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
 }
+//-(BrandInfo *)brandInfo{
+//    if (!_brandInfo) {
+//        _brandInfo = [[BrandInfo alloc]init];
+//        _brandInfo.brandDescription = @"BEIJING - The capsized Eastern Star cruise ship will be moved to allow divers to search for victims at the site.With eight victims still missing, the search and rescue headquarters will move the ship as soon as weather and water movements are favorable, Minister of Transport Yang Chuantang said Monday.\"A glimmer of hope deserves all-out efforts,\" he said.Ministry sources said on Saturday the search for the missing victims would be extended for nearly 1,300 km along the Yangtze River between Jianli in Hubei Province, where the ship sank, downstream to the Wusong Estuary in Shanghai.The Eastern Star with 456 people onboard was on an 11-day trip along the Yangtze when it was overturned by a tornado last Monday night.Fourteen people survived the disaster. As of Monday, rescuers had retrieved the bodies of 434 victims.";
+//    }
+//    return _brandInfo;
+//}
 
 -(NSMutableArray *)brandRunwayList{
     if (!_brandRunwayList) {
@@ -42,10 +54,7 @@
     }
     return _brandRunwayList;
 }
-//定义左上角的按钮  可以用ICViewPager  方便测试
-- (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
-    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
-}
+
 
 //开始加载数据
 - (void)viewDidLoad {
@@ -57,12 +66,13 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     [self initHeaderView];
 //    [self initNavigationBar];
 //    //偏移量初始化，用来判断表向上或向下移动
 //    self.lastScrollOffset = CGPointZero;
-    [self updateRunwayList];
+    [self getBrandInfo];
     [self createToolbar];
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
@@ -71,16 +81,16 @@
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
--(void)updateRunwayList{
-    [ModeBrandRunwayAPI requestBrandRunwayListByBrandName:nil AndCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {
-            [self.brandRunwayList removeAllObjects];
-            [self.brandRunwayList addObjectsFromArray:obj];
-            
-            [self.tableView reloadData];
+-(void)getBrandInfo{
+    [ModeBrandRunwayAPI requestBrandInfoByBrandId:@(1) andCallback:^(id obj) {
+        if ([obj isKindOfClass:[NSNull class]]) {
+            [self showAlertViewWithCautionInfo:@"Try refresh it again."];
+        } else {
+            self.brandInfo = obj;
         }
     }];
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     
 }
@@ -103,6 +113,12 @@
     frame = headerView.frame;
     frame.size.height = [self.brandInfo getBrandDetailHeigthtByWidth:(self.tableView.frame.size.width - 40.f)] + 137.f;
     self.tableView.tableHeaderView.frame = frame;
+}
+-(void)setBrandInfo:(BrandInfo *)brandInfo{
+    _brandInfo = brandInfo;
+    [self initHeaderView];
+    self.title = self.brandInfo.brandName;
+    [self.view setNeedsDisplay];
 }
 //-(void)initNavigationBar{
 //    //导航栏设置

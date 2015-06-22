@@ -15,6 +15,8 @@
 #import "ModeGood.h"
 #import <FMDB.h>
 #import "UIColor+HexString.h"
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
 static const CGFloat kJVTableViewTopInset = 30.0;
 static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdentifier";
 
@@ -141,31 +143,10 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.clothes removeAllObjects];
-    [self readDataFromTableWishlist];
+    [self.clothes addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
     self.wishlistCount.text = [NSString stringWithFormat:@"%d",(int)self.clothes.count];
 }
--(void)readDataFromTableWishlist{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        NSLog(@"打开数据库成功");
-        FMResultSet* set = [db executeQuery:@"select * from wishlist"];
-        while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [self.clothes addObject:modeGood];
-        }
-        [db close];
-    } else {
-        NSLog(@"打开数据库失败");
-        [db close];
-    }
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

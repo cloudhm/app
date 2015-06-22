@@ -84,7 +84,7 @@ static NSString *reuseIdentifier=@"MyCell";
 
 - (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
 {
-//    [self refreshData];
+    [self refreshData];
 }
 //刷新数据
 -(void)refreshData{

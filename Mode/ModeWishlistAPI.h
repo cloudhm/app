@@ -18,4 +18,6 @@ typedef void (^MyCallback)(id obj);
 
 //获取用户最新的wishlist
 +(void)requestNewestWishlistAndCallback:(MyCallback)callback;
+//分享九宫格
++(void)shareWishlistBy:(NSDictionary*)params andCallback:(MyCallback)callback;
 @end

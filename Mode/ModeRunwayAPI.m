@@ -32,17 +32,6 @@
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         NSMutableArray* runwayArr = [[JsonParser parserRunwayInfoByDictionary:jsonDic]mutableCopy];
         [runwayArr addObject:params];
-//        NSDictionary* runwayDic = [dictionary objectForKey:@"runway"];
-//        
-//        NSString* intro_desc = [dictionary objectForKey:@"intro_desc"];
-//        NSString* intro_title = [dictionary objectForKey:@"intro_title"];
-//        /*
-//         解析秀场所有商品  [dictionary objectForKey:@"items"]
-//         */
-//        NSDictionary* goodDics = [dictionary objectForKey:@"items"];
-//        NSMutableArray* goodArr = [NSMutableArray array];
-////        NSArray* goodItems = [JsonParser par]
-//        NSDictionary* callbackDic =@{@"intro_desc":intro_desc,@"intro_title":intro_title,@"allItems":goodArr};
         callback(runwayArr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get_new error:%@",error);

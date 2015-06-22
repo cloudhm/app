@@ -155,7 +155,30 @@
             NSLog(@"创建likenope表成功");
             for (GoodItem* goodItem in obj) {
                 sqlStr = [self insertTableStrWithTableName:tableName andTableElements:elements];
-                BOOL res = [db executeUpdate:sqlStr, goodItem.itemId,goodItem.moreProperty,goodItem.saletime,goodItem.sku,goodItem.utime,goodItem.color,goodItem.ctime,goodItem.goodSize,goodItem.expires,goodItem.itemName,goodItem.merchantId,goodItem.defaultImage,goodItem.goodPrice,goodItem.style,goodItem.defaultThumb,goodItem.productLink,goodItem.goodTitle,goodItem.brandId,goodItem.occasion,goodItem.status,goodItem.goodDescription,goodItem.hasCoupon,goodItem.hasSelected];
+                BOOL res = [db executeUpdate:sqlStr,
+                            goodItem.itemId,
+                            goodItem.moreProperty,
+                            goodItem.saletime,
+                            goodItem.sku,
+                            goodItem.utime,
+                            goodItem.color,
+                            goodItem.ctime,
+                            goodItem.goodSize,
+                            goodItem.expires,
+                            goodItem.itemName,
+                            goodItem.merchantId,
+                            goodItem.defaultImage,
+                            goodItem.goodPrice,
+                            goodItem.style,
+                            goodItem.defaultThumb,
+                            goodItem.productLink,
+                            goodItem.goodTitle,
+                            goodItem.brandId,
+                            goodItem.occasion,
+                            goodItem.status,
+                            goodItem.goodDescription,
+                            goodItem.hasCoupon,
+                            goodItem.hasSelected];
                 if (res == YES) {
                     NSLog(@"插入成功");
                 } else {
@@ -229,24 +252,70 @@
     }
     if ([tableName isEqualToString:LIKENOPE_TABLENAME]) {
         while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [fetchedDatabase addObject:modeGood];
+            GoodItem* goodItem = [[GoodItem alloc]init];
+            goodItem.moreProperty = [set stringForColumn:@"moreProperty"];
+            goodItem.saletime = [set objectForColumnName:@"saletime"];
+            goodItem.sku = [set stringForColumn:@"sku"];
+            goodItem.utime = [set objectForColumnName:@"utime"];
+            goodItem.color = [set stringForColumn:@"color"];
+            goodItem.itemId = [set objectForColumnName:@"itemId"];
+            goodItem.ctime = [set stringForColumn:@"ctime"];
+            goodItem.goodSize = [set stringForColumn:@"goodSize"];
+            goodItem.expires = [set objectForColumnName:@"expires"];
+            goodItem.itemName = [set stringForColumn:@"itemName"];
+            goodItem.merchantId = [set objectForColumnName:@"merchantId"];
+            goodItem.defaultImage = [set stringForColumn:@"defaultImage"];
+            goodItem.goodPrice = [set objectForColumnName:@"goodPrice"];
+            goodItem.style = [set stringForColumn:@"style"];
+            goodItem.defaultThumb = [set stringForColumn:@"defaultThumb"];
+            goodItem.productLink = [set stringForColumn:@"productLink"];
+            goodItem.goodTitle = [set stringForColumn:@"goodTitle"];
+            goodItem.brandId = [set objectForColumnName:@"brandId"];
+            goodItem.occasion = [set stringForColumn:@"occasion"];
+            goodItem.status = [set objectForColumnName:@"status"];
+            goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
+            goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
+            goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
+//            modeGood.goods_id = [set stringForColumn:@"goods_id"];
+//            modeGood.brand_name = [set stringForColumn:@"brand_name"];
+//            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
+//            modeGood.img_link = [set stringForColumn:@"img_link"];
+//            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
+            [fetchedDatabase addObject:goodItem];
         }
     }
     if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
         while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [fetchedDatabase addObject:modeGood];
+            GoodItem* goodItem = [[GoodItem alloc]init];
+            goodItem.moreProperty = [set stringForColumn:@"moreProperty"];
+            goodItem.saletime = [set objectForColumnName:@"saletime"];
+            goodItem.sku = [set stringForColumn:@"sku"];
+            goodItem.utime = [set objectForColumnName:@"utime"];
+            goodItem.color = [set stringForColumn:@"color"];
+            goodItem.itemId = [set objectForColumnName:@"itemId"];
+            goodItem.ctime = [set stringForColumn:@"ctime"];
+            goodItem.goodSize = [set stringForColumn:@"goodSize"];
+            goodItem.expires = [set objectForColumnName:@"expires"];
+            goodItem.itemName = [set stringForColumn:@"itemName"];
+            goodItem.merchantId = [set objectForColumnName:@"merchantId"];
+            goodItem.defaultImage = [set stringForColumn:@"defaultImage"];
+            goodItem.goodPrice = [set objectForColumnName:@"goodPrice"];
+            goodItem.style = [set stringForColumn:@"style"];
+            goodItem.defaultThumb = [set stringForColumn:@"defaultThumb"];
+            goodItem.productLink = [set stringForColumn:@"productLink"];
+            goodItem.goodTitle = [set stringForColumn:@"goodTitle"];
+            goodItem.brandId = [set objectForColumnName:@"brandId"];
+            goodItem.occasion = [set stringForColumn:@"occasion"];
+            goodItem.status = [set objectForColumnName:@"status"];
+            goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
+            goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
+            goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
+//            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
+//            modeGood.brand_name = [set stringForColumn:@"brand_name"];
+//            modeGood.goods_id = [set stringForColumn:@"goods_id"];
+//            modeGood.img_link = [set stringForColumn:@"img_link"];
+//            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
+            [fetchedDatabase addObject:goodItem];
         }
     }
     [db close];
@@ -265,8 +334,31 @@
             if (![obj isKindOfClass:[NSArray class]]) {//单条数据插入
                 
                 if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
-                    ModeGood* modeGood = (ModeGood*)obj;
-                    BOOL flag = [db executeUpdate:sqlStr,modeGood.goods_id,modeGood.brand_img_link,modeGood.brand_name,modeGood.img_link,modeGood.has_coupon];
+                    GoodItem* goodItem = (GoodItem*)obj;
+                    BOOL flag = [db executeUpdate:sqlStr,
+                                 goodItem.itemId,
+                                 goodItem.moreProperty,
+                                 goodItem.saletime,
+                                 goodItem.sku,
+                                 goodItem.utime,
+                                 goodItem.color,
+                                 goodItem.ctime,
+                                 goodItem.goodSize,
+                                 goodItem.expires,
+                                 goodItem.itemName,
+                                 goodItem.merchantId,
+                                 goodItem.defaultImage,
+                                 goodItem.goodPrice,
+                                 goodItem.style,
+                                 goodItem.defaultThumb,
+                                 goodItem.productLink,
+                                 goodItem.goodTitle,
+                                 goodItem.brandId,
+                                 goodItem.occasion,
+                                 goodItem.status,
+                                 goodItem.goodDescription,
+                                 goodItem.hasCoupon,
+                                 goodItem.hasSelected];
                     res = flag&&res;
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
@@ -277,8 +369,30 @@
                 
             } else {//多条数据插入
                 if ([tableName isEqualToString:WISHLIST_TABLENAME]) {
-                    for (ModeGood* modeGood in obj) {
-                        BOOL flag = [db executeUpdate:sqlStr,modeGood.goods_id,modeGood.brand_img_link,modeGood.brand_name,modeGood.img_link,modeGood.has_coupon];
+                    for (GoodItem* goodItem in obj) {
+                        BOOL flag = [db executeUpdate:sqlStr,goodItem.itemId,
+                                     goodItem.moreProperty,
+                                     goodItem.saletime,
+                                     goodItem.sku,
+                                     goodItem.utime,
+                                     goodItem.color,
+                                     goodItem.ctime,
+                                     goodItem.goodSize,
+                                     goodItem.expires,
+                                     goodItem.itemName,
+                                     goodItem.merchantId,
+                                     goodItem.defaultImage,
+                                     goodItem.goodPrice,
+                                     goodItem.style,
+                                     goodItem.defaultThumb,
+                                     goodItem.productLink,
+                                     goodItem.goodTitle,
+                                     goodItem.brandId,
+                                     goodItem.occasion,
+                                     goodItem.status,
+                                     goodItem.goodDescription,
+                                     goodItem.hasCoupon,
+                                     goodItem.hasSelected];
                         if (!flag) {
                             NSLog(@"数组插入失败");
                             res = flag&&res;

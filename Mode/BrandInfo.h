@@ -9,8 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface BrandInfo : NSObject
-
-@property (nonatomic, strong) NSString* brandIntroduce;
+@property (strong, nonatomic) NSNumber *brandId;
+@property (strong, nonatomic) NSString *brandName;
+@property (strong, nonatomic) NSString *brandCname;
+@property (strong, nonatomic) NSString *brandEname;
+@property (strong, nonatomic) NSString *brandLogo;
+@property (strong, nonatomic) NSString *brandTitle;//null
+@property (strong, nonatomic) NSString *brandDescription;//null
+@property (strong, nonatomic) NSNumber *merchantId;//null
+@property (strong, nonatomic) NSNumber *sortOrder;
+@property (strong, nonatomic) NSNumber *ifShow;
+@property (strong, nonatomic) NSNumber *likes;
+@property (strong, nonatomic) NSNumber *ctime;
+@property (strong, nonatomic) NSNumber *utime;
 
 -(CGFloat)getBrandDetailHeigthtByWidth:(CGFloat)width;
 @end

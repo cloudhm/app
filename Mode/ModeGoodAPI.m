@@ -17,8 +17,8 @@
     manager.requestSerializer.timeoutInterval = 10.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 }
-+(NSNumber*)getUserID{
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
++(NSString*)getUserID{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
 
 
@@ -26,7 +26,7 @@
 +(void)setGoodsFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = SET_GOODS_FEEDBACK;
     NSMutableDictionary* allParams = [params mutableCopy];
-    [allParams setObject:[self getUserID] forKey:@"user_id"];
+    [allParams setObject:[self getUserID] forKey:@"userId"];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {

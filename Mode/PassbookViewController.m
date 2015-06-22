@@ -14,7 +14,7 @@
 #import "OrderConfirmViewController.h"
 #import "UIViewController+CWPopup.h"
 #import "UIColor+HexString.h"
-
+#import "ModePassbookAPI.h"
 #import "WishListViewController.h"
 @interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate>
 @property (strong, nonatomic) NSMutableArray* timeArr;
@@ -58,6 +58,16 @@
         [av show];
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [ModePassbookAPI requestPassbookListAndCallback:^(id obj) {
+        if (obj == nil) {
+            self.tableView.alpha = 0.f;
+        } else {
+            self.tableView.alpha = 1.f;
+#warning 数据模型木有
+        }
+    }];
+}
 -(NSMutableArray *)timeArr{
     if (!_timeArr) {
         _timeArr = [NSMutableArray array];
@@ -74,10 +84,10 @@
     
     self.tableView.backgroundColor = [UIColor clearColor];//使tableView变透明背景
     
-#warning 虚拟数据从plist文件中倒入
-    NSString* filePath = [[NSBundle mainBundle]pathForResource:@"times" ofType:@"plist"];
-    self.timeArr = [[NSArray arrayWithContentsOfFile:filePath]mutableCopy];
- 
+//#warning 虚拟数据从plist文件中倒入
+//    NSString* filePath = [[NSBundle mainBundle]pathForResource:@"times" ofType:@"plist"];
+//    self.timeArr = [[NSArray arrayWithContentsOfFile:filePath]mutableCopy];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"PassbookTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCell"];
 
     

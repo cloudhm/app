@@ -170,7 +170,10 @@
     return 30.f;
 }
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"AAAAAAAA";
+    if (self.modeCollections.count == 0) {
+        return @"Nothing...";
+    }
+    return @"My Favorite";
 }
 #pragma mark -UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -190,7 +193,14 @@
     ModeCollection* modeCollection = self.modeCollections[indexPath.row];
     [ModeWishlistAPI requestCollectionItems:modeCollection.collectionId AndCallback:^(id obj) {
         if(![obj isKindOfClass:[NSNull class]]) {
-            [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
+            NSArray* array = obj;
+            if (array.count>0) {
+                [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
+            } else {
+                [self showAlertViewWithErrorInfo:@"That is null link"];
+                self.tableView.userInteractionEnabled = YES;
+            }
+            
         } else {
             self.tableView.userInteractionEnabled = YES;
         }

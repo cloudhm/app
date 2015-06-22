@@ -24,7 +24,7 @@
 #define LIKENOPE_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
 
 #define WISHLIST_TABLENAME @"wishlist"
-#define WISHLIST_ELEMENTS @[@"goods_id",@"brand_img_link",@"brand_name",@"img_link",@"has_coupon"]
+#define WISHLIST_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
 
 
 

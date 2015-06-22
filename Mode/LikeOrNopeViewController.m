@@ -23,6 +23,8 @@
 #import "TAlertView.h"
 #import "Runway.h"
 #import "GoodItem.h"
+#import "ModeWishlistAPI.h"
+
 //static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
 //static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
@@ -40,9 +42,20 @@
 
 @implementation LikeOrNopeViewController
 
-
+#pragma mark ShowAlertView
+-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 #pragma mark - Object Lifecycle
--(NSMutableArray *)allGoods{//准备接受一组秀场的数组
+-(NSMutableArray *)goodItems{//准备接受一组秀场的数组
     if (!_goodItems) {
         _goodItems = [NSMutableArray array];
     }
@@ -127,11 +140,10 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
     [self.goodItems addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
-    if (self.allGoods.count>0) {
+    if (self.goodItems.count>0) {
         self.number = 1;
-        self.totalNumber = self.allGoods.count;
+        self.totalNumber = self.goodItems.count;
         self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
     }
     [self updateUI];
@@ -189,23 +201,15 @@
 #pragma mark ShareViewControllerDelegate
 -(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent startAnimation:(UIActivityIndicatorView *)activityView{
     [activityView startAnimating];
-#warning 发布信息给服务器
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:2.f];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [activityView stopAnimating];
-            [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
-            self.heartIV.alpha = 1.f;
-            self.label.alpha = 1.f;
-            [self showAlertView];
-        });
-    });
-    
-
-
-    
-    
-
+    NSDictionary* params = @{@"items":nineGoods,@"text":textContent};
+    [ModeWishlistAPI shareWishlistBy:params andCallback:^(id obj) {
+        NSLog(@"%@",obj);
+        [activityView stopAnimating];
+        [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+        self.heartIV.alpha = 1.f;
+        self.label.alpha = 1.f;
+        [self showAlertView];
+    }];
 }
 
 
@@ -233,18 +237,7 @@
 }
 
 
-#pragma mark ShowAlertView
--(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
-    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
-    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
-    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
-    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
-    alert.tapToClose = NO;
-    alert.timeToClose = 1.f;
-    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
-    alert.style = TAlertViewStyleInformation;
-    [alert showAsMessage];
-}
+
 -(void)dealloc{
     NSLog(@"likeornope页面销毁");
 }
@@ -276,16 +269,18 @@
                 if ([obj isKindOfClass:[NSNull class]]) {
                     return;
                 }
-                NSArray* allItems = [obj objectForKey:@"allItems"];
+                
                 self.receiveArr = obj;
+                NSArray* allItems = obj[1];
                 [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
                 [self createStartIntroduceView];
-                [self.allGoods addObjectsFromArray:allItems];
+                [self.goodItems removeAllObjects];
+                [self.goodItems addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
                 
                 
                 
                 self.number = 1;
-                self.totalNumber = self.allGoods.count;
+                self.totalNumber = self.goodItems.count;
                 self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
                 [self updateUI];
                 self.view.userInteractionEnabled = YES;
@@ -320,12 +315,12 @@
                 self.receiveArr =obj;
                 [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
                 [self createStartIntroduceView];
-                [self.allGoods addObjectsFromArray:allItems];
+                [self.goodItems addObjectsFromArray:allItems];
                 
                 
                 
                 self.number = 1;
-                self.totalNumber = self.allGoods.count;
+                self.totalNumber = self.goodItems.count;
                 self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
                 [self updateUI];
                 self.view.userInteractionEnabled = YES;
@@ -390,10 +385,11 @@
 // This is called then a user swipes the view fully left or right.
 - (void)view:(UIView *)view wasChosenWithDirection:(MDCSwipeDirection)direction {
     self.number++;
-    self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?12:self.number),(int)self.totalNumber];
+    self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?self.totalNumber:self.number),(int)self.totalNumber];
+#warning like or nope feedback interface params need to modify
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.itemId,@"fd":@"nope"} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
             NSLog(@"nope:%@",[obj objectForKey:@"status"]);
         }];
         // remove nope goods-Image from Disk
@@ -402,7 +398,7 @@
     } else {
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"goods_id":self.currentCloth.itemId,@"fd":@"like"} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
             if ([[obj objectForKey:@"status"]isEqualToString:@"success"]) {
                 NSLog(@"like:%@",[obj objectForKey:@"status"]);
             };
@@ -450,7 +446,7 @@
     self.currentCloth = firstCardView.goodItem;
 }
 - (ChooseClothesView *)popPersonViewWithFrame:(CGRect)frame {
-    if ([self.allGoods count] == 0) {
+    if ([self.goodItems count] == 0) {
         return nil;
     }
     MDCSwipeToChooseViewOptions *options = [MDCSwipeToChooseViewOptions new];
@@ -473,11 +469,11 @@
     };
 
     ChooseClothesView *clothesView = [[ChooseClothesView alloc] initWithFrame:frame
-                                                                    goodItem:self.allGoods[0]
+                                                                    goodItem:self.goodItems[0]
                                                                    options:options];
     clothesView.userInteractionEnabled = NO;
     
-    [self.allGoods removeObjectAtIndex:0];
+    [self.goodItems removeObjectAtIndex:0];
     
     return clothesView;
 }

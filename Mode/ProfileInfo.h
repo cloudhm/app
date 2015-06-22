@@ -20,14 +20,14 @@
 @property (strong, nonatomic) NSNumber *ctime;//long int
 @property (strong, nonatomic) NSString *birthday;
 @property (strong, nonatomic) NSNumber *wishes;//int
-@property (strong, nonatomic) NSNumber *vip;//isvip int
+@property (strong, nonatomic) NSNumber *vip;//source -> isvip int
 @property (strong, nonatomic) NSNumber *orders;//int
 @property (strong, nonatomic) NSNumber *inviteBy;//int
-@property (strong, nonatomic) NSString *inviteCode;
+@property (strong, nonatomic) NSString *inviteCode;    //null
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *countryCode;//          null
-@property (strong, nonatomic) NSNumber *longitude;//double
-@property (strong, nonatomic) NSNumber *latitude;//double
+@property (strong, nonatomic) NSNumber *longitude;//double      null
+@property (strong, nonatomic) NSNumber *latitude;//double       null
 @property (strong, nonatomic) NSString *gender;//               null
 @property (strong, nonatomic) NSNumber *likes;//int
 @property (strong, nonatomic) NSNumber *shares;//int

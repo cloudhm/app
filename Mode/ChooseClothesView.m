@@ -105,17 +105,7 @@
         self.brandImageView.image = [UIImage getSubImageByImage:image andImageViewFrame:self.brandImageView.frame];
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodItem.defaultThumb lastPathComponent] toDisk:YES];
     }];
-//    if (![[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[self.modeGood.brand_img_link lastPathComponent]]) {
-//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//        [manager downloadImageWithURL:[NSURL URLWithString:self.modeGood.brand_img_link] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//            NSLog(@"%ld/%ld",receivedSize,expectedSize);
-//        }completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//            [[SDImageCache sharedImageCache]storeImage:image forKey:[self.modeGood.brand_img_link lastPathComponent] toDisk:YES];
-//            self.brandImageView.image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[self.modeGood.brand_img_link lastPathComponent]];
-//        }];
-//    } else {
-//        self.brandImageView.image = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[self.modeGood.brand_img_link lastPathComponent]];
-//    }
+
     
     [_informationView addSubview:_brandImageView];
 }

@@ -7,7 +7,7 @@
 //
 
 #import "WishListViewController.h"
-#import "ModeGood.h"
+//#import "ModeGood.h"
 #import "WishlistScrollView.h"
 #import <FMDB.h>
 #import "WishlistView.h"
@@ -22,7 +22,10 @@
 #import "Common.h"
 #import "UIView+AutoLayout.h"
 #import "GoodItem.h"
-@interface WishListViewController ()<UIAlertViewDelegate,WishlistScrollViewDelegate>
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
+#import "BrandRunwayTableViewController.h"
+@interface WishListViewController ()<WishlistScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
 @property (weak, nonatomic) UILabel *label;
@@ -111,8 +114,9 @@
     
     UIButton* b1 = [[UIButton alloc]init];
 //    b1.translatesAutoresizingMaskIntoConstraints = NO;
-    [b1 setImage:[UIImage imageNamed:@"brand_info_normal.png"] forState:UIControlStateNormal];
-    [b1 setImage:[UIImage imageNamed:@"brand_info_press.png"] forState:UIControlStateHighlighted];
+    [b1 setImage:[UIImage imageNamed:@"brandInfoNor.png"] forState:UIControlStateNormal];
+    [b1 setImage:[UIImage imageNamed:@"brandInfoHigh.png"] forState:UIControlStateHighlighted];
+    [b1 addTarget:self action:@selector(gotoBrandRunway:) forControlEvents:UIControlEventTouchUpInside];
     b1.tag = 1;
     self.brandInfoBtn = b1;
     [self.rightView addSubview:b1];
@@ -238,7 +242,7 @@
     }
 //如果跳转页面未传值，则显示本地未上传给服务器的wishlist列表，如果传值则显示网络上喜欢的历史纪录
     if (!self.receiveArr) {
-        [self readDataFromTableWishlist];
+        [self.clothes addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
     } else {
         [self.clothes addObjectsFromArray:self.receiveArr];
     }
@@ -254,54 +258,19 @@
 }
 //页面已经显示时添加两个通知的观察者
 -(void)viewDidAppear:(BOOL)animated{
-    
-//    if (!self.receiveArr) {
-//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeDataFromWishlist:) name:@"removeNopedGood" object:nil];
-//    }
+
 }
 //页面即将消失把通知注销掉
 -(void)viewDidDisappear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"removeNopedGood" object:nil];
-//    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"requestLoadGoodInfo" object:nil];
+
 }
-//收到通知  网络请求商品详情
--(void)requestLoadGoodInfo:(NSNotification*)noti{
-//    [ModeGoodAPI requestGoodInfoWithGoodID:[noti.userInfo objectForKey:@"goods_id"] andCallback:^(id obj) {
-//        if ([obj isKindOfClass:[NSNull class]]) {
-//            return ;
-//        }
-    
-//    }];
-}
+
 //计算右视图中商品标题的大小
 -(CGRect)getGoodTitleFrame {
     NSDictionary* attributes = @{NSFontAttributeName:[UIFont italicSystemFontOfSize:14],NSForegroundColorAttributeName:[UIColor colorWithRed:77/255.f green:77/255.f blue:77/255.f alpha:1]};
     return [self.goodItem.goodTitle boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.rightView.bounds)-10.f, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
 }
 
-//导入wishlist数据  主要用来显示右上角红心数
--(void)readDataFromTableWishlist{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        NSLog(@"打开数据库成功");
-        FMResultSet* set = [db executeQuery:@"select * from wishlist"];
-        while ([set next]) {
-            ModeGood* modeGood = [[ModeGood alloc]init];
-            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-            modeGood.img_link = [set stringForColumn:@"img_link"];
-            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
-            [self.clothes addObject:modeGood];
-        }
-        [db close];
-    } else {
-        NSLog(@"打开数据库失败");
-        [db close];
-    }
-}
 //增加横向滚动的scrollView视图
 -(void)createScrollView{
     [self defineRightBarItem];
@@ -322,7 +291,7 @@
     self.goodItem = self.clothes[index];
     self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodItem.goodPrice.floatValue];
     self.couponBtn.enabled = YES;
-    if ([self.goodItem.hasCoupon isEqualToString:@"true"]&&self.goodItem.hasSelected==NO) {
+    if ([self.goodItem.hasCoupon isEqualToString:@"true"]&&[self.goodItem.hasSelected isEqual:@(0)]) {
         [self.couponBtn setSelected:NO];
     } else {
         [self.couponBtn setSelected:YES];
@@ -335,7 +304,6 @@
     }];
     [self resetAllElementsInRightView];
     [self.view setNeedsLayout];
-//    [self.view setNeedsUpdateConstraints];
 }
 -(void)createLeftView{
     float padding = 10.f;
@@ -389,53 +357,12 @@
 - (IBAction)clickConpon:(UIButton *)sender {
     [sender setSelected:YES];
     sender.enabled = NO;
-    self.goodItem.hasSelected = YES;
+    self.goodItem.hasSelected = @(1);
 #warning 发请求通知服务器已申请优惠券
 }
 
-/*
-//根据滚动视图中的子视图删除按钮的通知  把该视图从scrollView中删除  并且从数据库删除，更新右上角红心数 重置选中视图下标
--(void)removeDataFromWishlist:(NSNotification*)noti{
-    NSString* nopedGoods_id = [noti.userInfo objectForKey:@"goods_id"];
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        NSLog(@"数据库成功打开");
-        BOOL res = [db executeUpdate:@"DELETE FROM wishlist WHERE goods_id = ?",nopedGoods_id];
-        NSLog(@"%@",nopedGoods_id);
-        if (res) {
-            NSLog(@"删除成功");
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
-    id obj = noti.object;
-    if ([obj isMemberOfClass:[WishlistView class]]) {
-        WishlistView* wishlistView = (WishlistView*)obj;
-        [self.bigSV.goodItems removeObject:wishlistView.goodItem];
-        [self.bigSV.goodeItemViews removeObject:wishlistView];
-        [wishlistView removeFromSuperview];
-        [self.bigSV layoutSubviews];
-        int count = self.label.text.intValue;
-        count--;
-        self.label.text = [NSString stringWithFormat:@"%d",(int)count];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
-        if ([self.label.text isEqualToString:@"0"]) {
-            UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please come back and choose some your liked fashion goods first" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [av show];
-        }
-    }
-}
- */
-#pragma mark UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+
+
 //定义导航栏右上角红心位置的视图
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
@@ -457,20 +384,23 @@
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-- (IBAction)gotoBrandRunway:(UIButton *)sender {//跳转时响应
+- (void)gotoBrandRunway:(UIButton *)sender {//跳转时响应
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    [self performSegueWithIdentifier:@"gotoBrandRunway" sender:nil];
+    if (self.goodItem.brandId) {
+        [self performSegueWithIdentifier:@"gotoBrandRunway" sender:self.goodItem.brandId];
+    }
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    BrandRunwayTableViewController* bc = segue.destinationViewController;
+    
+    bc.brandId = sender;
 }
-*/
+
 
 @end

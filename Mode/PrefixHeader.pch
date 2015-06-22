@@ -13,7 +13,7 @@
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://192.168.1.118:8080"//@"http://120.26.107.42:8080"
+#define HOSTADDRESS @"http://127.0.0.1:8080"//@"http://120.26.107.42:8080"
 
 
 //账号接口
@@ -35,8 +35,7 @@
 #define TRANSACTIONS [HOSTADDRESS stringByAppendingPathComponent:@"transactions/users"]//用户交易历史 GET
 
 //商品接口
-#define GET_GOODS @"http://120.26.107.42/api/goods/get_goods" //获取商品的基本信息
-#define SET_GOODS_FEEDBACK @"http://120.26.107.42/api/goods/set_goods_feedback" //设置商品测试反馈秀场接口
+#define SET_GOODS_FEEDBACK [HOSTADDRESS stringByAppendingPathComponent:@"brands/users/like"] //设置商品测试反馈秀场接口
 
 //秀场接口
 #define RUNWAY [HOSTADDRESS stringByAppendingPathComponent:@"runway"]  //新建一组秀场心愿单接口
@@ -44,12 +43,15 @@
 //心愿单接口
 #define GET_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/users"]//获取用户的collection
 #define GET_COLLECTION_ITEMS [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"] //按collectionId(此参数暂时不传)
+#define SHARE_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"]//分享九宫格
+
 
 #define GET_NEWEST_WISHLIST @"http://120.26.107.42/api/wishlist/get_newest_wishlist" //获取用户最新的wishlist
 
 
 //品牌接口
-#define BRAND_GET_RUNWAY_LIST @"http://120.26.107.42/api/brand/get_runway_list" //获取某个品牌的所有秀场信息
+#define BRANDINFO [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //获取品牌介绍信息
 
-
+//Passbook清单
+#define PASSBOOK_LIST [HOSTADDRESS stringByAppendingPathComponent:@"passbooks/users"]//获得所有奖券信息
 #endif

@@ -39,36 +39,36 @@
 }
 #pragma mark MENUS
 +(NSDictionary*)parserMenuListByDictionary:(NSDictionary*)dictionary{
-    NSMutableDictionary* allData = [NSMutableDictionary dictionary];
-    NSArray* stylesArr = [dictionary objectForKey:STYLE];
-    if (![stylesArr isKindOfClass:[NSNull class]]) {
-        NSArray* modeSysLists = [self parserMenuListByArray:stylesArr withKeyword:STYLE];
-        [allData setObject:modeSysLists forKey:STYLE];
-
-    }
-    
-    NSArray* brandsArr = [dictionary objectForKey:BRAND];
-    if (![brandsArr isKindOfClass:[NSNull class]]) {
-        NSArray* modeSysLists = [self parserMenuListByArray:brandsArr withKeyword:BRAND];
-        [allData setObject:modeSysLists forKey:BRAND];
-    }
-    NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
-    if (![occasionsArr isKindOfClass:[NSNull class]]) {
-        NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
-        [allData setObject:modeSysLists forKey:OCCASION];
-        
-    }
-    return allData;
+//    NSMutableDictionary* allData = [NSMutableDictionary dictionary];
+//    NSArray* stylesArr = [dictionary objectForKey:STYLE];
+//    if (![stylesArr isKindOfClass:[NSNull class]]) {
+//        NSArray* modeSysLists = [self parserMenuListByArray:stylesArr withKeyword:STYLE];
+//        [allData setObject:modeSysLists forKey:STYLE];
+//
+//    }
+//    
+//    NSArray* brandsArr = [dictionary objectForKey:BRAND];
+//    if (![brandsArr isKindOfClass:[NSNull class]]) {
+//        NSArray* modeSysLists = [self parserMenuListByArray:brandsArr withKeyword:BRAND];
+//        [allData setObject:modeSysLists forKey:BRAND];
+//    }
+//    NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
+//    if (![occasionsArr isKindOfClass:[NSNull class]]) {
+//        NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
+//        [allData setObject:modeSysLists forKey:OCCASION];
+//        
+//    }
+    return nil;
 }
-+(NSArray*)parserMenuListByArray:(NSArray*)array withKeyword:(NSString*)keyword{
++(NSArray*)parserMenuListByArray:(NSArray*)array{
     NSMutableArray* array1 = [NSMutableArray array];
     for (NSArray* subArray in array) {
-        ModeSysList* sysList = [self parserMenuListBySubArray:subArray withKeyword:keyword];
+        ModeSysList* sysList = [self parserMenuListBySubArray:subArray];
         [array1 addObject:sysList];
     }
     return array1;
 }
-+(ModeSysList*)parserMenuListBySubArray:(NSArray*)subArray withKeyword:(NSString*)keyword{
++(ModeSysList*)parserMenuListBySubArray:(NSArray*)subArray{
     ModeSysList* sysList = [[ModeSysList alloc]init];
     sysList.name = subArray[0];
     sysList.picLink = subArray[1];

@@ -31,4 +31,6 @@
 
 //品牌信息介绍
 +(BrandInfo*)parserBrandInfoByDictionary:(NSDictionary*)dictionary;
+
++(NSArray*)parserMenuListByArray:(NSArray*)array;
 @end

@@ -4,120 +4,84 @@
 <dict>
 	<key>brands</key>
 	<array>
-		<dict>
-			<key>name</key>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Brand</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
+		</array>
 	</array>
 	<key>occasions</key>
 	<array>
-		<dict>
-			<key>name</key>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Occasion</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
+		</array>
 	</array>
-	<key>style</key>
+	<key>styles</key>
 	<array>
-		<dict>
-			<key>name</key>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>name</key>
+		</array>
+		<array>
 			<string>Style</string>
-			<key>picLink</key>
 			<string></string>
-		</dict>
+		</array>
 	</array>
 	<key>utime</key>
 	<integer>0</integer>

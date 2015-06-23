@@ -17,7 +17,7 @@
 
 
 #define HOME_LIST_TABLENAME @"list_home"
-#define HOME_LIST_ELEMENTS @[@"utime",OCCASION,BRAND,STYLE]
+#define HOME_LIST_ELEMENTS @[@"menu"]
 
 
 

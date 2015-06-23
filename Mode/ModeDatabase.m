@@ -10,7 +10,14 @@
 #import "ModeSysList.h"
 #import "PrefixHeaderDatabase.pch"
 #import "GoodItem.h"
+#import "JsonParser.h"
 @implementation ModeDatabase
++(NSString*)getUserId{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
++(NSString*)getSQLName{
+    return [[self getUserId]stringByAppendingPathExtension:@"sql"];
+}
 //清空表内容 sql语句
 +(NSString*)deleteTableStrWithTableName:(NSString*)tableName{
     return [self deletaTableStrWithTableName:tableName andConditionKey:nil andConditionValue:nil];
@@ -28,11 +35,14 @@
     NSString* sqlStr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@",tableName];
     for (int i = 0; i<elements.count; i++) {
         if (i == 0) {
-            sqlStr = [NSString stringWithFormat:@"%@(%@ primary key,",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@"%@(%@ primary key",sqlStr,elements[i]];
         } else if (i == elements.count-1){
-            sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,elements[i]];
         } else {
-            sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,elements[i]];
+        }
+        if (elements.count==1) {
+            sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
         }
     }
     return sqlStr;
@@ -49,14 +59,20 @@
             sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
         }
     }
+    if (elements.count == 1) {
+        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
+    }
     for (int i =0 ; i< elements.count; i++) {
         if (i == 0) {
-            sqlStr = [NSString stringWithFormat:@"%@ values(%@,",sqlStr,@"?"];
+            sqlStr = [NSString stringWithFormat:@"%@ values(%@",sqlStr,@"?"];
         } else if (i == elements.count-1){
-            sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"?"];
+            sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,@"?"];
         } else {
-            sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
+            sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,@"?"];
         }
+    }
+    if (elements.count == 1) {
+        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
     }
     return sqlStr;
 }
@@ -65,23 +81,28 @@
     NSString* sqlStr = [NSString stringWithFormat:@"replace into %@",tableName];
         for (int i = 0 ; i<elements.count; i++) {
             if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
+                sqlStr = [NSString stringWithFormat:@"%@(%@",sqlStr,elements[i]];
             } else if (i == elements.count-1){
-                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,elements[i]];
+                sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,elements[i]];
             } else {
-                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
+                sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,elements[i]];
             }
         }
+    if (elements.count == 1) {
+        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
+    }
         for (int i =0 ; i<elements.count; i++) {
             if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@ values(%@,",sqlStr,@"?"];
+                sqlStr = [NSString stringWithFormat:@"%@ values(%@",sqlStr,@"?"];
             } else if (i == elements.count-1){
-                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"?"];
+                sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,@"?"];
             } else {
-                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
+                sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,@"?"];
             }
         }
-//    }
+    if (elements.count == 1) {
+        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
+    }
     
     return sqlStr;
 }
@@ -97,7 +118,7 @@
 }
 +(BOOL)deleteTableWithName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     NSString* sqlStr = [self deleteTableStrWithTableName:tableName];
     if ([db open]) {
@@ -117,7 +138,7 @@
 //把网络请求回来的秀场数据 存入数据库
 +(void)saveGetNewDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObj:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self deleteTableStrWithTableName:tableName];//只是为了清空原先加载的16张图片数据模型
@@ -177,7 +198,7 @@
 //主页面的数据本地化存储
 +(void)saveSystemListDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObject:(id)obj andKeyWord:(NSString*)keyword{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self createTableStrWithTableName:tableName andTableElements:elements];
@@ -201,14 +222,34 @@
     }
     
 }
-
++(id)readDatabaseInTableName:(NSString*)tableName andSelectConditionKey:(NSString *)conditionKey andSelectConditionValue:(NSString *)conditionValue{
+    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    FMDatabase *db = [FMDatabase databaseWithPath:path];
+    if ([db open] == NO) {
+        NSLog(@"打开失败");
+        [db close];
+        
+    }
+    NSString* sqlStr = [self selectTableStrWithTableName:tableName andSelectConditionKey:conditionKey andSelectConditionValue:conditionValue];
+    FMResultSet* set = [db executeQuery:sqlStr];
+    if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
+        while ([set next]) {
+            NSString* selectedStr = [set stringForColumn:@"menu"];
+            NSData* jsonData = [selectedStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            return [dic objectForKey:conditionKey];
+        }
+    }
+    return nil;
+}
 
 +(NSArray*)readDatabaseFromTableName:(NSString*)tableName andSelectConditionKey:(NSString*)conditionKey andSelectConditionValue:(NSString*)conditionValue {
     
     NSMutableArray* fetchedDatabase = [NSMutableArray array];
     //从本地数据库读取内容
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open] == NO) {
         NSLog(@"打开失败");
@@ -220,12 +261,14 @@
     FMResultSet* set = [db executeQuery:sqlStr];
     //查询数据
     if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-        NSString* selectedStr = [set stringForColumn:conditionKey];
-        NSLog(@"%@",selectedStr);
-        NSData* data = [[NSData alloc]initWithBase64EncodedString:selectedStr options:0];
-        NSKeyedUnarchiver* unArch = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
-        NSArray* selectedArr = [unArch decodeObjectForKey:conditionKey];
-        [fetchedDatabase addObjectsFromArray:selectedArr];
+        while ([set next]) {
+            NSString* selectedStr = [set stringForColumn:@"menu"];
+            NSData* jsonData = [selectedStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            NSArray* subArr = [dic objectForKey:conditionKey];
+            NSArray* array = [JsonParser parserMenuListByArray:subArr];
+            [fetchedDatabase addObjectsFromArray:array];
+        }
     }
     if ([tableName isEqualToString:LIKENOPE_TABLENAME]) {
         while ([set next]) {
@@ -290,7 +333,7 @@
 }
 +(BOOL)replaceIntoTable:(NSString*)tableName andTableElements:(NSArray*)elements andInsertContent:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
     NSLog(@"%@",path);
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
@@ -330,8 +373,8 @@
                     res = flag&&res;
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-                    NSArray* arr = obj;
-                    BOOL flag = [db executeUpdate:sqlStr,arr[0],arr[1],arr[2],arr[3]];
+                    
+                    BOOL flag = [db executeUpdate:sqlStr,obj];
                     res = flag&&res;
                 }
                 

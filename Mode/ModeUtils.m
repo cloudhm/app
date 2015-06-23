@@ -16,20 +16,12 @@
 +(void)initDatabase{
     
     NSString* plistPath = [[NSBundle mainBundle]pathForResource:@"init" ofType:@"plist"];
-    NSDictionary* dictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    NSNumber* utime = [dictionary objectForKey:@"utime"];
-    NSArray* occasionArr = [self parserAndGetBy:[dictionary objectForKey:OCCASION]];
-    NSArray* brandArr = [self parserAndGetBy:[dictionary objectForKey:BRAND]];
-    NSArray* mstyle = [self parserAndGetBy:[dictionary objectForKey:STYLE]];
-    NSData* occData = [NSKeyedArchiver archivedDataWithRootObject:occasionArr];
-    NSString* occStr = [occData base64EncodedStringWithOptions:0];
-    NSLog(@"%@",occStr);
-    NSData* brandData = [NSKeyedArchiver archivedDataWithRootObject:brandArr];
-    NSString* brandStr = [brandData base64EncodedStringWithOptions:0];
-    NSData* styleData = [NSKeyedArchiver archivedDataWithRootObject:mstyle];
-    NSString* styleStr = [styleData base64EncodedStringWithOptions:0];
+    NSDictionary* dictionary = [[NSDictionary alloc]initWithContentsOfFile:plistPath];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
     
-    BOOL res = [ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:@[utime,occStr,brandStr,styleStr]];
+    NSString* jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    BOOL res = [ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:jsonStr];
     if (res) {
         NSLog(@"初始化数据库成功");
         [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"menu_utime"];

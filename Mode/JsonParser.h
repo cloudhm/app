@@ -22,21 +22,13 @@
 
 //获取用户Collection列表
 +(NSArray*)parserModeCollectionArrBy:(NSArray*)array;
+
 //获取一个collection中的items
 +(NSArray*)parserCollectionItemsBy:(NSDictionary*)dictionary;
 
-////商品对象解析
-//+(ModeGood*)parserGoodByDictionary:(NSDictionary*)dictionary;
-
-////商品基本信息
-//+(GoodInfo*)parserGoodInfoByDictionary:(NSDictionary*)dictionary;
-
-//心愿单
-//+(ModeWishlist*)parserWishlistByDictionary:(NSDictionary*)dictionary;
-
-//品牌秀场
-//+(ModeBrandRunway*)parserBrandRunwayByDictionary:(NSDictionary*)dictionary;
+//一组秀场
 +(NSArray*)parserRunwayInfoByDictionary:(NSDictionary*)dictionary;
 
+//品牌信息介绍
 +(BrandInfo*)parserBrandInfoByDictionary:(NSDictionary*)dictionary;
 @end

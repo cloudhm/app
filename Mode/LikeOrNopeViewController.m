@@ -11,7 +11,6 @@
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 #import "WishListViewController.h"
 #import "ModeGoodAPI.h"
-//#import "ModeGood.h"
 #import "SDWebImageManager.h"
 #import "UIViewController+CWPopup.h"
 #import "ShareViewController.h"
@@ -25,8 +24,6 @@
 #import "GoodItem.h"
 #import "ModeWishlistAPI.h"
 
-//static const CGFloat ChoosePersonButtonHorizontalPadding = 80.f;
-//static const CGFloat ChoosePersonButtonVerticalPadding = 35.f;
 
 @interface LikeOrNopeViewController ()<UIAlertViewDelegate,ShareViewControllerDelegate>
 

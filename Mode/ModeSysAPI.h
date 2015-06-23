@@ -13,9 +13,5 @@ typedef void (^MyCallback)(id obj);
 @interface ModeSysAPI : NSObject
 
 +(void)requestMenuListAndCallback:(MyCallback)callback;
-/* //deprecated request method
-+(void)requestBrandListAndCallback:(MyCallback)callback;
-+(void)requestOccasionListAndCallback:(MyCallback)callback;
-+(void)requestStyleListAndCallback:(MyCallback)callback;
- */
+
 @end

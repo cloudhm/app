@@ -10,7 +10,6 @@
 #import "BrandIntroduceHeaderView.h"
 #import "AppDelegate.h"
 #import "ModeBrandRunwayAPI.h"
-#import "ModeBrandRunway.h"
 #import "BrandRunwayTableViewCell.h"
 #import "UIColor+HexString.h"
 #import "LikeOrNopeViewController.h"
@@ -23,7 +22,6 @@
 @property (strong, nonatomic) UILabel *toolbarLabel;
 @property (assign, nonatomic) CGPoint lastScrollOffset;
 @property (strong, nonatomic) NSMutableArray *brandRunwayList;
-@property (strong, nonatomic) ModeBrandRunway *brandRunway;
 @property (strong, nonatomic) BrandInfo *brandInfo;
 @end
 
@@ -135,7 +133,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BrandRunwayTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.brandRunway = self.brandRunwayList[indexPath.row];
+    
     return cell;
 }
 

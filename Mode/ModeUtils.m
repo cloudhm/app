@@ -32,30 +32,5 @@
     } else {
         NSLog(@"插入数据失败");
     }
-//        }
-        
-//        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (eventId primary key,menutype,name,picLink,amount)"];
-//        BOOL res = NO;
-//        if (result) {
-//            for (NSDictionary* dic in array) {
-//                
-//                NSString* eventId = [dic objectForKey:@"eventId"];
-//                NSString* style_type = [dic objectForKey:@"type"];
-//                NSString* name = [dic objectForKey:@"name"];
-//                NSString* picLink = [dic objectForKey:@"picLink"];
-//                NSString* amount = [dic objectForKey:@"amount"];
-//                res = [db executeUpdate:@"replace into list_home(eventId,menutype,name,picLink,amount) values(?,?,?,?,?)",eventId,style_type,name,picLink,amount];
-//                if (res == NO) {
-//                    NSLog(@"插入数据失败");
-//                }
-//            }
-//            
-//            
-//        }
-//        [db close];
-//    } else {
-//        [db close];
-//        NSLog(@"数据库打开失败");
-//    }
 }
 @end

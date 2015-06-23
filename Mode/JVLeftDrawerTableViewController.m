@@ -12,7 +12,7 @@
 #import "JVFloatingDrawerViewController.h"
 
 #import "BrandRunwayTableViewController.h"
-#import "ModeGood.h"
+
 #import <FMDB.h>
 #import "UIColor+HexString.h"
 #import "ModeDatabase.h"

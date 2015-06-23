@@ -13,7 +13,7 @@
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://127.0.0.1:8080"//@"http://120.26.107.42:8080"
+#define HOSTADDRESS @"http://120.26.107.42:8080"//@"http://127.0.0.1:8080"//
 
 
 //账号接口
@@ -22,11 +22,6 @@
 
 //系统接口
 #define MENU [HOSTADDRESS stringByAppendingPathComponent:@"menus"]//获取所有主页面数据  GET
-/*  // deprecated interface
-#define BRAND_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/brands"] //获取活跃中的品牌名称列表
-#define OCCASION_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/occasions"] //获取场合列表
-#define STYLE_LIST [HOSTADDRESS stringByAppendingPathComponent:@"menu/styles"] //获取商品风格列表
-*/
 
 //获得用户的明细信息
 #define PROFILEINFO [HOSTADDRESS stringByAppendingPathComponent:@"profiles/users"]//用户明细信息 GET
@@ -45,13 +40,13 @@
 #define GET_COLLECTION_ITEMS [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"] //按collectionId(此参数暂时不传)
 #define SHARE_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"]//分享九宫格
 
-
-#define GET_NEWEST_WISHLIST @"http://120.26.107.42/api/wishlist/get_newest_wishlist" //获取用户最新的wishlist
-
-
 //品牌接口
 #define BRANDINFO [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //获取品牌介绍信息
 
 //Passbook清单
 #define PASSBOOK_LIST [HOSTADDRESS stringByAppendingPathComponent:@"passbooks/users"]//获得所有奖券信息
+
+
+
+
 #endif

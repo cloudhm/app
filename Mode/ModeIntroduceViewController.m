@@ -84,7 +84,6 @@
     button.backgroundColor = [UIColor clearColor];
     button.alpha = 0.f;
     button.frame = CGRectMake(0, 0, 140.f, 40.f);
-//    button.frame = CGRectMake(self.introScrollView.frame.size.width*(self.imageNames.count-1), 0, self.introScrollView.frame.size.width, self.introScrollView.frame.size.height);
     self.startBtn = button;
     //为按钮添加点击事件
     [button addTarget:self action:@selector(enterApp) forControlEvents:UIControlEventTouchUpInside];

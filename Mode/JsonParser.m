@@ -8,10 +8,9 @@
 
 #import "JsonParser.h"
 #import "ModeSysList.h"
-//#import "ModeGood.h"
-//#import "Coupon.h"
+
 #import "ModeCollection.h"
-#import "ModeBrandRunway.h"
+
 #import "PrefixHeaderDatabase.pch"
 #import "ProfileInfo.h"
 #import "Transaction.h"
@@ -232,43 +231,8 @@
 }
 
 
-//颜色判断是否为十六进制编码
-+(NSString*)colorObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{
-    if ([[dictionary objectForKey:key]isKindOfClass:[NSNull class]]||
-        [dictionary objectForKey:key]==nil||
-        [[dictionary objectForKey:key]isEqualToString:@"null"]||
-        [[dictionary objectForKey:key]isEqualToString:@"red"]||
-        [[dictionary objectForKey:key]isEqualToString:@"Array"]) {
-        return @"";
-    } else {
-        return [dictionary objectForKey:key];
-    }
-}
-//字符串类型判断是否为空或空对象
-+(NSString*)stringObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{
-    if ([[dictionary objectForKey:key]isKindOfClass:[NSNull class]]||[dictionary objectForKey:key]==nil) {
-        return @"";
-    } else {
-        return [dictionary objectForKey:key];
-    }
-}
-//数值类型判断是否为空或空对象
-+(NSNumber*)numberObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dicitionary{
-    if ([[dicitionary objectForKey:key]isKindOfClass:[NSNull class]]||[dicitionary objectForKey:key]==nil) {
-        return @(0);
-    } else {
-        return [dicitionary objectForKey:key];
-    }
-    
-}
 
-+(ModeBrandRunway*)parserBrandRunwayByDictionary:(NSDictionary*)dictionary{
-    ModeBrandRunway* brandRunway = [[ModeBrandRunway alloc]init];
-    brandRunway.ctime = [dictionary objectForKey:@"ctime"];
-    brandRunway.pic_link = [dictionary objectForKey:@"pic_link"];
-    brandRunway.event_id = [dictionary objectForKey:@"event_id"];
-    return brandRunway;
-}
+
 +(Runway*)parserRunwayByDictionary:(NSDictionary*)dictionary{
     Runway* runway = [[Runway alloc]init];
     runway.status = [self numberObjectForKey:@"status" byDictionary:dictionary];
@@ -305,5 +269,35 @@
     brandInfo.ctime = [dictionary objectForKey:@"ctime"];
     brandInfo.utime = [dictionary objectForKey:@"utime"];
     return brandInfo;
+}
+#pragma mark parser null or nil -default value
+//颜色判断是否为十六进制编码
++(NSString*)colorObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{
+    if ([[dictionary objectForKey:key]isKindOfClass:[NSNull class]]||
+        [dictionary objectForKey:key]==nil||
+        [[dictionary objectForKey:key]isEqualToString:@"null"]||
+        [[dictionary objectForKey:key]isEqualToString:@"red"]||
+        [[dictionary objectForKey:key]isEqualToString:@"Array"]) {
+        return @"";
+    } else {
+        return [dictionary objectForKey:key];
+    }
+}
+//字符串类型判断是否为空或空对象
++(NSString*)stringObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{
+    if ([[dictionary objectForKey:key]isKindOfClass:[NSNull class]]||[dictionary objectForKey:key]==nil) {
+        return @"";
+    } else {
+        return [dictionary objectForKey:key];
+    }
+}
+//数值类型判断是否为空或空对象
++(NSNumber*)numberObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dicitionary{
+    if ([[dicitionary objectForKey:key]isKindOfClass:[NSNull class]]||[dicitionary objectForKey:key]==nil) {
+        return @(0);
+    } else {
+        return [dicitionary objectForKey:key];
+    }
+    
 }
 @end

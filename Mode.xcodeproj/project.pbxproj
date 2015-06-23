@@ -115,7 +115,6 @@
 		14080EFB1B318DE300060666 /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080EF31B318DE300060666 /* OrderViewController.m */; };
 		14080EFC1B318DE300060666 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080EF51B318DE300060666 /* OrderTableViewCell.m */; };
 		14080EFD1B318DE300060666 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14080EF61B318DE300060666 /* OrderTableViewCell.xib */; };
-		14080EFE1B318DE300060666 /* OrderCellInnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080EF81B318DE300060666 /* OrderCellInnerView.m */; };
 		14080EFF1B318DE300060666 /* ModeOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080EFA1B318DE300060666 /* ModeOrder.m */; };
 		14080F021B318E0000060666 /* WishListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F011B318E0000060666 /* WishListViewController.m */; };
 		14080F081B318E4E00060666 /* LikeOrNopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F041B318E4E00060666 /* LikeOrNopeViewController.m */; };
@@ -133,12 +132,8 @@
 		14080F2B1B318EA300060666 /* OccasionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F241B318EA300060666 /* OccasionViewController.m */; };
 		14080F2C1B318EA300060666 /* BrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F261B318EA300060666 /* BrandViewController.m */; };
 		14080F2D1B318EA300060666 /* StyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F281B318EA300060666 /* StyleViewController.m */; };
-		14080F301B318EC800060666 /* ModeBrandRunway.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F2F1B318EC800060666 /* ModeBrandRunway.m */; };
 		14080F331B318ED400060666 /* BrandInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F321B318ED400060666 /* BrandInfo.m */; };
 		14080F361B318EE400060666 /* ModeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F351B318EE400060666 /* ModeCollection.m */; };
-		14080F391B318EF400060666 /* ModeGood.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F381B318EF400060666 /* ModeGood.m */; };
-		14080F3E1B318F0300060666 /* GoodInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F3B1B318F0300060666 /* GoodInfo.m */; };
-		14080F3F1B318F0300060666 /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F3D1B318F0300060666 /* Coupon.m */; };
 		14080F421B318F1000060666 /* ModeSysList.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F411B318F1000060666 /* ModeSysList.m */; };
 		14080F4E1B318F2700060666 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F441B318F2700060666 /* ColorView.m */; };
 		14080F4F1B318F2700060666 /* WishlistScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F461B318F2700060666 /* WishlistScrollView.m */; };
@@ -379,8 +374,6 @@
 		14080EF41B318DE300060666 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		14080EF51B318DE300060666 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		14080EF61B318DE300060666 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
-		14080EF71B318DE300060666 /* OrderCellInnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCellInnerView.h; sourceTree = "<group>"; };
-		14080EF81B318DE300060666 /* OrderCellInnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCellInnerView.m; sourceTree = "<group>"; };
 		14080EF91B318DE300060666 /* ModeOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeOrder.h; sourceTree = "<group>"; };
 		14080EFA1B318DE300060666 /* ModeOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeOrder.m; sourceTree = "<group>"; };
 		14080F001B318E0000060666 /* WishListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishListViewController.h; sourceTree = "<group>"; };
@@ -413,18 +406,10 @@
 		14080F261B318EA300060666 /* BrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandViewController.m; sourceTree = "<group>"; };
 		14080F271B318EA300060666 /* StyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleViewController.h; sourceTree = "<group>"; };
 		14080F281B318EA300060666 /* StyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleViewController.m; sourceTree = "<group>"; };
-		14080F2E1B318EC800060666 /* ModeBrandRunway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeBrandRunway.h; sourceTree = "<group>"; };
-		14080F2F1B318EC800060666 /* ModeBrandRunway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeBrandRunway.m; sourceTree = "<group>"; };
 		14080F311B318ED400060666 /* BrandInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandInfo.h; sourceTree = "<group>"; };
 		14080F321B318ED400060666 /* BrandInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandInfo.m; sourceTree = "<group>"; };
 		14080F341B318EE400060666 /* ModeCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeCollection.h; sourceTree = "<group>"; };
 		14080F351B318EE400060666 /* ModeCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeCollection.m; sourceTree = "<group>"; };
-		14080F371B318EF400060666 /* ModeGood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeGood.h; sourceTree = "<group>"; };
-		14080F381B318EF400060666 /* ModeGood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeGood.m; sourceTree = "<group>"; };
-		14080F3A1B318F0300060666 /* GoodInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodInfo.h; sourceTree = "<group>"; };
-		14080F3B1B318F0300060666 /* GoodInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodInfo.m; sourceTree = "<group>"; };
-		14080F3C1B318F0300060666 /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coupon.h; sourceTree = "<group>"; };
-		14080F3D1B318F0300060666 /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coupon.m; sourceTree = "<group>"; };
 		14080F401B318F1000060666 /* ModeSysList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeSysList.h; sourceTree = "<group>"; };
 		14080F411B318F1000060666 /* ModeSysList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeSysList.m; sourceTree = "<group>"; };
 		14080F431B318F2700060666 /* ColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorView.h; sourceTree = "<group>"; };
@@ -663,39 +648,6 @@
 				14080E0B1B31846F00060666 /* ModeUtils.m */,
 			);
 			name = Database;
-			sourceTree = "<group>";
-		};
-		116D38881B1B3905009E9D14 /* Goods */ = {
-			isa = PBXGroup;
-			children = (
-				14080F3A1B318F0300060666 /* GoodInfo.h */,
-				14080F3B1B318F0300060666 /* GoodInfo.m */,
-				14080F3C1B318F0300060666 /* Coupon.h */,
-				14080F3D1B318F0300060666 /* Coupon.m */,
-				DB69F6DF1B33C50900FEE588 /* GoodItem.h */,
-				DB69F6E01B33C50900FEE588 /* GoodItem.m */,
-			);
-			name = Goods;
-			sourceTree = "<group>";
-		};
-		116D38891B1B3923009E9D14 /* Runway */ = {
-			isa = PBXGroup;
-			children = (
-				14080F371B318EF400060666 /* ModeGood.h */,
-				14080F381B318EF400060666 /* ModeGood.m */,
-			);
-			name = Runway;
-			sourceTree = "<group>";
-		};
-		116D388A1B1B3934009E9D14 /* Wishlist */ = {
-			isa = PBXGroup;
-			children = (
-				14080F341B318EE400060666 /* ModeCollection.h */,
-				14080F351B318EE400060666 /* ModeCollection.m */,
-				DB8B4FFA1B32F2AC003A1F8C /* CollectionItem.h */,
-				DB8B4FFB1B32F2AC003A1F8C /* CollectionItem.m */,
-			);
-			name = Wishlist;
 			sourceTree = "<group>";
 		};
 		118CC9941B18B24000AE5BD4 /* WishList */ = {
@@ -1033,11 +985,14 @@
 				14080F321B318ED400060666 /* BrandInfo.m */,
 				DBE490521B32BAF300DAA443 /* ProfileInfo.h */,
 				DBE490531B32BAF300DAA443 /* ProfileInfo.m */,
-				DB4BDDD91B2138A300EFDE22 /* BrandRunway */,
-				116D388A1B1B3934009E9D14 /* Wishlist */,
-				116D38891B1B3923009E9D14 /* Runway */,
-				116D38881B1B3905009E9D14 /* Goods */,
-				DBA2E9901B144B6C006B5CE4 /* Sys */,
+				DB69F6DF1B33C50900FEE588 /* GoodItem.h */,
+				DB69F6E01B33C50900FEE588 /* GoodItem.m */,
+				14080F341B318EE400060666 /* ModeCollection.h */,
+				14080F351B318EE400060666 /* ModeCollection.m */,
+				DB8B4FFA1B32F2AC003A1F8C /* CollectionItem.h */,
+				DB8B4FFB1B32F2AC003A1F8C /* CollectionItem.m */,
+				14080F401B318F1000060666 /* ModeSysList.h */,
+				14080F411B318F1000060666 /* ModeSysList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1228,15 +1183,6 @@
 			name = WebView;
 			sourceTree = "<group>";
 		};
-		DB4BDDD91B2138A300EFDE22 /* BrandRunway */ = {
-			isa = PBXGroup;
-			children = (
-				14080F2E1B318EC800060666 /* ModeBrandRunway.h */,
-				14080F2F1B318EC800060666 /* ModeBrandRunway.m */,
-			);
-			name = BrandRunway;
-			sourceTree = "<group>";
-		};
 		DB9460641B15AD1100A7833B /* Passbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -1257,8 +1203,6 @@
 				14080EF41B318DE300060666 /* OrderTableViewCell.h */,
 				14080EF51B318DE300060666 /* OrderTableViewCell.m */,
 				14080EF61B318DE300060666 /* OrderTableViewCell.xib */,
-				14080EF71B318DE300060666 /* OrderCellInnerView.h */,
-				14080EF81B318DE300060666 /* OrderCellInnerView.m */,
 				14080EF91B318DE300060666 /* ModeOrder.h */,
 				14080EFA1B318DE300060666 /* ModeOrder.m */,
 			);
@@ -1283,15 +1227,6 @@
 				14080F601B318F5700060666 /* BrandIntroduceHeaderView.m */,
 			);
 			name = BrandIntroduceHeaderView;
-			sourceTree = "<group>";
-		};
-		DBA2E9901B144B6C006B5CE4 /* Sys */ = {
-			isa = PBXGroup;
-			children = (
-				14080F401B318F1000060666 /* ModeSysList.h */,
-				14080F411B318F1000060666 /* ModeSysList.m */,
-			);
-			name = Sys;
 			sourceTree = "<group>";
 		};
 		DBAA40051B130E13009D66D3 /* LikeOrNope */ = {
@@ -1615,7 +1550,6 @@
 				14080E051B31846500060666 /* ModeSysAPI.m in Sources */,
 				14080E211B31847000060666 /* ModeDatabase.m in Sources */,
 				14080E2A1B31879400060666 /* TAlertView.m in Sources */,
-				14080F301B318EC800060666 /* ModeBrandRunway.m in Sources */,
 				14080F511B318F2700060666 /* WishlistTableViewCell.m in Sources */,
 				14080F1B1B318E8400060666 /* WishlistTableViewController.m in Sources */,
 				14080F2B1B318EA300060666 /* OccasionViewController.m in Sources */,
@@ -1644,16 +1578,13 @@
 				14080F2D1B318EA300060666 /* StyleViewController.m in Sources */,
 				DB169D4D1B199B1C0015D4A6 /* UIImageView+HighlightedWebCache.m in Sources */,
 				DB17B67A1B0EC59400D43B9F /* main.m in Sources */,
-				14080EFE1B318DE300060666 /* OrderCellInnerView.m in Sources */,
 				DB7D377B1B37E75A00006D2B /* ModePassbookAPI.m in Sources */,
 				DB169D491B199B1C0015D4A6 /* UIButton+WebCache.m in Sources */,
 				DB169D4E1B199B1C0015D4A6 /* UIImageView+WebCache.m in Sources */,
 				DB169D451B199B1C0015D4A6 /* SDWebImageDownloader.m in Sources */,
 				14080E1F1B31847000060666 /* UIView+Extension.m in Sources */,
 				14080E3B1B3187BB00060666 /* QBAnimationGroup.m in Sources */,
-				14080F3E1B318F0300060666 /* GoodInfo.m in Sources */,
 				14080F501B318F2700060666 /* WishlistView.m in Sources */,
-				14080F391B318EF400060666 /* ModeGood.m in Sources */,
 				DBE490511B32A2A900DAA443 /* ModeProfilesAPI.m in Sources */,
 				DB24CFDC1B267E3B00102403 /* WebViewViewController.m in Sources */,
 				14080F4E1B318F2700060666 /* ColorView.m in Sources */,
@@ -1663,7 +1594,6 @@
 				14080F091B318E4E00060666 /* ShareViewController.m in Sources */,
 				14080F731B318F9D00060666 /* CustomCollectionViewCell.m in Sources */,
 				14080F421B318F1000060666 /* ModeSysList.m in Sources */,
-				14080F3F1B318F0300060666 /* Coupon.m in Sources */,
 				14080E1A1B31846F00060666 /* JsonParser.m in Sources */,
 				14080F2A1B318EA300060666 /* HomeNavigationController.m in Sources */,
 			);

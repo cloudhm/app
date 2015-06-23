@@ -7,10 +7,8 @@
 //
 
 #import "ModeDatabase.h"
-#import "ModeGood.h"
 #import "ModeSysList.h"
 #import "PrefixHeaderDatabase.pch"
-//#import "ModeGood.h"
 #import "GoodItem.h"
 @implementation ModeDatabase
 //清空表内容 sql语句
@@ -65,26 +63,6 @@
 //替换表内容 sql语句 多了一列type for home_list
 +(NSString*)replaceTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"replace into %@",tableName];
-//    if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-//        for (int i = 0 ; i<=elements.count; i++) {
-//            if (i == 0) {
-//                sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
-//            } else if (i == elements.count){
-//                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"type"];
-//            } else {
-//                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
-//            }
-//        }
-//        for (int i =0 ; i<= elements.count; i++) {
-//            if (i == 0) {
-//                sqlStr = [NSString stringWithFormat:@"%@ values(%@,",sqlStr,@"?"];
-//            } else if (i == elements.count){
-//                sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,@"?"];
-//            } else {
-//                sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,@"?"];
-//            }
-//        }
-//    } else {
         for (int i = 0 ; i<elements.count; i++) {
             if (i == 0) {
                 sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
@@ -276,11 +254,6 @@
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
             goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
-//            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-//            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-//            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-//            modeGood.img_link = [set stringForColumn:@"img_link"];
-//            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
             [fetchedDatabase addObject:goodItem];
         }
     }
@@ -310,11 +283,6 @@
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
             goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
-//            modeGood.brand_img_link = [set stringForColumn:@"brand_img_link"];
-//            modeGood.brand_name = [set stringForColumn:@"brand_name"];
-//            modeGood.goods_id = [set stringForColumn:@"goods_id"];
-//            modeGood.img_link = [set stringForColumn:@"img_link"];
-//            modeGood.has_coupon = [set stringForColumn:@"has_coupon"];
             [fetchedDatabase addObject:goodItem];
         }
     }

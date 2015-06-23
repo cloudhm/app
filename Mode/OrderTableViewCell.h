@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderCellInnerView.h"
+
 #import "ModeOrder.h"
 #import "ColorView.h"
 //OrderViewController中tableView的自定义xib cell
@@ -16,5 +16,4 @@
 @property (weak, nonatomic) IBOutlet UIImageView *main_img;
 @property (weak, nonatomic) IBOutlet UITextView *titleView;
 @property (weak, nonatomic) IBOutlet ColorView *colorView;
-@property (strong, nonatomic) OrderCellInnerView *orderCellInnerView;
 @end

@@ -12,7 +12,6 @@
 #import "CustomCollectionViewFlowLayout.h"
 #import "OccasionCollectionViewCell.h"
 #import "ModeRunwayAPI.h"
-#import "ModeGood.h"
 #import "ModeSysList.h"
 #import "ModeWishlistAPI.h"
 #import "ModeDatabase.h"

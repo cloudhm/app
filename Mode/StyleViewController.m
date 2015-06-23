@@ -12,7 +12,6 @@
 #import "ModeSysAPI.h"
 #import "LikeOrNopeViewController.h"
 #import "ModeRunwayAPI.h"
-#import "ModeGood.h"
 #import "ModeSysList.h"
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"

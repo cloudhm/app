@@ -11,7 +11,6 @@
 #import "BrandCollectionViewCell.h"
 #import "ModeSysAPI.h"
 #import "LikeOrNopeViewController.h"
-#import "ModeGood.h"
 #import "ModeRunwayAPI.h"
 #import "ModeSysList.h"
 #import "ModeDatabase.h"

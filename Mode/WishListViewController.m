@@ -7,13 +7,12 @@
 //
 
 #import "WishListViewController.h"
-//#import "ModeGood.h"
+
 #import "WishlistScrollView.h"
 #import <FMDB.h>
 #import "WishlistView.h"
 #import "ModeGoodAPI.h"
-//#import "GoodInfo.h"
-#import "Coupon.h"
+
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
 #import "ColorView.h"
@@ -30,7 +29,7 @@
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
 @property (weak, nonatomic) UILabel *label;
 @property (nonatomic, weak) WishlistScrollView *bigSV;
-//@property (strong, nonatomic) GoodInfo *goodInfo;
+
 @property (strong, nonatomic) GoodItem *goodItem;
 @property (weak, nonatomic) UIImageView *goods_img_detail;
 @property (weak, nonatomic) UILabel *goods_price;
@@ -61,7 +60,7 @@
 
 
 
-
+#pragma mark Create Elements
 //增加右下视图  商品详情控件
 -(void)createRightView{
     
@@ -216,54 +215,6 @@
     
     
 }
-//懒加载
--(NSMutableArray *)clothes{
-    if (!_clothes) {
-        _clothes = [NSMutableArray array];
-    }
-    return _clothes;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"Wishlist";
-    
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
-    
-    
-//由于页面显示的关系  因此本通知写在viewDidLoad中   在页面显示的时候   会显示出第一件物品的信息
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestLoadGoodInfo:) name:@"selectGood_id" object:nil];
-    
-    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-//如果跳转页面未传值，则显示本地未上传给服务器的wishlist列表，如果传值则显示网络上喜欢的历史纪录
-    if (!self.receiveArr) {
-        [self.clothes addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
-    } else {
-        [self.clothes addObjectsFromArray:self.receiveArr];
-    }
-    self.goodItem = self.clothes[0];
-    [self createScrollView];
-    [self createRightView];
-    [self createLeftView];
-//从数据库读取数据
-    [self resetAllElementsInRightView];
-    
-    
-    
-}
-//页面已经显示时添加两个通知的观察者
--(void)viewDidAppear:(BOOL)animated{
-
-}
-//页面即将消失把通知注销掉
--(void)viewDidDisappear:(BOOL)animated{
-
-}
 
 //计算右视图中商品标题的大小
 -(CGRect)getGoodTitleFrame {
@@ -285,25 +236,6 @@
     UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(padding*2, KScreenHeight- kStatusNaviBarH - 50.f, KScreenWidth - 4* padding, 2.f)];
     bottomLineView.backgroundColor = [UIColor colorWithHexString:@"#dbdbdb"];
     [self.view addSubview:bottomLineView];
-}
-#pragma mark WishlistScrollViewDelegate
--(void)wishlistScrollView:(WishlistScrollView *)wishlistScrollView didSelectedItemsAtIndex:(NSInteger)index{
-    self.goodItem = self.clothes[index];
-    self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodItem.goodPrice.floatValue];
-    self.couponBtn.enabled = YES;
-    if ([self.goodItem.hasCoupon isEqualToString:@"true"]&&[self.goodItem.hasSelected isEqual:@(0)]) {
-        [self.couponBtn setSelected:NO];
-    } else {
-        [self.couponBtn setSelected:YES];
-        self.couponBtn.enabled = NO;
-    }
-    
-    [self.goods_img_detail sd_setImageWithURL:[NSURL URLWithString:self.goodItem.defaultImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        self.goods_img_detail.image = [UIImage getSubImageByImage:image andImageViewFrame:self.goods_img_detail.frame];
-        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodItem.defaultImage lastPathComponent] toDisk:YES];
-    }];
-    [self resetAllElementsInRightView];
-    [self.view setNeedsLayout];
 }
 -(void)createLeftView{
     float padding = 10.f;
@@ -352,17 +284,6 @@
     }];
     [leftView addSubview:imageView];
 }
-
-
-- (IBAction)clickConpon:(UIButton *)sender {
-    [sender setSelected:YES];
-    sender.enabled = NO;
-    self.goodItem.hasSelected = @(1);
-#warning 发请求通知服务器已申请优惠券
-}
-
-
-
 //定义导航栏右上角红心位置的视图
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
@@ -380,6 +301,76 @@
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
 }
+//懒加载
+-(NSMutableArray *)clothes{
+    if (!_clothes) {
+        _clothes = [NSMutableArray array];
+    }
+    return _clothes;
+}
+#pragma mark view-life_circle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"Wishlist";
+    
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
+    
+
+    
+    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+//如果跳转页面未传值，则显示本地未上传给服务器的wishlist列表，如果传值则显示网络上喜欢的历史纪录
+    if (!self.receiveArr) {
+        [self.clothes addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
+    } else {
+        [self.clothes addObjectsFromArray:self.receiveArr];
+    }
+    self.goodItem = self.clothes[0];
+    [self createScrollView];
+    [self createRightView];
+    [self createLeftView];
+//从数据库读取数据
+    [self resetAllElementsInRightView];
+    
+    
+    
+}
+
+#pragma mark WishlistScrollViewDelegate
+-(void)wishlistScrollView:(WishlistScrollView *)wishlistScrollView didSelectedItemsAtIndex:(NSInteger)index{
+    self.goodItem = self.clothes[index];
+    self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodItem.goodPrice.floatValue];
+    self.couponBtn.enabled = YES;
+    if ([self.goodItem.hasCoupon isEqualToString:@"true"]&&[self.goodItem.hasSelected isEqual:@(0)]) {
+        [self.couponBtn setSelected:NO];
+    } else {
+        [self.couponBtn setSelected:YES];
+        self.couponBtn.enabled = NO;
+    }
+    
+    [self.goods_img_detail sd_setImageWithURL:[NSURL URLWithString:self.goodItem.defaultImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.goods_img_detail.image = [UIImage getSubImageByImage:image andImageViewFrame:self.goods_img_detail.frame];
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[self.goodItem.defaultImage lastPathComponent] toDisk:YES];
+    }];
+    [self resetAllElementsInRightView];
+    [self.view setNeedsLayout];
+}
+
+#pragma mark Cash-pay
+- (IBAction)clickConpon:(UIButton *)sender {
+    [sender setSelected:YES];
+    sender.enabled = NO;
+    self.goodItem.hasSelected = @(1);
+#warning 发请求通知服务器已申请优惠券
+}
+
+
+
+
 #pragma mark navigationItem.leftBarButtonItem Action
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];

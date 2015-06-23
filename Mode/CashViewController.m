@@ -33,7 +33,29 @@ static NSString* reusedIdentifier = @"MyCell";
     }
     return _allData;
 }
-#pragma mark View DidAppear And DidDisappear
+#pragma mark view-life_circle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self createTopView];
+    [self createTableViewAndBackImageView];
+    [self createBottomView];
+    self.title = @"Cash";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    
+    [self.cashTableView registerClass:[CashTableViewCell class] forCellReuseIdentifier:reusedIdentifier];
+    
+    [self getTransactionArr];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.cashTableView addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.cashTableView addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
+}
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeViewFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -163,28 +185,7 @@ static NSString* reusedIdentifier = @"MyCell";
 
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
 
-    [self createTopView];
-    [self createTableViewAndBackImageView];
-    [self createBottomView];
-    self.title = @"Cash";
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    
-    [self.cashTableView registerClass:[CashTableViewCell class] forCellReuseIdentifier:reusedIdentifier];
-    
-    [self getTransactionArr];
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
-    bgView.backgroundColor = [UIColor whiteColor];
-    [self.cashTableView addSubview:bgView];
-    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
-    refreshControl.delegate = self;
-    [self.cashTableView addSubview:refreshControl];
-    self.myRefreshControl = refreshControl;
-}
 #pragma mark - QBRefreshControlDelegate
 
 - (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl

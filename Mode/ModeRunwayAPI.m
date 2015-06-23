@@ -9,7 +9,6 @@
 #import "ModeRunwayAPI.h"
 #import <AFNetworking.h>
 #import "PrefixHeader.pch"
-#import "ModeGood.h"
 #import "JsonParser.h"
 @implementation ModeRunwayAPI
 +(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{

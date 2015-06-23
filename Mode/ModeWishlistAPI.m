@@ -82,28 +82,5 @@
 }
 
 
-//+(void)requestNewestWishlistAndCallback:(MyCallback)callback{
-//    NSString* path = GET_NEWEST_WISHLIST;
-//    NSDictionary* params = @{@"user_id":[self getUserID]};
-//    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-//    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-//        NSString* amount = [dictionary objectForKey:@"amount"];
-//
-//        NSDictionary* itemDics = [dictionary objectForKey:@"items"];
-//        NSMutableArray* itemArr = [NSMutableArray array];
-//        for (int i = 0; i<=amount.integerValue; i++) {
-//            NSDictionary* itemDic = [itemDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-//            ModeGood* modeGood = [JsonParser parserGoodByDictionary:itemDic];
-////            WishlistInfo* wishlistInfo = [JsonParser parserWishlistInfoByDictionary:itemDic];
-//            [itemArr addObject:modeGood];
-//            
-//        }
-//        callback(itemArr);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"request newest wishlist failure:%@",error);
-//    }];
-//}
 
 @end

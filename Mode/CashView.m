@@ -57,10 +57,7 @@
     _transaction = transaction;
     [self layoutSubviews];
 }
-//-(void)setCashNumStr:(NSString *)cashNumStr{
-//    _cashNumStr = cashNumStr;
-//    [self layoutSubviews];
-//}
+
 
 -(void)layoutSubviews{
     [super layoutSubviews];

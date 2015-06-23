@@ -9,7 +9,6 @@
 #import "ModeBrandRunwayAPI.h"
 #import <AFNetworking.h>
 #import "PrefixHeader.pch"
-#import "ModeBrandRunway.h"
 #import "JsonParser.h"
 #import "BrandInfo.h"
 @implementation ModeBrandRunwayAPI
@@ -36,7 +35,7 @@
             callback(NULL);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"request_brand_runway_list_error:%@",error);
+        NSLog(@"request_brand_info_error:%@",error);
         callback([NSNull null]);
     }];
 }

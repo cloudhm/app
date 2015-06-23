@@ -23,7 +23,7 @@
 //视图控制器（在实现里用懒加载）
 @property (nonatomic, strong) UITableViewController *leftDrawerViewController;
 @property (nonatomic, strong) UIViewController *homeViewController;
-//@property (nonatomic, strong) UITableViewController *profileViewController;
+
 
 @property (strong, nonatomic) UIViewController *wishlistViewController;
 @property (strong, nonatomic) UITableViewController *wishlistTableViewController;

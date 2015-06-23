@@ -203,10 +203,11 @@
         if(![obj isKindOfClass:[NSNull class]]) {
             NSArray* array = obj;
             if (array.count>0) {
+                self.tableView.userInteractionEnabled = YES;
                 [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
             } else {
                 [self showAlertViewWithErrorInfo:@"That is null link"];
-                self.tableView.userInteractionEnabled = YES;
+                
             }
             
         } else {

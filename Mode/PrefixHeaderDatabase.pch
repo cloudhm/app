@@ -10,14 +10,16 @@
 #define Mode_PrefixHeaderDatabase_pch
 
 
-#define TYPE @"menutype"
+
 #define OCCASION @"occasions"
 #define BRAND @"brands"
 #define STYLE @"styles"
 
 
 #define HOME_LIST_TABLENAME @"list_home"
-#define HOME_LIST_ELEMENTS @[@"name",@"picLink",@"menutype"]
+#define HOME_LIST_ELEMENTS @[@"utime",OCCASION,BRAND,STYLE]
+
+
 
 
 #define LIKENOPE_TABLENAME @"likenope"

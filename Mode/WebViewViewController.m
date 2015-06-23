@@ -11,7 +11,7 @@
 
 @interface WebViewViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
+//@property (strong, nonatomic) nsur *<#name#>;
 @end
 
 @implementation WebViewViewController
@@ -21,26 +21,29 @@
     [super viewDidLoad];
     self.webView.delegate = self;
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.website]];
-    
+    self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:request];
 }
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    
+    NSString *urlPath = [request.URL description];
+    switch (navigationType) {
+#warning 该代理方法中把用户点击的链接，用户提交form，用户重新提交form纪录
+        case UIWebViewNavigationTypeLinkClicked:
+            NSLog(@"user click:%@",urlPath);
+            break;
+        case UIWebViewNavigationTypeFormSubmitted:
+            NSLog(@"from user submitted:%@",urlPath);
+            break;
+        case UIWebViewNavigationTypeFormResubmitted:
+            NSLog(@"from user resubmitted:%@",urlPath);
+            break;
+        default:
+            break;
+    }
     return YES;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

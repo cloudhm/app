@@ -51,7 +51,7 @@ static NSString *reuseIdentifier=@"MyCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
+    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:OCCASION andSelectConditionValue:nil]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -94,7 +94,7 @@ static NSString *reuseIdentifier=@"MyCell";
             [self showAlertViewWithCautionInfo:cautionInfo];
         } else if ([obj boolValue] == YES || [obj boolValue] == NO) {
             [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
+            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:OCCASION andSelectConditionValue:nil]];
             [self.cv reloadData];
             [self.cv setNeedsDisplay];
         }

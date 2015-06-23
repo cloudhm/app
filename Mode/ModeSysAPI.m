@@ -35,7 +35,7 @@
             [[NSUserDefaults standardUserDefaults]setInteger:utime forKey:@"menu_utime"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
-            NSArray* allData = [JsonParser parserMenuListByDictionary:dictionary];
+            NSDictionary* allData = [JsonParser parserMenuListByDictionary:dictionary];
             callback(@([ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:allData]));
         } else {
             callback(@(NO));

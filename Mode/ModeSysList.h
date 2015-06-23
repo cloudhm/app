@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ModeSysList : NSObject
+@interface ModeSysList : NSObject<NSCoding>
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* picLink;
 @property (nonatomic,copy) NSString* tagId;
 @property (copy, nonatomic) NSString *amount;
-@property (strong, nonatomic) NSString *menutype;
+
 @end

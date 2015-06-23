@@ -48,7 +48,7 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:BRAND]];
+    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:BRAND andSelectConditionValue:nil]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -100,7 +100,7 @@ static NSString *reuseIdentifier=@"MyCell";
             [self showAlertViewWithCautionInfo:cautionInfo];
         } else if ([obj boolValue] == YES || [obj boolValue] == NO ) {
             [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:BRAND]];
+            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:BRAND andSelectConditionValue:nil]];
             [self.cv reloadData];
             [self.cv setNeedsDisplay];
         }

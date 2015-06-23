@@ -85,6 +85,7 @@
             [self showAlertViewWithCautionInfo:@"Try refresh it again."];
         } else {
             self.brandInfo = obj;
+            self.toolbarLabel.text = [NSString stringWithFormat:@"%ld",(long)self.brandInfo.likes.integerValue];
             [self.tableView reloadData];
         }
     }];
@@ -148,9 +149,9 @@
     
     self.toolbarLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2+5.f, 5, 100, 40)];
     self.toolbarLabel.font = [UIFont systemFontOfSize:20];
-    self.toolbarLabel.textAlignment = NSTextAlignmentLeft;
+    self.toolbarLabel.textAlignment = NSTextAlignmentCenter;
     self.toolbarLabel.textColor = [UIColor redColor];
-    self.toolbarLabel.text = @"1001";
+    self.toolbarLabel.text = @"0";
     UIBarButtonItem* otherv =[[UIBarButtonItem alloc]initWithCustomView:v];
     UIBarButtonItem* btn = [[UIBarButtonItem alloc]initWithCustomView:self.toolbarBtn];
     UIBarButtonItem* l = [[UIBarButtonItem alloc]initWithCustomView:self.toolbarLabel];

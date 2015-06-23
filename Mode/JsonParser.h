@@ -12,7 +12,7 @@
 @interface JsonParser : NSObject
 
 //主页面SYS_LIST
-+(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary;
++(NSDictionary*)parserMenuListByDictionary:(NSDictionary*)dictionary;
 
 //获取个人信息
 +(ProfileInfo*)parserProfileInfoByDictionary:(NSDictionary*)dictionary;

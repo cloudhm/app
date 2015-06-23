@@ -93,9 +93,7 @@
 
 }
 
--(void)click{
-    NSLog(@"...");
-}
+
 -(void)changePosition:(NSNotification*)noti {
     NSDictionary *dic = noti.userInfo;
     float t = [[dic objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];

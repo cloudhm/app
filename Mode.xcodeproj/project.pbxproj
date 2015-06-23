@@ -158,7 +158,6 @@
 		14C235D31B31164C006A63F5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C235D21B31164C006A63F5 /* SystemConfiguration.framework */; };
 		14C235DA1B316560006A63F5 /* libFlurry_6.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C235D91B316560006A63F5 /* libFlurry_6.4.0.a */; };
 		14C235DD1B318208006A63F5 /* times.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14C235DB1B318208006A63F5 /* times.plist */; };
-		14C235DE1B318208006A63F5 /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14C235DC1B318208006A63F5 /* init.plist */; };
 		14F2B8A21B27AA630047A039 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8981B27AA630047A039 /* Bolts.framework */; };
 		14F2B8A31B27AA630047A039 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14F2B8991B27AA630047A039 /* FacebookSDKStrings.bundle */; };
 		14F2B8A41B27AA630047A039 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B89A1B27AA630047A039 /* FBAudienceNetwork.framework */; };
@@ -218,6 +217,7 @@
 		DB7D37781B37E06D00006D2B /* brandInfoHigh.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7D37761B37E06D00006D2B /* brandInfoHigh.png */; };
 		DB7D377B1B37E75A00006D2B /* ModePassbookAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7D377A1B37E75A00006D2B /* ModePassbookAPI.m */; };
 		DB7D377E1B37EC0100006D2B /* Passbook.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7D377D1B37EC0100006D2B /* Passbook.m */; };
+		DB8435081B3975DC00BA46DB /* init.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB8435071B3975DC00BA46DB /* init.plist */; };
 		DB8B4FF91B32D030003A1F8C /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8B4FF81B32D030003A1F8C /* Transaction.m */; };
 		DB8B4FFC1B32F2AC003A1F8C /* CollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8B4FFB1B32F2AC003A1F8C /* CollectionItem.m */; };
 		DBE4904E1B32A29800DAA443 /* ModeTransactionsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE4904D1B32A29800DAA443 /* ModeTransactionsAPI.m */; };
@@ -456,7 +456,6 @@
 		14C235D81B316560006A63F5 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
 		14C235D91B316560006A63F5 /* libFlurry_6.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.4.0.a; sourceTree = "<group>"; };
 		14C235DB1B318208006A63F5 /* times.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = times.plist; sourceTree = "<group>"; };
-		14C235DC1B318208006A63F5 /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
 		14F2B8981B27AA630047A039 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		14F2B8991B27AA630047A039 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		14F2B89A1B27AA630047A039 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -549,6 +548,7 @@
 		DB7D377A1B37E75A00006D2B /* ModePassbookAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModePassbookAPI.m; sourceTree = "<group>"; };
 		DB7D377C1B37EC0100006D2B /* Passbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passbook.h; sourceTree = "<group>"; };
 		DB7D377D1B37EC0100006D2B /* Passbook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Passbook.m; sourceTree = "<group>"; };
+		DB8435071B3975DC00BA46DB /* init.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = init.plist; sourceTree = "<group>"; };
 		DB8B4FF71B32D030003A1F8C /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
 		DB8B4FF81B32D030003A1F8C /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
 		DB8B4FFA1B32F2AC003A1F8C /* CollectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionItem.h; sourceTree = "<group>"; };
@@ -1158,7 +1158,7 @@
 				14080E3E1B31885E00060666 /* picture */,
 				14080E271B31877D00060666 /* ThirdFrame */,
 				14C235DB1B318208006A63F5 /* times.plist */,
-				14C235DC1B318208006A63F5 /* init.plist */,
+				DB8435071B3975DC00BA46DB /* init.plist */,
 				14C235D61B316560006A63F5 /* Flurry */,
 				14F2B8971B27AA630047A039 /* FacebookSDK */,
 				DB169D1E1B199B1C0015D4A6 /* SDWebImage */,
@@ -1406,7 +1406,6 @@
 				DB69F6DC1B33ADCE00FEE588 /* Icon.png in Resources */,
 				14080E8A1B31889B00060666 /* _hollow.png in Resources */,
 				14080F5E1B318F4B00060666 /* PassbookTableViewCell.xib in Resources */,
-				14C235DE1B318208006A63F5 /* init.plist in Resources */,
 				14080EBC1B3188C200060666 /* _new_secret_name_normal.png in Resources */,
 				14080E741B31888B00060666 /* cash_normal.png in Resources */,
 				14080F0A1B318E4E00060666 /* ShareViewController.xib in Resources */,
@@ -1430,6 +1429,7 @@
 				11C183BD1B14CD62009F3819 /* Default-568h@2x.png in Resources */,
 				DB69F6D81B33ADCE00FEE588 /* Icon-60@2x.png in Resources */,
 				14080E9A1B3188A300060666 /* coupon_line.png in Resources */,
+				DB8435081B3975DC00BA46DB /* init.plist in Resources */,
 				14080E541B31887300060666 /* setting_press.png in Resources */,
 				14080E8B1B31889B00060666 /* _menu.png in Resources */,
 				14080E961B3188A300060666 /* coupon_go_normal_rev1.png in Resources */,
@@ -1727,7 +1727,7 @@
 					/Users/wuyao/Desktop/Facebook/FacebookSDK,
 				);
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1752,7 +1752,7 @@
 					/Users/wuyao/Desktop/Facebook/FacebookSDK,
 				);
 				INFOPLIST_FILE = Mode/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

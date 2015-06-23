@@ -132,9 +132,7 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
     [[[AppDelegate globalDelegate] drawerViewController] setCenterViewController:destinationViewController];
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
--(void)viewWillDisappear:(BOOL)animated{
-    NSLog(@"...");
-}
+
 -(NSMutableArray *)clothes{
     if (!_clothes) {
         _clothes = [NSMutableArray array];

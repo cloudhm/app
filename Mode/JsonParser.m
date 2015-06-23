@@ -38,24 +38,24 @@
     return strDate;
 }
 #pragma mark MENUS
-+(NSArray*)parserMenuListByDictionary:(NSDictionary*)dictionary{
-    NSMutableArray* allData = [NSMutableArray array];
++(NSDictionary*)parserMenuListByDictionary:(NSDictionary*)dictionary{
+    NSMutableDictionary* allData = [NSMutableDictionary dictionary];
     NSArray* stylesArr = [dictionary objectForKey:STYLE];
     if (![stylesArr isKindOfClass:[NSNull class]]) {
         NSArray* modeSysLists = [self parserMenuListByArray:stylesArr withKeyword:STYLE];
-        [allData addObjectsFromArray:modeSysLists];
+        [allData setObject:modeSysLists forKey:STYLE];
 
     }
     
     NSArray* brandsArr = [dictionary objectForKey:BRAND];
     if (![brandsArr isKindOfClass:[NSNull class]]) {
         NSArray* modeSysLists = [self parserMenuListByArray:brandsArr withKeyword:BRAND];
-        [allData addObjectsFromArray:modeSysLists];
+        [allData setObject:modeSysLists forKey:BRAND];
     }
     NSArray* occasionsArr = [dictionary objectForKey:OCCASION];
     if (![occasionsArr isKindOfClass:[NSNull class]]) {
         NSArray* modeSysLists = [self parserMenuListByArray:occasionsArr withKeyword:OCCASION];
-        [allData addObjectsFromArray:modeSysLists];
+        [allData setObject:modeSysLists forKey:OCCASION];
         
     }
     return allData;
@@ -72,7 +72,6 @@
     ModeSysList* sysList = [[ModeSysList alloc]init];
     sysList.name = subArray[0];
     sysList.picLink = subArray[1];
-    sysList.menutype = keyword;
     if ([sysList.picLink isKindOfClass:[NSNull class]]) {
         sysList.picLink = @"";
     }

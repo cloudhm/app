@@ -24,6 +24,7 @@
 #import "ModeDatabase.h"
 #import "PrefixHeaderDatabase.pch"
 #import "BrandRunwayTableViewController.h"
+#import "WebViewViewController.h"
 @interface WishListViewController ()<WishlistScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray* clothes;
 @property (nonatomic, strong) NSMutableArray* clothesIvArr;
@@ -115,7 +116,7 @@
 //    b1.translatesAutoresizingMaskIntoConstraints = NO;
     [b1 setImage:[UIImage imageNamed:@"brandInfoNor.png"] forState:UIControlStateNormal];
     [b1 setImage:[UIImage imageNamed:@"brandInfoHigh.png"] forState:UIControlStateHighlighted];
-    [b1 addTarget:self action:@selector(gotoBrandRunway:) forControlEvents:UIControlEventTouchUpInside];
+    [b1 addTarget:self action:@selector(gotoNextView:) forControlEvents:UIControlEventTouchUpInside];
     b1.tag = 1;
     self.brandInfoBtn = b1;
     [self.rightView addSubview:b1];
@@ -124,6 +125,7 @@
 //    b2.translatesAutoresizingMaskIntoConstraints = NO;
     [b2 setImage:[UIImage imageNamed:@"viewDetailNormal.png"] forState:UIControlStateNormal];
     [b2 setImage:[UIImage imageNamed:@"viewDetailPress.png"] forState:UIControlStateHighlighted];
+    [b2 addTarget:self action:@selector(gotoNextView:) forControlEvents:UIControlEventTouchUpInside];
     b2.tag = 2;
     self.viewDetailBtn = b2;
     [self.rightView addSubview: b2];
@@ -375,22 +377,41 @@
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)gotoBrandRunway:(UIButton *)sender {//跳转时响应
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    if (self.goodItem.brandId) {
-        [self performSegueWithIdentifier:@"gotoBrandRunway" sender:self.goodItem.brandId];
+- (void)gotoNextView:(UIButton *)sender {//跳转时响应
+    
+    switch (sender.tag) {
+        case 1:
+        {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+            self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+            if (self.goodItem.brandId) {
+                [self performSegueWithIdentifier:@"gotoBrandRunway" sender:self.goodItem.brandId];
+            }
+        }
+            break;
+        case 2:
+        {
+            [self performSegueWithIdentifier:@"gotoWebViewController1" sender:self.goodItem.defaultThumb];
+        }
+            break;
+        default:
+            break;
     }
+    
 }
-
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    BrandRunwayTableViewController* bc = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"gotoBrandRunway"]) {
+        BrandRunwayTableViewController* bc = segue.destinationViewController;
+        bc.brandId = sender;
+    } else if ([segue.identifier isEqualToString:@"gotoWebViewController1"]) {
+        WebViewViewController* wc = segue.destinationViewController;
+        wc.website = sender;
+    }
     
-    bc.brandId = sender;
 }
 
 

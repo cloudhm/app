@@ -97,7 +97,7 @@
 }
 +(BOOL)deleteTableWithName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     NSString* sqlStr = [self deleteTableStrWithTableName:tableName];
     if ([db open]) {
@@ -117,7 +117,7 @@
 //把网络请求回来的秀场数据 存入数据库
 +(void)saveGetNewDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObj:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self deleteTableStrWithTableName:tableName];//只是为了清空原先加载的16张图片数据模型
@@ -177,7 +177,7 @@
 //主页面的数据本地化存储
 +(void)saveSystemListDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObject:(id)obj andKeyWord:(NSString*)keyword{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self createTableStrWithTableName:tableName andTableElements:elements];
@@ -204,10 +204,11 @@
 
 
 +(NSArray*)readDatabaseFromTableName:(NSString*)tableName andSelectConditionKey:(NSString*)conditionKey andSelectConditionValue:(NSString*)conditionValue {
+    
     NSMutableArray* fetchedDatabase = [NSMutableArray array];
     //从本地数据库读取内容
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open] == NO) {
         NSLog(@"打开失败");
@@ -219,14 +220,12 @@
     FMResultSet* set = [db executeQuery:sqlStr];
     //查询数据
     if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-        while ([set next]) {
-            ModeSysList* mstyle = [[ModeSysList alloc]init];
-            mstyle.name = [set stringForColumn:@"name"];
-            mstyle.picLink = [set stringForColumn:@"picLink"];
-//            mstyle.eventId = [set stringForColumn:@"eventId"];
-//            mstyle.amount = [set stringForColumn:@"amount"];
-            [fetchedDatabase addObject:mstyle];
-        }
+        NSString* selectedStr = [set stringForColumn:conditionKey];
+        NSLog(@"%@",selectedStr);
+        NSData* data = [[NSData alloc]initWithBase64EncodedString:selectedStr options:0];
+        NSKeyedUnarchiver* unArch = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
+        NSArray* selectedArr = [unArch decodeObjectForKey:conditionKey];
+        [fetchedDatabase addObjectsFromArray:selectedArr];
     }
     if ([tableName isEqualToString:LIKENOPE_TABLENAME]) {
         while ([set next]) {
@@ -291,7 +290,8 @@
 }
 +(BOOL)replaceIntoTable:(NSString*)tableName andTableElements:(NSArray*)elements andInsertContent:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
+    NSLog(@"%@",path);
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self createTableStrWithTableName:tableName andTableElements:elements];
@@ -330,8 +330,8 @@
                     res = flag&&res;
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-                    ModeSysList* modeSysList = (ModeSysList*)obj;
-                    BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.picLink,modeSysList.menutype];
+                    NSArray* arr = obj;
+                    BOOL flag = [db executeUpdate:sqlStr,arr[0],arr[1],arr[2],arr[3]];
                     res = flag&&res;
                 }
                 
@@ -369,13 +369,13 @@
                     
                 }
                 if ([tableName isEqualToString:HOME_LIST_TABLENAME]) {
-                    for (ModeSysList* modeSysList in obj) {
-                        BOOL flag = [db executeUpdate:sqlStr,modeSysList.name,modeSysList.picLink,modeSysList.menutype];
-                        if (!flag) {
-                            NSLog(@"数组插入失败");
+                    NSArray* arr = obj;
+                    BOOL flag = [db executeUpdate:sqlStr,arr[0],arr[1],arr[2],arr[3]];
+                    if (!flag) {
+                        NSLog(@"数组插入失败");
                             res = flag&&res;
                         }
-                    }
+                    
                 }
             }
             if (res) {

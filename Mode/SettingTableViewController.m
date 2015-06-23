@@ -111,9 +111,9 @@
             break;
         default:
         {
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"utime"];
-            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
-            [[NSUserDefaults standardUserDefaults]synchronize];
+//            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"utime"];
+//            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
+//            [[NSUserDefaults standardUserDefaults]synchronize];
             LoginViewController *lvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
             [AppDelegate globalDelegate].window.rootViewController = lvc;
             

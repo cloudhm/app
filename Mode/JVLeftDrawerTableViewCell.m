@@ -42,9 +42,7 @@
         self.backgroundColor = [UIColor colorWithHexString:@"#3b3f4d"];
         iv.highlighted = YES;
     }
-    
-//    self.titleLabel.textColor = tintColor;
-//    self.iconImageView.tintColor = tintColor;
+
 }
 -(void)ad{
     UIImageView *arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 50, 50)];
@@ -55,24 +53,6 @@
 }
 #pragma mark - Accessors
 
-#pragma Title
 
-//- (NSString *)titleText {
-//    return self.titleLabel.text;
-//}
-//
-//- (void)setTitleText:(NSString *)title {
-//    self.titleLabel.text = title;
-//}
-
-#pragma Icon
-
-//- (UIImage *)iconImage {
-//    return self.iconImageView.image;
-//}
-//
-//- (void)setIconImage:(UIImage *)icon {
-//    self.iconImageView.image = [icon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-//}
 
 @end

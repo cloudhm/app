@@ -25,6 +25,7 @@
     [self.webView loadRequest:request];
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
     return YES;
 }
 - (void)didReceiveMemoryWarning {

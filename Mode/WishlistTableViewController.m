@@ -20,18 +20,21 @@
 #import "TAlertView.h"
 #import "CashViewController.h"
 #import "CollectionItem.h"
-@interface WishlistTableViewController ()<QBRefreshControlDelegate>
+#import "WishlistHeadView.h"
+
+@interface WishlistTableViewController ()<QBRefreshControlDelegate,WishlistHeadViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *modeCollections;
 
 @property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
-@property (weak, nonatomic) IBOutlet UIImageView *brand_img;//用户头像 暂时用系统自定义头像
+//@property (weak, nonatomic) IBOutlet UIImageView *brand_img;//用户头像 暂时用系统自定义头像
+//
+//@property (weak, nonatomic) IBOutlet UILabel *following;
+//@property (weak, nonatomic) IBOutlet UILabel *likes;
+//@property (weak, nonatomic) IBOutlet UILabel *invitaions;
+//@property (weak, nonatomic) IBOutlet UILabel *money;
 
-@property (weak, nonatomic) IBOutlet UILabel *following;
-@property (weak, nonatomic) IBOutlet UILabel *likes;
-@property (weak, nonatomic) IBOutlet UILabel *invitaions;
-@property (weak, nonatomic) IBOutlet UILabel *money;
-
+@property (weak, nonatomic) IBOutlet WishlistHeadView *headV;
 
 @property (strong, nonatomic) ProfileInfo *profileInfo;
 
@@ -86,12 +89,7 @@
     }
     return _modeCollections;
 }
--(void)initUI{
-    self.brand_img.layer.borderWidth = 1.f;
-    self.brand_img.layer.cornerRadius = 29.f;
-    self.brand_img.layer.borderColor = [UIColor clearColor].CGColor;
-    self.brand_img.image = [UIImage imageNamed:@"headPortrait.png"];
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
@@ -103,10 +101,15 @@
     if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    [self initUI];
+
+    self.tableView.tableHeaderView = self.headV;
+    UIView* view = self.tableView.tableHeaderView;
+    view.frame = CGRectMake(0, 0, 0, 125);
+    self.tableView.tableHeaderView = view;
     
+    self.headV.delegate = self;
     [self getDataFromNetwork];
-    self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
+//    self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
  
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
     bgView.backgroundColor = [UIColor whiteColor];
@@ -116,26 +119,29 @@
     [self.tableView addSubview:refreshControl];
     self.myRefreshControl = refreshControl;
     
-    
+    NSLog(@"%@",NSStringFromCGRect(self.headV.frame));
     
 }
 #pragma mark - QBRefreshControlDelegate
 
-- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
-{
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl{
     [self getDataFromNetwork];
 }
 
--(void)setProfileInfo:(ProfileInfo *)profileInfo{
-    _profileInfo = profileInfo;
-    self.likes.text = [NSString stringWithFormat:@"%d",profileInfo.likes.integerValue];
-    self.money.text = [NSString stringWithFormat:@"%.2f",profileInfo.usd.doubleValue];
-}
 -(void)getDataFromNetwork{
     [ModeProfilesAPI requestProfilesAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];
         if (![obj isKindOfClass:[NSNull class]]) {
+            self.headV.profileInfo = obj;
             self.profileInfo = obj;
+            UIView* view = self.tableView.tableHeaderView;
+            if (self.profileInfo.likes.integerValue == 0) {
+                view.frame = CGRectMake(0, 0, 0, 125);
+            } else {
+                view.frame = CGRectMake(0, 0, 0, 185);
+            }
+            self.tableView.tableHeaderView = view;
+            [self.headV setNeedsLayout];
         } else {
             [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
         }
@@ -171,8 +177,10 @@
 }
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (self.modeCollections.count == 0) {
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         return @"Nothing...";
     }
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleDefault;
     return @"My Favorite";
 }
 #pragma mark -UITableViewDelegate
@@ -247,10 +255,11 @@
     return YES;
 }
 */
-
-- (IBAction)gotoCash:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"gotoCash" sender:self.money.text];
+#pragma mark WishlistHeadViewDelegate
+-(void)wishlistHeadView:(WishlistHeadView *)wishlistHeadView didClickGoToCashListWith:(NSString *)cash{
+    [self performSegueWithIdentifier:@"gotoCash" sender:cash];
 }
+
 
 #pragma mark - Navigation
 

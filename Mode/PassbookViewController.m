@@ -29,10 +29,13 @@
     NSLog(@"passbook dealloc");
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
 }
 //设置CADisplayLink 并加入事件循环
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
@@ -68,6 +71,16 @@
         }
     }];
 }
+-(void)changePosition:(NSNotification*)noti{
+    NSTimeInterval timeDuration = [[noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
+    CGRect startRect = [[noti.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
+    CGRect endRect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    CGRect rect = self.orderConfirmViewController.view.frame;
+    rect.origin.y = startRect.origin.y>endRect.origin.y? -30.f:+30.f;
+    [UIView animateWithDuration:timeDuration animations:^{
+        self.orderConfirmViewController.view.frame = rect;
+    } completion:nil];
+}
 -(NSMutableArray *)timeArr{
     if (!_timeArr) {
         _timeArr = [NSMutableArray array];
@@ -84,9 +97,9 @@
     
     self.tableView.backgroundColor = [UIColor clearColor];//使tableView变透明背景
     
-//#warning 虚拟数据从plist文件中倒入
-//    NSString* filePath = [[NSBundle mainBundle]pathForResource:@"times" ofType:@"plist"];
-//    self.timeArr = [[NSArray arrayWithContentsOfFile:filePath]mutableCopy];
+#warning 虚拟数据从plist文件中倒入
+    NSString* filePath = [[NSBundle mainBundle]pathForResource:@"times" ofType:@"plist"];
+    self.timeArr = [[NSArray arrayWithContentsOfFile:filePath]mutableCopy];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"PassbookTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyCell"];
 
@@ -139,18 +152,19 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tableView.userInteractionEnabled = NO;
-    OrderConfirmViewController* orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];
-    orderConfirmViewController.delegate = self;
-    [self presentPopupViewController:orderConfirmViewController animated:YES completion:nil];
+    self.orderConfirmViewController = [[OrderConfirmViewController alloc]initWithNibName:@"OrderConfirmViewController" bundle:nil];
+    self.orderConfirmViewController.delegate = self;
+    [self presentPopupViewController:self.orderConfirmViewController animated:YES completion:nil];
     
 #warning 这个是跳准时传递的数据 暂时写死为www.baidu.com
-    NSString* website = @"http://www.baidu.com";
+    NSString* website = @"http://www.amazon.cn";
     [self performSegueWithIdentifier:@"gotoWebViewViewController" sender:website];
 }
 #pragma mark OrderConfirmViewControllerDelegate
 -(void)dismissOrderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController{
     self.tableView.userInteractionEnabled = YES;
     [self dismissPopupViewControllerAnimated:YES completion:nil];
+    self.orderConfirmViewController = nil;
 }
 -(void)orderConfirmViewController:(OrderConfirmViewController *)orderConfirmViewController editFinishWithName:(NSString *)name andZipCode:(NSString *)zipcode beginAnimation:(UIActivityIndicatorView *)activityView{
 #warning 这个方法是发送信息给服务器端

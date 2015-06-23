@@ -200,12 +200,16 @@
     [activityView startAnimating];
     NSDictionary* params = @{@"items":nineGoods,@"text":textContent};
     [ModeWishlistAPI shareWishlistBy:params andCallback:^(id obj) {
-        NSLog(@"%@",obj);
-        [activityView stopAnimating];
-        [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
-        self.heartIV.alpha = 1.f;
-        self.label.alpha = 1.f;
-        [self showAlertView];
+        if(obj == nil) {
+            [activityView stopAnimating];
+            [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+            self.heartIV.alpha = 1.f;
+            self.label.alpha = 1.f;
+            [self showAlertView];
+        } else {
+            [self showAlertViewWithCautionInfo:@"Fail to share,please try again."];
+        }
+        
     }];
 }
 

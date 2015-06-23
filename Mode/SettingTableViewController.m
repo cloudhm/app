@@ -10,8 +10,13 @@
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
 #import "WishListViewController.h"
-@interface SettingTableViewController ()
-
+#import "UIViewController+CWPopup.h"
+#import "ConsigneeNameViewController.h"
+#import "TAlertView.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
+@interface SettingTableViewController ()<ConsigneeNameViewControllerDelegate>
+@property (strong, nonatomic) ConsigneeNameViewController *consigneeNameViewController;
 @end
 
 @implementation SettingTableViewController
@@ -28,6 +33,8 @@
     }
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
@@ -38,9 +45,19 @@
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
 }
-
+-(void)changePosition:(NSNotification*)noti{
+    NSTimeInterval timeDuration = [[noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
+    CGRect startRect = [[noti.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
+    CGRect endRect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    CGRect rect = self.consigneeNameViewController.view.frame;
+    rect.origin.y = startRect.origin.y>endRect.origin.y? -30.f:+30.f;
+    [UIView animateWithDuration:timeDuration animations:^{
+        self.consigneeNameViewController.view.frame = rect;
+    } completion:nil];
+}
 
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
@@ -72,10 +89,55 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            self.tableView.userInteractionEnabled = NO;
+            self.consigneeNameViewController = [[ConsigneeNameViewController alloc]initWithNibName:@"ConsigneeNameViewController" bundle:nil];
+            self.consigneeNameViewController.delegate = self;
+            [self.navigationController presentPopupViewController:self.consigneeNameViewController animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        default:
+        {
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"utime"];
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            LoginViewController *lvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            [AppDelegate globalDelegate].window.rootViewController = lvc;
+            
+        }
+            break;
+    }
+}
+#pragma mark ConsigneeNameViewControllerDelegate
+-(void)consigneeNameViewController:(ConsigneeNameViewController *)consigneeNameViewController comfirmInputConsigneeName:(NSString *)consigneeName{
+    [[NSUserDefaults standardUserDefaults]setObject:consigneeName forKey:@"consigneeName"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self dismissconsigneeNameViewController:consigneeNameViewController];
+//    [self showTAlertViewWithTitle:@"Operation success!"];
+
+}
+-(void)showTAlertViewWithTitle:(NSString*)title{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:title andMessage:nil];
+    alert.style = TAlertViewStyleSuccess;
+    [alert show];
+}
+-(void)dismissconsigneeNameViewController:(ConsigneeNameViewController *)consigneeNameViewContorller{
+    self.tableView.userInteractionEnabled = YES;
+    [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+    self.consigneeNameViewController = nil;
 }
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

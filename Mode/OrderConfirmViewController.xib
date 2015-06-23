@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="305" height="292"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pop up box_.png" id="cAu-DU-LoK">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pop_up_box_.png" id="cAu-DU-LoK">
                     <rect key="frame" x="0.0" y="16" width="305" height="279"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -42,7 +42,7 @@
                     <color key="textColor" red="0.4549019608" green="0.4431372549" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pencil icon.png" id="lp1-3a-9FU">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pencil_icon.png" id="lp1-3a-9FU">
                     <rect key="frame" x="127" y="0.0" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -120,8 +120,8 @@
     </objects>
     <resources>
         <image name="Close button.png" width="55" height="51"/>
-        <image name="Pencil icon.png" width="114" height="119"/>
-        <image name="Pop up box_.png" width="720" height="435"/>
+        <image name="Pencil_icon.png" width="114" height="119"/>
+        <image name="Pop_up_box_.png" width="579" height="526"/>
         <image name="confirm_normal.png" width="492" height="104"/>
         <image name="confirm_press.png" width="492" height="104"/>
         <image name="five-pointed star.png" width="42" height="40"/>

@@ -106,10 +106,7 @@ static NSString *reuseIdentifier=@"MyCell";
     [self refreshData];
 }
 -(void)viewDidAppear:(BOOL)animated{
-//    [self.dataArray removeAllObjects];
-//    [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:TYPE andSelectConditionValue:OCCASION]];
-//    [self.cv reloadData];
-//    [self.cv setNeedsDisplay];
+
     
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];

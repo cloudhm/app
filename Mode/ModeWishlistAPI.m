@@ -41,6 +41,7 @@
     NSString* collectionItemsPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld",(long)[collectionId integerValue]]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [self setTimeoutIntervalBy:manager];
     [manager GET:collectionItemsPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         NSArray* collectionItems = [JsonParser parserCollectionItemsBy:jsonDic];
@@ -67,6 +68,7 @@
             }
         }
     }
+    collectionStr = [collectionStr stringByAppendingFormat:@"&&%@",[params objectForKey:@"text"]];
     [allParams setObject:collectionStr forKey:@"collectionitems"];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
@@ -74,7 +76,7 @@
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"share success");
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        callback(dictionary);
+        callback(@(YES));
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"share error:%@",error);
         callback([NSNull null]);

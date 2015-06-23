@@ -211,6 +211,9 @@
 		DB69F6E41B33FF8500FEE588 /* viewDetailPress.png in Resources */ = {isa = PBXBuildFile; fileRef = DB69F6E21B33FF8500FEE588 /* viewDetailPress.png */; };
 		DB69F6E51B33FF8500FEE588 /* viewDetailNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB69F6E31B33FF8500FEE588 /* viewDetailNormal.png */; };
 		DB69F6E81B34171100FEE588 /* Runway.m in Sources */ = {isa = PBXBuildFile; fileRef = DB69F6E71B34171100FEE588 /* Runway.m */; };
+		DB6BDA631B392D10004B8499 /* ConsigneeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6BDA611B392D10004B8499 /* ConsigneeNameViewController.m */; };
+		DB6BDA641B392D10004B8499 /* ConsigneeNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6BDA621B392D10004B8499 /* ConsigneeNameViewController.xib */; };
+		DB6BDA671B3937AA004B8499 /* BrandRunwayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6BDA661B3937AA004B8499 /* BrandRunwayHeaderView.m */; };
 		DB7D37771B37E06D00006D2B /* brandInfoNor.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7D37751B37E06D00006D2B /* brandInfoNor.png */; };
 		DB7D37781B37E06D00006D2B /* brandInfoHigh.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7D37761B37E06D00006D2B /* brandInfoHigh.png */; };
 		DB7D377B1B37E75A00006D2B /* ModePassbookAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7D377A1B37E75A00006D2B /* ModePassbookAPI.m */; };
@@ -535,6 +538,11 @@
 		DB69F6E31B33FF8500FEE588 /* viewDetailNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viewDetailNormal.png; sourceTree = "<group>"; };
 		DB69F6E61B34171100FEE588 /* Runway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Runway.h; sourceTree = "<group>"; };
 		DB69F6E71B34171100FEE588 /* Runway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Runway.m; sourceTree = "<group>"; };
+		DB6BDA601B392D10004B8499 /* ConsigneeNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsigneeNameViewController.h; sourceTree = "<group>"; };
+		DB6BDA611B392D10004B8499 /* ConsigneeNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsigneeNameViewController.m; sourceTree = "<group>"; };
+		DB6BDA621B392D10004B8499 /* ConsigneeNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsigneeNameViewController.xib; sourceTree = "<group>"; };
+		DB6BDA651B3937AA004B8499 /* BrandRunwayHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandRunwayHeaderView.h; sourceTree = "<group>"; };
+		DB6BDA661B3937AA004B8499 /* BrandRunwayHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayHeaderView.m; sourceTree = "<group>"; };
 		DB7D37751B37E06D00006D2B /* brandInfoNor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brandInfoNor.png; sourceTree = "<group>"; };
 		DB7D37761B37E06D00006D2B /* brandInfoHigh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brandInfoHigh.png; sourceTree = "<group>"; };
 		DB7D37791B37E75A00006D2B /* ModePassbookAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModePassbookAPI.h; sourceTree = "<group>"; };
@@ -870,6 +878,9 @@
 			children = (
 				14080EDF1B318C0C00060666 /* SettingTableViewController.h */,
 				14080EE01B318C0C00060666 /* SettingTableViewController.m */,
+				DB6BDA601B392D10004B8499 /* ConsigneeNameViewController.h */,
+				DB6BDA611B392D10004B8499 /* ConsigneeNameViewController.m */,
+				DB6BDA621B392D10004B8499 /* ConsigneeNameViewController.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1214,6 +1225,8 @@
 			children = (
 				14080F131B318E7400060666 /* BrandRunwayTableViewController.h */,
 				14080F141B318E7400060666 /* BrandRunwayTableViewController.m */,
+				DB6BDA651B3937AA004B8499 /* BrandRunwayHeaderView.h */,
+				DB6BDA661B3937AA004B8499 /* BrandRunwayHeaderView.m */,
 				14080F151B318E7400060666 /* BrandRunwayTableViewCell.h */,
 				14080F161B318E7400060666 /* BrandRunwayTableViewCell.m */,
 			);
@@ -1365,6 +1378,7 @@
 				14080E561B31887300060666 /* copper_normal.png in Resources */,
 				14080E531B31887300060666 /* profile_press.png in Resources */,
 				14080EC51B3188C200060666 /* new_secret_password.png in Resources */,
+				DB6BDA641B392D10004B8499 /* ConsigneeNameViewController.xib in Resources */,
 				14080E231B31848B00060666 /* Main.storyboard in Resources */,
 				14080F121B318E6100060666 /* OrderConfirmViewController.xib in Resources */,
 				DB69F6DE1B33ADCE00FEE588 /* iTunesArtWork.png in Resources */,
@@ -1545,6 +1559,7 @@
 				14080DFF1B31845900060666 /* ModeRunwayAPI.m in Sources */,
 				14080F741B318F9D00060666 /* OccasionCollectionViewCell.m in Sources */,
 				DB69F6E81B34171100FEE588 /* Runway.m in Sources */,
+				DB6BDA671B3937AA004B8499 /* BrandRunwayHeaderView.m in Sources */,
 				14080DF61B31844200060666 /* ModeBrandRunwayAPI.m in Sources */,
 				14080E1D1B31847000060666 /* ConvertTime.m in Sources */,
 				14080E051B31846500060666 /* ModeSysAPI.m in Sources */,
@@ -1576,6 +1591,7 @@
 				14080E3D1B3187BB00060666 /* QBAnimationSequence.m in Sources */,
 				14080F2C1B318EA300060666 /* BrandViewController.m in Sources */,
 				14080F2D1B318EA300060666 /* StyleViewController.m in Sources */,
+				DB6BDA631B392D10004B8499 /* ConsigneeNameViewController.m in Sources */,
 				DB169D4D1B199B1C0015D4A6 /* UIImageView+HighlightedWebCache.m in Sources */,
 				DB17B67A1B0EC59400D43B9F /* main.m in Sources */,
 				DB7D377B1B37E75A00006D2B /* ModePassbookAPI.m in Sources */,

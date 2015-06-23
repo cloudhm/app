@@ -13,7 +13,7 @@
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://120.26.107.42:8080"//@"http://127.0.0.1:8080"//
+#define HOSTADDRESS @"http://120.26.107.42:8080/ModePlatform-1.0-SNAPSHOT"//@"http://127.0.0.1:8080"//
 
 
 //账号接口

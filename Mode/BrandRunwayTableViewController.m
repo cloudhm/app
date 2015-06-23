@@ -85,6 +85,7 @@
             [self showAlertViewWithCautionInfo:@"Try refresh it again."];
         } else {
             self.brandInfo = obj;
+            [self.tableView reloadData];
         }
     }];
 }
@@ -116,15 +117,8 @@
     _brandInfo = brandInfo;
     [self initHeaderView];
     self.title = self.brandInfo.brandName;
-    [self.view setNeedsDisplay];
 }
-//-(void)initNavigationBar{
-//    //导航栏设置
-//    self.tableView.showsVerticalScrollIndicator = NO;
-////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-////    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.f green:21/255.f blue:20/255.f alpha:1];
-////    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//}
+
 #pragma mark TableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

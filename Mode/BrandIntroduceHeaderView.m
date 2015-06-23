@@ -42,7 +42,8 @@
 
 -(void)setBrandInfo:(BrandInfo *)brandInfo{
     _brandInfo = brandInfo;
-    self.brandDetail.text = _brandInfo.brandDescription;
+//    self.brandDetail.text = _brandInfo.brandDescription;
+    [self layoutSubviews];
 }
 
 -(void)layoutSubviews{
@@ -74,7 +75,7 @@
         self.brandDetail.textAlignment = NSTextAlignmentCenter;
     }
     self.brandDetail.frame = CGRectMake(brandDetailX, brandDetailY, brandDetailW, brandDetailH+10);
-    
+#warning 以下两个控件如果brandInfo-runwayItems为空或0  则不显示
     float brandStyleX = 0;
     float brandStyleY = CGRectGetMaxY(self.brandDetail.frame) + padding;
     float brandStyleW = CGRectGetWidth(currentDeviceFrame);
@@ -89,6 +90,9 @@
     self.bottomLine.frame = CGRectMake(bottomLineX, bottomLineY, bottomLineW, bottomLineH);
 }
 -(CGFloat)getTotalHeight{
+//    if () {
+//        <#statements#>
+//    }
     return CGRectGetMaxY(self.bottomLine.frame);
 }
 @end

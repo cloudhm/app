@@ -25,8 +25,14 @@
 +(void)requestMenuListAndCallback:(MyCallback)callback{
     NSString* path = MENU;
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
+    // First request for menu, add headers for Machine ID, OS, Location, etc
+    // X-Machine-Id
+    // X-Os-Version
+    // X-Loc-Longititude
+    // X-Loc-Latitude
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (![dictionary objectForKey:@"code"]) {

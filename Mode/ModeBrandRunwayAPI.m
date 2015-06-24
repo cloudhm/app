@@ -24,6 +24,7 @@
     NSString* path = BRANDINFO;
     NSString* brandInfoPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld",brandId.integerValue]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager GET:brandInfoPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -24,6 +24,7 @@
     NSString* path = TRANSACTIONS;
     NSString* transactionsPath = [path stringByAppendingPathComponent:[self getUserId]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager GET:transactionsPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

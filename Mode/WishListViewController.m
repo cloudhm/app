@@ -288,7 +288,7 @@
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
-    bgIV.image = [UIImage imageNamed:@"heart.png"];
+    bgIV.image = [UIImage imageNamed:@"heartRev0.png"];
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
     l.textAlignment = NSTextAlignmentCenter;
     l.textColor = [UIColor whiteColor];

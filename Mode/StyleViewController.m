@@ -46,7 +46,7 @@ static NSString *reuseIdentifier=@"MyCell";
     return _dataArray;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self refreshData];
+    
 }
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
@@ -78,6 +78,7 @@ static NSString *reuseIdentifier=@"MyCell";
     self.myRefreshControl = refreshControl;
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [self refreshData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"svcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"svcToLvc" object:nil];
 }

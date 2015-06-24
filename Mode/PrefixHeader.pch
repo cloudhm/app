@@ -9,11 +9,13 @@
 #ifndef Mode_PrefixHeader_pch
 #define Mode_PrefixHeader_pch
 
+#define Token @"X-Auth-Token"
+
 /*
  * http://120.26.107.42:8080  等于  api.10buck.com
  */
 
-#define HOSTADDRESS @"http://120.26.107.42:8080/ModePlatform-1.0-SNAPSHOT"//@"http://127.0.0.1:8080"//
+#define HOSTADDRESS @"http://120.26.107.42:8080/ModePlatform-1.0-SNAPSHOT"//@"http://192.168.1.121:8080"//
 
 
 //账号接口
@@ -30,10 +32,10 @@
 #define TRANSACTIONS [HOSTADDRESS stringByAppendingPathComponent:@"transactions/users"]//用户交易历史 GET
 
 //商品接口
-#define SET_GOODS_FEEDBACK [HOSTADDRESS stringByAppendingPathComponent:@"brands/users/like"] //设置商品测试反馈秀场接口
+#define SET_GOODS_FEEDBACK [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //设置商品测试反馈秀场接口
 
 //秀场接口
-#define RUNWAY [HOSTADDRESS stringByAppendingPathComponent:@"runway"]  //新建一组秀场心愿单接口
+#define RUNWAY [HOSTADDRESS stringByAppendingPathComponent:@"runways"]  //新建一组秀场心愿单接口
 
 //心愿单接口
 #define GET_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/users"]//获取用户的collection

@@ -314,23 +314,7 @@
         
     }];
 }
-//#pragma mark UIAlertViewDelegate
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    if (alertView.tag == 1) {
-//        if (buttonIndex == alertView.cancelButtonIndex) {
-//            self.firstCardView.userInteractionEnabled = YES;
-//        }
-//    } else if (alertView.tag == 2) {
-//        if (buttonIndex == alertView.cancelButtonIndex) {
-//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//        } else {
-//            [self requestNewRunway];
-//        }
-//        
-//        
-//    }
-//    self.navigationItem.rightBarButtonItem.enabled = YES;
-//}
+
 
 #pragma mark UpdateUI
 -(void)updateUI{
@@ -387,7 +371,7 @@
 #warning like or nope feedback interface params need to modify
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
             //do nothing here.
         }];
         // remove nope goods-Image from Disk
@@ -396,7 +380,7 @@
     } else {
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
+        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
             //do nothing here.
         }];
         [self.wishlist addObject:self.currentCloth];

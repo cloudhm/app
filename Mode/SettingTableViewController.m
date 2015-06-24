@@ -111,7 +111,7 @@
             break;
         default:
         {
-
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"token"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
             [[NSUserDefaults standardUserDefaults]synchronize];
             LoginViewController *lvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];

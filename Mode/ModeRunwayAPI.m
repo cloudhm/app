@@ -26,6 +26,7 @@
     NSMutableDictionary* allParams = [params mutableCopy];
     [allParams setObject:[self getUserID] forKey:@"userId"];
     AFHTTPRequestOperationManager*manager=[AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

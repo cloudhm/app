@@ -8,6 +8,7 @@
 
 #import "ModeAccountAPI.h"
 #import <AFNetworking.h>
+#import "NSString+MD5.h"
 @implementation ModeAccountAPI
 
 +(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
@@ -18,12 +19,15 @@
 
 +(void)signupWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = ACCOUNT_SIGNUP;
-    NSMutableDictionary* allParams = [params mutableCopy];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
+    [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
+    [manager.requestSerializer setValue:[params objectForKey:@"nickname"] forHTTPHeaderField:@"nickname"];
+    
     
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
-    [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (![dictionary objectForKey:@"code"]) {
             NSNumber* utime = [dictionary objectForKey:@"utime"];
@@ -46,11 +50,14 @@
 }
 +(void)loginWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = ACCOUNT_LOGIN;
-    NSMutableDictionary* allParams = [params mutableCopy];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
-    [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
+//    [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
+    [manager.requestSerializer setValue:@"e9bc0e13a8a16cbb07b175d92a113126" forHTTPHeaderField:@"password"];
+    [manager.requestSerializer setValue:@"1013103903@qq.com" forHTTPHeaderField:@"username"];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (![dictionary objectForKey:@"code"]) {
             NSString* userId = [dictionary objectForKey:@"userId"];

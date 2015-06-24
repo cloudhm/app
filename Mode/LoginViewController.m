@@ -245,13 +245,13 @@
 
 
 - (IBAction)showLoginView:(UIButton *)sender {
-#warning 暂时跳过此阶段
-    [[NSUserDefaults standardUserDefaults]setObject:@"362" forKey:@"userId"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    [self enterHostView];
+//#warning 暂时跳过此阶段
+//    [[NSUserDefaults standardUserDefaults]setObject:@"362" forKey:@"userId"];
+//    [[NSUserDefaults standardUserDefaults]synchronize];
+//    [self enterHostView];
     
     
-    return;
+//    return;
     if (self.lvc == nil) {
         self.lvc = [[LoginView alloc]init];
         self.lvc.delegate = self;
@@ -379,7 +379,6 @@
 -(void)enterHostView{
     dispatch_async(dispatch_get_main_queue(), ^{
         JVFloatingDrawerViewController*jvc =[AppDelegate globalDelegate].drawerViewController;
-//        [[AppDelegate globalDelegate]configureDrawerViewController];
         [AppDelegate globalDelegate].window.rootViewController = jvc;
     }) ;
 }
@@ -389,6 +388,14 @@
     [AppDelegate globalDelegate].leftDrawerViewController = nil;
     [AppDelegate globalDelegate].homeViewController = nil;
     [AppDelegate globalDelegate].drawerAnimator = nil;
+    
+    [AppDelegate globalDelegate].wishlistViewController = nil;
+    [AppDelegate globalDelegate].wishlistTableViewController = nil;
+    [AppDelegate globalDelegate].passbookViewController = nil;
+    [AppDelegate globalDelegate].launchViewController = nil;
+    [AppDelegate globalDelegate].orderViewController = nil;
+    [AppDelegate globalDelegate].settingViewController = nil;
+    [AppDelegate globalDelegate].feedbackViewController = nil;
 
 }
 

@@ -36,12 +36,7 @@
 		14080E3D1B3187BB00060666 /* QBAnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080E3A1B3187BB00060666 /* QBAnimationSequence.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		14080E4D1B31887300060666 /* coupon_go_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E3F1B31887300060666 /* coupon_go_normal.png */; };
 		14080E4E1B31887300060666 /* home_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E401B31887300060666 /* home_normal.png */; };
-		14080E4F1B31887300060666 /* passbook_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E411B31887300060666 /* passbook_press.png */; };
-		14080E501B31887300060666 /* orders_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E421B31887300060666 /* orders_press.png */; };
-		14080E511B31887300060666 /* wishlist_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E431B31887300060666 /* wishlist_press.png */; };
 		14080E521B31887300060666 /* feedback_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E441B31887300060666 /* feedback_press.png */; };
-		14080E531B31887300060666 /* profile_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E451B31887300060666 /* profile_press.png */; };
-		14080E541B31887300060666 /* setting_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E461B31887300060666 /* setting_press.png */; };
 		14080E551B31887300060666 /* homeShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E471B31887300060666 /* homeShadow.png */; };
 		14080E561B31887300060666 /* copper_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E481B31887300060666 /* copper_normal.png */; };
 		14080E571B31887300060666 /* headPortraitThumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 14080E491B31887300060666 /* headPortraitThumbnail.png */; };
@@ -235,6 +230,19 @@
 		DBFAB5C51B3A571000C0308B /* handNopeHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */; };
 		DBFAB5C71B3A573D00C0308B /* handLike.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C61B3A573D00C0308B /* handLike.png */; };
 		DBFAB5C91B3A576300C0308B /* handLikePress.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C81B3A576300C0308B /* handLikePress.png */; };
+		DBFAB5CB1B3A98B300C0308B /* profileNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5CA1B3A98B300C0308B /* profileNormal.png */; };
+		DBFAB5CD1B3A990000C0308B /* homeHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5CC1B3A990000C0308B /* homeHighlight.png */; };
+		DBFAB5CF1B3A992D00C0308B /* profileHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5CE1B3A992D00C0308B /* profileHighlight.png */; };
+		DBFAB5D11B3A995900C0308B /* wishlistNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5D01B3A995900C0308B /* wishlistNormal.png */; };
+		DBFAB5D31B3A997E00C0308B /* wishlistHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5D21B3A997E00C0308B /* wishlistHighlight.png */; };
+		DBFAB5D51B3A999E00C0308B /* ordersNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5D41B3A999E00C0308B /* ordersNormal.png */; };
+		DBFAB5D71B3A99BE00C0308B /* ordersHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5D61B3A99BE00C0308B /* ordersHighlight.png */; };
+		DBFAB5D91B3A99E500C0308B /* passbookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5D81B3A99E500C0308B /* passbookNormal.png */; };
+		DBFAB5DB1B3A9A0C00C0308B /* passbookHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5DA1B3A9A0C00C0308B /* passbookHighlight.png */; };
+		DBFAB5DD1B3A9A2700C0308B /* settingNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5DC1B3A9A2700C0308B /* settingNormal.png */; };
+		DBFAB5DF1B3A9A4C00C0308B /* settingHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5DE1B3A9A4C00C0308B /* settingHighlight.png */; };
+		DBFAB5E51B3ABA9100C0308B /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFAB5E41B3ABA9100C0308B /* NSString+MD5.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DBFAB5EF1B3AD7F900C0308B /* dividerLine.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5EE1B3AD7F900C0308B /* dividerLine.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,12 +310,7 @@
 		14080E3A1B3187BB00060666 /* QBAnimationSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBAnimationSequence.m; sourceTree = "<group>"; };
 		14080E3F1B31887300060666 /* coupon_go_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_go_normal.png; sourceTree = "<group>"; };
 		14080E401B31887300060666 /* home_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_normal.png; sourceTree = "<group>"; };
-		14080E411B31887300060666 /* passbook_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passbook_press.png; sourceTree = "<group>"; };
-		14080E421B31887300060666 /* orders_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orders_press.png; sourceTree = "<group>"; };
-		14080E431B31887300060666 /* wishlist_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wishlist_press.png; sourceTree = "<group>"; };
 		14080E441B31887300060666 /* feedback_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_press.png; sourceTree = "<group>"; };
-		14080E451B31887300060666 /* profile_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_press.png; sourceTree = "<group>"; };
-		14080E461B31887300060666 /* setting_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_press.png; sourceTree = "<group>"; };
 		14080E471B31887300060666 /* homeShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeShadow.png; sourceTree = "<group>"; };
 		14080E481B31887300060666 /* copper_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copper_normal.png; sourceTree = "<group>"; };
 		14080E491B31887300060666 /* headPortraitThumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headPortraitThumbnail.png; sourceTree = "<group>"; };
@@ -584,6 +587,21 @@
 		DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handNopeHighlight.png; sourceTree = "<group>"; };
 		DBFAB5C61B3A573D00C0308B /* handLike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handLike.png; sourceTree = "<group>"; };
 		DBFAB5C81B3A576300C0308B /* handLikePress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handLikePress.png; sourceTree = "<group>"; };
+		DBFAB5CA1B3A98B300C0308B /* profileNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileNormal.png; sourceTree = "<group>"; };
+		DBFAB5CC1B3A990000C0308B /* homeHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeHighlight.png; sourceTree = "<group>"; };
+		DBFAB5CE1B3A992D00C0308B /* profileHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileHighlight.png; sourceTree = "<group>"; };
+		DBFAB5D01B3A995900C0308B /* wishlistNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wishlistNormal.png; sourceTree = "<group>"; };
+		DBFAB5D21B3A997E00C0308B /* wishlistHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wishlistHighlight.png; sourceTree = "<group>"; };
+		DBFAB5D41B3A999E00C0308B /* ordersNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ordersNormal.png; sourceTree = "<group>"; };
+		DBFAB5D61B3A99BE00C0308B /* ordersHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ordersHighlight.png; sourceTree = "<group>"; };
+		DBFAB5D81B3A99E500C0308B /* passbookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passbookNormal.png; sourceTree = "<group>"; };
+		DBFAB5DA1B3A9A0C00C0308B /* passbookHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = passbookHighlight.png; sourceTree = "<group>"; };
+		DBFAB5DC1B3A9A2700C0308B /* settingNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingNormal.png; sourceTree = "<group>"; };
+		DBFAB5DE1B3A9A4C00C0308B /* settingHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingHighlight.png; sourceTree = "<group>"; };
+		DBFAB5E31B3ABA9100C0308B /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		DBFAB5E41B3ABA9100C0308B /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		DBFAB5EC1B3ABF3A00C0308B /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
+		DBFAB5EE1B3AD7F900C0308B /* dividerLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dividerLine.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -785,6 +803,8 @@
 		14080E271B31877D00060666 /* ThirdFrame */ = {
 			isa = PBXGroup;
 			children = (
+				DBFAB5E31B3ABA9100C0308B /* NSString+MD5.h */,
+				DBFAB5E41B3ABA9100C0308B /* NSString+MD5.m */,
 				DBF6CB2E1B25270A00FEC1F5 /* UIViewController+CWPopup.h */,
 				DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */,
 				14080E351B3187BB00060666 /* QBAnimationGroup.h */,
@@ -808,6 +828,18 @@
 		14080E3E1B31885E00060666 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				DBFAB5EE1B3AD7F900C0308B /* dividerLine.png */,
+				DBFAB5CC1B3A990000C0308B /* homeHighlight.png */,
+				DBFAB5D81B3A99E500C0308B /* passbookNormal.png */,
+				DBFAB5D41B3A999E00C0308B /* ordersNormal.png */,
+				DBFAB5D61B3A99BE00C0308B /* ordersHighlight.png */,
+				DBFAB5D01B3A995900C0308B /* wishlistNormal.png */,
+				DBFAB5D21B3A997E00C0308B /* wishlistHighlight.png */,
+				DBFAB5DC1B3A9A2700C0308B /* settingNormal.png */,
+				DBFAB5CA1B3A98B300C0308B /* profileNormal.png */,
+				DBFAB5DE1B3A9A4C00C0308B /* settingHighlight.png */,
+				DBFAB5DA1B3A9A0C00C0308B /* passbookHighlight.png */,
+				DBFAB5CE1B3A992D00C0308B /* profileHighlight.png */,
 				DBFAB5C81B3A576300C0308B /* handLikePress.png */,
 				DBFAB5C61B3A573D00C0308B /* handLike.png */,
 				DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */,
@@ -892,12 +924,7 @@
 				14080E701B31888B00060666 /* cash_up_box.png */,
 				14080E3F1B31887300060666 /* coupon_go_normal.png */,
 				14080E401B31887300060666 /* home_normal.png */,
-				14080E411B31887300060666 /* passbook_press.png */,
-				14080E421B31887300060666 /* orders_press.png */,
-				14080E431B31887300060666 /* wishlist_press.png */,
 				14080E441B31887300060666 /* feedback_press.png */,
-				14080E451B31887300060666 /* profile_press.png */,
-				14080E461B31887300060666 /* setting_press.png */,
 				14080E471B31887300060666 /* homeShadow.png */,
 				14080E481B31887300060666 /* copper_normal.png */,
 				14080E491B31887300060666 /* headPortraitThumbnail.png */,
@@ -972,6 +999,7 @@
 		5E56E6E1700A36FF63B3092B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBFAB5EC1B3ABF3A00C0308B /* libcommonCrypto.dylib */,
 				14C235D21B31164C006A63F5 /* SystemConfiguration.framework */,
 				14C235D01B311620006A63F5 /* libz.dylib */,
 				14C235CE1B311604006A63F5 /* CFNetwork.framework */,
@@ -1412,7 +1440,7 @@
 				14080E751B31888B00060666 /* cash_page.png in Resources */,
 				14080EC41B3188C200060666 /* new_secret_name_normal.png in Resources */,
 				14080E561B31887300060666 /* copper_normal.png in Resources */,
-				14080E531B31887300060666 /* profile_press.png in Resources */,
+				DBFAB5D71B3A99BE00C0308B /* ordersHighlight.png in Resources */,
 				14080EC51B3188C200060666 /* new_secret_password.png in Resources */,
 				DB6BDA641B392D10004B8499 /* ConsigneeNameViewController.xib in Resources */,
 				14080E231B31848B00060666 /* Main.storyboard in Resources */,
@@ -1422,6 +1450,7 @@
 				14080EDE1B3188D300060666 /* tab_line.png in Resources */,
 				14F2B8AA1B27AA630047A039 /* LICENSE in Resources */,
 				14080EBE1B3188C200060666 /* new_secret_box.png in Resources */,
+				DBFAB5DB1B3A9A0C00C0308B /* passbookHighlight.png in Resources */,
 				DB0CA3F91B327FC800611C82 /* red_CouponSelected.png in Resources */,
 				14080E721B31888B00060666 /* cash_down_box.png in Resources */,
 				14080ED31B3188CB00060666 /* pass_input_left.png in Resources */,
@@ -1452,17 +1481,19 @@
 				DB69F6E51B33FF8500FEE588 /* viewDetailNormal.png in Resources */,
 				14080E731B31888B00060666 /* cash_enter_the_total_amount.png in Resources */,
 				DBFAB5C51B3A571000C0308B /* handNopeHighlight.png in Resources */,
-				14080E511B31887300060666 /* wishlist_press.png in Resources */,
 				14080EDB1B3188D300060666 /* home_Arrow_right.png in Resources */,
+				DBFAB5D51B3A999E00C0308B /* ordersNormal.png in Resources */,
 				14C235DD1B318208006A63F5 /* times.plist in Resources */,
 				14080ECE1B3188CB00060666 /* email_input_left.png in Resources */,
 				14080E811B31889300060666 /* facebook_login_normal.png in Resources */,
 				14080E7F1B31889300060666 /* email_login_normal.png in Resources */,
 				14080EAD1B3188AB00060666 /* Pencil_icon.png in Resources */,
+				DBFAB5CB1B3A98B300C0308B /* profileNormal.png in Resources */,
 				14080E4E1B31887300060666 /* home_normal.png in Resources */,
 				14F2B8AB1B27AA630047A039 /* README.txt in Resources */,
 				14080EBB1B3188C200060666 /* _new_secret_email_normal.png in Resources */,
 				14080EAE1B3188AB00060666 /* Pop_up_box_.png in Resources */,
+				DBFAB5DD1B3A9A2700C0308B /* settingNormal.png in Resources */,
 				14080E551B31887300060666 /* homeShadow.png in Resources */,
 				DBE391891B3A52A800B91D85 /* blankNormal.png in Resources */,
 				14080EAA1B3188AB00060666 /* five-pointed star.png in Resources */,
@@ -1472,11 +1503,12 @@
 				DB69F6D81B33ADCE00FEE588 /* Icon-60@2x.png in Resources */,
 				14080E9A1B3188A300060666 /* coupon_line.png in Resources */,
 				DB8435081B3975DC00BA46DB /* init.plist in Resources */,
-				14080E541B31887300060666 /* setting_press.png in Resources */,
 				14080E8B1B31889B00060666 /* _menu.png in Resources */,
 				14080E961B3188A300060666 /* coupon_go_normal_rev1.png in Resources */,
 				14080EA91B3188AB00060666 /* confirm_press.png in Resources */,
 				14080ED11B3188CB00060666 /* old_secret_login_normal.png in Resources */,
+				DBFAB5CD1B3A990000C0308B /* homeHighlight.png in Resources */,
+				DBFAB5EF1B3AD7F900C0308B /* dividerLine.png in Resources */,
 				14080E4D1B31887300060666 /* coupon_go_normal.png in Resources */,
 				14080EC11B3188C200060666 /* new_secret_login_normal.png in Resources */,
 				DB69F6DA1B33ADCE00FEE588 /* Icon-Small.png in Resources */,
@@ -1484,7 +1516,6 @@
 				14080EA71B3188AB00060666 /* Close button.png in Resources */,
 				14080E8C1B31889B00060666 /* _solid.png in Resources */,
 				14080E9B1B3188A300060666 /* coupon_mode.png in Resources */,
-				14080E4F1B31887300060666 /* passbook_press.png in Resources */,
 				14080EDA1B3188D300060666 /* home_Arrow_left.png in Resources */,
 				DBFAB5C31B3A56DA00C0308B /* handNope.png in Resources */,
 				14080EFD1B318DE300060666 /* OrderTableViewCell.xib in Resources */,
@@ -1495,14 +1526,17 @@
 				14080E841B31889300060666 /* or_line.png in Resources */,
 				14080EC61B3188C200060666 /* new_secret_password_normal.png in Resources */,
 				14080EA61B3188AB00060666 /* Arrow_left_button.png in Resources */,
+				DBFAB5D91B3A99E500C0308B /* passbookNormal.png in Resources */,
 				14080E761B31888B00060666 /* cash_press.png in Resources */,
 				DB69F6D91B33ADCE00FEE588 /* Icon-60@3x.png in Resources */,
 				DB69F6E41B33FF8500FEE588 /* viewDetailPress.png in Resources */,
 				14080EC21B3188C200060666 /* new_secret_login_press.png in Resources */,
 				14080E591B31887300060666 /* 0.start_page.png in Resources */,
 				14080EDC1B3188D300060666 /* home_divider_line.png in Resources */,
-				14080E501B31887300060666 /* orders_press.png in Resources */,
+				DBFAB5CF1B3A992D00C0308B /* profileHighlight.png in Resources */,
+				DBFAB5D31B3A997E00C0308B /* wishlistHighlight.png in Resources */,
 				14080ED01B3188CB00060666 /* input_right_password.png in Resources */,
+				DBFAB5DF1B3A9A4C00C0308B /* settingHighlight.png in Resources */,
 				14080EC31B3188C200060666 /* new_secret_name.png in Resources */,
 				14080E981B3188A300060666 /* coupon_box.png in Resources */,
 				DBE3918B1B3A530600B91D85 /* blankPressl.png in Resources */,
@@ -1511,6 +1545,7 @@
 				DBE3918D1B3A533800B91D85 /* facebookSmallLogo.png in Resources */,
 				14080EDD1B3188D300060666 /* home_menu.png in Resources */,
 				14080EBD1B3188C200060666 /* _new_secret_password_normal.png in Resources */,
+				DBFAB5D11B3A995900C0308B /* wishlistNormal.png in Resources */,
 				14080E301B3187A600060666 /* arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1612,6 +1647,7 @@
 				14080E211B31847000060666 /* ModeDatabase.m in Sources */,
 				14080E2A1B31879400060666 /* TAlertView.m in Sources */,
 				14080F511B318F2700060666 /* WishlistTableViewCell.m in Sources */,
+				DBFAB5E51B3ABA9100C0308B /* NSString+MD5.m in Sources */,
 				14080F1B1B318E8400060666 /* WishlistTableViewController.m in Sources */,
 				14080F2B1B318EA300060666 /* OccasionViewController.m in Sources */,
 				DB169D4C1B199B1C0015D4A6 /* UIImage+WebP.m in Sources */,
@@ -1779,6 +1815,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mode/UMAnalytics_Sdk_3.5.8",
 					"$(PROJECT_DIR)/Mode/Flurry",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1804,6 +1841,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mode/UMAnalytics_Sdk_3.5.8",
 					"$(PROJECT_DIR)/Mode/Flurry",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -44,14 +44,7 @@
     }
 
 }
--(void)ad{
-    UIImageView *arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 50, 50)];
-    UIImage *theImage = [UIImage imageNamed:@"arrow.png"];
-    theImage = [theImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    arrowImageView.image = theImage;
-    arrowImageView.tintColor = [UIColor blackColor];
-}
-#pragma mark - Accessors
+
 
 
 

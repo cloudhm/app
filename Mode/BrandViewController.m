@@ -76,11 +76,12 @@ static NSString *reuseIdentifier=@"MyCell";
     self.myRefreshControl = refreshControl;
 }
 -(void)viewDidAppear:(BOOL)animated{
+    [self refreshData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bvcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"bvcToLvc" object:nil];
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self refreshData];
+    
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bvcToLvc" object:nil];

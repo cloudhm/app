@@ -134,7 +134,7 @@
                                         </mask>
                                     </variation>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_divider line.png" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-Ab-fi3">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dividerLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="eC5-Ab-fi3">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="AWd-Od-03I"/>
@@ -453,7 +453,7 @@
                                         </mask>
                                     </variation>
                                 </view>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_divider line.png" translatesAutoresizingMaskIntoConstraints="NO" id="rGt-3X-OVD">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dividerLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="rGt-3X-OVD">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="2" id="1Ge-R3-l4R"/>
@@ -472,7 +472,7 @@
                                         </mask>
                                     </variation>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_divider line.png" translatesAutoresizingMaskIntoConstraints="NO" id="vLf-fR-q19">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dividerLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="vLf-fR-q19">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="2" id="HGO-D1-Vra"/>
@@ -1799,7 +1799,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kvv-aM-MOM" id="f1j-Ds-oCL">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="home_normal.png" highlightedImage="home.png" translatesAutoresizingMaskIntoConstraints="NO" id="9x7-Fn-li3">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="home_normal.png" highlightedImage="homeHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="9x7-Fn-li3">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="k2l-wi-h1I">
@@ -1858,7 +1858,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jM5-Ns-0F2" id="H9L-38-ZU5">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="profile.png" highlightedImage="profile_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgU-L1-3Ed">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="profileNormal.png" highlightedImage="profileHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgU-L1-3Ed">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="OX4-vy-aTI">
@@ -1953,7 +1953,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wishlist.png" highlightedImage="wishlist_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9v-BD-kKB">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wishlistNormal.png" highlightedImage="wishlistHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9v-BD-kKB">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Nfw-Kn-xNR">
@@ -2057,7 +2057,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="orders.png" highlightedImage="orders_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZQN-AW-cNn">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ordersNormal.png" highlightedImage="ordersHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZQN-AW-cNn">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="AlF-nR-B1q">
@@ -2116,7 +2116,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="passbook.png" highlightedImage="passbook_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-ei-AKE">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="passbookNormal.png" highlightedImage="passbookHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-ei-AKE">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Pcj-7N-YNm">
@@ -2179,7 +2179,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="setting.png" highlightedImage="setting_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="0PN-pC-r1l">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="settingNormal.png" highlightedImage="settingHighlight.png" translatesAutoresizingMaskIntoConstraints="NO" id="0PN-pC-r1l">
                                                     <rect key="frame" x="40" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="5UL-i2-5aM">
@@ -2211,67 +2211,6 @@
                                             <outlet property="titleLabel" destination="WP8-eQ-qhq" id="6ms-xg-kg8"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jbB-yr-g0p" customClass="JVLeftDrawerTableViewCell">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbB-yr-g0p" id="1be-H9-0xJ">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="feedback.png" highlightedImage="feedback_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="LKQ-Tl-bdh">
-                                                    <rect key="frame" x="40" y="15" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="9hy-yk-PfG">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                                                        </constraint>
-                                                        <constraint firstAttribute="height" constant="30" id="Nd2-We-VmD">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                                                        </constraint>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GL-eo-4FV">
-                                                    <rect key="frame" x="90" y="19" width="222" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="eH8-Cd-dKM"/>
-                                                        <constraint firstAttribute="width" constant="222" id="evM-UF-HzL">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="160"/>
-                                                        </constraint>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="evM-UF-HzL"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <include reference="evM-UF-HzL"/>
-                                                        </mask>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="9GL-eo-4FV" firstAttribute="leading" secondItem="LKQ-Tl-bdh" secondAttribute="trailing" constant="20" id="Ez8-gD-c9Z">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="14"/>
-                                                </constraint>
-                                                <constraint firstItem="LKQ-Tl-bdh" firstAttribute="leading" secondItem="1be-H9-0xJ" secondAttribute="leadingMargin" constant="32" id="bYu-uN-rVd">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="7"/>
-                                                </constraint>
-                                                <constraint firstAttribute="centerY" secondItem="9GL-eo-4FV" secondAttribute="centerY" constant="0.5" id="kbA-IL-Jbu">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                                                </constraint>
-                                                <constraint firstAttribute="centerY" secondItem="LKQ-Tl-bdh" secondAttribute="centerY" id="qBZ-Tj-m74">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                                                </constraint>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="iconImageView" destination="LKQ-Tl-bdh" id="aN1-l1-bOc"/>
-                                            <outlet property="titleLabel" destination="9GL-eo-4FV" id="8c4-s8-h3b"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -2286,7 +2225,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDB-2D-suG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2959.5" y="885.75"/>
+            <point key="canvasLocation" x="-2707.5" y="825.75"/>
         </scene>
         <!--Passbook View Controller-->
         <scene sceneID="DAw-mG-xVN">
@@ -3071,15 +3010,13 @@
     <resources>
         <image name="0.start_page.png" width="720" height="1280"/>
         <image name="399-list1" width="19" height="15"/>
-        <image name="_divider line.png" width="9" height="64"/>
         <image name="confirmed_normal.png" width="68" height="62"/>
         <image name="confirmed_selected.png" width="68" height="62"/>
         <image name="coupon_page.png" width="720" height="1139"/>
+        <image name="dividerLine.png" width="9" height="64"/>
         <image name="email_login_normal.png" width="459" height="80"/>
         <image name="facebook_login_normal.png" width="459" height="75"/>
         <image name="facebook_login_press.png" width="459" height="75"/>
-        <image name="feedback.png" width="63" height="63"/>
-        <image name="feedback_press.png" width="63" height="63"/>
         <image name="finished.png" width="79" height="62"/>
         <image name="finished_selected.png" width="80" height="62"/>
         <image name="handLike.png" width="82" height="72"/>
@@ -3087,25 +3024,25 @@
         <image name="handNope.png" width="78" height="72"/>
         <image name="handNopeHighlight.png" width="80" height="77"/>
         <image name="heart.png" width="64" height="53"/>
-        <image name="home.png" width="44" height="50"/>
+        <image name="homeHighlight.png" width="44" height="50"/>
         <image name="home_Arrow_left" width="19" height="28"/>
         <image name="home_Arrow_right" width="22" height="27"/>
         <image name="home_normal.png" width="63" height="64"/>
         <image name="login_page.png" width="720" height="1280"/>
-        <image name="orders.png" width="63" height="64"/>
-        <image name="orders_press.png" width="63" height="64"/>
-        <image name="passbook.png" width="63" height="64"/>
-        <image name="passbook_press.png" width="63" height="64"/>
-        <image name="profile.png" width="63" height="64"/>
-        <image name="profile_press.png" width="63" height="64"/>
+        <image name="ordersHighlight.png" width="63" height="64"/>
+        <image name="ordersNormal.png" width="63" height="64"/>
+        <image name="passbookHighlight.png" width="63" height="64"/>
+        <image name="passbookNormal.png" width="63" height="64"/>
+        <image name="profileHighlight.png" width="63" height="64"/>
+        <image name="profileNormal.png" width="47" height="47"/>
         <image name="purchased.png" width="93" height="62"/>
         <image name="purchased_selected.png" width="93" height="62"/>
         <image name="red_CouponNormal.png" width="214" height="87"/>
         <image name="red_CouponSelected.png" width="214" height="87"/>
-        <image name="setting.png" width="63" height="64"/>
-        <image name="setting_press.png" width="63" height="64"/>
-        <image name="wishlist.png" width="63" height="64"/>
-        <image name="wishlist_press.png" width="63" height="64"/>
+        <image name="settingHighlight.png" width="63" height="64"/>
+        <image name="settingNormal.png" width="63" height="64"/>
+        <image name="wishlistHighlight.png" width="63" height="64"/>
+        <image name="wishlistNormal.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ltb-0z-8pe"/>

@@ -25,6 +25,7 @@
     NSString* path = GET_COLLECTION;
     NSString* getCollectionPath = [path stringByAppendingPathComponent:[self getUserID]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:getCollectionPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

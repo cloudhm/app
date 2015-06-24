@@ -171,7 +171,7 @@
 
     
     self.goods_title.text = self.goodItem.goodTitle;
-    self.releaseTime.text = self.goodItem.ctime;
+    self.releaseTime.text = [NSString stringWithFormat:@"Release time:%@",self.goodItem.ctime];
     
     
     

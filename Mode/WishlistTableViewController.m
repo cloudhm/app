@@ -21,7 +21,7 @@
 #import "CashViewController.h"
 #import "CollectionItem.h"
 #import "WishlistHeadView.h"
-
+#import "WishlistTableSectionHeaderView.h"
 @interface WishlistTableViewController ()<QBRefreshControlDelegate,WishlistHeadViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *modeCollections;
@@ -93,6 +93,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
+    self.tableView.sectionHeaderHeight = 30;
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
@@ -172,17 +173,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.modeCollections.count;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30.f;
-}
--(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    WishlistTableSectionHeaderView* sectionHeaderView = [WishlistTableSectionHeaderView headerViewWithTableView:tableView];
     if (self.modeCollections.count == 0) {
+        sectionHeaderView.headerString = @"Nothing";
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-        return @"Nothing...";
+    } else {
+        sectionHeaderView.headerString = @"TASTE STUDIO";
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleDefault;
     }
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleDefault;
-    return @"My Favorite";
+    return sectionHeaderView;
 }
+
 #pragma mark -UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* reuseIdentifier = @"Cell";

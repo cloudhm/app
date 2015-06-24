@@ -27,9 +27,14 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager GET:transactionsPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* jsonArr = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSArray* transactionArr = [JsonParser parserAllTransactionByTransactionArr:jsonArr];
-        callback(transactionArr);
+        NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        if (![jsonDic isKindOfClass:[NSDictionary class]]) {//解析出来的字典，如果不是error，系统还是认为是数组
+            NSArray* jsonArr = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+            NSArray* transactionArr = [JsonParser parserAllTransactionByTransactionArr:jsonArr];
+            callback(transactionArr);
+        } else {
+            callback(@(NO));
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request transactions failure:%@",error);
         callback([NSNull null]);

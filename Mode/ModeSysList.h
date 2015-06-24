@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ModeSysList : NSObject<NSCoding>
+@interface ModeSysList : NSObject
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* picLink;
 @property (nonatomic,copy) NSString* tagId;

@@ -37,7 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    [ModeUtils initDatabase];
+#warning 这个数据库表可能废弃，因为没有用户userId
+    [ModeUtils initDatabase];//这个数据库建在哪  目前还不知道  可能因此废弃
     UIScrollView* scrollView = [[UIScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.introScrollView = scrollView;
     self.introScrollView.contentSize = CGSizeMake(self.introScrollView.frame.size.width*self.imageNames.count, self.introScrollView.frame.size.height);

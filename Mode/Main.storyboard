@@ -2401,9 +2401,6 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-XC-60h">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="672"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="H2D-We-fdm" id="Wrr-jP-cRG"/>
                                 </connections>
@@ -2422,11 +2419,11 @@
                                 <exclude reference="j8V-XC-60h"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2cw-nZ-Hog"/>
                                 <exclude reference="27c-g5-bmD"/>
                                 <exclude reference="Osk-aR-NbK"/>
                                 <exclude reference="ZPk-WZ-ttz"/>
                                 <exclude reference="pCl-KB-RXV"/>
-                                <exclude reference="2cw-nZ-Hog"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2434,11 +2431,11 @@
                                 <include reference="j8V-XC-60h"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2cw-nZ-Hog"/>
                                 <include reference="27c-g5-bmD"/>
                                 <include reference="Osk-aR-NbK"/>
                                 <include reference="ZPk-WZ-ttz"/>
                                 <include reference="pCl-KB-RXV"/>
-                                <include reference="2cw-nZ-Hog"/>
                             </mask>
                         </variation>
                     </view>

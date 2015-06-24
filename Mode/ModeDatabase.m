@@ -33,16 +33,16 @@
 //创建表命令
 +(NSString*)createTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@",tableName];
+    if (elements.count == 1) {
+        return [NSString stringWithFormat:@"%@(%@ primary key)",sqlStr,elements[0]];
+    }
     for (int i = 0; i<elements.count; i++) {
         if (i == 0) {
             sqlStr = [NSString stringWithFormat:@"%@(%@ primary key",sqlStr,elements[i]];
         } else if (i == elements.count-1){
-            sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@"%@,%@)",sqlStr,elements[i]];
         } else {
-            sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,elements[i]];
-        }
-        if (elements.count==1) {
-            sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
+            sqlStr = [NSString stringWithFormat:@"%@,%@",sqlStr,elements[i]];
         }
     }
     return sqlStr;
@@ -50,60 +50,53 @@
 //插入表内容 sql语句
 +(NSString*)insertTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"insert into %@",tableName];
+    if (elements.count == 1) {
+        return [NSString stringWithFormat:@"%@(%@) values(%@)",sqlStr,elements[0],@"?"];
+    }
     for (int i = 0 ; i<elements.count; i++) {
         if (i == 0) {
-            sqlStr = [NSString stringWithFormat:@"%@(%@,",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@"%@(%@",sqlStr,elements[i]];
         } else if (i == elements.count-1){
-            sqlStr = [NSString stringWithFormat:@"%@%@)",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@"%@,%@)",sqlStr,elements[i]];
         } else {
-            sqlStr = [NSString stringWithFormat:@"%@%@,",sqlStr,elements[i]];
+            sqlStr = [NSString stringWithFormat:@"%@,%@",sqlStr,elements[i]];
         }
-    }
-    if (elements.count == 1) {
-        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
     }
     for (int i =0 ; i< elements.count; i++) {
         if (i == 0) {
             sqlStr = [NSString stringWithFormat:@"%@ values(%@",sqlStr,@"?"];
         } else if (i == elements.count-1){
-            sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,@"?"];
+            sqlStr = [NSString stringWithFormat:@"%@,%@)",sqlStr,@"?"];
         } else {
-            sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,@"?"];
+            sqlStr = [NSString stringWithFormat:@"%@,%@",sqlStr,@"?"];
         }
-    }
-    if (elements.count == 1) {
-        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
     }
     return sqlStr;
 }
 //替换表内容 sql语句 多了一列type for home_list
 +(NSString*)replaceTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"replace into %@",tableName];
-        for (int i = 0 ; i<elements.count; i++) {
-            if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@(%@",sqlStr,elements[i]];
-            } else if (i == elements.count-1){
-                sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,elements[i]];
-            } else {
-                sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,elements[i]];
-            }
-        }
     if (elements.count == 1) {
-        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
+        return [NSString stringWithFormat:@"%@(%@) values(%@)",sqlStr,elements[0],@"?"];
     }
-        for (int i =0 ; i<elements.count; i++) {
-            if (i == 0) {
-                sqlStr = [NSString stringWithFormat:@"%@ values(%@",sqlStr,@"?"];
-            } else if (i == elements.count-1){
-                sqlStr = [NSString stringWithFormat:@",%@%@)",sqlStr,@"?"];
-            } else {
-                sqlStr = [NSString stringWithFormat:@",%@%@",sqlStr,@"?"];
-            }
+    for (int i = 0 ; i<elements.count; i++) {
+        if (i == 0) {
+            sqlStr = [NSString stringWithFormat:@"%@(%@",sqlStr,elements[i]];
+        } else if (i == elements.count-1){
+            sqlStr = [NSString stringWithFormat:@"%@,%@)",sqlStr,elements[i]];
+        } else {
+            sqlStr = [NSString stringWithFormat:@"%@,%@",sqlStr,elements[i]];
         }
-    if (elements.count == 1) {
-        sqlStr = [NSString stringWithFormat:@"%@)",sqlStr];
     }
-    
+    for (int i =0 ; i<elements.count; i++) {
+        if (i == 0) {
+            sqlStr = [NSString stringWithFormat:@"%@ values(%@",sqlStr,@"?"];
+        } else if (i == elements.count-1){
+            sqlStr = [NSString stringWithFormat:@"%@,%@)",sqlStr,@"?"];
+        } else {
+            sqlStr = [NSString stringWithFormat:@"%@,%@",sqlStr,@"?"];
+        }
+    }
     return sqlStr;
 }
 //查询语句

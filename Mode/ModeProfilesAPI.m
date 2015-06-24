@@ -27,9 +27,15 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager GET:profilesInfoPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        ProfileInfo* profileInfo = [JsonParser parserProfileInfoByDictionary:dictionary];
-        callback(profileInfo);
+        if (![dictionary objectForKey:@"code"]) {
+            ProfileInfo* profileInfo = [JsonParser parserProfileInfoByDictionary:dictionary];
+            callback(profileInfo);
+        } else {
+            callback(@(NO));
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request profileInfo failure:%@",error);
         callback([NSNull null]);

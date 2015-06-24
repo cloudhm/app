@@ -29,9 +29,13 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSMutableArray* runwayArr = [[JsonParser parserRunwayInfoByDictionary:jsonDic]mutableCopy];
-        [runwayArr addObject:params];
-        callback(runwayArr);
+        if (![jsonDic objectForKey:@"code"]) {
+            NSMutableArray* runwayArr = [[JsonParser parserRunwayInfoByDictionary:jsonDic]mutableCopy];
+            [runwayArr addObject:params];
+            callback(runwayArr);
+        } else {
+            callback(@(NO));
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"get_new error:%@",error);
         callback([NSNull null]);

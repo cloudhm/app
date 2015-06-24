@@ -22,7 +22,11 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:passbookPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        
+        if (![dictionary objectForKey:@"code"]) {
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request passbook_list error:%@",error);

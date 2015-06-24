@@ -706,8 +706,8 @@
                                                 <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal" image="hand_unlike_normal.png"/>
-                                        <state key="highlighted" image="hand_unlike_press.png"/>
+                                        <state key="normal" image="handNope.png"/>
+                                        <state key="highlighted" image="handNopeHighlight.png"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Ewn-SR-EEf"/>
@@ -736,8 +736,8 @@
                                                 <variation key="heightClass=regular-widthClass=compact" constant="53"/>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal" image="hand_like_normal.png"/>
-                                        <state key="highlighted" image="hand_like_press.png"/>
+                                        <state key="normal" image="handLike.png"/>
+                                        <state key="highlighted" image="handLikePress.png"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Hcs-iS-uN1"/>
@@ -3082,10 +3082,10 @@
         <image name="feedback_press.png" width="63" height="63"/>
         <image name="finished.png" width="79" height="62"/>
         <image name="finished_selected.png" width="80" height="62"/>
-        <image name="hand_like_normal.png" width="82" height="72"/>
-        <image name="hand_like_press.png" width="82" height="77"/>
-        <image name="hand_unlike_normal.png" width="78" height="72"/>
-        <image name="hand_unlike_press.png" width="80" height="77"/>
+        <image name="handLike.png" width="82" height="72"/>
+        <image name="handLikePress.png" width="82" height="77"/>
+        <image name="handNope.png" width="78" height="72"/>
+        <image name="handNopeHighlight.png" width="80" height="77"/>
         <image name="heart.png" width="64" height="53"/>
         <image name="home.png" width="44" height="50"/>
         <image name="home_Arrow_left" width="19" height="28"/>
@@ -3108,9 +3108,9 @@
         <image name="wishlist_press.png" width="63" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fme-6E-gLw"/>
-        <segue reference="icY-Nh-Kcu"/>
         <segue reference="Ltb-0z-8pe"/>
         <segue reference="yyR-l5-ALd"/>
+        <segue reference="feN-Lw-k7C"/>
+        <segue reference="icY-Nh-Kcu"/>
     </inferredMetricsTieBreakers>
 </document>

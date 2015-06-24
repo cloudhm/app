@@ -111,6 +111,9 @@
     }
     
 }
+-(NSString*)getUserId{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
 //如果上一次未完成分享  会弹出分享视图
 -(void)viewDidAppear:(BOOL)animated{
     if (self.label.text.integerValue >= 9) {

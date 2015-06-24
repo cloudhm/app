@@ -25,7 +25,7 @@
 #define LIKENOPE_TABLENAME @"likenope"
 #define LIKENOPE_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
 
-#define WISHLIST_TABLENAME @"wishlist"
+#define WISHLIST_TABLENAME [@"wishlist" stringByAppendingString:[NSString stringWithFormat:@"%@",[self getUserId]]]
 #define WISHLIST_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
 
 

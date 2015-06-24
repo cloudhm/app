@@ -26,9 +26,14 @@
     [allParams setObject:[self getUserID] forKey:@"userId"];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [self setTimeoutIntervalBy:manager];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        callback(dictionary);
+        if (![dictionary objectForKey:@"code"]) {
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"set_good_feedback-error:%@",error);
     }];

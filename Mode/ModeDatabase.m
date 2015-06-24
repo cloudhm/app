@@ -15,9 +15,7 @@
 +(NSString*)getUserId{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
-+(NSString*)getSQLName{
-    return [[self getUserId]stringByAppendingPathExtension:@"sql"];
-}
+
 //清空表内容 sql语句
 +(NSString*)deleteTableStrWithTableName:(NSString*)tableName{
     return [self deletaTableStrWithTableName:tableName andConditionKey:nil andConditionValue:nil];
@@ -76,6 +74,7 @@
 //替换表内容 sql语句 多了一列type for home_list
 +(NSString*)replaceTableStrWithTableName:(NSString*)tableName andTableElements:(NSArray*)elements{
     NSString* sqlStr = [NSString stringWithFormat:@"replace into %@",tableName];
+    NSLog(@"%@",[NSThread currentThread]);
     if (elements.count == 1) {
         return [NSString stringWithFormat:@"%@(%@) values(%@)",sqlStr,elements[0],@"?"];
     }
@@ -111,7 +110,7 @@
 }
 +(BOOL)deleteTableWithName:(NSString*)tableName andConditionKey:(NSString*)conditionKey andConditionValue:(NSString*)conditionValue{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     NSString* sqlStr = [self deleteTableStrWithTableName:tableName];
     if ([db open]) {
@@ -131,7 +130,7 @@
 //把网络请求回来的秀场数据 存入数据库
 +(void)saveGetNewDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObj:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self deleteTableStrWithTableName:tableName];//只是为了清空原先加载的16张图片数据模型
@@ -191,7 +190,7 @@
 //主页面的数据本地化存储
 +(void)saveSystemListDatabaseIntoTableName:(NSString*)tableName andTableElements:(NSArray*)elements andObject:(id)obj andKeyWord:(NSString*)keyword{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open]) {
         NSString* sqlStr = [self createTableStrWithTableName:tableName andTableElements:elements];
@@ -217,7 +216,7 @@
 }
 +(id)readDatabaseInTableName:(NSString*)tableName andSelectConditionKey:(NSString *)conditionKey andSelectConditionValue:(NSString *)conditionValue{
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open] == NO) {
         NSLog(@"打开失败");
@@ -231,6 +230,7 @@
             NSString* selectedStr = [set stringForColumn:@"menu"];
             NSData* jsonData = [selectedStr dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+            [db close];
             return [dic objectForKey:conditionKey];
         }
     }
@@ -242,7 +242,7 @@
     NSMutableArray* fetchedDatabase = [NSMutableArray array];
     //从本地数据库读取内容
     NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     FMDatabase *db = [FMDatabase databaseWithPath:path];
     if ([db open] == NO) {
         NSLog(@"打开失败");
@@ -326,7 +326,7 @@
 }
 +(BOOL)replaceIntoTable:(NSString*)tableName andTableElements:(NSArray*)elements andInsertContent:(id)obj{
     NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:[self getSQLName]];
+    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sql"];
     NSLog(@"%@",path);
     FMDatabase* db = [FMDatabase databaseWithPath:path];
     if ([db open]) {

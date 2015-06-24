@@ -27,12 +27,7 @@
 @property (strong, nonatomic) NSMutableArray *modeCollections;
 
 @property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
-//@property (weak, nonatomic) IBOutlet UIImageView *brand_img;//用户头像 暂时用系统自定义头像
-//
-//@property (weak, nonatomic) IBOutlet UILabel *following;
-//@property (weak, nonatomic) IBOutlet UILabel *likes;
-//@property (weak, nonatomic) IBOutlet UILabel *invitaions;
-//@property (weak, nonatomic) IBOutlet UILabel *money;
+
 
 @property (weak, nonatomic) IBOutlet WishlistHeadView *headV;
 

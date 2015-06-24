@@ -103,11 +103,11 @@ static NSString *reuseIdentifier=@"MyCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    [self refreshData];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
 
-    
+    [self refreshData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
 }

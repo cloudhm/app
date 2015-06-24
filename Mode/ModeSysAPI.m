@@ -28,18 +28,22 @@
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
-        NSString* jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSNumber* lastUtime = [ModeDatabase readDatabaseInTableName:HOME_LIST_TABLENAME andSelectConditionKey:@"utime" andSelectConditionValue:nil];
-        NSNumber* utime = [dictionary objectForKey:@"utime"];
-        if (utime.integerValue != lastUtime.integerValue) {
-            [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
-            callback(@([ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:jsonStr]));
+        if (![dictionary objectForKey:@"code"]) {
+            NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+            NSString* jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSNumber* lastUtime = [ModeDatabase readDatabaseInTableName:HOME_LIST_TABLENAME andSelectConditionKey:@"utime" andSelectConditionValue:nil];
+            NSNumber* utime = [dictionary objectForKey:@"utime"];
+            if (utime.integerValue != lastUtime.integerValue) {
+                [ModeDatabase deleteTableWithName:HOME_LIST_TABLENAME andConditionKey:nil andConditionValue:nil];
+                callback(@([ModeDatabase replaceIntoTable:HOME_LIST_TABLENAME andTableElements:HOME_LIST_ELEMENTS andInsertContent:jsonStr]));
+            } else {
+                callback(@(NO));
+            }
         } else {
             callback(@(NO));
         }
+       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"menu request fail : %@",error);
         callback([NSNull null]);

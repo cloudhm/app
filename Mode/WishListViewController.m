@@ -341,7 +341,9 @@
     
     
 }
-
+-(NSString*)getUserId{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
 #pragma mark WishlistScrollViewDelegate
 -(void)wishlistScrollView:(WishlistScrollView *)wishlistScrollView didSelectedItemsAtIndex:(NSInteger)index{
     self.goodItem = self.clothes[index];

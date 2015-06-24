@@ -28,11 +28,11 @@
     [self setTimeoutIntervalBy:manager];
     [manager GET:brandInfoPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        if (dictionary != nil) {
+        if (![dictionary objectForKey:@"code"]) {
             BrandInfo* brandInfo = [JsonParser parserBrandInfoByDictionary:dictionary];
             callback(brandInfo);
         } else {
-            callback(NULL);
+            callback(@(NO));
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"request_brand_info_error:%@",error);

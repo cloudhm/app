@@ -231,6 +231,10 @@
 		DBE490511B32A2A900DAA443 /* ModeProfilesAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE490501B32A2A900DAA443 /* ModeProfilesAPI.m */; };
 		DBE490541B32BAF300DAA443 /* ProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE490531B32BAF300DAA443 /* ProfileInfo.m */; };
 		DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */; };
+		DBFAB5C31B3A56DA00C0308B /* handNope.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C21B3A56DA00C0308B /* handNope.png */; };
+		DBFAB5C51B3A571000C0308B /* handNopeHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */; };
+		DBFAB5C71B3A573D00C0308B /* handLike.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C61B3A573D00C0308B /* handLike.png */; };
+		DBFAB5C91B3A576300C0308B /* handLikePress.png in Resources */ = {isa = PBXBuildFile; fileRef = DBFAB5C81B3A576300C0308B /* handLikePress.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -576,6 +580,10 @@
 		DBE490531B32BAF300DAA443 /* ProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInfo.m; sourceTree = "<group>"; };
 		DBF6CB2E1B25270A00FEC1F5 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		DBF6CB2F1B25270A00FEC1F5 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
+		DBFAB5C21B3A56DA00C0308B /* handNope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handNope.png; sourceTree = "<group>"; };
+		DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handNopeHighlight.png; sourceTree = "<group>"; };
+		DBFAB5C61B3A573D00C0308B /* handLike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handLike.png; sourceTree = "<group>"; };
+		DBFAB5C81B3A576300C0308B /* handLikePress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handLikePress.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -800,6 +808,10 @@
 		14080E3E1B31885E00060666 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				DBFAB5C81B3A576300C0308B /* handLikePress.png */,
+				DBFAB5C61B3A573D00C0308B /* handLike.png */,
+				DBFAB5C41B3A571000C0308B /* handNopeHighlight.png */,
+				DBFAB5C21B3A56DA00C0308B /* handNope.png */,
 				DBE3918E1B3A537800B91D85 /* heartRev0.png */,
 				DBE3918C1B3A533800B91D85 /* facebookSmallLogo.png */,
 				DBE3918A1B3A530600B91D85 /* blankPressl.png */,
@@ -1428,15 +1440,18 @@
 				14080E571B31887300060666 /* headPortraitThumbnail.png in Resources */,
 				14080E991B3188A300060666 /* coupon_left_time_box.png in Resources */,
 				14080ED21B3188CB00060666 /* old_secret_login_press.png in Resources */,
+				DBFAB5C91B3A576300C0308B /* handLikePress.png in Resources */,
 				DB69F6DC1B33ADCE00FEE588 /* Icon.png in Resources */,
 				14080E8A1B31889B00060666 /* _hollow.png in Resources */,
 				14080F5E1B318F4B00060666 /* PassbookTableViewCell.xib in Resources */,
 				14080EBC1B3188C200060666 /* _new_secret_name_normal.png in Resources */,
 				14080E741B31888B00060666 /* cash_normal.png in Resources */,
 				14080F0A1B318E4E00060666 /* ShareViewController.xib in Resources */,
+				DBFAB5C71B3A573D00C0308B /* handLike.png in Resources */,
 				14080ED41B3188CB00060666 /* secret_page.png in Resources */,
 				DB69F6E51B33FF8500FEE588 /* viewDetailNormal.png in Resources */,
 				14080E731B31888B00060666 /* cash_enter_the_total_amount.png in Resources */,
+				DBFAB5C51B3A571000C0308B /* handNopeHighlight.png in Resources */,
 				14080E511B31887300060666 /* wishlist_press.png in Resources */,
 				14080EDB1B3188D300060666 /* home_Arrow_right.png in Resources */,
 				14C235DD1B318208006A63F5 /* times.plist in Resources */,
@@ -1471,6 +1486,7 @@
 				14080E9B1B3188A300060666 /* coupon_mode.png in Resources */,
 				14080E4F1B31887300060666 /* passbook_press.png in Resources */,
 				14080EDA1B3188D300060666 /* home_Arrow_left.png in Resources */,
+				DBFAB5C31B3A56DA00C0308B /* handNope.png in Resources */,
 				14080EFD1B318DE300060666 /* OrderTableViewCell.xib in Resources */,
 				14F2B8A51B27AA630047A039 /* FBAudienceNetwork.README.txt in Resources */,
 				14080E311B3187A600060666 /* arrow@2x.png in Resources */,

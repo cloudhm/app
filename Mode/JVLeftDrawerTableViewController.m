@@ -144,7 +144,9 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"JVDrawerCellReuseIdenti
     [self.clothes addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:WISHLIST_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
     self.wishlistCount.text = [NSString stringWithFormat:@"%d",(int)self.clothes.count];
 }
-
+-(NSString*)getUserId{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

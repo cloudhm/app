@@ -111,15 +111,18 @@
             break;
         default:
         {
-//            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"utime"];
-//            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
-//            [[NSUserDefaults standardUserDefaults]synchronize];
+
+            [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
             LoginViewController *lvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
             [AppDelegate globalDelegate].window.rootViewController = lvc;
             
         }
             break;
     }
+}
+-(void)dealloc{
+    NSLog(@"...");
 }
 #pragma mark ConsigneeNameViewControllerDelegate
 -(void)consigneeNameViewController:(ConsigneeNameViewController *)consigneeNameViewController comfirmInputConsigneeName:(NSString *)consigneeName{

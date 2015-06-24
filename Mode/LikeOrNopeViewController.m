@@ -71,8 +71,11 @@
         self.navigationController.interactivePopGestureRecognizer.delegate = nil;
         [self performSegueWithIdentifier:@"gotoWishlistVC" sender:nil];
     } else {
-        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Hi,Friend!" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [av show];
+        TAlertView* alertView = [[TAlertView alloc] initWithTitle:@"Hi,Friend!" andMessage:@"Please choose some your liked fashion goods first"];
+        alertView.tapToClose = YES;
+        [alertView show];
+//        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Hi,Friend!" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [av show];
     }
 }
 //定义导航栏右侧按钮
@@ -203,16 +206,19 @@
     [activityView startAnimating];
     NSDictionary* params = @{@"items":nineGoods,@"text":textContent};
     [ModeWishlistAPI shareWishlistBy:params andCallback:^(id obj) {
+        [activityView stopAnimating];
         if([obj isKindOfClass:[NSNumber class]]) {
-            [activityView stopAnimating];
-            [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
-            self.heartIV.alpha = 1.f;
-            self.label.alpha = 1.f;
-            [self showAlertView];
+            if ([obj boolValue]) {//callback->yes
+                [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
+                self.heartIV.alpha = 1.f;
+                self.label.alpha = 1.f;
+                [self showAlertView];
+            } else {//callback->no
+                [self showAlertViewWithCautionInfo:@"Fail to share,please try again."];
+            }
         } else {
-            [self showAlertViewWithCautionInfo:@"Fail to share,please try again."];
+            [self showAlertViewWithCautionInfo:@"Bad net.Please try again."];
         }
-        
     }];
 }
 
@@ -226,7 +232,7 @@
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
     if (self.tabLabel.text.integerValue>=self.totalNumber) {//用来判断本组是否已经完成
         self.label.text = @"0";
-        [self finishOneSetAndReadyComeback];
+        [self finishOneSetAndReadyComebackWithTitle:@"Nice!" andMessage:@"The set has been finished,whether to continue"];
         return ;
     }
     if (flag) {
@@ -234,9 +240,14 @@
         [self.wishlist removeAllObjects];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"modificationWishlistCount" object:nil userInfo:@{@"wishlistCount":self.label.text}];
         self.navigationController.navigationBar.userInteractionEnabled = YES;
-        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        av.tag = 1;
-        [av show];
+        TAlertView* shareSuccessAlertView = [[TAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" buttons:@[@"OK"] andCallBack:^(TAlertView *alertView, NSInteger buttonIndex) {
+            self.firstCardView.userInteractionEnabled = YES;
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        }];
+        [shareSuccessAlertView show];
+//        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        av.tag = 1;
+//        [av show];
     }
 }
 
@@ -261,82 +272,65 @@
     [appearance setDefaultTitle:@"Error" forAlertViewStyle:TAlertViewStyleError];
     [appearance setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleNeutral];
 }
+
 //完成整组秀场弹出的alertView
--(void)finishOneSetAndReadyComeback{
+-(void)finishOneSetAndReadyComebackWithTitle:(NSString*)title andMessage:(NSString*)message{
     
-    TAlertView* av = [[TAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" buttons:@[@"Back",@"Continue"] andCallBack:^(TAlertView *alertView, NSInteger buttonIndex) {
+    TAlertView* alertView = [[TAlertView alloc]initWithTitle:title message:message buttons:@[@"Back",@"Continue"] andCallBack:^(TAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 0) {
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         } else {
-            NSDictionary* newParams = [self.receiveArr lastObject];
-            [ModeRunwayAPI requestRunwayWithParams:newParams andCallback:^(id obj) {
-                if ([obj isKindOfClass:[NSNull class]]) {
-                    return;
-                }
-                
-                self.receiveArr = obj;
-                NSArray* allItems = obj[1];
-                [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
-                [self createStartIntroduceView];
-                [self.goodItems removeAllObjects];
-                [self.goodItems addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
-                
-                
-                
-                self.number = 1;
-                self.totalNumber = self.goodItems.count;
-                self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
-                [self updateUI];
-                self.view.userInteractionEnabled = YES;
-                [self.view setNeedsDisplay];
-            }];
-            
+            [self requestNewRunway];
         }
-
     }];
-    
-//    UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"The set has been finished,whether to continue" delegate:self cancelButtonTitle:@"Back" otherButtonTitles: @"Continue",nil];
-//    av.tag = 2;
-    [av show];
+    [alertView show];
 }
-
-#pragma mark UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1) {
-        if (buttonIndex == alertView.cancelButtonIndex) {
-            self.firstCardView.userInteractionEnabled = YES;
-        }
-    } else if (alertView.tag == 2) {
-        if (buttonIndex == alertView.cancelButtonIndex) {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            NSDictionary* newParams = [self.receiveArr lastObject];
-            [ModeRunwayAPI requestRunwayWithParams:newParams andCallback:^(id obj) {
-                if ([obj isKindOfClass:[NSNull class]]) {
-                    return;
-                }
-                NSArray* allItems = [obj objectForKey:@"allItems"];
-                self.receiveArr =obj;
-                [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
-                [self createStartIntroduceView];
-                [self.goodItems addObjectsFromArray:allItems];
-                
-                
-                
-                self.number = 1;
-                self.totalNumber = self.goodItems.count;
-                self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
-                [self updateUI];
-                self.view.userInteractionEnabled = YES;
-                [self.view setNeedsDisplay];
+-(void) requestNewRunway {
+    NSDictionary* newParams = [self.receiveArr lastObject];
+    [ModeRunwayAPI requestRunwayWithParams:newParams andCallback:^(id obj) {
+        if ([obj isKindOfClass:[NSNull class]]) {
+            [self finishOneSetAndReadyComebackWithTitle:@"Sorry!" andMessage:@"Cannot connect server.Wether to continue..."];
+        } else if ([obj isKindOfClass:[NSNumber class]]) {
+#warning 这个需要调试一下
+            TAlertView* comebackAlterView = [[TAlertView alloc]initWithTitle:@"Sorry!" message:@"The kind of set has been finished.Please come back tomorrow." buttons:@[@"Back"] andCallBack:^(TAlertView *alertView, NSInteger buttonIndex) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }];
+            [comebackAlterView show];
+        } else if ([obj isKindOfClass:[NSArray class]]) {
+            self.receiveArr = obj;
+            NSArray* allItems = obj[1];
+            [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
+            [self createStartIntroduceView];
+            [self.goodItems removeAllObjects];
+            [self.goodItems addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:LIKENOPE_TABLENAME andSelectConditionKey:nil andSelectConditionValue:nil]];
             
+            self.number = 1;
+            self.totalNumber = self.goodItems.count;
+            self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)self.number,(int)self.totalNumber];
+            [self updateUI];
+            self.view.userInteractionEnabled = YES;
+            [self.view setNeedsDisplay];
         }
         
-        
-    }
-    self.navigationItem.rightBarButtonItem.enabled = YES;
+    }];
 }
+//#pragma mark UIAlertViewDelegate
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    if (alertView.tag == 1) {
+//        if (buttonIndex == alertView.cancelButtonIndex) {
+//            self.firstCardView.userInteractionEnabled = YES;
+//        }
+//    } else if (alertView.tag == 2) {
+//        if (buttonIndex == alertView.cancelButtonIndex) {
+//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//        } else {
+//            [self requestNewRunway];
+//        }
+//        
+//        
+//    }
+//    self.navigationItem.rightBarButtonItem.enabled = YES;
+//}
 
 #pragma mark UpdateUI
 -(void)updateUI{
@@ -394,7 +388,7 @@
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
-            NSLog(@"nope:%@",[obj objectForKey:@"status"]);
+            //do nothing here.
         }];
         // remove nope goods-Image from Disk
         [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.defaultImage lastPathComponent] fromDisk:YES];
@@ -403,13 +397,7 @@
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
-            NSNumber* num = (NSNumber*)obj;
-            BOOL b = [num boolValue];
-            if (b) {
-                NSLog(@"send success");
-            } else {
-                NSLog(@"send failure");
-            }
+            //do nothing here.
         }];
         [self.wishlist addObject:self.currentCloth];
         //判断移动方向为右则添加进数组
@@ -440,7 +428,7 @@
     }
     if(!self.anotherFlag) {
         if (self.number>self.totalNumber) {
-            [self finishOneSetAndReadyComeback];
+            [self finishOneSetAndReadyComebackWithTitle:@"Nice!" andMessage:@"The set has been finished,whether to continue"];
         }
     } else {
         self.anotherFlag = NO;

@@ -195,12 +195,14 @@ static NSString* reusedIdentifier = @"MyCell";
 -(void)getTransactionArr{
     [ModeTransactionsAPI requestTransactionsAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];
-        if (![obj isKindOfClass:[NSNull class]]) {
+        if ([obj isKindOfClass:[NSArray class]]) {
             [self.allData removeAllObjects];
             [self.allData addObjectsFromArray:obj];
             [self.cashTableView reloadData];
-        } else {
+        } else if ([obj isKindOfClass:[NSNull class]]){
             [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
+        } else if ([obj isKindOfClass:[NSNumber class]]){
+            [self showAlertViewWithErrorInfo:@"Query failure.Please try it again."];
         }
     }];
 }

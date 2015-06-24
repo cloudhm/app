@@ -79,7 +79,7 @@
     [self setTimeoutIntervalBy:manager];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        if (![dictionary objectForKey:@"code"]) {
+        if (![dictionary objectForKey:@"code"]) {//服务器成功收到
             callback(@(YES));
         } else {
             callback(@(NO));

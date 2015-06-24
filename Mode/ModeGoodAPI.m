@@ -36,6 +36,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"set_good_feedback-error:%@",error);
+        callback([NSNull null]);
     }];
 }
 

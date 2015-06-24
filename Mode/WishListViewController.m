@@ -11,8 +11,6 @@
 #import "WishlistScrollView.h"
 #import <FMDB.h>
 #import "WishlistView.h"
-#import "ModeGoodAPI.h"
-
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
 #import "ColorView.h"

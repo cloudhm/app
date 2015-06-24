@@ -379,12 +379,18 @@
 -(void)enterHostView{
     dispatch_async(dispatch_get_main_queue(), ^{
         JVFloatingDrawerViewController*jvc =[AppDelegate globalDelegate].drawerViewController;
-        [[AppDelegate globalDelegate]configureDrawerViewController];
+//        [[AppDelegate globalDelegate]configureDrawerViewController];
         [AppDelegate globalDelegate].window.rootViewController = jvc;
     }) ;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [AppDelegate globalDelegate].drawerViewController = nil;
+    [AppDelegate globalDelegate].leftDrawerViewController = nil;
+    [AppDelegate globalDelegate].homeViewController = nil;
+    [AppDelegate globalDelegate].drawerAnimator = nil;
 
+}
 
 
 @end

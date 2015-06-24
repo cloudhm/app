@@ -203,7 +203,7 @@
     [activityView startAnimating];
     NSDictionary* params = @{@"items":nineGoods,@"text":textContent};
     [ModeWishlistAPI shareWishlistBy:params andCallback:^(id obj) {
-        if(obj == nil) {
+        if([obj isKindOfClass:[NSNumber class]]) {
             [activityView stopAnimating];
             [self.navigationController dismissPopupViewControllerAnimated:YES completion:nil];
             self.heartIV.alpha = 1.f;
@@ -403,9 +403,13 @@
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
         [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId} andCallback:^(id obj) {
-            if ([[obj objectForKey:@"status"]isEqualToString:@"success"]) {
-                NSLog(@"like:%@",[obj objectForKey:@"status"]);
-            };
+            NSNumber* num = (NSNumber*)obj;
+            BOOL b = [num boolValue];
+            if (b) {
+                NSLog(@"send success");
+            } else {
+                NSLog(@"send failure");
+            }
         }];
         [self.wishlist addObject:self.currentCloth];
         //判断移动方向为右则添加进数组

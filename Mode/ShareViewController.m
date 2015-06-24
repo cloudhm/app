@@ -62,8 +62,8 @@
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
-    UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"图片保存完成" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alertView show];
+//    UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"图片保存完成" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//    [alertView show];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];

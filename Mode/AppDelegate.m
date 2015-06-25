@@ -13,6 +13,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "Flurry.h"
+#import <AdSupport/AdSupport.h>
+#import <StoreKit/StoreKit.h>
 
 
 static NSString * const kJVDrawersStoryboardName = @"Main";
@@ -53,21 +55,56 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
     }
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-
-//    // 友盟统计接口对接
-//    //将startWithAppkey:@"xxxxxxxxxxxxxxx"中的xxxxxxxxxxxxxxx替换为您在友盟后台申请的应用Appkey
-//    //将channelId:@"Web" 中的Web 替换为您应用的推广渠道。channelId为nil或@""时，默认会被当作@"App Store"渠道。
-//    //数据发送策略包括BATCH（启动时发送）和SEND_INTERVAL（按间隔发送）两种
-//    [MobClick startWithAppkey:@"558008cc67e58e9e3b0010e8" reportPolicy:BATCH channelId:@"Web"];
-//    
-//    //友盟SDK为了兼容Xcode3的工程，默认取的是Build号，如果需要取Xcode4及以上版本的Version，可以使用下面的方法；
-//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-//    [MobClick setAppVersion:version];
-//
-    
     
     // flurry 统计接口对接
     [Flurry startSession:@"YHN5SMSMQTNTNKB54MHS"];
+    
+    
+    // appsflyer 实现应用用户跟踪
+    // 获得APPid必须先去apple developer上的iTunes connect 添加一个新的应用 然后获取它的id 测试用
+    [AppsFlyerTracker sharedTracker].appleAppID = @"1012183628";
+    
+    [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"SBmwGxPPexfY2Y7wHaGz2g";
+    
+    // 获取广告标示符
+        NSString *IDFA = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+        NSLog(@"%@",IDFA);
+    
+    // 设置货币代码
+    [AppsFlyerTracker sharedTracker].currencyCode = @"";
+    
+    // 设置自定义用户id(高级)
+    [AppsFlyerTracker sharedTracker].customerUserID = @"";
+    
+    //设置 HTTP (高级)
+    // AppsFlyer SDK 通过 HTTPS 与其服务器沟通。如果您选择禁止 HTTPS(不建议),您可以设置 isHTTPS 属性 至 NO。默认值为 YES:。
+    [AppsFlyerTracker sharedTracker].isHTTPS = YES;
+    
+    //获得 AppsFlyer 专有设备 ID。AppsFlyer 设备 ID 是报告和 API 中 AppsFlyer 使用的主要 ID
+    NSString *appsFlyerID = [[AppsFlyerTracker sharedTracker] getAppsFlyerUID];
+    NSLog(@"appsFlyerID is %@",appsFlyerID);
+    
+    //    AppsFlyer 为您提供一种从 AppsFlyer 分析选择排除特定用户的方法。
+    //    该方法满足最新的隐私要求,并符合 Facebook 数据和隐私政策。
+    //     默认是否(NO),是指默认情况下启用跟踪。
+    [AppsFlyerTracker sharedTracker].deviceTrackingDisabled = YES;
+    
+    //    只有您的项目中存在AdSupport.framework库时,AF SDK才会收集IDFA。不需要明确选择进入或退出。然而,
+    //    如果您想明确选择排除 IDFA,在第 5 节中的 SDK 初始化期间,请使用以下 API:
+    //除非另有指示,不建议使用。
+    //     [AppsFlyerTracker sharedTracker].disableAppleAdSupportTracking = YES;
+    
+    //    在测试情况下,我们建议设置 useReceiptValidationSandbox 标记至 YES,由于这将重新将请求导入至 Apple 沙箱服务器(Apple sandbox servers)。
+    [AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
+    
+    //AppsFlyer SDK 可以提供应用内购买服务器验证。设定购买收据验证,您需要调用 SKstoreKit 的 completeTransaction:callback 中的 validateAndTrackInAppPurchase 方法。该调用将自动产生“af_purchase” 应用内事件
+//    [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:@"" eventNameIfFailed:@"" withValue:@"" withProduct:@"" price:nil currency:@"" success:^(NSDictionary *response) {
+//        
+//    } failure:^(NSError *error, id reponse) {
+//        
+//    }];
+//    
+
     
     
     // Facebook的登录分享
@@ -94,7 +131,7 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
 // 注册推送成功返回Token
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"%s__%d__| Token = %@", __FUNCTION__, __LINE__, [[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""]);
+//    NSLog(@"%s__%d__| Token = %@", __FUNCTION__, __LINE__, [[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""]);
     
 //    NSLog(@"%@", deviceToken);
 }
@@ -103,7 +140,7 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
 // 注册通知失败
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"%s__%d__| ,Error = %@", __FUNCTION__, __LINE__, [error description]);
+//    NSLog(@"%s__%d__| ,Error = %@", __FUNCTION__, __LINE__, [error description]);
     
 }
 // 推送
@@ -144,7 +181,67 @@ static NSString * const kJVLeftDrawerStoryboardID = @"JVLeftDrawerTableViewContr
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     [FBSDKAppEvents activateApp];
+    
+    
+    // load the conversion data
+    [AppsFlyerTracker sharedTracker].delegate = self;
+    
+    // track launch 这个 API 可以启用 AppsFlyer,从而检测到安装、会话(应用程序打开)和更新
+    // 安装事件(启用跟踪的最低要求 – 强制)
+    [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+    
 }
+
+//跟踪忠实用户如何发现您的应用程序并将它们归因于特定的活动/来源
+//- eventName 是定义事件名称的任何字符串。您可以在附录 A 中查看推荐常用事件名称列表。
+//- values 是含有富事件的时间参数库。您可以在附录 A 中查看推荐参数列表。
+- (void) trackEvent:(NSString *)eventName withValues:(NSDictionary*)values{
+    
+    //示例 1: 单一产品的“添加至购物车”(af_add_to_cart)值为 9.99 USD,content_id “234234” 且类型为 “category_a”:
+    [[AppsFlyerTracker sharedTracker] trackEvent:AFEventAddToCart withValues:@{
+                                                                               AFEventParamPrice: @9.99,
+                                                                               AFEventParamContentType : @"category_a",
+                                                                               AFEventParamContentId: @"234234",
+                                                                               AFEventParamCurrency : @"USD",
+                                                                               AFEventParamQuantity : @1
+                                                                               }];
+    
+}
+
+
+
+
+
+
+#pragma mark - appsflyer 实现应用用户跟踪
+-(void)onConversionDataReceived:(NSDictionary*) installData {
+    
+    id status = [installData objectForKey:@"af_status"];
+    
+    if([status isEqualToString:@"Non-organic"]) {
+        
+        id sourceID = [installData objectForKey:@"media_source"];
+        
+        id campaign = [installData objectForKey:@"campaign"];
+        
+        NSLog(@"This is a none organic install. Media source: %@  Campaign: %@",sourceID,campaign);
+        
+    } else if([status isEqualToString:@"Organic"]) {
+        
+        NSLog(@"This is an organic install.");
+        
+    }
+    
+}
+
+
+-(void)onConversionDataRequestFailure:(NSError *) error {
+    
+    NSLog(@"%@",error);
+    
+}
+
+
 
 
 

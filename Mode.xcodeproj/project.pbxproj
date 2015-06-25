@@ -153,6 +153,8 @@
 		14080F741B318F9D00060666 /* OccasionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F6D1B318F9D00060666 /* OccasionCollectionViewCell.m */; };
 		14080F751B318F9D00060666 /* BrandCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F6F1B318F9D00060666 /* BrandCollectionViewCell.m */; };
 		14080F761B318F9E00060666 /* StyleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14080F711B318F9D00060666 /* StyleCollectionViewCell.m */; };
+		142424141B3C0EC000DE25F4 /* libAppsFlyerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142424131B3C0EC000DE25F4 /* libAppsFlyerLib.a */; };
+		142424161B3C0ED800DE25F4 /* FacebookSDKStrings.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 142424151B3C0ED800DE25F4 /* FacebookSDKStrings.bundle */; };
 		14C235CF1B311604006A63F5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C235CE1B311604006A63F5 /* CFNetwork.framework */; };
 		14C235D11B311620006A63F5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C235D01B311620006A63F5 /* libz.dylib */; };
 		14C235D31B31164C006A63F5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C235D21B31164C006A63F5 /* SystemConfiguration.framework */; };
@@ -172,8 +174,6 @@
 		14F2B8AF1B27AD240047A039 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8AE1B27AD240047A039 /* StoreKit.framework */; };
 		14F2B8B11B27AD390047A039 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B01B27AD390047A039 /* CoreMotion.framework */; };
 		14F2B8B31B27AD460047A039 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B21B27AD460047A039 /* CoreTelephony.framework */; };
-		14F2B8B51B27AD750047A039 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B41B27AD750047A039 /* Bolts.framework */; };
-		14F2B8B71B27ADCC0047A039 /* FacebookSDKStrings.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F2B8B61B27ADCC0047A039 /* FacebookSDKStrings.bundle */; };
 		AA9827CDCB6C528EADAAF092 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B79F925EE1658CDFB122AC77 /* libPods.a */; };
 		DB0CA3F81B327FC800611C82 /* red_CouponNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0CA3F61B327FC800611C82 /* red_CouponNormal.png */; };
 		DB0CA3F91B327FC800611C82 /* red_CouponSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0CA3F71B327FC800611C82 /* red_CouponSelected.png */; };
@@ -460,6 +460,11 @@
 		14080F6F1B318F9D00060666 /* BrandCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandCollectionViewCell.m; sourceTree = "<group>"; };
 		14080F701B318F9D00060666 /* StyleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleCollectionViewCell.h; sourceTree = "<group>"; };
 		14080F711B318F9D00060666 /* StyleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleCollectionViewCell.m; sourceTree = "<group>"; };
+		1424240E1B3C0A6F00DE25F4 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = "../Company/调研/Facebook分享和登陆/FacebookSDK/FacebookSDKStrings.bundle"; sourceTree = "<group>"; };
+		142424101B3C0ABA00DE25F4 /* libAppsFlyerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppsFlyerLib.a; path = "../Company/调研/appsflyer 应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1/libAppsFlyerLib.a"; sourceTree = "<group>"; };
+		142424121B3C0AFF00DE25F4 /* AppsFlyerTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsFlyerTracker.h; sourceTree = "<group>"; };
+		142424131B3C0EC000DE25F4 /* libAppsFlyerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppsFlyerLib.a; path = "../../Company/调研/appsflyer 应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1/libAppsFlyerLib.a"; sourceTree = "<group>"; };
+		142424151B3C0ED800DE25F4 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = "../../Company/调研/Facebook分享和登陆/FacebookSDK/FacebookSDKStrings.bundle"; sourceTree = "<group>"; };
 		14C235CE1B311604006A63F5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		14C235D01B311620006A63F5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		14C235D21B31164C006A63F5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -591,15 +596,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142424161B3C0ED800DE25F4 /* FacebookSDKStrings.bundle in Frameworks */,
+				142424141B3C0EC000DE25F4 /* libAppsFlyerLib.a in Frameworks */,
+				14F2B8AD1B27AD170047A039 /* AdSupport.framework in Frameworks */,
 				14C235D31B31164C006A63F5 /* SystemConfiguration.framework in Frameworks */,
 				14C235D11B311620006A63F5 /* libz.dylib in Frameworks */,
 				14C235CF1B311604006A63F5 /* CFNetwork.framework in Frameworks */,
 				14F2B8B31B27AD460047A039 /* CoreTelephony.framework in Frameworks */,
-				14F2B8B71B27ADCC0047A039 /* FacebookSDKStrings.bundle in Frameworks */,
-				14F2B8B51B27AD750047A039 /* Bolts.framework in Frameworks */,
 				14F2B8B11B27AD390047A039 /* CoreMotion.framework in Frameworks */,
 				14F2B8AF1B27AD240047A039 /* StoreKit.framework in Frameworks */,
-				14F2B8AD1B27AD170047A039 /* AdSupport.framework in Frameworks */,
 				14F2B8A91B27AA630047A039 /* FBSDKShareKit.framework in Frameworks */,
 				14C235DA1B316560006A63F5 /* libFlurry_6.4.0.a in Frameworks */,
 				14F2B8A61B27AA630047A039 /* FBSDKCoreKit.framework in Frameworks */,
@@ -972,6 +977,10 @@
 		5E56E6E1700A36FF63B3092B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				142424151B3C0ED800DE25F4 /* FacebookSDKStrings.bundle */,
+				142424131B3C0EC000DE25F4 /* libAppsFlyerLib.a */,
+				142424101B3C0ABA00DE25F4 /* libAppsFlyerLib.a */,
+				1424240E1B3C0A6F00DE25F4 /* FacebookSDKStrings.bundle */,
 				14C235D21B31164C006A63F5 /* SystemConfiguration.framework */,
 				14C235D01B311620006A63F5 /* libz.dylib */,
 				14C235CE1B311604006A63F5 /* CFNetwork.framework */,
@@ -1059,6 +1068,7 @@
 				14080E221B31848B00060666 /* Main.storyboard */,
 				DB17B67B1B0EC59400D43B9F /* AppDelegate.h */,
 				DB17B67C1B0EC59400D43B9F /* AppDelegate.m */,
+				142424121B3C0AFF00DE25F4 /* AppsFlyerTracker.h */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -1779,6 +1789,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mode/UMAnalytics_Sdk_3.5.8",
 					"$(PROJECT_DIR)/Mode/Flurry",
+					"/Users/wuyao/Desktop/Company/调研/appsflyer",
+					"应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1",
+					"/Users/wuyao/Desktop/Company/调研/appsflyer",
+					"应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1804,6 +1818,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Mode/UMAnalytics_Sdk_3.5.8",
 					"$(PROJECT_DIR)/Mode/Flurry",
+					"/Users/wuyao/Desktop/Company/调研/appsflyer",
+					"应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1",
+					"/Users/wuyao/Desktop/Company/调研/appsflyer",
+					"应用程序跟踪报告/AF-iOS-SDK-v2.5.3.15.1",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

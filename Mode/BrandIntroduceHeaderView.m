@@ -58,6 +58,7 @@
     self.brandImageView.layer.cornerRadius = CGRectGetWidth(self.brandImageView.bounds)/2;
     self.brandImageView.layer.borderWidth = 1.f;
     self.brandImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.brandImageView.layer.masksToBounds = YES;
     [self.brandImageView sd_setImageWithURL:[NSURL URLWithString:self.brandInfo.brandLogo] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [[SDImageCache sharedImageCache]storeImage:image forKey:[self.brandInfo.brandLogo lastPathComponent] toDisk:YES];
     }];

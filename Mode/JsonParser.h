@@ -8,7 +8,7 @@
 
 //数据模型类JSON解析
 #import <Foundation/Foundation.h>
-@class ModeSysList,ModeWishlist,ModeBrandRunway,ProfileInfo,BrandInfo;
+@class ModeSysList,ModeWishlist,ModeBrandRunway,ProfileInfo,BrandInfo,CollectionInfo;
 @interface JsonParser : NSObject
 
 //主页面SYS_LIST
@@ -33,4 +33,6 @@
 +(BrandInfo*)parserBrandInfoByDictionary:(NSDictionary*)dictionary;
 
 +(NSArray*)parserMenuListByArray:(NSArray*)array;
+
++(CollectionInfo*)parserCollectionInfoByDictionary:(NSDictionary*)dictionary;
 @end

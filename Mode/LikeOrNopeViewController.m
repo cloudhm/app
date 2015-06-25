@@ -82,7 +82,7 @@
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
-    bgIV.image = [UIImage imageNamed:@"heart.png"];
+    bgIV.image = [UIImage imageNamed:@"heartRev0.png"];
     self.heartIV = bgIV;
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
     l.textAlignment = NSTextAlignmentCenter;
@@ -158,6 +158,7 @@
 }
 //开场遮盖
 -(void)createStartIntroduceView{
+    self.navigationItem.rightBarButtonItem.enabled = YES;//弹出九宫格  打开导航栏右上的跳转按钮交互
     if (!self.startIntroduceView) {
         self.startIntroduceView = [[UIView alloc]initWithFrame:self.navigationController.view.bounds];
         self.startIntroduceView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
@@ -232,7 +233,9 @@
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
     if (self.tabLabel.text.integerValue>=self.totalNumber) {//用来判断本组是否已经完成
         self.label.text = @"0";
+        [self.wishlist removeAllObjects];
         [self finishOneSetAndReadyComebackWithTitle:@"Nice!" andMessage:@"The set has been finished,whether to continue"];
+        
         return ;
     }
     if (flag) {
@@ -368,21 +371,22 @@
 - (void)view:(UIView *)view wasChosenWithDirection:(MDCSwipeDirection)direction {
     self.number++;
     self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?self.totalNumber:self.number),(int)self.totalNumber];
-#warning like or nope feedback interface params need to modify
+
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
-            //do nothing here.
-        }];
+#warning 接口不对
+//        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
+//            //do nothing here.
+//        }];
         // remove nope goods-Image from Disk
         [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.defaultImage lastPathComponent] fromDisk:YES];
         
     } else {
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
-        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
-            //do nothing here.
-        }];
+//        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"true"} andCallback:^(id obj) {
+//            //do nothing here.
+//        }];
         [self.wishlist addObject:self.currentCloth];
         //判断移动方向为右则添加进数组
         int count = self.label.text.intValue;

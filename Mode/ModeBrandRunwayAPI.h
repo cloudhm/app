@@ -11,6 +11,8 @@ typedef void (^MyCallback)(id obj);
 @interface ModeBrandRunwayAPI : NSObject
 //获取品牌信息
 +(void)requestBrandInfoByBrandId:(NSNumber*)brandId andCallback:(MyCallback)callback;
-
-#warning 缺秀场入口
+//选择是否fellow品牌
++(void)setBrandFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
+//用户喜欢的品牌
++(void)requestBrandListOfUserFellowAndCallback:(MyCallback)callback;
 @end

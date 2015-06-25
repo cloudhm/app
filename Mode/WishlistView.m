@@ -28,10 +28,10 @@
             [self createDelBtn];
         }
 
-        if (![_goodItem.hasCoupon isEqualToString:@"true"]) {
-            self.couponImageView.alpha = 0.f;
-        } else {
+        if (_goodItem.ifCoupon.boolValue) {
             self.couponImageView.alpha = 1.f;
+        } else {
+            self.couponImageView.alpha = 0.f;
         }
         self.delBtn.enabled = NO;
         self.delBtn.alpha = 0.f;

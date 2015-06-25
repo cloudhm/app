@@ -14,6 +14,7 @@
 #import "UIColor+HexString.h"
 #import "LikeOrNopeViewController.h"
 #import "TAlertView.h"
+
 @interface BrandRunwayTableViewController ()
 
 
@@ -74,13 +75,18 @@
     [self createToolbar];
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
+    
+    [ModeBrandRunwayAPI requestBrandListOfUserFellowAndCallback:^(id obj) {
+        NSLog(@"%@",obj);
+    }];
+    
 }
 #pragma mark navigationItem.leftBarButtonItem Action
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)getBrandInfo{
-    [ModeBrandRunwayAPI requestBrandInfoByBrandId:@(1) andCallback:^(id obj) {
+    [ModeBrandRunwayAPI requestBrandInfoByBrandId:self.brandId andCallback:^(id obj) {
         if ([obj isKindOfClass:[NSNull class]]) {
             [self showAlertViewWithCautionInfo:@"Try refresh it again."];
         } else {
@@ -141,15 +147,15 @@
     
     self.toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, self.navigationController.view.bounds.size.height, self.view.bounds.size.width, 50)];
     UIView *v = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width/2-70.f, 40.f)];//添加的
-    self.toolbarBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2-45.f, 5.f, 40.f, 40.f)];
+    self.toolbarBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2-30.f, 5.f, 40.f, 40.f)];
     [self.toolbarBtn setImage:[UIImage imageNamed:@"_hollow.png"] forState:UIControlStateNormal];
     [self.toolbarBtn setImage:[UIImage imageNamed:@"_solid.png"] forState:UIControlStateSelected];
     self.toolbarBtn.backgroundColor = [UIColor clearColor];
     [self.toolbarBtn addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.toolbarLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2+5.f, 5, 100, 40)];
+    self.toolbarLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2+10.f, 5, 100, 40)];
     self.toolbarLabel.font = [UIFont systemFontOfSize:20];
-    self.toolbarLabel.textAlignment = NSTextAlignmentCenter;
+    self.toolbarLabel.textAlignment = NSTextAlignmentLeft;
     self.toolbarLabel.textColor = [UIColor redColor];
     self.toolbarLabel.text = @"0";
     UIBarButtonItem* otherv =[[UIBarButtonItem alloc]initWithCustomView:v];
@@ -167,10 +173,16 @@
     [btn setSelected:!btn.selected];
     NSInteger i = self.toolbarLabel.text.integerValue;
     if (btn.selected) {
-        self.toolbarLabel.text = [NSString stringWithFormat:@"%ld",++i];
+        i++;
+        self.toolbarLabel.text = [NSString stringWithFormat:@"%d",i];
     } else {
-        self.toolbarLabel.text = [NSString stringWithFormat:@"%ld",--i];
+        i--;
+        self.toolbarLabel.text = [NSString stringWithFormat:@"%d",i];
     }
+    NSString* likeNope = (btn.selected == YES?@"true":@"false");
+    [ModeBrandRunwayAPI setBrandFeedbackWithParams:@{@"brandId":self.brandId,@"like":likeNope} andCallback:^(id obj) {
+        //do nothing here.
+    }];
 }
 
 #pragma mark UITableViewDelegate

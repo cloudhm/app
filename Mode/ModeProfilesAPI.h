@@ -11,4 +11,5 @@
 typedef void (^MyCallback)(id obj);
 @interface ModeProfilesAPI : NSObject
 +(void)requestProfilesAndCallback:(MyCallback)callback;
++(void)requestEnchashmentWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;//用户提现
 @end

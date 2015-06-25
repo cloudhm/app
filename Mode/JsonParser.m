@@ -18,6 +18,7 @@
 #import "GoodItem.h"
 #import "Runway.h"
 #import "BrandInfo.h"
+#import "CollectionInfo.h"
 @implementation JsonParser
 
 #pragma mark TIME-CONVERT
@@ -72,9 +73,13 @@
     ModeSysList* sysList = [[ModeSysList alloc]init];
     sysList.name = subArray[0];
     sysList.picLink = subArray[1];
-    if ([sysList.picLink isKindOfClass:[NSNull class]]) {
+    if ([sysList.picLink isKindOfClass:[NSNull class]]||sysList.picLink == nil) {
         sysList.picLink = @"";
     }
+//    sysList.brandId = subArray[2];
+//    if ([sysList.brandId isKindOfClass:[NSNull class]]||sysList.brandId == nil) {
+//        sysList.brandId = @"";
+//    }
     return sysList;
 }
 #pragma mark PROFILE_INFO
@@ -98,7 +103,7 @@
     profileInfo.orders = [dictionary objectForKey:@"orders"];
     profileInfo.inviteBy = [dictionary objectForKey:@"inviteBy"];
     profileInfo.inviteCode = [dictionary objectForKey:@"inviteCode"];
-    profileInfo.username = [dictionary objectForKey:@"username"];
+    profileInfo.nickname = [dictionary objectForKey:@"nickname"];
     profileInfo.countryCode = [self stringObjectForKey:@"countryCode" byDictionary:dictionary];
     profileInfo.longitude = [self numberObjectForKey:@"longitude" byDictionary:dictionary];
     profileInfo.latitude = [self numberObjectForKey:@"latitude" byDictionary:dictionary];
@@ -106,7 +111,7 @@
     profileInfo.shares = [dictionary objectForKey:@"shares"];
     profileInfo.avatar = [dictionary objectForKey:@"avatar"];
     profileInfo.fbToken = [dictionary objectForKey:@"fbToken"];
-    
+    profileInfo.email = [self stringObjectForKey:@"email" byDictionary:dictionary];
     return profileInfo;
 }
 #pragma mark TRANSACTIONS
@@ -133,41 +138,7 @@
     transaction.status = [self numberObjectForKey:@"status" byDictionary:dictionary];
     return transaction;
 }
-//#pragma mark 
-//
-//+(GoodInfo*)parserGoodInfoByDictionary:(NSDictionary*)dictionary{
-//    GoodInfo* goodInfo = [[GoodInfo alloc]init];
-//    
-//    goodInfo.brand_id = [dictionary objectForKey:@"brand_id"];
-//    goodInfo.brand_name = [dictionary objectForKey:@"brand_name"];
-//    goodInfo.goods_id = [dictionary objectForKey:@"goods_id"];
-//    goodInfo.goods_title = [dictionary objectForKey:@"goods_title"];
-//    goodInfo.has_coupon = [dictionary objectForKey:@"has_coupon"];
-//    goodInfo.img_link = [dictionary objectForKey:@"img_link"];
-//    goodInfo.last_time = [dictionary objectForKey:@"last_time"];
-//    goodInfo.goods_price = [dictionary objectForKey:@"price"];
-//    goodInfo.goods_color = [dictionary objectForKey:@"color"];
-//    goodInfo.goods_size = [dictionary objectForKey:@"size"];
-//    goodInfo.img_detail_link = [dictionary objectForKey:@"img_detail_link"];
-//    goodInfo.ctime = [dictionary objectForKey:@"ctime"];
-//    goodInfo.ctime=[self getRelativeTimeBySeconds:goodInfo.ctime];
-//    if ([goodInfo.has_coupon isEqualToString:@"Y"]) {
-//        NSDictionary* couponDic = [dictionary objectForKey:@"coupon"];
-//        goodInfo.coupon = [self parserCouponByDictionary:couponDic];
-//    } else {
-//        goodInfo.coupon = nil;
-//    }
-//    return goodInfo;
-//}
-//+(Coupon*)parserCouponByDictionary:(NSDictionary*)dictionary{
-//    Coupon* coupon = [[Coupon alloc]init];
-//    coupon.amount = [dictionary objectForKey:@"amount"];
-//    coupon.coupon = [dictionary objectForKey:@"coupon"];
-//    coupon.coupon_id = [dictionary objectForKey:@"coupon_id"];
-//    coupon.expired_time = [dictionary objectForKey:@"expired_time"];
-//    coupon.left_amount = [dictionary objectForKey:@"left_amount"];
-//    return coupon;
-//}
+
 #pragma mark Collection－List
 +(NSArray*)parserModeCollectionArrBy:(NSArray*)array{
     NSMutableArray* array1 = [NSMutableArray array];
@@ -218,13 +189,13 @@
     goodItem.style = [self stringObjectForKey:@"style" byDictionary:dictionary];
     goodItem.defaultThumb = [dictionary objectForKey:@"defaultThumb"];
     goodItem.productLink = [self stringObjectForKey:@"productLink" byDictionary:dictionary];
-    goodItem.goodTitle = [self stringObjectForKey:@"goodTitle" byDictionary:dictionary];
+    goodItem.goodTitle = [self stringObjectForKey:@"title" byDictionary:dictionary];
     goodItem.brandId = [self numberObjectForKey:@"brandId" byDictionary:dictionary];
     goodItem.occasion = [self stringObjectForKey:@"occasion" byDictionary:dictionary];
     goodItem.status = [dictionary objectForKey:@"status"];
-    goodItem.goodDescription = [self stringObjectForKey:@"goodDescription" byDictionary:dictionary];
-    //以下两个自己设的
-    goodItem.hasCoupon = @"true";//自己设的
+    goodItem.goodDescription = [self stringObjectForKey:@"description" byDictionary:dictionary];
+    goodItem.ifCoupon = [self numberObjectForKey:@"ifCoupon" byDictionary:dictionary];
+    //以下一个自己设的
     goodItem.hasSelected = @(0);
     return goodItem;
 }
@@ -237,7 +208,10 @@
     runway.status = [self numberObjectForKey:@"status" byDictionary:dictionary];
     runway.source = [self stringObjectForKey:@"source" byDictionary:dictionary];
     runway.runwayDescription = [self stringObjectForKey:@"description" byDictionary:dictionary];
-    runway.runwayTitle = [dictionary objectForKey:@"title"];
+    runway.runwayTitle = [self stringObjectForKey:@"title" byDictionary:dictionary];
+    runway.ctime = [dictionary objectForKey:@"ctime"];
+    runway.runwayId = [dictionary objectForKey:@"runwayId"];
+    runway.utime = [dictionary objectForKey:@"utime"];
     return runway;
 }
 +(NSArray*)parserRunwayInfoByDictionary:(NSDictionary*)dictionary{
@@ -246,6 +220,9 @@
     NSMutableArray* goodItems = [NSMutableArray array];
     NSArray* goodItemDics = [dictionary objectForKey:@"items"];
     for (NSDictionary* goodItemDic in goodItemDics) {
+        if ([goodItemDic isKindOfClass:[NSNull class]]) {
+            continue;
+        }
         GoodItem* goodItem = [self parserGoodItemByDictionary:goodItemDic];
         [goodItems addObject:goodItem];
     }
@@ -259,15 +236,34 @@
     brandInfo.brandCname = [dictionary objectForKey:@"brandCname"];
     brandInfo.brandEname = [dictionary objectForKey:@"brandEname"];
     brandInfo.brandLogo = [dictionary objectForKey:@"brandLogo"];
-    brandInfo.brandTitle = [self stringObjectForKey:@"brandTitle" byDictionary:dictionary];
-    brandInfo.brandDescription = [self stringObjectForKey:@"brandDescription" byDictionary:dictionary];
+    brandInfo.brandTitle = [self stringObjectForKey:@"title" byDictionary:dictionary];
+    brandInfo.brandDescription = [self stringObjectForKey:@"description" byDictionary:dictionary];
     brandInfo.merchantId = [self numberObjectForKey:@"merchantId" byDictionary:dictionary];
     brandInfo.sortOrder = [dictionary objectForKey:@"sortOrder"];
-    brandInfo.ifShow = [dictionary objectForKey:@"ifShow"];
+    brandInfo.status = [dictionary objectForKey:@"status"];
     brandInfo.likes = [dictionary objectForKey:@"likes"];
     brandInfo.ctime = [dictionary objectForKey:@"ctime"];
     brandInfo.utime = [dictionary objectForKey:@"utime"];
     return brandInfo;
+}
++(CollectionInfo*)parserCollectionInfoByDictionary:(NSDictionary*)dictionary{
+    NSDictionary* collectionDic = [dictionary objectForKey:@"collection"];
+    CollectionInfo* collectionInfo = [[CollectionInfo alloc]init];
+    collectionInfo.collectionId = [collectionDic objectForKey:@"collectionId"];
+    collectionInfo.userId = [collectionDic objectForKey:@"userId"];
+    collectionInfo.ctimeStr = [self getRelativeTimeBySeconds:[dictionary objectForKey:@"ctime"]];
+    collectionInfo.utime = [collectionDic objectForKey:@"utime"];
+    collectionInfo.comments = [self stringObjectForKey:@"comments" byDictionary:collectionDic];
+    collectionInfo.defaultThumb = [self stringObjectForKey:@"defaultThumb" byDictionary:collectionDic];
+    collectionInfo.defaultImage = [self stringObjectForKey:@"defaultImage" byDictionary:collectionDic];
+    NSMutableArray* arr = [NSMutableArray array];
+    NSArray* collectionItemDics = [dictionary objectForKey:@"items"];
+    for (NSDictionary* collectionItemDic in collectionItemDics) {
+        GoodItem* goodItem = [self parserGoodItemByDictionary:collectionItemDic];
+        [arr addObject:goodItem];
+    }
+    collectionInfo.collectionItems = arr;
+    return collectionInfo;
 }
 #pragma mark parser null or nil -default value
 //颜色判断是否为十六进制编码

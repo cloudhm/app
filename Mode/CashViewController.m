@@ -14,6 +14,7 @@
 #import "ModeTransactionsAPI.h"
 #import "QBArrowRefreshControl.h"
 #import "TAlertView.h"
+#import "ModeProfilesAPI.h"
 @interface CashViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,QBRefreshControlDelegate>
 @property (strong, nonatomic) UITableView *cashTableView;
 @property (strong, nonatomic) UIView *bottomView;
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) UILabel* mysaveCount;
 @property (strong, nonatomic) UILabel* currency;
 @property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
+@property (weak, nonatomic) UITextField *enchashment;
 @end
 
 @implementation CashViewController
@@ -80,7 +82,10 @@ static NSString* reusedIdentifier = @"MyCell";
         self.bottomView.frame = bottomViewFrame;
         self.cashTableView.frame = tableViewFrame;
     } completion:^(BOOL finished) {
-        [self.cashTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.allData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        if (self.allData.count>0) {
+            [self.cashTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.allData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        
     }];
 }
 #pragma mark ScrollView
@@ -170,8 +175,9 @@ static NSString* reusedIdentifier = @"MyCell";
     tf.placeholder = @"Enter the total amount...";
     [tf setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     tf.clearsOnBeginEditing = YES;
-    tf.keyboardType =UIKeyboardTypeNumbersAndPunctuation;
+    tf.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     tf.delegate = self;
+    self.enchashment = tf;
     [bView addSubview:tf];
     
 }
@@ -179,8 +185,15 @@ static NSString* reusedIdentifier = @"MyCell";
 
 #pragma mark UIButton - action
 -(void)getCash:(UIButton*)btn{//提现接口
-    NSLog(@"cash");
+    if (self.enchashment.text.floatValue>self.mysaveCount.text.floatValue) {
+        
+    }
     [self.view endEditing:YES];
+    NSDictionary* params = @{@"unit":@"usd",@"amount":@(self.enchashment.text.floatValue),@"isWithdrawl":@"false"};
+    NSLog(@"%@",params);
+    [ModeProfilesAPI requestEnchashmentWithParams:params andCallback:^(id obj) {
+        NSLog(@"%@",obj);
+    }];
 }
 
 

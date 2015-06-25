@@ -199,7 +199,7 @@
         colorView.colorStr = colorArr[i];
         //重绘在View中的类的setter方法已写
     }
-    self.sizeLabel.frame = CGRectMake(CGRectGetMinX(self.colorLabel.frame), CGRectGetMaxY(self.colorLabel.frame)+5.f, 100, 40);
+    self.sizeLabel.frame = CGRectMake(CGRectGetMinX(self.colorLabel.frame), CGRectGetMaxY(self.colorLabel.frame), 100, 40);
     self.sizeLabel.text = [NSString stringWithFormat:@"SIZE:    %@",self.goodItem.goodSize];
     float brandInfoBtnX = 20.f;
     self.brandInfoBtn.frame = CGRectMake(brandInfoBtnX, CGRectGetMaxY(self.sizeLabel.frame), CGRectGetWidth(self.rightView.bounds)-2* brandInfoBtnX, 30.f);
@@ -329,7 +329,7 @@
     } else {
         [self.clothes addObjectsFromArray:self.receiveArr];
     }
-    self.goodItem = self.clothes[0];
+    
     [self createScrollView];
     [self createRightView];
     [self createLeftView];
@@ -339,6 +339,14 @@
     
     
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.goodItem = self.clothes[0];
+}
+-(void)setGoodItem:(GoodItem *)goodItem{
+    _goodItem = goodItem;
+    [self.couponBtn setSelected:!goodItem.ifCoupon.boolValue];
+    self.couponBtn.enabled = goodItem.ifCoupon.boolValue;
+}
 -(NSString*)getUserId{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
@@ -347,7 +355,7 @@
     self.goodItem = self.clothes[index];
     self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodItem.goodPrice.floatValue];
     self.couponBtn.enabled = YES;
-    if ([self.goodItem.hasCoupon isEqualToString:@"true"]&&[self.goodItem.hasSelected isEqual:@(0)]) {
+    if ((self.goodItem.ifCoupon.boolValue == YES)&&[self.goodItem.hasSelected isEqual:@(0)]) {
         [self.couponBtn setSelected:NO];
     } else {
         [self.couponBtn setSelected:YES];

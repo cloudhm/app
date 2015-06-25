@@ -31,8 +31,12 @@
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (![jsonDic isKindOfClass:[NSDictionary class]]) {
             NSArray* jsonArr = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            NSArray* collectionArr = [JsonParser parserModeCollectionArrBy:jsonArr];
-            callback(collectionArr);
+            NSMutableArray* parserArr = [NSMutableArray array];
+            for (NSDictionary* subDic in jsonArr) {
+                CollectionInfo* collectionInfo = [JsonParser parserCollectionInfoByDictionary:subDic];
+                [parserArr addObject:collectionInfo];
+            }
+            callback(parserArr);
         } else {
             callback(@(NO));
         }
@@ -73,14 +77,17 @@
     for (GoodItem*goodItem in items) {
         [collectionItems addObject:goodItem.itemId];
     }
-    [allParams setObject:collectionItems forKey:@"collectionitems"];
-    [allParams setObject:[params objectForKey:@"text"] forKey:@"comments"];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:collectionItems options:0 error:nil];
+    NSString* jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [allParams setObject:jsonStr forKey:@"collectionitems"];
+    [allParams setObject:[params objectForKey:@"text"] forKey:@"comment"];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [self setTimeoutIntervalBy:manager];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        if (![dictionary objectForKey:@"code"]) {//服务器成功收到
+        if ([dictionary objectForKey:@"code"]) {//服务器成功收到
             callback(@(YES));
         } else {
             callback(@(NO));

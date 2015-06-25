@@ -168,7 +168,7 @@
                             goodItem.occasion,
                             goodItem.status,
                             goodItem.goodDescription,
-                            goodItem.hasCoupon,
+                            goodItem.ifCoupon,
                             goodItem.hasSelected];
                 if (res == YES) {
                     NSLog(@"插入成功");
@@ -287,7 +287,7 @@
             goodItem.occasion = [set stringForColumn:@"occasion"];
             goodItem.status = [set objectForColumnName:@"status"];
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
-            goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
+            goodItem.ifCoupon = [set objectForColumnName:@"ifCoupon"];
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
             [fetchedDatabase addObject:goodItem];
         }
@@ -316,7 +316,7 @@
             goodItem.occasion = [set stringForColumn:@"occasion"];
             goodItem.status = [set objectForColumnName:@"status"];
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
-            goodItem.hasCoupon = [set stringForColumn:@"hasCoupon"];
+            goodItem.ifCoupon = [set objectForColumnName:@"ifCoupon"];
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
             [fetchedDatabase addObject:goodItem];
         }
@@ -361,7 +361,7 @@
                                  goodItem.occasion,
                                  goodItem.status,
                                  goodItem.goodDescription,
-                                 goodItem.hasCoupon,
+                                 goodItem.ifCoupon,
                                  goodItem.hasSelected];
                     res = flag&&res;
                 }
@@ -395,7 +395,7 @@
                                      goodItem.occasion,
                                      goodItem.status,
                                      goodItem.goodDescription,
-                                     goodItem.hasCoupon,
+                                     goodItem.ifCoupon,
                                      goodItem.hasSelected];
                         if (!flag) {
                             NSLog(@"数组插入失败");

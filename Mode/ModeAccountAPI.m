@@ -52,10 +52,10 @@
     NSString* path = ACCOUNT_LOGIN;
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [self setTimeoutIntervalBy:manager];
-//    [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
-//    [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
-    [manager.requestSerializer setValue:@"e9bc0e13a8a16cbb07b175d92a113126" forHTTPHeaderField:@"password"];
-    [manager.requestSerializer setValue:@"1013103903@qq.com" forHTTPHeaderField:@"username"];
+    [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
+    [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
+//    [manager.requestSerializer setValue:@"123" forHTTPHeaderField:@"password"];
+//    [manager.requestSerializer setValue:@"cloud" forHTTPHeaderField:@"username"];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

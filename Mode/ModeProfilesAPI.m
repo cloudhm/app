@@ -42,4 +42,19 @@
         callback([NSNull null]);
     }];
 }
++(void)requestEnchashmentWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
+    NSString* path = ENCHASHMENT;
+    NSMutableDictionary* allParams = [params mutableCopy];
+    [allParams setObject:[self getUserId] forKey:@"userId"];
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [manager PUT:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        callback(jsonDic);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback([NSNull null]);
+        NSLog(@"enchashment fail:%@",error);
+    }];
+}
 @end

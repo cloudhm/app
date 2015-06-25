@@ -11,7 +11,7 @@
 typedef void (^MyCallback)(id obj);
 @interface ModeGoodAPI : NSObject
 
-//设置商品测试反馈
-+(void)setGoodsFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
+////设置商品测试反馈
+//+(void)setGoodsFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
 
 @end

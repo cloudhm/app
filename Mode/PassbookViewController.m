@@ -16,11 +16,13 @@
 #import "UIColor+HexString.h"
 #import "ModePassbookAPI.h"
 #import "WishListViewController.h"
-@interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate>
+#import "QBArrowRefreshControl.h"
+@interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate,QBRefreshControlDelegate>
 @property (strong, nonatomic) NSMutableArray* timeArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CADisplayLink *gameTimer;
 @property (strong, nonatomic) OrderConfirmViewController *orderConfirmViewController;
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @end
 
 @implementation PassbookViewController
@@ -49,6 +51,19 @@
         self.gameTimer.frameInterval = 60.f;//该控件默认1分钟刷新60次，设置为60 则1秒钟刷新1次
         [self.gameTimer addToRunLoop:[NSRunLoop currentRunLoop]forMode:NSDefaultRunLoopMode];
     }
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor clearColor];
+    [self.tableView addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.tableView addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
+}
+#pragma mark - QBRefreshControlDelegate
+
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
+{
+    [self getPassbookList];
 }
 -(void)gotoWishlistController:(NSNotification*)noti{
     if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
@@ -61,15 +76,19 @@
         [av show];
     }
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)getPassbookList{
     [ModePassbookAPI requestPassbookListAndCallback:^(id obj) {
-        if (obj == nil) {
+        [self.myRefreshControl endRefreshing];
+        if ([obj boolValue] == NO) {
             self.tableView.alpha = 0.f;
         } else {
             self.tableView.alpha = 1.f;
-#warning 数据模型木有
+            
         }
     }];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [self getPassbookList];
 }
 -(void)changePosition:(NSNotification*)noti{
     NSTimeInterval timeDuration = [[noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];

@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSNumber *orders;//int
 @property (strong, nonatomic) NSNumber *inviteBy;//int
 @property (strong, nonatomic) NSString *inviteCode;    //null
-@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *nickname; //-----------------
 @property (strong, nonatomic) NSString *countryCode;//          null
 @property (strong, nonatomic) NSNumber *longitude;//double      null
 @property (strong, nonatomic) NSNumber *latitude;//double       null
@@ -34,7 +34,7 @@
 @property (strong, nonatomic) NSNumber *usd;//double
 @property (strong, nonatomic) NSString *avatar;//@""
 @property (strong, nonatomic) NSString *fbToken;//@""
-
+@property (strong, nonatomic) NSString *email;//----------------------
 
 
 

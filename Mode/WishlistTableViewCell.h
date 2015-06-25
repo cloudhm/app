@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ModeCollection.h"
+#import "CollectionInfo.h"
 @interface WishlistTableViewCell : UITableViewCell
 
 @property (strong, nonatomic)  UIImageView *iconIV;
-@property (weak, nonatomic) IBOutlet UIImageView *shareIV;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *defaultImages;
+
 @property (weak, nonatomic) IBOutlet UILabel *ctimeLabel;
 @property (strong, nonatomic) UILabel *commentLabel;
-@property (strong, nonatomic) ModeCollection *modeCollection;
+
+@property (strong, nonatomic) CollectionInfo *collectionInfo;
 @end

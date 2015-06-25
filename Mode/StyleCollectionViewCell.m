@@ -9,6 +9,7 @@
 #import "StyleCollectionViewCell.h"
 #import "SDWebImageManager.h"
 #import "UIButton+WebCache.h"
+#import "SDWebImageManager.h"
 @implementation StyleCollectionViewCell
 -(void)setMstyle:(ModeSysList *)mstyle{
     _mstyle=mstyle;
@@ -18,7 +19,11 @@
     [super layoutSubviews];
     self.name.text = [self.mstyle.name uppercaseString];
     [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.mstyle.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [[SDImageCache sharedImageCache] storeImage:image forKey:[self.mstyle.picLink lastPathComponent] toDisk:YES];
+        if(!error) {
+            [[SDImageCache sharedImageCache] storeImage:image forKey:[self.mstyle.picLink lastPathComponent] toDisk:YES];
+        }
+        NSLog(@"%ld,%@",cacheType,error);
+        
     }];
 
 }

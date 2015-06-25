@@ -40,4 +40,40 @@
         callback([NSNull null]);
     }];
 }
+
++(void)setBrandFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
+    NSString* path = SET_BRAND_LIKE;
+    NSString* requestPath = [[[path stringByAppendingPathComponent:[self getUserID]]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"brandId"]]]stringByAppendingPathComponent:[params objectForKey:@"like"]];
+    //    NSMutableDictionary* allParams = [params mutableCopy];
+    //    [allParams setObject:[self getUserID] forKey:@"userId"];
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [self setTimeoutIntervalBy:manager];
+    [manager POST:requestPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        if ([dictionary objectForKey:@"code"]) {
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"set_good_feedback-error:%@",error);
+        callback([NSNull null]);
+    }];
+}
++(void)requestBrandListOfUserFellowAndCallback:(MyCallback)callback{
+    NSString* path = FELLOW_BRAND_LIST;
+    NSString* requestPath = [[path stringByAppendingPathComponent:[self getUserID]]stringByAppendingPathComponent:@"like"];
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    [self setTimeoutIntervalBy:manager];
+    [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
+    [manager GET:requestPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        callback(dictionary);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback([NSNull null]);
+        NSLog(@"request fellow_brand_list fail :%@",error);
+    }];
+}
 @end

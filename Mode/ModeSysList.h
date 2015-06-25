@@ -11,7 +11,7 @@
 @interface ModeSysList : NSObject
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* picLink;
-@property (nonatomic,copy) NSString* tagId;
+@property (nonatomic,copy) NSString* brandId;
 @property (copy, nonatomic) NSString *amount;
 
 @end

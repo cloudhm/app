@@ -214,6 +214,7 @@
 		DB6BDA631B392D10004B8499 /* ConsigneeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6BDA611B392D10004B8499 /* ConsigneeNameViewController.m */; };
 		DB6BDA641B392D10004B8499 /* ConsigneeNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6BDA621B392D10004B8499 /* ConsigneeNameViewController.xib */; };
 		DB6BDA671B3937AA004B8499 /* BrandRunwayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6BDA661B3937AA004B8499 /* BrandRunwayHeaderView.m */; };
+		DB6EF7201B3BD3130095D8F8 /* CollectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6EF71F1B3BD3130095D8F8 /* CollectionInfo.m */; };
 		DB7D37771B37E06D00006D2B /* brandInfoNor.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7D37751B37E06D00006D2B /* brandInfoNor.png */; };
 		DB7D37781B37E06D00006D2B /* brandInfoHigh.png in Resources */ = {isa = PBXBuildFile; fileRef = DB7D37761B37E06D00006D2B /* brandInfoHigh.png */; };
 		DB7D377B1B37E75A00006D2B /* ModePassbookAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7D377A1B37E75A00006D2B /* ModePassbookAPI.m */; };
@@ -568,6 +569,8 @@
 		DB6BDA621B392D10004B8499 /* ConsigneeNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsigneeNameViewController.xib; sourceTree = "<group>"; };
 		DB6BDA651B3937AA004B8499 /* BrandRunwayHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandRunwayHeaderView.h; sourceTree = "<group>"; };
 		DB6BDA661B3937AA004B8499 /* BrandRunwayHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandRunwayHeaderView.m; sourceTree = "<group>"; };
+		DB6EF71E1B3BD3130095D8F8 /* CollectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionInfo.h; sourceTree = "<group>"; };
+		DB6EF71F1B3BD3130095D8F8 /* CollectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionInfo.m; sourceTree = "<group>"; };
 		DB7D37751B37E06D00006D2B /* brandInfoNor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brandInfoNor.png; sourceTree = "<group>"; };
 		DB7D37761B37E06D00006D2B /* brandInfoHigh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brandInfoHigh.png; sourceTree = "<group>"; };
 		DB7D37791B37E75A00006D2B /* ModePassbookAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModePassbookAPI.h; sourceTree = "<group>"; };
@@ -1085,6 +1088,8 @@
 				DB8B4FFB1B32F2AC003A1F8C /* CollectionItem.m */,
 				14080F401B318F1000060666 /* ModeSysList.h */,
 				14080F411B318F1000060666 /* ModeSysList.m */,
+				DB6EF71E1B3BD3130095D8F8 /* CollectionInfo.h */,
+				DB6EF71F1B3BD3130095D8F8 /* CollectionInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1690,6 +1695,7 @@
 				DBF6CB301B25270A00FEC1F5 /* UIViewController+CWPopup.m in Sources */,
 				14080F591B318F3A00060666 /* RegisterView.m in Sources */,
 				14080F581B318F3A00060666 /* LoginView.m in Sources */,
+				DB6EF7201B3BD3130095D8F8 /* CollectionInfo.m in Sources */,
 				DB169D401B199B1C0015D4A6 /* MKAnnotationView+WebCache.m in Sources */,
 				14080E201B31847000060666 /* UIImage+PartlyImage.m in Sources */,
 				14080F021B318E0000060666 /* WishListViewController.m in Sources */,

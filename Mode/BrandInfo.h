@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *brandDescription;//null
 @property (strong, nonatomic) NSNumber *merchantId;//null
 @property (strong, nonatomic) NSNumber *sortOrder;
-@property (strong, nonatomic) NSNumber *ifShow;
+@property (strong, nonatomic) NSNumber *status;
 @property (strong, nonatomic) NSNumber *likes;
 @property (strong, nonatomic) NSNumber *ctime;
 @property (strong, nonatomic) NSNumber *utime;

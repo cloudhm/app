@@ -19,6 +19,7 @@
     [super layoutSubviews];
 
     [self.button sd_setBackgroundImageWithURL:[NSURL URLWithString:self.brand.picLink] forState:UIControlStateNormal placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
         [[SDImageCache sharedImageCache] storeImage:image forKey:[self.brand.picLink lastPathComponent] toDisk:YES];
     }];
 

@@ -27,26 +27,29 @@
 
 //获得用户的明细信息
 #define PROFILEINFO [HOSTADDRESS stringByAppendingPathComponent:@"profiles/users"]//用户明细信息 GET
-
+#define ENCHASHMENT [HOSTADDRESS stringByAppendingPathComponent:@"profiles/users/cash"]//用户提现 PUT
 //获取用户的交易历史
 #define TRANSACTIONS [HOSTADDRESS stringByAppendingPathComponent:@"transactions/users"]//用户交易历史 GET
 
-//商品接口
-#define SET_GOODS_FEEDBACK [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //设置商品测试反馈秀场接口
+//品牌接口
+
+
+
 
 //秀场接口
 #define RUNWAY [HOSTADDRESS stringByAppendingPathComponent:@"runways"]  //新建一组秀场心愿单接口
 
 //心愿单接口
-#define GET_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/users"]//获取用户的collection
+#define GET_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems/items/users"]//获取用户的collection及其中物品的信息
 #define GET_COLLECTION_ITEMS [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"] //按collectionId(此参数暂时不传)
 #define SHARE_COLLECTION [HOSTADDRESS stringByAppendingPathComponent:@"collections/collectionitems"]//分享九宫格
 
 //品牌接口
 #define BRANDINFO [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //获取品牌介绍信息
-
+#define SET_BRAND_LIKE [HOSTADDRESS stringByAppendingPathComponent:@"brands"] //设置是否fellow品牌
+#define FELLOW_BRAND_LIST [HOSTADDRESS stringByAppendingPathComponent:@"brands"]//喜欢的所有品牌
 //Passbook清单
-#define PASSBOOK_LIST [HOSTADDRESS stringByAppendingPathComponent:@"passbooks/users"]//获得所有奖券信息
+#define PASSBOOK_LIST [HOSTADDRESS stringByAppendingPathComponent:@"passbooks/user"]//获得所有奖券信息
 
 
 

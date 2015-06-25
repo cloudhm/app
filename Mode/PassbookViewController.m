@@ -18,6 +18,7 @@
 #import "WishListViewController.h"
 #import "QBArrowRefreshControl.h"
 @interface PassbookViewController ()<UITableViewDataSource,UITableViewDelegate,OrderConfirmViewControllerDelegate,QBRefreshControlDelegate>
+
 @property (strong, nonatomic) NSMutableArray* timeArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CADisplayLink *gameTimer;
@@ -100,6 +101,7 @@
         self.orderConfirmViewController.view.frame = rect;
     } completion:nil];
 }
+
 -(NSMutableArray *)timeArr{
     if (!_timeArr) {
         _timeArr = [NSMutableArray array];

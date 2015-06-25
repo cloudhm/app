@@ -20,9 +20,11 @@
 #import "TAlertView.h"
 #import "CashViewController.h"
 
+
 #import "WishlistHeadView.h"
 #import "WishlistTableSectionHeaderView.h"
 #import "CollectionInfo.h"
+
 @interface WishlistTableViewController ()<QBRefreshControlDelegate,WishlistHeadViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *modeCollections;
@@ -105,11 +107,13 @@
     self.tableView.tableHeaderView = view;
     
     self.headV.delegate = self;
+
     
 //    self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
  
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
     bgView.backgroundColor = [UIColor clearColor];
+
     [self.tableView addSubview:bgView];
     QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
     refreshControl.delegate = self;
@@ -119,10 +123,12 @@
     NSLog(@"%@",NSStringFromCGRect(self.headV.frame));
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [self getDataFromNetwork];
     self.tableView.userInteractionEnabled = YES;
 }
+
 #pragma mark - QBRefreshControlDelegate
 
 - (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl{
@@ -132,10 +138,12 @@
 -(void)getDataFromNetwork{
     [ModeProfilesAPI requestProfilesAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];
+
         if ([obj isKindOfClass:[NSNull class]]) {
             [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
             
         } else if ([obj isKindOfClass:[ProfileInfo class]]) {
+
             self.headV.profileInfo = obj;
             self.profileInfo = obj;
             UIView* view = self.tableView.tableHeaderView;
@@ -146,6 +154,7 @@
             }
             self.tableView.tableHeaderView = view;
             [self.headV setNeedsLayout];
+
         }
         
     }];
@@ -169,8 +178,10 @@
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
     CollectionInfo* collectionInfo = self.modeCollections[indexPath.row];
     return [collectionInfo getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]+230.f+15.f;
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.modeCollections.count;
@@ -183,7 +194,9 @@
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     } else {
         sectionHeaderView.headerString = @"TASTE STUDIO";
+
         self.tableView.separatorStyle = UITableViewCellSelectionStyleGray;
+
     }
     return sectionHeaderView;
 }
@@ -195,12 +208,15 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"WishlistTableViewCell" owner:nil options:nil]lastObject];
     }
+
     cell.collectionInfo = self.modeCollections[indexPath.row];
+
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tableView.userInteractionEnabled = NO;
+
     CollectionInfo* collectionInfo = self.modeCollections[indexPath.row];
 
     self.tableView.userInteractionEnabled = YES;

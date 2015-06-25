@@ -10,7 +10,10 @@
 @class ShareViewController,UIActivityIndicatorView;
 @protocol ShareViewControllerDelegate <NSObject>
 @optional
--(void)shareViewController:(ShareViewController*)shareViewController shareNineModeGoodsToOthers:(NSArray*)nineGoods andTextContent:(NSString*)textContent startAnimation:(UIActivityIndicatorView*)activityView;
+
+
+-(void)shareViewController:(ShareViewController*)shareViewController shareNineModeGoodsToOthers:(NSArray*)nineGoods andTextContent:(NSString*)textContent startAnimation:(UIActivityIndicatorView*)activityView shareImagesToFacebook:(UIImage *)shareImagesToFacebook;
+
 
 @end
 @interface ShareViewController : UIViewController

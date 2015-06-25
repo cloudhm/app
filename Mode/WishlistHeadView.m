@@ -30,7 +30,9 @@
     [super layoutSubviews];
     self.likes.text = [NSString stringWithFormat:@"%d",self.profileInfo.likes.integerValue];
     self.cash.text = [NSString stringWithFormat:@"%.2f",self.profileInfo.usd.doubleValue];
+
     self.name.text = self.profileInfo.nickname;
+
     if (self.profileInfo.likes.integerValue == 0) {
         self.scrollView.alpha = 0.f;
         self.scrollView.frame = CGRectZero;

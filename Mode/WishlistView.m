@@ -28,7 +28,9 @@
             [self createDelBtn];
         }
 
+
         if (_goodItem.ifCoupon.boolValue) {
+
             self.couponImageView.alpha = 1.f;
         } else {
             self.couponImageView.alpha = 0.f;

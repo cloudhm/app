@@ -168,7 +168,9 @@
                             goodItem.occasion,
                             goodItem.status,
                             goodItem.goodDescription,
+
                             goodItem.ifCoupon,
+
                             goodItem.hasSelected];
                 if (res == YES) {
                     NSLog(@"插入成功");
@@ -287,7 +289,9 @@
             goodItem.occasion = [set stringForColumn:@"occasion"];
             goodItem.status = [set objectForColumnName:@"status"];
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
+
             goodItem.ifCoupon = [set objectForColumnName:@"ifCoupon"];
+
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
             [fetchedDatabase addObject:goodItem];
         }
@@ -316,7 +320,9 @@
             goodItem.occasion = [set stringForColumn:@"occasion"];
             goodItem.status = [set objectForColumnName:@"status"];
             goodItem.goodDescription = [set stringForColumn:@"goodDescription"];
+
             goodItem.ifCoupon = [set objectForColumnName:@"ifCoupon"];
+
             goodItem.hasSelected = [set objectForColumnName:@"hasSelected"];
             [fetchedDatabase addObject:goodItem];
         }
@@ -361,7 +367,9 @@
                                  goodItem.occasion,
                                  goodItem.status,
                                  goodItem.goodDescription,
+
                                  goodItem.ifCoupon,
+
                                  goodItem.hasSelected];
                     res = flag&&res;
                 }

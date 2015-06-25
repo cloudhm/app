@@ -123,11 +123,7 @@
 
 
 - (IBAction)gotoFacebook:(FBSDKLoginButton *)sender {
-    
-
-    [self loginFB];
-    
-    
+     [self loginFB];
 }
 - (void)loginFB
 {
@@ -244,14 +240,8 @@
 
 
 
+
 - (IBAction)showLoginView:(UIButton *)sender {
-//#warning 暂时跳过此阶段
-//    [[NSUserDefaults standardUserDefaults]setObject:@"362" forKey:@"userId"];
-//    [[NSUserDefaults standardUserDefaults]synchronize];
-//    [self enterHostView];
-    
-    
-//    return;
     if (self.lvc == nil) {
         self.lvc = [[LoginView alloc]init];
         self.lvc.delegate = self;
@@ -388,7 +378,6 @@
     [AppDelegate globalDelegate].leftDrawerViewController = nil;
     [AppDelegate globalDelegate].homeViewController = nil;
     [AppDelegate globalDelegate].drawerAnimator = nil;
-    
     [AppDelegate globalDelegate].wishlistViewController = nil;
     [AppDelegate globalDelegate].wishlistTableViewController = nil;
     [AppDelegate globalDelegate].passbookViewController = nil;

@@ -199,6 +199,7 @@
         colorView.colorStr = colorArr[i];
         //重绘在View中的类的setter方法已写
     }
+
     self.sizeLabel.frame = CGRectMake(CGRectGetMinX(self.colorLabel.frame), CGRectGetMaxY(self.colorLabel.frame), 100, 40);
     self.sizeLabel.text = [NSString stringWithFormat:@"SIZE:    %@",self.goodItem.goodSize];
     float brandInfoBtnX = 20.f;
@@ -211,6 +212,7 @@
     self.brandImageView.layer.masksToBounds = YES;
     self.brandImageView.backgroundColor = [UIColor yellowColor];
     
+
     self.viewDetailBtn.frame = CGRectMake(brandInfoBtnX, CGRectGetMaxY(self.brandInfoBtn.frame)+10.f, CGRectGetWidth(self.rightView.bounds)-2* brandInfoBtnX, 30.f);
     
     
@@ -288,7 +290,9 @@
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
+
     bgIV.image = [UIImage imageNamed:@"heartRev0.png"];
+
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
     l.textAlignment = NSTextAlignmentCenter;
     l.textColor = [UIColor whiteColor];
@@ -329,7 +333,8 @@
     } else {
         [self.clothes addObjectsFromArray:self.receiveArr];
     }
-    
+
+
     [self createScrollView];
     [self createRightView];
     [self createLeftView];
@@ -339,6 +344,7 @@
     
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     self.goodItem = self.clothes[0];
 }
@@ -350,12 +356,15 @@
 -(NSString*)getUserId{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
+
 #pragma mark WishlistScrollViewDelegate
 -(void)wishlistScrollView:(WishlistScrollView *)wishlistScrollView didSelectedItemsAtIndex:(NSInteger)index{
     self.goodItem = self.clothes[index];
     self.goods_price.text = [NSString stringWithFormat:@"Sale Price:$%.2f",self.goodItem.goodPrice.floatValue];
     self.couponBtn.enabled = YES;
+
     if ((self.goodItem.ifCoupon.boolValue == YES)&&[self.goodItem.hasSelected isEqual:@(0)]) {
+
         [self.couponBtn setSelected:NO];
     } else {
         [self.couponBtn setSelected:YES];

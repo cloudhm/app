@@ -18,7 +18,9 @@
 #import "SDWebImage/SDImageCache.h"
 #import "FMDB.h"
 #import "UIColor+HexString.h"
+
 #import "ModeSysAPI.h"
+
 //#import "TAlertView.h"
 @interface HomeViewController ()<ViewPagerDataSource,ViewPagerDelegate>
 @property (strong, nonatomic) NSArray *tabNames;
@@ -41,9 +43,11 @@
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
 - (void)viewDidLoad {
+
     [ModeSysAPI requestMenuListAndCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]postNotificationName:@"requestMenus" object:nil userInfo:@{@"callback":obj}];
     }];
+
     self.delegate = self;
     self.dataSource = self;
     [super viewDidLoad];
@@ -52,12 +56,9 @@
     self.title = @"MODE";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
     
+    
+}
 
-    
-}
--(void)viewDidAppear:(BOOL)animated{
-    
-}
 #pragma mark ViewPagerDatasource
 -(NSUInteger)numberOfTabsForViewPager:(ViewPagerController *)viewPager{
     return 3;

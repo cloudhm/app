@@ -111,6 +111,7 @@
             break;
         default:
         {
+
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"token"];
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"userId"];
             [[NSUserDefaults standardUserDefaults]synchronize];

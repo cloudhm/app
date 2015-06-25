@@ -48,9 +48,11 @@ static NSString *reuseIdentifier=@"MyCell";
 //由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"requestMenus" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(responseMenus:) name:@"requestMenus" object:nil];
     
+
     [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:BRAND andSelectConditionValue:nil]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
@@ -79,6 +81,7 @@ static NSString *reuseIdentifier=@"MyCell";
     self.myRefreshControl = refreshControl;
 }
 -(void)viewDidAppear:(BOOL)animated{
+
 //    [self refreshData];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"bvcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"bvcToLvc" object:nil];
@@ -111,6 +114,7 @@ static NSString *reuseIdentifier=@"MyCell";
 -(void)refreshData{
     [ModeSysAPI requestMenuListAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
+
         [self dealCallback:obj];
     }];
 }

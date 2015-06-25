@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppsFlyerTracker.h"
 
 
 
 @class JVFloatingDrawerViewController;//分栏控制器
 @class JVFloatingDrawerSpringAnimator;//主页面
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,AppsFlyerTrackerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

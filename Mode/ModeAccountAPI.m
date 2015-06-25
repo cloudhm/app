@@ -19,6 +19,7 @@
 
 +(void)signupWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = ACCOUNT_SIGNUP;
+
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
     [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
@@ -50,12 +51,11 @@
 }
 +(void)loginWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = ACCOUNT_LOGIN;
+
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [self setTimeoutIntervalBy:manager];
     [manager.requestSerializer setValue:[[params objectForKey:@"password"] MD5] forHTTPHeaderField:@"password"];
     [manager.requestSerializer setValue:[params objectForKey:@"username"] forHTTPHeaderField:@"username"];
-//    [manager.requestSerializer setValue:@"123" forHTTPHeaderField:@"password"];
-//    [manager.requestSerializer setValue:@"cloud" forHTTPHeaderField:@"username"];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

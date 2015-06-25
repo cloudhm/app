@@ -30,7 +30,9 @@
 @property (strong, nonatomic) NSNumber *expires;//int
 @property (strong, nonatomic) NSString *style;//null
 @property (strong, nonatomic) NSString *occasion;//null
+
 @property (strong, nonatomic) NSNumber *ifCoupon;
 #warning 缺优惠券
+
 @property (strong, nonatomic) NSNumber *hasSelected;
 @end

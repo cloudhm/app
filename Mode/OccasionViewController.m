@@ -51,6 +51,7 @@ static NSString *reuseIdentifier=@"MyCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"requestMenus" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(responseMenus:) name:@"requestMenus" object:nil];
     
@@ -81,6 +82,7 @@ static NSString *reuseIdentifier=@"MyCell";
     self.myRefreshControl = refreshControl;
     
 
+
 }
 #pragma mark - QBRefreshControlDelegate
 
@@ -88,10 +90,12 @@ static NSString *reuseIdentifier=@"MyCell";
 {
     [self refreshData];
 }
+
 //刷新数据
 -(void)refreshData{
     [ModeSysAPI requestMenuListAndCallback:^(id obj) {
         [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
+
         [self dealCallback:obj];
     }];
 }
@@ -108,8 +112,6 @@ static NSString *reuseIdentifier=@"MyCell";
     }
 }
 -(void)viewDidAppear:(BOOL)animated{
-//    [self refreshData];
-    
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
 }

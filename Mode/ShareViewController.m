@@ -51,7 +51,30 @@
 
 - (IBAction)shareFacebook:(UIButton *)sender {
     [sender setSelected:!sender.selected];
+
+    
+    NSArray *activityItems;
+    
+    if (self.shareImage != nil) {
+        activityItems = @[self.shareTextContent, self.shareImage];
+    } else {
+        activityItems = @[self.shareTextContent];
+    }
+    
+    UIActivityViewController *activityController =
+    [[UIActivityViewController alloc] initWithActivityItems:activityItems
+                                      applicationActivities:nil];
+    
+    [self presentViewController:activityController
+                       animated:YES completion:nil];
+    
+    
+
 }
+
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(modificationPosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -88,8 +111,10 @@
     }
 }
 - (IBAction)sendShareAndPostNotification:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:startAnimation:)]) {
-        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text startAnimation:self.avtivityView];
+
+    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:startAnimation:shareImagesToFacebook:)]) {
+        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text startAnimation:self.avtivityView shareImagesToFacebook:self.shareImage];
+
     }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

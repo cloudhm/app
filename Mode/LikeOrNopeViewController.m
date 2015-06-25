@@ -24,8 +24,16 @@
 #import "GoodItem.h"
 #import "ModeWishlistAPI.h"
 
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Social/Social.h>
 
-@interface LikeOrNopeViewController ()<UIAlertViewDelegate,ShareViewControllerDelegate>
+
+@interface LikeOrNopeViewController ()<UIAlertViewDelegate,ShareViewControllerDelegate,FBSDKSharingDelegate>
+{
+    SLComposeViewController *slComposerSheet;
+}
+
 
 
 @property (nonatomic,assign) CGRect mainFrame;
@@ -82,7 +90,9 @@
 -(void)defineRightBarItem{
     UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34 ,34)];
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:rightView.bounds];
+
     bgIV.image = [UIImage imageNamed:@"heartRev0.png"];
+
     self.heartIV = bgIV;
     UILabel *l = [[UILabel alloc]initWithFrame:bgIV.bounds];
     l.textAlignment = NSTextAlignmentCenter;
@@ -113,10 +123,12 @@
         self.view.userInteractionEnabled = YES;
     }
     
+
 }
 -(NSString*)getUserId{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
 }
+
 //如果上一次未完成分享  会弹出分享视图
 -(void)viewDidAppear:(BOOL)animated{
     if (self.label.text.integerValue >= 9) {
@@ -158,7 +170,9 @@
 }
 //开场遮盖
 -(void)createStartIntroduceView{
+
     self.navigationItem.rightBarButtonItem.enabled = YES;//弹出九宫格  打开导航栏右上的跳转按钮交互
+
     if (!self.startIntroduceView) {
         self.startIntroduceView = [[UIView alloc]initWithFrame:self.navigationController.view.bounds];
         self.startIntroduceView.backgroundColor = [UIColor colorWithHexString:@"#1b1b1b"];
@@ -202,8 +216,10 @@
 #warning 加载在导航栏控制器上  该视图控制器就可以居中显示了
     [self.navigationController presentPopupViewController:shareViewController animated:YES completion:nil];
 }
-#pragma mark ShareViewControllerDelegate
--(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent startAnimation:(UIActivityIndicatorView *)activityView{
+
+#pragma mark - ShareViewControllerDelegate
+-(void)shareViewController:(ShareViewController *)shareViewController shareNineModeGoodsToOthers:(NSArray *)nineGoods andTextContent:(NSString *)textContent startAnimation:(UIActivityIndicatorView *)activityView shareImagesToFacebook:(UIImage *)shareImagesToFacebook{
+
     [activityView startAnimating];
     NSDictionary* params = @{@"items":nineGoods,@"text":textContent};
     [ModeWishlistAPI shareWishlistBy:params andCallback:^(id obj) {
@@ -221,7 +237,65 @@
             [self showAlertViewWithCautionInfo:@"Bad net.Please try again."];
         }
     }];
+
+    
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [slComposerSheet setInitialText:textContent];
+        [slComposerSheet addImage:shareImagesToFacebook];
+        [slComposerSheet addURL:[NSURL URLWithString:@"http://www.facebook.com/"]];
+        [self presentViewController:slComposerSheet animated:YES completion:nil];
+    }
+    
+    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        NSLog(@"start completion block");
+        NSString *output;
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                output = @"Action Cancelled";
+                break;
+            case SLComposeViewControllerResultDone:
+                output = @"Post Successfull";
+                break;
+            default:
+                break;
+        }
+        if (result != SLComposeViewControllerResultCancelled)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook Message" message:output delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+
+    
 }
+
+
+#pragma mark - FBSDKSharingDelegate
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"completed share:%@", results);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"sharing error:%@", error);
+    NSString *message = error.userInfo[FBSDKErrorLocalizedDescriptionKey] ?:
+    @"There was a problem sharing, please try again later.";
+    NSString *title = error.userInfo[FBSDKErrorLocalizedTitleKey] ?: @"Oops!";
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"share cancelled");
+}
+
+
+
 
 
 -(void)showAlertView{
@@ -233,9 +307,11 @@
 #warning 如果没有商品可选弹出第一个AlertView  有可选则第二个
     if (self.tabLabel.text.integerValue>=self.totalNumber) {//用来判断本组是否已经完成
         self.label.text = @"0";
+
         [self.wishlist removeAllObjects];
         [self finishOneSetAndReadyComebackWithTitle:@"Nice!" andMessage:@"The set has been finished,whether to continue"];
         
+
         return ;
     }
     if (flag) {
@@ -248,9 +324,7 @@
             self.navigationItem.rightBarButtonItem.enabled = YES;
         }];
         [shareSuccessAlertView show];
-//        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Nice!" message:@"Well Done.Shared successed!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//        av.tag = 1;
-//        [av show];
+
     }
 }
 
@@ -372,21 +446,25 @@
     self.number++;
     self.tabLabel.text = [NSString stringWithFormat:@"%d/%d",(int)(self.number>self.totalNumber?self.totalNumber:self.number),(int)self.totalNumber];
 
+
     if (direction == MDCSwipeDirectionLeft) {
         //Nope goods
 #warning 接口不对
 //        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"false"} andCallback:^(id obj) {
 //            //do nothing here.
 //        }];
+
         // remove nope goods-Image from Disk
         [[SDImageCache sharedImageCache] removeImageForKey:[self.currentCloth.defaultImage lastPathComponent] fromDisk:YES];
         
     } else {
         //Like goods
         [ModeDatabase replaceIntoTable:WISHLIST_TABLENAME andTableElements:WISHLIST_ELEMENTS andInsertContent:self.currentCloth];
+
 //        [ModeGoodAPI setGoodsFeedbackWithParams:@{@"itemId":self.currentCloth.itemId,@"brandId":self.currentCloth.brandId,@"like":@"true"} andCallback:^(id obj) {
 //            //do nothing here.
 //        }];
+
         [self.wishlist addObject:self.currentCloth];
         //判断移动方向为右则添加进数组
         int count = self.label.text.intValue;

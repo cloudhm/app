@@ -75,18 +75,22 @@
     [self createToolbar];
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(comeback:)];
     self.navigationItem.leftBarButtonItem = barItem;
+
     
     [ModeBrandRunwayAPI requestBrandListOfUserFellowAndCallback:^(id obj) {
         NSLog(@"%@",obj);
     }];
     
+
 }
 #pragma mark navigationItem.leftBarButtonItem Action
 -(void)comeback:(UIBarButtonItem*)btn{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)getBrandInfo{
+
     [ModeBrandRunwayAPI requestBrandInfoByBrandId:self.brandId andCallback:^(id obj) {
+
         if ([obj isKindOfClass:[NSNull class]]) {
             [self showAlertViewWithCautionInfo:@"Try refresh it again."];
         } else {
@@ -155,7 +159,7 @@
     
     self.toolbarLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2+10.f, 5, 100, 40)];
     self.toolbarLabel.font = [UIFont systemFontOfSize:20];
-    self.toolbarLabel.textAlignment = NSTextAlignmentLeft;
+    self.toolbarLabel.textAlignment = NSTextAlignmentCenter;
     self.toolbarLabel.textColor = [UIColor redColor];
     self.toolbarLabel.text = @"0";
     UIBarButtonItem* otherv =[[UIBarButtonItem alloc]initWithCustomView:v];
@@ -189,6 +193,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"brandRunwayToLikeNope" sender:@{@"title":@"aaaa",@"intro_desc":@"bbbbb",@"intro_title":@"ccccccc",@"params":@{@"mode":@"style",@"mode_val":@"dddd"}}];
 }
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

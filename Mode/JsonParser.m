@@ -18,7 +18,9 @@
 #import "GoodItem.h"
 #import "Runway.h"
 #import "BrandInfo.h"
+
 #import "CollectionInfo.h"
+
 @implementation JsonParser
 
 #pragma mark TIME-CONVERT
@@ -73,13 +75,10 @@
     ModeSysList* sysList = [[ModeSysList alloc]init];
     sysList.name = subArray[0];
     sysList.picLink = subArray[1];
+
     if ([sysList.picLink isKindOfClass:[NSNull class]]||sysList.picLink == nil) {
         sysList.picLink = @"";
     }
-//    sysList.brandId = subArray[2];
-//    if ([sysList.brandId isKindOfClass:[NSNull class]]||sysList.brandId == nil) {
-//        sysList.brandId = @"";
-//    }
     return sysList;
 }
 #pragma mark PROFILE_INFO
@@ -112,6 +111,7 @@
     profileInfo.avatar = [dictionary objectForKey:@"avatar"];
     profileInfo.fbToken = [dictionary objectForKey:@"fbToken"];
     profileInfo.email = [self stringObjectForKey:@"email" byDictionary:dictionary];
+
     return profileInfo;
 }
 #pragma mark TRANSACTIONS
@@ -145,6 +145,7 @@
     for (NSDictionary* dic in array) {
         ModeCollection* modeCollection = [self parserModeCollectionBy:dic];
         [array1 addObject:modeCollection];
+
     }
     return array1;
 }
@@ -203,6 +204,7 @@
 
 
 
+
 +(Runway*)parserRunwayByDictionary:(NSDictionary*)dictionary{
     Runway* runway = [[Runway alloc]init];
     runway.status = [self numberObjectForKey:@"status" byDictionary:dictionary];
@@ -246,6 +248,7 @@
     brandInfo.utime = [dictionary objectForKey:@"utime"];
     return brandInfo;
 }
+
 +(CollectionInfo*)parserCollectionInfoByDictionary:(NSDictionary*)dictionary{
     NSDictionary* collectionDic = [dictionary objectForKey:@"collection"];
     CollectionInfo* collectionInfo = [[CollectionInfo alloc]init];
@@ -265,6 +268,7 @@
     collectionInfo.collectionItems = arr;
     return collectionInfo;
 }
+
 #pragma mark parser null or nil -default value
 //颜色判断是否为十六进制编码
 +(NSString*)colorObjectForKey:(NSString*)key byDictionary:(NSDictionary*)dictionary{

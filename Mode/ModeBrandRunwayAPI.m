@@ -19,6 +19,7 @@
 }
 +(NSString*)getUserID{
     return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+
 }
 +(void)requestBrandInfoByBrandId:(NSNumber*)brandId andCallback:(MyCallback)callback{
     NSString* path = BRANDINFO;
@@ -44,8 +45,7 @@
 +(void)setBrandFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = SET_BRAND_LIKE;
     NSString* requestPath = [[[path stringByAppendingPathComponent:[self getUserID]]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"brandId"]]]stringByAppendingPathComponent:[params objectForKey:@"like"]];
-    //    NSMutableDictionary* allParams = [params mutableCopy];
-    //    [allParams setObject:[self getUserID] forKey:@"userId"];
+
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];

@@ -46,15 +46,18 @@
     NSString* path = ENCHASHMENT;
     NSMutableDictionary* allParams = [params mutableCopy];
     [allParams setObject:[self getUserId] forKey:@"userId"];
+    NSLog(@"%@",allParams);
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"token"] forHTTPHeaderField:Token];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    [manager PUT:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager PUT:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",[manager.baseURL description]);
         NSDictionary* jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         callback(jsonDic);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        callback([NSNull null]);
+        NSLog(@"%@",[manager.baseURL description]);
         NSLog(@"enchashment fail:%@",error);
+        callback([NSNull null]);
     }];
 }
 @end

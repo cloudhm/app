@@ -189,7 +189,7 @@ static NSString* reusedIdentifier = @"MyCell";
         
     }
     [self.view endEditing:YES];
-    NSDictionary* params = @{@"unit":@"usd",@"amount":@(self.enchashment.text.floatValue),@"isWithdrawl":@"false"};
+    NSDictionary* params = @{@"unit":@"usd",@"amount":@(self.enchashment.text.floatValue),@"isWithdrawl":@"true"};
     NSLog(@"%@",params);
     [ModeProfilesAPI requestEnchashmentWithParams:params andCallback:^(id obj) {
         NSLog(@"%@",obj);

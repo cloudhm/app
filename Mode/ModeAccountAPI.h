@@ -12,4 +12,6 @@ typedef void (^MyCallback)(id obj);
 @interface ModeAccountAPI : NSObject
 //用户邮箱注册
 +(void)signupWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
+//用户邮箱登陆
++(void)loginWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
 @end

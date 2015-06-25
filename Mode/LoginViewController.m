@@ -5,8 +5,7 @@
 //  Created by YedaoDEV on 15/5/22.
 //  Copyright (c) 2015年 YedaoDEV. All rights reserved.
 //
-#define LOGINVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,210)
-#define REGISTERVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,260)
+
 #import "LoginViewController.h"
 #import "LoginView.h"
 #import "RegisterView.h"
@@ -15,40 +14,86 @@
 #import "JVFloatingDrawerViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-@interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate>
+
+#import "TAlertView.h"
+
+@interface LoginViewController ()<RegisterViewDelegate,LoginViewDelegate,UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (strong, nonatomic) LoginView *lvc;
 @property (strong, nonatomic) RegisterView *rvc;
 @property (weak, nonatomic) AppDelegate *delegate;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
+@property (nonatomic, strong) NSString *userID;
+@property(nonatomic,retain) UITableView *tableView;
+
+
+
+
+
+
 
 @end
 
+
+
 @implementation LoginViewController
-#warning 暂时无法隐藏状态栏
--(BOOL)prefersStatusBarHidden{
-    return YES;
+{
+    NSIndexPath *_currentIndexPath;
+
 }
+
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changePosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"token"]) {
-        [self.activityIndicatorView startAnimating];
-        [NSThread sleepForTimeInterval:3.f];
-        [self enterHostView];
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    
+    if ([ud objectForKey:@"token"]) {//token存在则确定是否在有效期内
+        NSTimeInterval utime  = [ud doubleForKey:@"utime"];
+        NSTimeInterval currentTime = [NSDate date].timeIntervalSince1970;
+        if (utime>=currentTime) {
+            self.view.userInteractionEnabled = NO;//如果已有登录记录，则关掉屏幕的交互
+            [self.activityIndicatorView startAnimating];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [NSThread sleepForTimeInterval:3.f];
+                [self enterHostView];
+            });
+        } else {
+            NSString* errorInfo = @"Please relogin and regrant.";
+            [self showAlertViewWithErrorInfo:errorInfo];
+        }
+        
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+
+#pragma mark - Actions
+
+- (IBAction)showLogin:(UIStoryboardSegue *)segue
+{
+    // This method exists in order to create an unwind segue to this controller.
+}
+
+#pragma mark - FBSDKLoginButtonDelegate
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
-    
+
 }
--(void)click{
-    NSLog(@"...");
-}
+
+
 -(void)changePosition:(NSNotification*)noti {
     NSDictionary *dic = noti.userInfo;
     float t = [[dic objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
@@ -75,16 +120,138 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 - (IBAction)gotoFacebook:(FBSDKLoginButton *)sender {
-    NSLog(@"1");
-    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-    loginButton.center = self.view.center;
-    self.loginButton.readPermissions = @[@"public_profile",@"email",@"user"];
-    [self.view addSubview:loginButton];
+    
+
+    [self loginFB];
+    
+    
 }
-#warning 登录接口暂时未开放
+- (void)loginFB
+{
+
+    //登录 添加参数 允许获取好友信息
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+      login.loginBehavior = FBSDKLoginBehaviorWeb;
+    //获取授权
+    [login logInWithReadPermissions:@[@"user_friends",@"email"]
+                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                             NSLog(@"用户信息 111:%@", result.token);
+                                NSLog(@"%@",result.token.tokenString);
+                                
+                                        NSLog(@"---%@",result.grantedPermissions);
+                                BOOL isHaveEmail =[result.grantedPermissions containsObject:@"email"];
+                                
+                                
+                                if (result.token) {
+                                                [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil]
+                                                 startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                                                     
+                                                      NSLog(@"用户信息2" );
+                                                     if (error) {
+                                                          NSLog(@"%@",error);
+                                                        
+                                    
+                                                     }else{
+                                                          NSLog(@"用户信息:%@", result);
+                                                         _userID = result[@"id"];
+                                                         if (_userID) {
+                                                             
+                                                             if (isHaveEmail) {
+                                                                 NSLog(@"haha");
+                                                                 [self fetchEmail];
+                                                                 
+                                                             }
+                                                         }
+                                                     }
+                                                 }];
+                                            }
+                                if ([result.grantedPermissions containsObject:@"user_friends"]) {
+                                    [self fetchData];
+            
+                                }else {
+                                    [self dismissViewControllerAnimated:YES completion:NULL];
+                                }
+                            }];
+
+}
+//
+- (void)fetchEmail
+{
+
+    //        初始化请求
+ 
+    NSString *string = [NSString stringWithFormat:@"%@",_userID];
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:string
+                                  parameters:@{@"fields":@"email"}];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        
+        if (!error) {
+            NSLog(@"fetched email:%@", result);
+            
+        }else{
+            NSLog(@"%@",error);
+        }
+
+    }];
+
+   
+
+}
+//获取好友列表
+- (void)fetchData
+{
+    
+//        初始化请求
+    
+         FBSDKGraphRequest* request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/taggable_friends?limit=100"
+                                                       parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"
+                                                                     }];
+    
+    
+    //    发送请求
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"Picker loading error:%@", error);
+            if (!error.userInfo[FBSDKErrorLocalizedDescriptionKey]) {
+                [[[UIAlertView alloc] initWithTitle:@"Oops"
+                                            message:@"There was a problem fetching the list"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            }
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            
+            //请求成功
+            
+            NSArray *friendArray =  [NSArray arrayWithArray:result[@"data"]] ;
+           
+            NSLog(@"好友数量_______%ld",friendArray.count);
+            
+        }
+    }];
+}
+
+
+
+
+
 - (IBAction)showLoginView:(UIButton *)sender {
-    NSLog(@"2");
+#warning 暂时跳过此阶段
+    [[NSUserDefaults standardUserDefaults]setObject:@"362" forKey:@"userId"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [self enterHostView];
+    
+    
+    return;
     if (self.lvc == nil) {
         self.lvc = [[LoginView alloc]init];
         self.lvc.delegate = self;
@@ -136,68 +303,94 @@
     }
 }
 
+
+
 #pragma mark RegisterViewDelegate
 -(void)registerView:(RegisterView *)registerView withAttributes:(NSDictionary *)attributes{
-    [self.view bringSubviewToFront:self.activityIndicatorView];
-    [self.activityIndicatorView startAnimating];
-    [ModeAccountAPI signupWithParams:attributes andCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {
+    if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        NSMutableDictionary* params = [attributes mutableCopy];
+        [params removeObjectForKey:@"error"];
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+        [self.activityIndicatorView startAnimating];
+        [ModeAccountAPI signupWithParams:params andCallback:^(id obj) {
             [self.activityIndicatorView stopAnimating];
-            NSString* token = [obj objectForKey:@"token"];
-            NSNumber* user_id = [obj objectForKey:@"user_id"];
-            NSString* utime = [obj objectForKey:@"utime"];
-            NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-            [ud setObject:token forKey:@"token"];
-            [ud setObject:user_id forKey:@"user_id"];
-            [ud setObject:utime forKey:@"token_utime"];
-            [ud synchronize];
-            [NSThread sleepForTimeInterval:2.f];
-            [self enterHostView];
-            
-            
-        } else {
-#warning 这里要根据错误error信息来判断提示用户出现什么类型的错误
+            if ([obj isKindOfClass:[NSNull class]]) {//返回空 网络问题
+                NSString* errorInfo = @"Net error!Cannot connect host servers.";
+                [self showAlertViewWithErrorInfo:errorInfo];
+            } else {
+                BOOL flag = [obj boolValue];
+                if (flag) {//返回yes 成功获得token 并且登陆
+                    [self enterHostView];
+                } else {//用户名或密码问题
+                    NSString* errorInfo = @"Email has exist. Please try it again.";
+                    [self showAlertViewWithErrorInfo:errorInfo];
+                }
+            }
+        }];
+    } else {
+        [self showAlertViewWithErrorInfo:@"Error input."];
+    }
+    
+}
+#pragma mark LoginViewDelegate
+-(void)loginView:(LoginView *)loginView withAttributes:(NSDictionary *)attributes{
+    if ([[attributes objectForKey:@"error"]isKindOfClass:[NSNull class]]) {
+        NSMutableDictionary* params = [attributes mutableCopy];
+        [params removeObjectForKey:@"error"];
+        [self.view bringSubviewToFront:self.activityIndicatorView];
+        [self.activityIndicatorView startAnimating];
+        [ModeAccountAPI loginWithParams:params andCallback:^(id obj) {
             [self.activityIndicatorView stopAnimating];
-            UILabel* label = [[UILabel alloc]init];
-            label.bounds = CGRectMake(0, 0, 150, 30);
-            label.text = @"请检查网络／已有相同账号";
-            label.alpha = 0.f;
-            label.textColor = [UIColor redColor];
-            [self.view addSubview: label];
-            [UIView animateWithDuration:.5f animations:^{
-                label.alpha = 1.f;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:.5f animations:^{
-                    label.alpha = 0.f;
-                } completion:^(BOOL finished) {
-                    [label removeFromSuperview];
-                }];
-            }];
-            
-        }
-        
-    }];
+            if ([obj isKindOfClass:[NSNull class]]) {
+                NSString* errorInfo = @"Net error!Fail to connect host servers.";
+                [self showAlertViewWithErrorInfo:errorInfo];
+            } else {
+                BOOL flag = [obj boolValue];
+                if (flag) {//返回yes 成功获得token 并且登陆
+                    [self enterHostView];
+                } else {//用户名或密码问题
+                    NSString* errorInfo = @"Email or Password error.";
+                    [self showAlertViewWithErrorInfo:errorInfo];
+                }
+            }
+        }];
+    } else {
+        [self showAlertViewWithErrorInfo:@"Error input."];
+    }
+    
+    
+    
+    
+}
+
+
+#pragma mark ShowAlertView
+-(void)showAlertViewWithErrorInfo:(NSString*)errorInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:errorInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
 }
 -(void)enterHostView{
     dispatch_async(dispatch_get_main_queue(), ^{
         JVFloatingDrawerViewController*jvc =[AppDelegate globalDelegate].drawerViewController;
-        [[AppDelegate globalDelegate]configureDrawerViewController];
+//        [[AppDelegate globalDelegate]configureDrawerViewController];
         [AppDelegate globalDelegate].window.rootViewController = jvc;
     }) ;
 }
--(void)dealloc{
-    
-    
-    NSLog(@"loginVc dealloc");
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)viewWillAppear:(BOOL)animated{
+    [AppDelegate globalDelegate].drawerViewController = nil;
+    [AppDelegate globalDelegate].leftDrawerViewController = nil;
+    [AppDelegate globalDelegate].homeViewController = nil;
+    [AppDelegate globalDelegate].drawerAnimator = nil;
+
 }
-*/
+
 
 @end

@@ -7,16 +7,18 @@
 //
 
 #import "ShareViewController.h"
-#import "ModeGood.h"
+#import "GoodItem.h"
 #import "SDWebImage/SDWebImageManager.h"
 #import "SDWebImage/UIImageView+WebCache.h"
-#import <FBSDKShareKit/FBSDKShareKit.h>
+#import "UIImage+PartlyImage.h"
 @interface ShareViewController()<UITextViewDelegate>
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *shareImageViews;
 @property (weak, nonatomic) IBOutlet UIButton *shareFacebookBtn;
 
 @property (weak, nonatomic) IBOutlet UITextView *shareTextContent;
 
+@property (weak, nonatomic) IBOutlet UIView *editView;
+@property (weak, nonatomic) UIImage *shareImage;
 @end
 
 
@@ -27,63 +29,88 @@
     self.shareFacebookBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     self.shareFacebookBtn.layer.borderWidth = 1.f;
     self.view.backgroundColor = [UIColor clearColor];
-//    self.shareTextContent.clearsOnInsertion = YES;
     self.shareTextContent.delegate = self;
     for (int i = 0; i<self.shareImageViews.count; i++) {
-        ModeGood* modeGood = self.nineGoods[i];
+        GoodItem* goodItem = self.nineGoods[i];
         UIImageView*iv=self.shareImageViews[i];
-        iv.image = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[modeGood.img_link lastPathComponent]];
+        iv.image = [UIImage getSubImageByImage:[[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[goodItem.defaultImage lastPathComponent]] andImageViewFrame:iv.frame];
     }
     
 }
-// 分享照片
-- (void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
-    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = image;
-    photo.userGenerated = YES;
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = @[photo];
+-(UIImage *)getImageFromView:(UIView *)view{
+    //创建一个画布
+    UIGraphicsBeginImageContext(view.frame.size);
+    //    把view中的内容渲染到画布中
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //    把画布中的图片取出来
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //结束渲染
+    UIGraphicsEndImageContext();
+    return image;
 }
-
-
 
 - (IBAction)shareFacebook:(UIButton *)sender {
     [sender setSelected:!sender.selected];
-    FBSDKLikeControl *button = [[FBSDKLikeControl alloc] init];
-    button.objectID = @"https://www.facebook.com/FacebookDevelopers";
-    [self.view addSubview:button];
+    
+    NSArray *activityItems;
+    
+    if (self.shareImage != nil) {
+        activityItems = @[self.shareTextContent, self.shareImage];
+    } else {
+        activityItems = @[self.shareTextContent];
+    }
+    
+    UIActivityViewController *activityController =
+    [[UIActivityViewController alloc] initWithActivityItems:activityItems
+                                      applicationActivities:nil];
+    
+    [self presentViewController:activityController
+                       animated:YES completion:nil];
+    
+    
 }
+
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"ShareViewController addObserver");
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(modificationPosition:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    
+    UIImage* image = [self getImageFromView:self.editView];
+    self.shareImage = image;
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+//    UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"提示" message:@"图片保存完成" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//    [alertView show];
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"ShareViewController removeObserver");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
+
 -(void)modificationPosition:(NSNotification*)noti{
-    
+#warning 高度有问题
     float animationDuration = [[noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
-    CGRect startRect = [[noti.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
+    CGRect startRect  = [[noti.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
     CGRect endRect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
     CGRect rect = self.view.frame;
-    rect.origin.y -= (startRect.origin.y - endRect.origin.y)>0?(startRect.origin.y - endRect.origin.y)-65.f:(startRect.origin.y - endRect.origin.y)+65.f;
+    rect.origin.y -= CGRectGetMinY(startRect) - CGRectGetMinY(endRect);
     [UIView animateWithDuration:animationDuration animations:^{
         self.view.frame = rect;
     } completion:nil];
 }
+
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     if ([self.shareTextContent.text isEqualToString:@"My Collection..."]) {
         self.shareTextContent.text = @"";
+        self.shareTextContent.textColor = [UIColor blackColor];
     }
 }
 - (IBAction)sendShareAndPostNotification:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:)]) {
-        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text];
+    if ([self.delegate respondsToSelector:@selector(shareViewController:shareNineModeGoodsToOthers:andTextContent:startAnimation:shareImagesToFacebook:)]) {
+        [self.delegate shareViewController:self shareNineModeGoodsToOthers:self.nineGoods andTextContent:self.shareTextContent.text startAnimation:self.avtivityView shareImagesToFacebook:self.shareImage];
     }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

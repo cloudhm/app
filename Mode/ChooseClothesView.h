@@ -25,14 +25,14 @@
 #import <UIKit/UIKit.h>
 #import <MDCSwipeToChoose/MDCSwipeToChoose.h>
 
-@class ModeGood;
+@class GoodItem;
 
 @interface ChooseClothesView : MDCSwipeToChooseView
 
-@property (nonatomic, strong, readonly) ModeGood *modeGood;
+@property (nonatomic, strong, readonly) GoodItem *goodItem;
 
 - (instancetype)initWithFrame:(CGRect)frame
-                       modeGood:(ModeGood *)modeGood
+                       goodItem:(GoodItem *)goodItem
                       options:(MDCSwipeToChooseViewOptions *)options;
 
 @end

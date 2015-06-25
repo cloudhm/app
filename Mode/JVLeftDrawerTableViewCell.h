@@ -10,7 +10,7 @@
 //左视图表格自定义单元
 @interface JVLeftDrawerTableViewCell : UITableViewCell
 
-@property (nonatomic, copy) NSString *titleText;
-@property (nonatomic, strong) UIImage *iconImage;
+//@property (nonatomic, copy) NSString *titleText;
+//@property (nonatomic, strong) UIImage *iconImage;
 
 @end

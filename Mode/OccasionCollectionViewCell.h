@@ -8,6 +8,16 @@
 
 #import "CustomCollectionViewCell.h"
 #import "ModeSysList.h"
+//@class OccasionCollectionViewCell;
+//@protocol OccasionCollectionViewCellDelegate <NSObject>
+//
+//@optional
+//-(void)occasionCollectionViewCell:(OccasionCollectionViewCell*)occasionCollectionViewCell didSelectedWithParams:(NSDictionary*)params;
+//
+//@end
+
+
 @interface OccasionCollectionViewCell : CustomCollectionViewCell
 @property (nonatomic,strong) ModeSysList* occasion;
+//@property (weak, nonatomic) id <OccasionCollectionViewCellDelegate> delegate;
 @end

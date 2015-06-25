@@ -10,12 +10,12 @@
 typedef void (^MyCallback)(id obj);
 @interface ModeWishlistAPI : NSObject
 
-//获取用户的wishlist
-+(void)requestWishlistsAndCallback:(MyCallback)callback;
+//获取用户的collections
++(void)requestCollectionsAndCallback:(MyCallback)callback;
 
-//按ID获取用户wishlist
-+(void)requestWishlistsByWishlist_ID:(NSString*)wishlist_id AndCallback:(MyCallback)callback;
+//按ID获取用户collectionItems
++(void)requestCollectionItems:(NSNumber*)collectionId AndCallback:(MyCallback)callback;
 
-//获取用户最新的wishlist
-+(void)requestNewestWishlistAndCallback:(MyCallback)callback;
+//分享九宫格
++(void)shareWishlistBy:(NSDictionary*)params andCallback:(MyCallback)callback;
 @end

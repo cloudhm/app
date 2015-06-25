@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define LOGINVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,210)
 @class LoginView;
 @protocol LoginViewDelegate <NSObject>
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//倒计时时间转换
 @interface ConvertTime : NSObject
 +(NSDictionary*)convertLastTimeByTimeInterval:(NSNumber*)timeNum;
 

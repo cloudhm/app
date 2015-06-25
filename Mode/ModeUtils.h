@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//主页面数据库初始化 用预制的plist文件
 @interface ModeUtils : NSObject
 +(void)initDatabase;
 @end

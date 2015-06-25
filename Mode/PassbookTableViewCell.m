@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     self.brand_img.layer.borderWidth = 1.f;
     self.brand_img.layer.borderColor = [UIColor grayColor].CGColor;
-    self.brand_img.layer.cornerRadius = 20.f;
+    self.brand_img.layer.cornerRadius = 21.f;
     self.brand_img.layer.masksToBounds = YES;
     
     self.hourLabel.layer.borderWidth = 1.5f;
@@ -23,7 +23,6 @@
     self.secondLabel.layer.borderWidth = 1.5f;
     self.secondLabel.layer.borderColor = [UIColor blackColor].CGColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

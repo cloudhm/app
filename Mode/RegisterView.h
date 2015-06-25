@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define REGISTERVIEWFRAME CGRectMake (0, self.view.bounds.size.height,self.view.bounds.size.width,260)
 @class RegisterView;
 @protocol RegisterViewDelegate <NSObject>
 

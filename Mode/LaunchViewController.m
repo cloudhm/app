@@ -9,6 +9,7 @@
 #import "LaunchViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+
 @interface LaunchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
 @property (weak, nonatomic) AppDelegate *delegate;
@@ -16,16 +17,12 @@
 
 @implementation LaunchViewController
 
-#pragma mark - 暂时无法隐藏状态栏
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
--(void)dealloc{
+-(void)viewDidDisappear:(BOOL)animated{
     self.backgroundView = nil;
-    NSLog(@"本页面销毁");
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.view.backgroundColor = [UIColor colorWithRed:214/255.f green:214/255.f  blue:214/255.f  alpha:1];
 }
 -(void)viewWillAppear:(BOOL)animated{

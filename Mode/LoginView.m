@@ -21,6 +21,8 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        
+        
         UIImageView* bgIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"secret_page.png"]];
         self.bgImageView = bgIV;
         [self addSubview:bgIV];
@@ -48,7 +50,7 @@
         firstTF.borderStyle = UITextBorderStyleNone;
         firstTF.placeholder = @"JOIN WITH EMAIL";
         [firstTF setValue:[UIFont fontWithName:@"Helvetica" size:16.f] forKeyPath:@"_placeholderLabel.font"];
-        firstTF.clearsOnBeginEditing = YES;
+        firstTF.clearsOnBeginEditing = NO;
         firstTF.returnKeyType=UIReturnKeyNext;
         self.tf1 = firstTF;
         [self addSubview:self.tf1];
@@ -71,15 +73,16 @@
         self.btn = b;
         [self addSubview:self.btn];
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
+    
     self.bgImageView.frame = self.bounds;
-
+    
     float toppadding = 10.f;
     self.label.frame = CGRectMake(0, toppadding, self.bounds.size.width, 20.f);
     float padding = 10.f;
@@ -99,8 +102,9 @@
         (![self.tf1.text isEqualToString:@"JOIN WITH EMAIL"])&&
         (![self.tf2.text isEqualToString:@""])&&
         [self.delegate respondsToSelector:@selector(loginView:withAttributes:)]) {
-#warning 登录接口暂时未开放
-        [self.delegate loginView:self withAttributes:@{}];
+        [self.delegate loginView:self withAttributes:@{@"email":self.tf1.text,@"password":self.tf2.text,@"error":[NSNull null]}];
+    } else {
+        [self.delegate loginView:self withAttributes:@{@"email":@"",@"password":@"",@"error":@"error"}];
     }
 }
 @end

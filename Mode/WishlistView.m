@@ -8,18 +8,19 @@
 
 #import "WishlistView.h"
 #import "SDWebImageManager.h"
-#import "ModeGood.h"
+#import "GoodItem.h"
 #import "UIImageView+WebCache.h"
+#import "UIImage+PartlyImage.h"
 @interface WishlistView()
 @property (nonatomic,weak) UIImageView* mainImageView;
 @property (nonatomic,weak) UIImageView* couponImageView;
 @property (nonatomic,weak) UIButton* delBtn;
 @end
 @implementation WishlistView
--(instancetype)initWithFrame:(CGRect)frame andModeGood:(ModeGood*)modeGood andWithoutBtn:(BOOL)withoutBtn{
+-(instancetype)initWithFrame:(CGRect)frame andGoodItem:(GoodItem*)goodItem andWithoutBtn:(BOOL)withoutBtn{
     self = [super initWithFrame:frame];
     if (self) {
-        _modeGood = modeGood;
+        _goodItem = goodItem;
         self.backgroundColor = [UIColor whiteColor];
         [self createImageView];
         [self createCouponView];
@@ -27,7 +28,7 @@
             [self createDelBtn];
         }
 
-        if (![_modeGood.has_coupon isEqualToString:@"true"]) {
+        if (![_goodItem.hasCoupon isEqualToString:@"true"]) {
             self.couponImageView.alpha = 0.f;
         } else {
             self.couponImageView.alpha = 1.f;
@@ -40,9 +41,8 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     if (self.selected == YES) {
-        self.delBtn.enabled = YES;
-        self.delBtn.alpha = 1.f;
-        
+        self.delBtn.enabled = NO;//按钮不显示
+        self.delBtn.alpha = 0.f;//按钮不显示
     } else {
         self.delBtn.enabled = NO;
         self.delBtn.alpha = 0.f;
@@ -62,15 +62,20 @@
 //            imageView.image = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[_modeGood.img_link lastPathComponent]];
 //        }];
 //    }
-    [imageView sd_setImageWithURL:[NSURL URLWithString:_modeGood.img_link] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [[SDImageCache sharedImageCache]storeImage:image forKey:[_modeGood.img_link lastPathComponent] toDisk:YES];
+    
+    [imageView sd_setImageWithURL:[NSURL URLWithString:_goodItem.defaultThumb] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        imageView.image = [UIImage getSubImageByImage:image andImageViewFrame:imageView.frame];//根据横宽比切图
+        [[SDImageCache sharedImageCache]storeImage:image forKey:[_goodItem.defaultThumb lastPathComponent] toDisk:YES];
     }];
+    
+    
     [self addSubview:imageView];
     self.mainImageView = imageView;
 }
 -(void)createCouponView{
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(5.f, 5.f, 20.f, 10.f)];
-    imageView.image = [UIImage imageNamed:@"coupon_normal.png"];
+    UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0.f, 0.f, 21.f, 20.f)];
+    imageView.image = [UIImage imageNamed:@"copper_normal.png"];
+    imageView.backgroundColor = [UIColor clearColor];
     [self addSubview:imageView];
     self.couponImageView = imageView;
     [self bringSubviewToFront:self.couponImageView];
@@ -85,7 +90,7 @@
 }
 -(void)click:(UIButton*)btn{
 //发送通知给控制器，要求控制器来执行删除视图及更新数据库的操作
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"removeNopedGood" object:self userInfo:@{@"goods_id":self.modeGood.goods_id}];
+//    [[NSNotificationCenter defaultCenter]postNotificationName:@"removeNopedGood" object:self userInfo:@{@"goods_id":self.modeGood.goods_id}];
 }
 //selected属性变更时，刷新本控件 和 刷新子视图
 - (void)setSelected:(BOOL)selected {

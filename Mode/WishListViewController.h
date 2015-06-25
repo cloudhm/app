@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//wishlist展示页面
+//wishlist展示页面  
 @interface WishListViewController : UIViewController
 
 @property(strong, nonatomic) NSArray* receiveArr;

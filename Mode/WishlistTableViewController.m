@@ -13,102 +13,182 @@
 #import "WishListViewController.h"
 #import "AppDelegate.h"
 #import "UIColor+HexString.h"
-@interface WishlistTableViewController ()
+#import "WishListViewController.h"
+#import "ModeProfilesAPI.h"
+#import "ProfileInfo.h"
+#import "QBArrowRefreshControl.h"
+#import "TAlertView.h"
+#import "CashViewController.h"
+#import "CollectionItem.h"
+#import "WishlistHeadView.h"
+#import "WishlistTableSectionHeaderView.h"
+@interface WishlistTableViewController ()<QBRefreshControlDelegate,WishlistHeadViewDelegate>
 
-@property (strong, nonatomic) NSMutableArray *wishlists;
-@property (strong, nonatomic) UIRefreshControl *refresh;
-@property (weak, nonatomic) IBOutlet UIImageView *brand_img;
+@property (strong, nonatomic) NSMutableArray *modeCollections;
+
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
+
+
+@property (weak, nonatomic) IBOutlet WishlistHeadView *headV;
+
+@property (strong, nonatomic) ProfileInfo *profileInfo;
 
 @end
 
 @implementation WishlistTableViewController
+
+#pragma mark ShowAlertView
+-(void)showAlertViewWithErrorInfo:(NSString*)errorInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:errorInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
+-(void)gotoWishlistController:(NSNotification*)noti{
+    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[self.parentViewController class]]
+        &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    } else {
+        UIAlertView* av = [[UIAlertView alloc]initWithTitle:@"Caution" message:@"Please choose some your liked fashion goods first" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSLog(@"wishlistTable");
+        [av show];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
+        [self.navigationController presentViewController:wlvc animated:YES completion:nil];
+    }
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
+}
+
 - (IBAction)actionToggleLeftDrawer:(UIBarButtonItem *)sender {
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
--(NSMutableArray *)wishlists{
-    if (!_wishlists) {
-        _wishlists = [NSMutableArray array];
+
+-(NSMutableArray *)modeCollections{
+    if (!_modeCollections) {
+        _modeCollections = [NSMutableArray array];
     }
-    return _wishlists;
+    return _modeCollections;
 }
--(void)initUI{
-    self.brand_img.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.brand_img.layer.borderWidth = 1.f;
-    self.brand_img.layer.cornerRadius = 29.f;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Profile";
+    self.tableView.sectionHeaderHeight = 30;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
+    [[UIBarButtonItem appearance]setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60.f) forBarMetrics:UIBarMetricsDefault];
+    
     if ([[[UIDevice currentDevice]systemVersion ]floatValue]>=7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    [self initUI];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-    [self getDataFromNetwork];
-    self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+
+    self.tableView.tableHeaderView = self.headV;
+    UIView* view = self.tableView.tableHeaderView;
+    view.frame = CGRectMake(0, 0, 0, 125);
+    self.tableView.tableHeaderView = view;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.refresh = [[UIRefreshControl alloc]init];
-    [self.refresh addTarget:self action:@selector(refreshView) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refresh];
+    self.headV.delegate = self;
+    [self getDataFromNetwork];
+//    self.tableView.tableHeaderView.bounds = CGRectMake(0, 0, 0, 185);
+ 
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.tableView addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.tableView addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
+    
+    NSLog(@"%@",NSStringFromCGRect(self.headV.frame));
+    
 }
--(void)refreshView{
-    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
-        [self.refresh endRefreshing];
-        if (![obj isKindOfClass:[NSNull class]]) {
-            [self.wishlists removeAllObjects];
-            [self.wishlists addObjectsFromArray:obj];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"....");
-        }
-    }];
+#pragma mark - QBRefreshControlDelegate
+
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl{
+    [self getDataFromNetwork];
 }
+
 -(void)getDataFromNetwork{
-    [ModeWishlistAPI requestWishlistsAndCallback:^(id obj) {
+    [ModeProfilesAPI requestProfilesAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];
         if (![obj isKindOfClass:[NSNull class]]) {
-            [self.wishlists removeAllObjects];
-            [self.wishlists addObjectsFromArray:obj];
+            self.headV.profileInfo = obj;
+            self.profileInfo = obj;
+            UIView* view = self.tableView.tableHeaderView;
+            if (self.profileInfo.likes.integerValue == 0) {
+                view.frame = CGRectMake(0, 0, 0, 125);
+            } else {
+                view.frame = CGRectMake(0, 0, 0, 185);
+            }
+            self.tableView.tableHeaderView = view;
+            [self.headV setNeedsLayout];
+        } else {
+            [self showAlertViewWithErrorInfo:@"Net error.Please try it again."];
+        }
+        
+    }];
+    [ModeWishlistAPI requestCollectionsAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];
+        if (![obj isKindOfClass:[NSNull class]]) {
+            [self.modeCollections removeAllObjects];
+            [self.modeCollections addObjectsFromArray:obj];
             [self.tableView reloadData];
         } else {
             NSLog(@"failure");
         }
     }];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-#pragma mark - Table view data source
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ModeWishlist* modewishlist = self.wishlists[indexPath.row];
-    NSLog(@"cell:%f",[modewishlist getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]);
-    return [modewishlist getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]+170.f+15.f;
+    ModeCollection* modeCollection = self.modeCollections[indexPath.row];
+    return [modeCollection getCommentHeightByLabelWidth:(CGRectGetWidth(tableView.bounds)-80.f-20.f)]+170.f+15.f;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.wishlists.count;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30.f;
+    return self.modeCollections.count;
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    WishlistTableSectionHeaderView* sectionHeaderView = [WishlistTableSectionHeaderView headerViewWithTableView:tableView];
+    if (self.modeCollections.count == 0) {
+        sectionHeaderView.headerString = @"Nothing";
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        sectionHeaderView.headerString = @"TASTE STUDIO";
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleDefault;
+    }
+    return sectionHeaderView;
+}
 
+#pragma mark -UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* reuseIdentifier = @"Cell";
     WishlistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"WishlistTableViewCell" owner:nil options:nil]lastObject];
     }
-    cell.modeWishlist = self.wishlists[indexPath.row];
+    cell.modeCollection = self.modeCollections[indexPath.row];
     return cell;
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -116,17 +196,31 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.tableView.userInteractionEnabled = NO;
-    ModeWishlist* wishlist = self.wishlists[indexPath.row];
-    [ModeWishlistAPI requestWishlistsByWishlist_ID:wishlist.wishlist_id AndCallback:^(id obj) {
+    ModeCollection* modeCollection = self.modeCollections[indexPath.row];
+    [ModeWishlistAPI requestCollectionItems:modeCollection.collectionId AndCallback:^(id obj) {
         if(![obj isKindOfClass:[NSNull class]]) {
-            [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
-//            WishListViewController*wvc = [[WishListViewController alloc]init];
-//            [self.navigationController pushViewController:wvc animated:YES];
+            NSArray* array = obj;
+            if (array.count>0) {
+                self.tableView.userInteractionEnabled = YES;
+                [self performSegueWithIdentifier:@"gotoWishlist2" sender:obj];
+            } else {
+                [self showAlertViewWithErrorInfo:@"That is null link"];
+                
+            }
+            
         } else {
             self.tableView.userInteractionEnabled = YES;
         }
     }];
 }
+
+////隐藏多余的分割线
+//- (void)setExtraCellLineHidden: (UITableView *)tableView{
+//    UIView *view =[ [UIView alloc]init];
+//    view.backgroundColor = [UIColor clearColor];
+//    [tableView setTableFooterView:view];
+////    [tableView setTableHeaderView:view];
+//}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,14 +254,25 @@
     return YES;
 }
 */
+#pragma mark WishlistHeadViewDelegate
+-(void)wishlistHeadView:(WishlistHeadView *)wishlistHeadView didClickGoToCashListWith:(NSString *)cash{
+    [self performSegueWithIdentifier:@"gotoCash" sender:cash];
+}
 
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    WishListViewController* wvc=[segue destinationViewController];
-    wvc.receiveArr = sender;
+    if ([segue.identifier isEqualToString:@"gotoCash"]) {
+        CashViewController*cc = [segue destinationViewController];
+        cc.currentCash = sender;
+    } else if ([segue.identifier isEqualToString:@"gotoWishlist2"]) {
+        UINavigationController* navi=[segue destinationViewController];
+        WishListViewController* wvc = (WishListViewController*)navi.topViewController;
+        wvc.receiveArr = sender;
+    }
+    
 }
 
 

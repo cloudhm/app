@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppsFlyerTracker.h"
 
 
 
 @class JVFloatingDrawerViewController;//分栏控制器
 @class JVFloatingDrawerSpringAnimator;//主页面
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,AppsFlyerTrackerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -23,14 +24,17 @@
 //视图控制器（在实现里用懒加载）
 @property (nonatomic, strong) UITableViewController *leftDrawerViewController;
 @property (nonatomic, strong) UIViewController *homeViewController;
-//@property (nonatomic, strong) UITableViewController *profileViewController;
-@property (strong, nonatomic) UITableViewController *brandRunwayViewController;
+
+
 @property (strong, nonatomic) UIViewController *wishlistViewController;
 @property (strong, nonatomic) UITableViewController *wishlistTableViewController;
 @property (strong, nonatomic) UIViewController *passbookViewController;
 @property (nonatomic,strong) UIViewController* launchViewController;
 @property (nonatomic, strong, readonly) UIStoryboard *drawersStoryboard;
 @property (strong, nonatomic) UIViewController *orderViewController;
+
+@property (strong, nonatomic) UIViewController *settingViewController;
+@property (nonatomic,strong) UIViewController* feedbackViewController;
 // ModeDelegate 的单例
 + (AppDelegate *)globalDelegate;
 

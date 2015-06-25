@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+//Order数据模型 暂时没有网络数据信息量  
 @interface ModeOrder : NSObject
 #warning 只是暂时根据效果图更改
 @property (copy, nonatomic) NSString *clothesTitle;

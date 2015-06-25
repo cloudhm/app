@@ -9,6 +9,14 @@
 #import "CustomCollectionViewCell.h"
 
 #import "ModeSysList.h"
+//@class BrandCollectionViewCell;
+//@protocol BrandCollectionViewCellDelegate <NSObject>
+//
+//@optional
+//-(void)brandCollectionViewCell:(BrandCollectionViewCell*)brandCollectionViewCell didSelectedWithParams:(NSDictionary*)params;
+//
+//@end
 @interface BrandCollectionViewCell : CustomCollectionViewCell
 @property (strong, nonatomic) ModeSysList *brand;
+//@property (weak, nonatomic) id <BrandCollectionViewCellDelegate> delegate;
 @end

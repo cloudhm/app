@@ -9,23 +9,37 @@
 #import "OccasionViewController.h"
 #import "LikeOrNopeViewController.h"
 #import "ModeSysAPI.h"
-#import <FMDB.h>
 #import "CustomCollectionViewFlowLayout.h"
 #import "OccasionCollectionViewCell.h"
 #import "ModeRunwayAPI.h"
-#import "ModeGood.h"
 #import "ModeSysList.h"
 #import "ModeWishlistAPI.h"
-@interface OccasionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+#import "ModeDatabase.h"
+#import "PrefixHeaderDatabase.pch"
+#import "TAlertView.h"
+#import "QBArrowRefreshControl.h"
+@interface OccasionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,QBRefreshControlDelegate>
 @property (weak, nonatomic) UICollectionView *cv;
-@property (assign, nonatomic) NSInteger num;
+
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (strong, nonatomic) UIRefreshControl *refresh;
+@property (strong, nonatomic) QBArrowRefreshControl *myRefreshControl;
 @end
 
 @implementation OccasionViewController
 
 static NSString *reuseIdentifier=@"MyCell";
+#pragma mark ShowAlertView
+-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+    alert.tapToClose = NO;
+    alert.timeToClose = 1.f;
+    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+    alert.style = TAlertViewStyleInformation;
+    [alert showAsMessage];
+}
 //懒加载可变数组
 -(NSMutableArray *)dataArray{
     if (!_dataArray) {
@@ -34,16 +48,10 @@ static NSString *reuseIdentifier=@"MyCell";
     return _dataArray;
 }
 
-//由于需要整页跳转，因此是按分区设置内容格式，因此可变数组应为二维数组
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    [self readDataFromLocalDatabase];
-    
-    
-    
-    
+    [self.dataArray addObjectsFromArray:[ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:OCCASION andSelectConditionValue:nil]];
     //设置集合视图的框架位置
     CGRect frame = CGRectMake(5.f, 0.f, self.view.bounds.size.width-10.f, self.view.bounds.size.height-5.f -44.f - 56.f);
     
@@ -51,7 +59,6 @@ static NSString *reuseIdentifier=@"MyCell";
     CustomCollectionViewFlowLayout * cvLayout = [[CustomCollectionViewFlowLayout alloc]initWithFrame:frame];
     UICollectionView* occasionCV = [[UICollectionView alloc]initWithFrame:frame collectionViewLayout:cvLayout];
     occasionCV.backgroundColor = [UIColor clearColor];
-//    occasionCV.pagingEnabled = YES;
     occasionCV.delegate = self;
     occasionCV.dataSource = self;
     occasionCV.showsVerticalScrollIndicator = NO;
@@ -62,98 +69,69 @@ static NSString *reuseIdentifier=@"MyCell";
     //注册集合视图单元格
     [self.cv registerClass:[OccasionCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    self.refresh = [[UIRefreshControl alloc]init];
-    [self.refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    self.refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
-    [self.cv addSubview:self.refresh];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -400, 320, 400)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    [self.cv addSubview:bgView];
+    QBArrowRefreshControl *refreshControl = [[QBArrowRefreshControl alloc] init];
+    refreshControl.delegate = self;
+    [self.cv addSubview:refreshControl];
+    self.myRefreshControl = refreshControl;
+    
+
 }
+#pragma mark - QBRefreshControlDelegate
+
+- (void)refreshControlDidBeginRefreshing:(QBRefreshControl *)refreshControl
+{
+    [self refreshData];
+}
+//刷新数据
 -(void)refreshData{
-    NSLog(@"update");
-    [ModeSysAPI requestOccasionListAndCallback:^(id obj) {
-        [self.refresh endRefreshing];
-        if (![obj isKindOfClass:[NSNull class]]) {
+    [ModeSysAPI requestMenuListAndCallback:^(id obj) {
+        [self.myRefreshControl endRefreshing];//返回值进入block块中停止刷新动画
+        if ([obj isKindOfClass:[NSNull class]]) {
+            NSString* cautionInfo = @"Net error!Fail to connect host servers.";
+            [self showAlertViewWithCautionInfo:cautionInfo];
+        } else if ([obj boolValue] == YES || [obj boolValue] == NO) {
             [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:obj];
-            NSLog(@"刷新视图");
-            [self saveAllResponseDataByObject:obj];
+            [self.dataArray addObjectsFromArray: [ModeDatabase readDatabaseFromTableName:HOME_LIST_TABLENAME andSelectConditionKey:OCCASION andSelectConditionValue:nil]];
             [self.cv reloadData];
-            [self.cv setNeedsLayout];
-        } else {
-            UILabel * l = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
-            l.text = @"已是最新版";
-            l.textColor = [UIColor redColor];
-            l.center = self.view.center;
-            l.alpha = 0.f;
-            [self.view addSubview:l];
-            [UIView animateWithDuration:1.f animations:^{
-                l.alpha = 1.f;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:1.f animations:^{
-                    l.alpha = 0.f;
-                } completion:^(BOOL finished) {
-                    [l removeFromSuperview];
-                }];
-            }];
+            [self.cv setNeedsDisplay];
         }
     }];
-    
-}
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"cccc");
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self getData];
+    
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
+
+    [self refreshData];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
 }
+//接受到通知后响应此方法
 -(void)gotoChoose:(NSNotification*)noti{
-    NSDictionary* params = @{@"mode":[noti.userInfo objectForKey:@"mode"],@"mode_val":[noti.userInfo objectForKey:@"mode_val"]};
+    NSDictionary* params = @{@"name":[noti.userInfo objectForKey:@"name"],@"source":[noti.userInfo objectForKey:@"source"]};
     NSLog(@"页面即将切换");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ovcToLvc" object:nil];
-    [ModeRunwayAPI requestGetNewWithParams:params andCallback:^(id obj) {
+    [ModeRunwayAPI requestRunwayWithParams:params andCallback:^(id obj) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoChoose:) name:@"ovcToLvc" object:nil];
         if ([obj isKindOfClass:[NSNull class]]) {
+            [self showAlertViewWithCautionInfo:@"Bad net.Please hold a mement."];
             return;
         }
-        NSArray* allItems = [obj objectForKey:@"allItems"];
-        [self saveDatabaseWithObj:allItems];
-        [self performSegueWithIdentifier:@"ovcToLvc" sender:@{@"title":[noti.userInfo objectForKey:@"category"],@"intro_desc":[obj objectForKey:@"intro_desc"],@"intro_title":[obj objectForKey:@"intro_title"]}];
+        NSArray* allItems = obj[1];
+        [ModeDatabase saveGetNewDatabaseIntoTableName:LIKENOPE_TABLENAME andTableElements:LIKENOPE_ELEMENTS andObj:allItems];
+        [self performSegueWithIdentifier:@"ovcToLvc" sender:obj];
+        
     }];
 }
--(void)saveDatabaseWithObj:(id)obj{
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase* db = [FMDatabase databaseWithPath:path];
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"DROP TABLE likenope"];//只是为了清空原先加载的16张图片数据模型
-        if (result) {
-            NSLog(@"成功删除");
-        } else {
-            NSLog(@"该表不存在或未删除");
-        }
-        result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS likenope (id integer primary key autoincrement,goods_id,brand_name,brand_img_link,img_link,has_coupon)"];
-        if (result) {
-            NSLog(@"创建likenope表成功");
-            for (ModeGood* modeGood in obj) {
-                BOOL res = [db executeUpdate:@"insert into likenope (goods_id,brand_name,brand_img_link,img_link,has_coupon) values(?,?,?,?,?)", modeGood.goods_id,modeGood.brand_name,modeGood.brand_img_link,modeGood.img_link,modeGood.has_coupon];
-                if (res == NO) {
-                    NSLog(@"插入数据失败");
-                }
-            }
-        } else {
-            NSLog(@"创建数据表失败");
-            [db close];
-        }
-    } else {
-        NSLog(@"数据库打开失败");
-        [db close];
-    }
-}
+
 
 #pragma mark CollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -162,6 +140,7 @@ static NSString *reuseIdentifier=@"MyCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
+#pragma mark CollectionView继承ScrollView  因此可以用ScrollViewDelegate
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self.cv reloadData];
 }
@@ -172,60 +151,6 @@ static NSString *reuseIdentifier=@"MyCell";
     return cell;
 }
 
--(void)getData{
-    [ModeSysAPI requestOccasionListAndCallback:^(id obj) {
-        if (![obj isKindOfClass:[NSNull class]]) {//返回不为空
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:obj];
-            [self saveAllResponseDataByObject:self.dataArray];//将数据
-            [self.cv reloadData];//刷新集合视图
-            
-        }
-    }];
-}
--(void)readDataFromLocalDatabase{
-    //从本地数据库读取内容
-    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-    if ([db open] == NO) {
-        NSLog(@"打开失败");
-        return;
-    }
-    //查询数据
-    FMResultSet* set = [db executeQuery:@"select * from list_home where type = 'occasion' "];
-    while ([set next]) {
-        ModeSysList* occasion = [[ModeSysList alloc]init];
-        occasion.name = [set stringForColumn:@"name"];
-        occasion.pic_link = [set stringForColumn:@"pic_link"];
-        occasion.event_id = [NSNumber numberWithInt:[set intForColumn:@"event_id"]];
-        occasion.amount = [NSNumber numberWithInt:[set intForColumn:@"amount"]];
-        [self.dataArray addObject:occasion];
-    }
-    [db close];
-}
-
--(void)saveAllResponseDataByObject:(NSArray*)array{
-    NSString* documentPath=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString*path=[documentPath stringByAppendingPathComponent:@"my.sqlite"];
-    FMDatabase *db = [FMDatabase databaseWithPath:path];
-
-    if ([db open]) {
-        BOOL result = [db executeUpdate:@"CREATE TABLE IF NOT EXISTS list_home (event_id primary key,type,name,pic_link,amount)"];
-        if (result) {
-            for (ModeSysList* occasion in self.dataArray) {
-                    BOOL res = [db executeUpdate:@"replace into list_home(event_id,type,name,pic_link,amount) values(?,?,?,?,?)", occasion.event_id,@"occasion",occasion.name, occasion.pic_link,occasion.amount];
-                    if (res == NO) {
-                        NSLog(@"插入数据失败");
-                    }
-            }
-        }
-        [db close];
-    } else {
-        [db close];
-        NSLog(@"数据库打开失败");
-    }
-}
 
  #pragma mark - Navigation
  
@@ -235,7 +160,7 @@ static NSString *reuseIdentifier=@"MyCell";
      UINavigationController*navi = [segue destinationViewController];
      LikeOrNopeViewController* lvc = (LikeOrNopeViewController*)navi.topViewController;
      NSLog(@"%@",lvc);
-     lvc.dictionary = sender;
+     lvc.receiveArr = sender;
  }
 
 

@@ -11,5 +11,5 @@
 typedef void (^MyCallback)(id obj);
 @interface ModeRunwayAPI : NSObject
 //新建一组秀场
-+(void)requestGetNewWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
++(void)requestRunwayWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
 @end

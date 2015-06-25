@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.10buck.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>com.10buck.mode</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -27,10 +27,10 @@
 			<string>mode</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb966388046735946</string>
+				<string>fb1446193455684318</string>
 			</array>
 			<key>FacebookAppID</key>
-			<string>966388046735946</string>
+			<string>1446193455684318</string>
 			<key>FacebookDisplayName</key>
 			<string>com.10buck.mode</string>
 		</dict>
@@ -38,11 +38,13 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>966388046735946</string>
+	<string>1446193455684318</string>
 	<key>FacebookDisplayName</key>
 	<string>com.10buck.mode</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -55,5 +57,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Ico-60@2x.png</string>
+		<string>Icon-60@3x.png</string>
+		<string>Icon-Small@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon.png</string>
+		<string>iTunesArtWork.png</string>
+	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 </dict>
 </plist>

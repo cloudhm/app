@@ -1,0 +1,34 @@
+//
+//  PrefixHeaderDatabase.pch
+//  Mode
+//
+//  Created by huangmin on 15/6/14.
+//  Copyright (c) 2015年 YedaoDEV. All rights reserved.
+//
+
+#ifndef Mode_PrefixHeaderDatabase_pch
+#define Mode_PrefixHeaderDatabase_pch
+
+
+
+#define OCCASION @"occasions"
+#define BRAND @"brands"
+#define STYLE @"styles"
+
+
+#define HOME_LIST_TABLENAME @"list_home"
+#define HOME_LIST_ELEMENTS @[@"menu"]
+
+
+
+
+#define LIKENOPE_TABLENAME @"likenope"
+#define LIKENOPE_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
+
+#define WISHLIST_TABLENAME [@"wishlist" stringByAppendingString:[NSString stringWithFormat:@"%@",[self getUserId]]]
+#define WISHLIST_ELEMENTS @[@"itemId",@"moreProperty",@"saletime",@"sku",@"utime",@"color",@"ctime",@"goodSize",@"expires",@"itemName",@"merchantId",@"defaultImage",@"goodPrice",@"style",@"defaultThumb",@"productLink",@"goodTitle",@"brandId",@"occasion",@"status",@"goodDescription",@"hasCoupon",@"hasSelected"]
+
+
+
+
+#endif

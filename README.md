@@ -1,2 +1,2 @@
-# YedaoInc iOS app
+# app
 company app

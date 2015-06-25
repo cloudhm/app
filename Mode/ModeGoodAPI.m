@@ -10,40 +10,35 @@
 #import "PrefixHeader.pch"
 #import <AFNetworking.h>
 #import "JsonParser.h"
-#import "ModeGood.h"
 @implementation ModeGoodAPI
-+(NSNumber*)getUserID{
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
++(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 }
-
-
++(NSString*)getUserID{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
 
 +(void)setGoodsFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback{
     NSString* path = SET_GOODS_FEEDBACK;
     NSMutableDictionary* allParams = [params mutableCopy];
-    [allParams setObject:[self getUserID] forKey:@"user_id"];
+    [allParams setObject:[self getUserID] forKey:@"userId"];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    [self setTimeoutIntervalBy:manager];
     [manager POST:path parameters:allParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        callback(dictionary);
+        if (![dictionary objectForKey:@"code"]) {
+            callback(@(YES));
+        } else {
+            callback(@(NO));
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"set_good_feedback-error:%@",error);
+        callback([NSNull null]);
     }];
 }
 
-+(void)requestGoodInfoWithGoodID:(NSString*)goodID andCallback:(MyCallback)callback{
-    NSString* path = GET_GOODS;
-    NSDictionary* params = @{@"id":goodID};
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        GoodInfo* goodInfo=[JsonParser parserGoodInfoByDictionary:dictionary];
-        callback(goodInfo);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        callback([NSNull null]);
-        NSLog(@"requestGoodInfo error:%@",error);
-    }];
-}
+
 @end

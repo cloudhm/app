@@ -9,6 +9,14 @@
 #import "CustomCollectionViewCell.h"
 
 #import "ModeSysList.h"
+//@class StyleCollectionViewCell;
+//@protocol StyleCollectionViewCellDelegate <NSObject>
+//
+//@optional
+//-(void)styleCollectionViewCell:(StyleCollectionViewCell*)styleCollectionViewCell didSelectedWithParams:(NSDictionary*)params;
+//
+//@end
 @interface StyleCollectionViewCell : CustomCollectionViewCell
 @property (nonatomic,strong) ModeSysList* mstyle;
+//@property (weak, nonatomic) id <StyleCollectionViewCellDelegate> delegate;
 @end

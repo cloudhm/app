@@ -9,32 +9,33 @@
 #import "ModeBrandRunwayAPI.h"
 #import <AFNetworking.h>
 #import "PrefixHeader.pch"
-#import "ModeBrandRunway.h"
 #import "JsonParser.h"
+#import "BrandInfo.h"
 @implementation ModeBrandRunwayAPI
-+(NSString*)getUserID{
-    return [[NSUserDefaults standardUserDefaults]objectForKey:@"user_id"];
++(void)setTimeoutIntervalBy:(AFHTTPRequestOperationManager*)manager{
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = 10.f;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
 }
-+(void)requestBrandRunwayListByBrandName:(NSString*)brandName AndCallback:(MyCallback)callback{
-    NSString* path = BRAND_GET_RUNWAY_LIST;
-#warning brandName 暂时默认为任意参数,可以为nil
-    NSDictionary* params = @{@"user_id":[self getUserID]};
++(NSString*)getUserID{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
+}
++(void)requestBrandInfoByBrandId:(NSNumber*)brandId andCallback:(MyCallback)callback{
+    NSString* path = BRANDINFO;
+    NSString* brandInfoPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld",brandId.integerValue]];
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self setTimeoutIntervalBy:manager];
+    [manager GET:brandInfoPath parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        NSString* amount = [dictionary objectForKey:@"amount"];
-        NSString* utime = [dictionary objectForKey:@"utime"];
-        NSDictionary* brandRunwayDics = [dictionary objectForKey:@"list"];
-        NSMutableArray* brandRunwaylist = [NSMutableArray array];
-        for (int i = 1; i<=amount.integerValue; i++) {
-            NSDictionary* brandRunwayDic = [brandRunwayDics objectForKey:[NSString stringWithFormat:@"%d",i]];
-            ModeBrandRunway* brandRunway = [JsonParser parserBrandRunwayByDictionary:brandRunwayDic];
-            [brandRunwaylist addObject:brandRunway];
+        if (![dictionary objectForKey:@"code"]) {
+            BrandInfo* brandInfo = [JsonParser parserBrandInfoByDictionary:dictionary];
+            callback(brandInfo);
+        } else {
+            callback(@(NO));
         }
-        callback(brandRunwaylist);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"request_brand_runway_list_error:%@",error);
+        NSLog(@"request_brand_info_error:%@",error);
         callback([NSNull null]);
     }];
 }

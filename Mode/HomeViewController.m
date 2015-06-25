@@ -18,35 +18,31 @@
 #import "SDWebImage/SDImageCache.h"
 #import "FMDB.h"
 #import "UIColor+HexString.h"
+//#import "ModeSysAPI.h"
+//#import "TAlertView.h"
 @interface HomeViewController ()<ViewPagerDataSource,ViewPagerDelegate>
 @property (strong, nonatomic) NSArray *tabNames;
 
 @end
 
 @implementation HomeViewController
-- (IBAction)clearCache:(UIBarButtonItem *)sender {
-    NSLog(NSHomeDirectory());
-    [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
-        [self removeDataBase];
-        NSLog(@"clear success");
-    }];
-    [[SDImageCache sharedImageCache]clearMemory];
-}
--(void)removeDataBase{
-//    NSString* documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString* path = [documentPath stringByAppendingPathComponent:@"my.sqlite"];
+
+//- (IBAction)clearCache:(UIBarButtonItem *)sender {
+//    NSLog(NSHomeDirectory());
+//    [[SDImageCache sharedImageCache]clearDiskOnCompletion:^{
+//        [self removeDataBase];
+//        NSLog(@"clear success");
+//    }];
+//    [[SDImageCache sharedImageCache]clearMemory];
+//}
+//-(void)removeDataBase{
+//
 //    
-//    NSError *err;
-//    [[NSFileManager defaultManager]removeItemAtPath:path error:&err];
-//    NSLog(@"%@",err);
-    
-    NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
-    [ud removeObjectForKey:@"brandlist_utime"];
-    [ud removeObjectForKey:@"occssionlist_utime"];
-    [ud removeObjectForKey:@"stylelist_utime"];
-    [ud synchronize];
-    
-}
+//    NSUserDefaults* ud=[NSUserDefaults standardUserDefaults];
+//    [ud removeObjectForKey:@"menu_utime"];
+//    [ud synchronize];
+//    
+//}
 /**
  *  标签栏
  */
@@ -60,13 +56,35 @@
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
 }
 - (void)viewDidLoad {
+    
     self.delegate = self;
     self.dataSource = self;
     [super viewDidLoad];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.title = @"MODE";
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:20],NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+//    [ModeSysAPI requestMenuListAndCallback:^(id obj) {
+//        if ([obj isKindOfClass:[NSNull class]]) {
+//            NSString* cautionInfo = @"Net error!Fail to connect host servers.";
+//            [self showAlertViewWithCautionInfo:cautionInfo];
+//        }
+//    }];
+    
 }
-
+//#pragma mark ShowAlertView
+//-(void)showAlertViewWithCautionInfo:(NSString*)cautionInfo{
+//    TAlertView *alert = [[TAlertView alloc] initWithTitle:cautionInfo andMessage:nil];
+//    alert.alertBackgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
+//    alert.titleFont = [UIFont fontWithName:@"Baskerville-SemiBoldItalic" size:14];
+//    [alert setTitleColor:[UIColor whiteColor] forAlertViewStyle:TAlertViewStyleInformation];
+//    alert.tapToClose = NO;
+//    alert.timeToClose = 1.f;
+//    alert.buttonsAlign = TAlertViewButtonsAlignHorizontal;
+//    alert.style = TAlertViewStyleInformation;
+//    [alert showAsMessage];
+//}
 #pragma mark ViewPagerDatasource
 -(NSUInteger)numberOfTabsForViewPager:(ViewPagerController *)viewPager{
     return 3;
@@ -78,7 +96,7 @@
 -(UIView *)viewPager:(ViewPagerController *)viewPager viewForTabAtIndex:(NSUInteger)index{
     UILabel *label = [UILabel new];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
     label.text = self.tabNames[index];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithHexString:@"#b4b4b4"];

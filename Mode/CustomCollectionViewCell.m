@@ -7,7 +7,7 @@
 //
 
 #import "CustomCollectionViewCell.h"
-
+#import "UIColor+HexString.h"
 @implementation CustomCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -21,8 +21,9 @@
         UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake(labelX,labelY,labelW,labelH)];
         namelabel.textAlignment = NSTextAlignmentCenter;
         namelabel.textColor = [UIColor blackColor];
-        namelabel.font = [UIFont systemFontOfSize:16];
-        namelabel.adjustsFontSizeToFitWidth = YES;
+        namelabel.alpha = 0.9;
+        namelabel.font = [UIFont fontWithName:@"Verdana" size:14];
+//        namelabel.adjustsFontSizeToFitWidth = YES;
         self.name = namelabel;
         
         [self.contentView addSubview:self.name];
@@ -34,10 +35,17 @@
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(btnX, btnY, btnW , btnH)];
         [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         self.button = btn;
+        self.button.layer.shadowOffset = CGSizeMake(2, 2);
+        self.button.layer.shadowColor = [UIColor redColor].CGColor;
         self.button.layer.cornerRadius = CGRectGetWidth(self.button.bounds)/2;
         self.button.layer.borderWidth = 1.f;
-        self.button.layer.backgroundColor = [UIColor colorWithRed:234/255.f green:234/255.f blue:234/255.f alpha:1].CGColor;
-        self.button.clipsToBounds=YES;
+        self.button.layer.borderColor = [UIColor colorWithHexString:@"#dbdbdb"].CGColor;
+        self.button.layer.masksToBounds = YES;
+//        CALayer* imageLayer = [CALayer new];
+//        imageLayer.frame = CGRectMake(btnX - 1.f, btnY - 1.f, btnW + 2.f, btnH + 2.f);
+//        imageLayer.contents = (id)[UIImage imageNamed:@"homeShadow.png"];
+//        [self.button.layer addSublayer:imageLayer];
+        
         [self.contentView addSubview:btn];
     }
     return self;

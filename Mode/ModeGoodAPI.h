@@ -13,6 +13,5 @@ typedef void (^MyCallback)(id obj);
 
 //设置商品测试反馈
 +(void)setGoodsFeedbackWithParams:(NSDictionary*)params andCallback:(MyCallback)callback;
-//获取商品的基本信息
-+(void)requestGoodInfoWithGoodID:(NSString*)goodID andCallback:(MyCallback)callback;
+
 @end

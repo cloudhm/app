@@ -22,6 +22,6 @@
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    [self.runway_img sd_setImageWithURL:[NSURL URLWithString:self.brandRunway.pic_link] placeholderImage:nil];
+    
 }
 @end

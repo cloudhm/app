@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ModeGood,WishlistView;
+@class GoodItem,WishlistView;
 
 //插入在WishlistScrollView中的视图
 @interface WishlistView : UIView
 @property (nonatomic, getter = isSelected) BOOL selected;
-@property (nonatomic,strong) ModeGood* modeGood;
--(instancetype)initWithFrame:(CGRect)frame andModeGood:(ModeGood*)modeGood andWithoutBtn:(BOOL)withoutBtn;
+@property (nonatomic,strong) GoodItem* goodItem;
+-(instancetype)initWithFrame:(CGRect)frame andGoodItem:(GoodItem*)goodItem andWithoutBtn:(BOOL)withoutBtn;
 @end

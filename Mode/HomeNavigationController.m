@@ -15,27 +15,21 @@
 @end
 
 @implementation HomeNavigationController
+
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"1");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoWishlistController:) name:@"gotoWishlistController" object:nil];
     if ([[NSUserDefaults standardUserDefaults]boolForKey:@"gotoWishlistController"]) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"gotoWishlistController"];
         [[NSUserDefaults standardUserDefaults]synchronize];
-        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishListViewController"];
-        [self pushViewController:wlvc animated:YES];
+        WishListViewController*wlvc = [[AppDelegate globalDelegate].drawersStoryboard instantiateViewControllerWithIdentifier:@"WishlistNavigationController"];
+        [self presentViewController:wlvc animated:YES completion:nil];
     }
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"2");
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"gotoWishlistController" object:nil];
 }
 -(void)gotoWishlistController:(NSNotification*)noti{
-//    if ([[noti.userInfo objectForKey:@"currentViewController"] isKindOfClass:[HomeNavigationController class]]) {
-//        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
-//        [[NSUserDefaults standardUserDefaults]synchronize];
-//    }
-    
     if ([[noti.userInfo objectForKey:@"currentViewController"]isKindOfClass:[HomeNavigationController class]]
         &&(![[noti.userInfo objectForKey:@"count"]isEqualToString:@"0"])) {
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"gotoWishlistController"];
@@ -45,21 +39,15 @@
         NSLog(@"home");
         [av show];
     }
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#1b1b1b"];
-//    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 /*
 #pragma mark - Navigation

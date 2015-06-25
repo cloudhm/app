@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ShareViewController;
+@class ShareViewController,UIActivityIndicatorView;
 @protocol ShareViewControllerDelegate <NSObject>
 @optional
--(void)shareViewController:(ShareViewController*)shareViewController shareNineModeGoodsToOthers:(NSArray*)nineGoods andTextContent:(NSString*)textContent;
+-(void)shareViewController:(ShareViewController*)shareViewController shareNineModeGoodsToOthers:(NSArray*)nineGoods andTextContent:(NSString*)textContent startAnimation:(UIActivityIndicatorView*)activityView shareImagesToFacebook:(UIImage *)shareImagesToFacebook;
 
 @end
 @interface ShareViewController : UIViewController
 @property (strong, nonatomic) NSArray *nineGoods;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *avtivityView;
 @property (weak, nonatomic) id <ShareViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @end
